@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quy định & hướng dẫn triển khai các loại kho Thợ ĐMX</title>
+<style>
+:root {
+  --blue:#12358f; --blue2:#0a276f; --yellow:#ffd200;
+  --bg:#f3f6fb; --card:#fff; --text:#172033; --muted:#667085;
+  --line:#dce3ee; --soft:#edf3ff; --green:#087443; --greenbg:#eaf8f1;
+  --shadow:0 8px 26px rgba(18,53,143,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI",Arial,sans-serif;line-height:1.55}
+.header{background:linear-gradient(135deg,#102f84,#0b2568);color:#fff}
+.header-inner{max-width:1440px;margin:auto;padding:26px 28px;display:flex;align-items:center;gap:24px}
+.logo{width:112px;height:112px;object-fit:contain;background:#12358f;border-radius:12px;flex:0 0 auto}
+.header h1{font-size:30px;line-height:1.2;margin:0 0 8px;letter-spacing:-.4px}
+.header .sub{font-size:15px;opacity:.9}
+.container{max-width:1440px;margin:auto;padding:24px 28px 50px}
+.toc{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.toc a{text-decoration:none;color:var(--blue);background:#fff;border:1px solid var(--line);padding:9px 14px;border-radius:9px;font-weight:600}
+.section{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:22px;box-shadow:var(--shadow);overflow:hidden}
+.section-head{padding:18px 22px;background:linear-gradient(90deg,#eef4ff,#f8fbff);border-bottom:1px solid var(--line)}
+.section-head h2{margin:0;font-size:21px;color:var(--blue2)}
+.section-body{padding:22px}
+.lead{font-size:16px;margin:0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pill-card{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.pill-card b{display:block;color:var(--blue2);margin-bottom:5px}
+.systems{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.system{border:1px solid var(--line);border-radius:12px;padding:15px;background:#fbfcff}
+.system .code{font-weight:800;color:var(--blue);font-size:18px}
+.system p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.flow{display:flex;align-items:stretch;gap:0;overflow:auto;padding:6px 0}
+.step{min-width:170px;flex:1;border:1px solid var(--line);background:#fff;padding:16px;border-radius:12px;position:relative}
+.step:not(:last-child){margin-right:28px}
+.step:not(:last-child)::after{content:"→";position:absolute;right:-25px;top:50%;transform:translateY(-50%);font-size:25px;color:var(--blue)}
+.step-no{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;align-items:center;justify-content:center;font-weight:800;margin-bottom:8px}
+.step b{display:block}
+.step small{color:var(--muted)}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:1050px}
+th,td{padding:12px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#12358f;color:#fff;position:sticky;top:0;z-index:2}
+th:first-child{border-radius:8px 0 0 0}
+th:last-child{border-radius:0 8px 0 0}
+.center{text-align:center}
+.warehouse-list{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.warehouse-card{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}
+.card-top{display:flex;gap:13px;align-items:center;padding:17px 18px;background:linear-gradient(135deg,#eef4ff,#fff)}
+.number{width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex:0 0 auto}
+.eyebrow{font-size:11px;letter-spacing:1.2px;color:var(--muted);font-weight:800}
+h3{margin:2px 0 0;font-size:19px;color:var(--blue2)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.info-grid div{padding:12px 15px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.info-grid div:nth-child(even){border-right:0}
+.info-grid span{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.info-grid strong{font-size:14px}
+.detail{padding:13px 16px;border-bottom:1px solid var(--line)}
+.detail:last-child{border-bottom:0}
+.detail h4{margin:0 0 6px;color:var(--blue2);font-size:14px}
+.detail p{margin:0;font-size:14px}
+.allowed{background:var(--greenbg)}
+.note{border-left:4px solid var(--yellow);background:#fff9d9;padding:13px 16px;border-radius:8px}
+.status{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.status-card{padding:15px;border:1px solid var(--line);border-radius:12px}
+.status-card b{display:block;margin-bottom:6px}
+.footer{max-width:1440px;margin:auto;padding:0 28px 28px;color:var(--muted);font-size:12px}
+@media(max-width:950px){.grid-3,.systems,.warehouse-list,.status{grid-template-columns:1fr}.header-inner{align-items:flex-start}.header h1{font-size:24px}}
+@media(max-width:600px){.header-inner,.container,.footer{padding-left:15px;padding-right:15px}.logo{width:80px;height:80px}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <img class="logo" src="data:image/png;base64,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" alt="Logo Thợ ĐMX">
+    <div>
+      <h1>QUY ĐỊNH & HƯỚNG DẪN TRIỂN KHAI CÁC LOẠI KHO THỢ ĐMX</h1>
+      <div class="sub">Tài liệu nghiệp vụ dùng để xác định loại kho, mục đích sử dụng, vị trí và phạm vi nhập/xuất</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <nav class="toc">
+    <a href="#muc-tieu">1. Mục tiêu</a>
+    <a href="#pham-vi">2. Phạm vi</a>
+    <a href="#he-thong">3. Hệ thống</a>
+    <a href="#nguyen-tac">4. Nguyên tắc triển khai</a>
+    <a href="#danh-muc">5. Danh mục kho</a>
+    <a href="#chi-tiet">6. Chi tiết từng loại kho</a>
+    <a href="#kiem-soat">7. Kiểm soát</a>
+  </nav>
+
+  <section class="section" id="muc-tieu">
+    <div class="section-head"><h2>1. Mục tiêu</h2></div>
+    <div class="section-body">
+      <p class="lead">Thiết lập một chuẩn thống nhất để xác định và triển khai các loại kho Thợ ĐMX theo đúng dịch vụ, công ty, mục đích sử dụng, yêu cầu GPKD, vị trí và phạm vi được phép nhập/xuất.</p>
+    </div>
+  </section>
+
+  <section class="section" id="pham-vi">
+    <div class="section-head"><h2>2. Phạm vi & bộ phận tham gia</h2></div>
+    <div class="section-body">
+      <div class="grid-3">
+        <div class="pill-card"><b>Thợ ĐMX</b><span>Đơn vị sử dụng và vận hành các loại kho theo mô hình dịch vụ.</span></div>
+        <div class="pill-card"><b>Vận hành dịch vụ</b><span>Xác định nhu cầu, mục đích và phạm vi sử dụng kho.</span></div>
+        <div class="pill-card"><b>IT / ERP</b><span>Cấu hình hoặc cập nhật thông tin kho trên hệ thống theo quy định.</span></div>
+        <div class="pill-card"><b>BHSC CE / ICT</b><span>Tham gia xác định các kho phục vụ sửa chữa và bảo hành.</span></div>
+        <div class="pill-card"><b>Kiểm soát nội bộ</b><span>Kiểm tra tính phù hợp giữa loại kho, mục đích và quyền nhập/xuất.</span></div>
+        <div class="pill-card"><b>Kế toán / Pháp lý</b><span>Phối hợp khi loại kho có yêu cầu GPKD hoặc phát sinh nghiệp vụ hàng hóa/dịch vụ.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="he-thong">
+    <div class="section-head"><h2>3. Hệ thống liên quan</h2></div>
+    <div class="section-body">
+      <div class="systems">
+        <div class="system"><div class="code">ERP</div><p>Hệ thống chính để quản lý danh mục kho và nghiệp vụ nhập/xuất liên quan.</p></div>
+        <div class="system"><div class="code">WMS</div><p>Hệ thống Bảo hành Thợ; liên quan khi kho phục vụ quản lý hàng hóa/Jobcard bảo hành.</p></div>
+        <div class="system"><div class="code">TMS</div><p>Hệ thống vận đơn Thợ; liên quan khi kho dùng để điều phối vận đơn.</p></div>
+        <div class="system"><div class="code">CRM</div><p>Hệ thống Tổng đài; liên quan khi nghiệp vụ dịch vụ cần tiếp nhận/tra cứu thông tin khách hàng.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="nguyen-tac">
+    <div class="section-head"><h2>4. Nguyên tắc triển khai</h2></div>
+    <div class="section-body">
+      <div class="flow">
+        <div class="step"><div class="step-no">1</div><b>Xác định dịch vụ</b><small>GHLĐ, BHSC CE, BHSC ICT, XDBT, Bảo dưỡng định kỳ...</small></div>
+        <div class="step"><div class="step-no">2</div><b>Xác định loại kho</b><small>Đối chiếu danh mục chuẩn và mục đích sử dụng.</small></div>
+        <div class="step"><div class="step-no">3</div><b>Xác định công ty</b><small>Thợ ĐMX hoặc Điện Máy Xanh theo danh mục.</small></div>
+        <div class="step"><div class="step-no">4</div><b>Kiểm tra GPKD</b><small>Kho yêu cầu GPKD phải đáp ứng điều kiện trước khi triển khai.</small></div>
+        <div class="step"><div class="step-no">5</div><b>Xác định vị trí</b><small>Đối chiếu quy định vị trí của từng loại kho.</small></div>
+        <div class="step"><div class="step-no">6</div><b>Kiểm tra nhập/xuất</b><small>Chỉ cho phép mã hàng/dịch vụ nằm trong phạm vi quy định.</small></div>
+        <div class="step"><div class="step-no">7</div><b>Cấu hình ERP</b><small>Tạo/cập nhật kho và kiểm tra kết quả trên hệ thống.</small></div>
+      </div>
+      <div class="note" style="margin-top:18px">
+        <b>Nguyên tắc kiểm soát:</b> Không sử dụng tên kho, dịch vụ hoặc quyền nhập/xuất ngoài danh mục đã được xác định nếu chưa có phê duyệt/cập nhật quy định tương ứng.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="danh-muc">
+    <div class="section-head"><h2>5. Danh mục các loại kho</h2></div>
+    <div class="section-body">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th><th>Loại kho</th><th>Dịch vụ</th><th>Công ty</th>
+              <th>GPKD</th><th>Vị trí</th>
+            </tr>
+          </thead>
+          <tbody><tr><td class='center'>1</td><td><b>Kho Thợ ĐMX</b></td><td>GHLĐ</td><td>Thợ ĐMX</td><td>Bắt buộc xin GPKD</td><td>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </td></tr><tr><td class='center'>2</td><td><b>Kho Bảo hành sửa chữa</b></td><td>BHSC CE</td><td>Thợ ĐMX</td><td>Bắt buộc xin GPKD</td><td>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </td></tr><tr><td class='center'>3</td><td><b>Kho Bảo hành ĐMX</b></td><td>BHSC CE</td><td>Điện Máy Xanh</td><td>Bắt buộc xin GPKD</td><td>Cùng địa điểm với kho CN/Kho TT của ĐMX. </td></tr><tr><td class='center'>4</td><td><b>Workshop CE</b></td><td>BHSC CE</td><td>Thợ ĐMX</td><td>Bắt buộc xin GPKD</td><td>Do bên BHSC CE quyết định, có thể không nằm cùng vị trí với kho CN/TT của ĐMX</td></tr><tr><td class='center'>5</td><td><b>Kho Bảo hành, Kho hàng lỗi TTBH</b></td><td>BHSC ICT</td><td>Điện Máy Xanh</td><td>Bắt buộc xin GPKD</td><td>Do bên BHSC ICT quyết định, có thể không nằm cùng vị trí với kho CN/TT của ĐMX</td></tr><tr><td class='center'>6</td><td><b>Trung Tâm Bảo Hành (IOS, Android, Windows)</b></td><td>BHSC ICT</td><td>Thợ ĐMX</td><td>Bắt buộc xin GPKD</td><td>Do bên BHSC ICT quyết định, có thể không nằm cùng vị trí với kho CN/TT của ĐMX</td></tr><tr><td class='center'>7</td><td><b>&quot;Kho XDBT&quot;</b></td><td>XDBT</td><td>Thợ ĐMX</td><td>Bắt buộc xin GPKD</td><td>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </td></tr><tr><td class='center'>8</td><td><b>Kho BDĐK</b></td><td>Bảo dưỡng định kỳ</td><td>Thợ ĐMX</td><td>Bắt buộc xin GPKD</td><td>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="chi-tiet">
+    <div class="section-head"><h2>6. Chi tiết triển khai từng loại kho</h2></div>
+    <div class="section-body">
+      <div class="warehouse-list">
+        
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">1</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>Kho Thợ ĐMX</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>GHLĐ</strong></div>
+        <div><span>Công ty</span><strong>Thợ ĐMX</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Là kho chứa hàng vật lý:<br>+ Vật tư lắp đặt<br>+ Phụ kiện lắp đặt, <br>2. Điều phối vận đơn <br>+ GHLĐ, <br>+ BHSC, BDĐK (các vùng nhỏ, GHLĐ xử lý luôn dịch vụ BHSC và BDĐK)<br>3. Xuất tiêu hao vật tư<br>4. Xuất bán vật tư</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>384 - Vật tư lắp đặt<br>1394 - Phụ kiện lắp đặt<br>2055 - Dịch vụ Bảo dưỡng định kỳ<br>2054 - Dịch vụ giao hàng lắp đặt<br>2036	Dịch vụ bảo dưỡng của Thợ ĐMX</p>
+      </div>
+    </article>
+    
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">2</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>Kho Bảo hành sửa chữa</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>BHSC CE</strong></div>
+        <div><span>Công ty</span><strong>Thợ ĐMX</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Là kho chứa hàng vật lý: Linh kiện điện máy<br>2. Điều phối vận đơn BHSC CE<br>3. Xuất tiêu hao linh kiện<br>4. Xuất bán linh kiện, dịch vụ</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>624 - Linh kiện điện máy<br>2094 - Dịch Vụ Bảo hành Sửa Chữa CE<br>2034 - Dịch vụ bảo hành CE của Thợ ĐMX</p>
+      </div>
+    </article>
+    
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">3</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>Kho Bảo hành ĐMX</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>BHSC CE</strong></div>
+        <div><span>Công ty</span><strong>Điện Máy Xanh</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Cùng địa điểm với kho CN/Kho TT của ĐMX. </strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Là kho chứa hàng vật lý: Hàng CE lỗi và ĐSD của Điện Máy Xanh<br>2. Là kho quản lý các Jobcard của CE</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>Các NH CE </p>
+      </div>
+    </article>
+    
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">4</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>Workshop CE</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>BHSC CE</strong></div>
+        <div><span>Công ty</span><strong>Thợ ĐMX</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Do bên BHSC CE quyết định, có thể không nằm cùng vị trí với kho CN/TT của ĐMX</strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Là kho chứa hàng vật lý: Linh kiện điện máy<br>2. Điều phối vận đơn BHSC CE<br>3. Xuất tiêu hao linh kiện<br>4. Xuất bán linh kiện, dịch vụ</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>624 - Linh kiện điện máy<br>2094 - Dịch Vụ Bảo hành Sửa Chữa CE<br>2034 - Dịch vụ bảo hành CE của Thợ ĐMX</p>
+      </div>
+    </article>
+    
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">5</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>Kho Bảo hành, Kho hàng lỗi TTBH</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>BHSC ICT</strong></div>
+        <div><span>Công ty</span><strong>Điện Máy Xanh</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Do bên BHSC ICT quyết định, có thể không nằm cùng vị trí với kho CN/TT của ĐMX</strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Là kho chứa hàng vật lý: Hàng ICT lỗi và ĐSD của Điện Máy Xanh<br>2. Là kho quản lý các Jobcard của ICT</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>Các NH ICT</p>
+      </div>
+    </article>
+    
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">6</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>Trung Tâm Bảo Hành (IOS, Android, Windows)</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>BHSC ICT</strong></div>
+        <div><span>Công ty</span><strong>Thợ ĐMX</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Do bên BHSC ICT quyết định, có thể không nằm cùng vị trí với kho CN/TT của ĐMX</strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Là kho chứa hàng vật lý: Linh kiện ICT<br>2. Điều phối vận đơn BHSC ICT<br>3. Xuất tiêu hao linh kiện<br>4. Xuất bán linh kiện, dịch vụ</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>26 - Linh kiện điện máy<br>1496 - Dịch Vụ Bảo hành Sửa Chữa ICT<br>- Dịch vụ bảo hành ICT của Thợ ĐMX</p>
+      </div>
+    </article>
+    
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">7</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>&quot;Kho XDBT&quot;</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>XDBT</strong></div>
+        <div><span>Công ty</span><strong>Thợ ĐMX</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Điều phối vận đơn XDBT<br>2. Xuất tiêu hao vật tư tồn kho của XDBT</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>384 - Vật tư lắp đặt</p>
+      </div>
+    </article>
+    
+    <article class="warehouse-card">
+      <div class="card-top">
+        <div class="number">8</div>
+        <div>
+          <div class="eyebrow">LOẠI KHO</div>
+          <h3>Kho BDĐK</h3>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div><span>Dịch vụ</span><strong>Bảo dưỡng định kỳ</strong></div>
+        <div><span>Công ty</span><strong>Thợ ĐMX</strong></div>
+        <div><span>GPKD</span><strong>Bắt buộc xin GPKD</strong></div>
+        <div><span>Vị trí</span><strong>Cùng địa điểm với kho CN của ĐMX. <br>Cùng địa điểm với kho của ST không có kho CN phục vụ. </strong></div>
+      </div>
+      <div class="detail">
+        <h4>Mục đích sử dụng</h4>
+        <p>1. Điều phối vận đơn BDĐK<br>2. Xuất tiêu hao vật tư tồn kho của BDĐK<br>3. Xuất bán VSML</p>
+      </div>
+      <div class="detail allowed">
+        <h4>Được phép nhập / xuất</h4>
+        <p>1394 - Phụ kiện lắp đặt<br>384 - Vật tư lắp đặt<br>Dịch vụ Bảo dưỡng dịnh kỳ</p>
+      </div>
+    </article>
+    
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kiem-soat">
+    <div class="section-head"><h2>7. Kiểm soát hệ thống & đo lường chất lượng</h2></div>
+    <div class="section-body">
+      <div class="status">
+        <div class="status-card">
+          <b>System Logic</b>
+          <span>ERP là hệ thống quản lý danh mục kho; quyền nhập/xuất cần được cấu hình/kiểm soát theo loại kho và phạm vi mã được phép. WMS/TMS/CRM sử dụng theo nghiệp vụ liên quan.</span>
+        </div>
+        <div class="status-card">
+          <b>System Status</b>
+          <span>Danh mục nghiệp vụ được xác định trong tài liệu nguồn. Việc tạo mới hoặc thay đổi cấu hình trên ERP là hạng mục triển khai hệ thống cần thực hiện và kiểm thử.</span>
+        </div>
+        <div class="status-card">
+          <b>KPI / Metrics</b>
+          <span>Thời gian hoàn tất tạo/cập nhật kho = Thời điểm cấu hình hoàn tất − Thời điểm yêu cầu hợp lệ được tiếp nhận.</span>
+        </div>
+        <div class="status-card">
+          <b>Kiểm soát nhập/xuất</b>
+          <span>Tỷ lệ giao dịch đúng quyền = Số giao dịch đúng loại kho và đúng phạm vi mã / Tổng số giao dịch kiểm tra × 100%.</span>
+        </div>
+      </div>
+      <div class="note" style="margin-top:16px">
+        <b>SO / OV / IV / CM / Chứng từ:</b> Tài liệu nguồn hiện chỉ xác định phạm vi mã được phép nhập/xuất theo từng loại kho, chưa quy định chi tiết luồng chứng từ SO, OV, IV, CM. Khi triển khai nghiệp vụ nhập/xuất cụ thể cần bổ sung mapping chứng từ tương ứng trước khi cấu hình chính thức.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">Thợ ĐMX • Tài liệu triển khai nội bộ • Nguồn danh mục: Quy trinh tao kho Tho DMX.xlsx</footer>
+</body>
+</html>
