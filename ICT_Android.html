@@ -8,6 +8,8 @@
 :root{
   --blue:#12358f;
   --blue2:#0a276f;
+  --green:#1b5e20;
+  --green-dark:#0d3811;
   --yellow:#ffd200;
   --bg:#f3f6fb;
   --card:#fff;
@@ -15,7 +17,7 @@
   --muted:#667085;
   --line:#dce3ee;
   --shadow:0 8px 26px rgba(18,53,143,.08);
-  --shadow-hover:0 12px 32px rgba(18,53,143,.14);
+  --shadow-hover:0 12px 32px rgba(27,94,32,.14);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -24,7 +26,7 @@ body{
   font-family:"Segoe UI",Arial,sans-serif;line-height:1.55;
 }
 .header{
-  background:linear-gradient(135deg,#1b5e20,#0d3811);
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
   color:#fff;padding:24px 24px 38px;
 }
 .header-inner{max-width:1180px;margin:auto}
@@ -64,17 +66,45 @@ body{
 .section-title{
   display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;
 }
-.section-title h2{margin:0 0 4px;font-size:22px;color:#1b5e20}
+.section-title h2{margin:0 0 4px;font-size:22px;color:var(--green)}
 .section-title p{margin:0;color:var(--muted);font-size:14px}
 .btn-back{
   display:inline-flex;align-items:center;gap:6px;font-size:13px;
   padding:8px 14px;background:#fff;border:1px solid var(--line);
-  border-radius:10px;color:#1b5e20;text-decoration:none;font-weight:600;
+  border-radius:10px;color:var(--green);text-decoration:none;font-weight:600;
   transition:.15s ease;
 }
 .btn-back:hover{background:#e8f5e9;border-color:#a5d6a7}
 
 .doc-list{display:flex;flex-direction:column;gap:14px}
+.doc-item{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px 24px;box-shadow:0 3px 12px rgba(16,40,90,.04);
+  transition:.2s ease;text-decoration:none;color:inherit;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.doc-item:hover{
+  transform:translateY(-2px);box-shadow:var(--shadow-hover);
+  border-color:#a5d6a7;background:#fafdfb;
+}
+.doc-info{display:flex;align-items:flex-start;gap:16px}
+.doc-icon{
+  width:44px;height:44px;border-radius:12px;background:#e8f5e9;color:var(--green);
+  display:grid;place-items:center;font-size:20px;flex:none;
+}
+.doc-tag{
+  display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;
+  border-radius:6px;background:#e8f5e9;color:var(--green);margin-bottom:4px;
+}
+.doc-info h3{font-size:16px;margin:0 0 4px;color:var(--text)}
+.doc-info p{font-size:13px;color:var(--muted);margin:0}
+.doc-btn{
+  flex:none;display:inline-flex;align-items:center;gap:6px;
+  padding:9px 16px;background:#e8f5e9;color:var(--green);
+  border-radius:10px;font-size:13px;font-weight:700;
+}
+.doc-item:hover .doc-btn{background:var(--green);color:#fff}
+
 .category-group{margin-bottom:28px}
 .category-header{
   font-size:15px;font-weight:700;color:var(--muted);text-transform:uppercase;
@@ -87,11 +117,20 @@ body{
   background:#fff;color:var(--muted);font-size:13px;text-align:center;
 }
 
+.no-result{display:none;margin-top:20px;padding:25px;text-align:center;color:var(--muted)}
 .footer{
   border-top:1px solid var(--line);background:#fff;
   padding:22px 24px;color:var(--muted);font-size:12px;
 }
 .footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px}
+
+@media(max-width:768px){
+  .header{padding:20px 16px 34px}
+  .hero h1{font-size:24px}
+  .doc-item{flex-direction:column;align-items:flex-start}
+  .doc-btn{width:100%;justify-content:center}
+  .footer-inner{flex-direction:column}
+}
 </style>
 </head>
 
@@ -114,7 +153,7 @@ body{
 
     <div class="hero">
       <h1>Quy trình sửa chữa ICT - Android</h1>
-      <p>Tài liệu nghiệp vụ, hướng dẫn tạo Jobcard và quy trình kỹ thuật cho các thiết bị chạy hệ điều hành Android.</p>
+      <p>Tài liệu nghiệp vụ, đặc tả BRD và quy trình kỹ thuật cho các thiết bị chạy hệ điều hành Android.</p>
     </div>
   </div>
 </header>
@@ -122,7 +161,7 @@ body{
 <div class="search-wrap">
   <div class="search">
     <span>⌕</span>
-    <input id="search" type="search" placeholder="Tìm kiếm quy trình trong nhóm Android..." autocomplete="off">
+    <input id="search" type="search" placeholder="Tìm kiếm quy trình trong nhóm Android (Bảo hành hãng, Jobcard, IMEI, ĐMXWorks...)" autocomplete="off">
   </div>
 </div>
 
@@ -130,21 +169,34 @@ body{
   <div class="section-title">
     <div>
       <h2>Danh sách tài liệu & quy trình</h2>
-      <p>Chọn quy trình để xem chi tiết từng bước thao tác</p>
+      <p>Chọn quy trình để xem chi tiết từng bước thao tác và đặc tả nghiệp vụ</p>
     </div>
     <a href="index.html" class="btn-back">← Quay lại Trang chủ</a>
   </div>
 
   <div id="docContainer">
+    <!-- Nhóm 1: Tạo Jobcard -->
     <div class="category-group">
-      <div class="category-header">🏷️ 1. Quy trình Tạo Jobcard</div>
+      <div class="category-header">🏷️ 1. Quy trình & Ràng buộc Tạo Jobcard</div>
       <div class="doc-list">
-        <div class="empty-placeholder">
-          Đang cập nhật quy trình tạo Jobcard thiết bị Android...
-        </div>
+        
+        <a class="doc-item" href="Rang_buoc_tao_Jobcard_Bao_hanh_hang_Android.html"
+           data-search="ràng buộc tạo jobcard bảo hành hãng máy khách android đmxworks imei ov so sửa chữa dịch vụ brd business rule">
+          <div class="doc-info">
+            <div class="doc-icon">📋</div>
+            <div>
+              <span class="doc-tag">BRD · ĐMXWorks</span>
+              <h3>Ràng buộc tạo Jobcard – Máy khách (Bảo hành hãng)</h3>
+              <p>Logic hệ thống tự động xác định loại Jobcard dựa trên hạn bảo hành hãng (IMEI/OV/SO) và ma trận kiểm soát Submit.</p>
+            </div>
+          </div>
+          <div class="doc-btn">Xem đặc tả →</div>
+        </a>
+
       </div>
     </div>
 
+    <!-- Nhóm 2: Tiếp nhận & Kiểm tra -->
     <div class="category-group">
       <div class="category-header">🔧 2. Quy trình Tiếp nhận & Kiểm tra</div>
       <div class="doc-list">
@@ -154,6 +206,7 @@ body{
       </div>
     </div>
 
+    <!-- Nhóm 3: Sửa chữa & Xử lý kỹ thuật -->
     <div class="category-group">
       <div class="category-header">🛠️ 3. Quy trình Sửa chữa & Xử lý kỹ thuật</div>
       <div class="doc-list">
@@ -163,6 +216,10 @@ body{
       </div>
     </div>
   </div>
+
+  <div class="no-result" id="noResult">
+    Không tìm thấy quy trình phù hợp trong nhóm Android.
+  </div>
 </main>
 
 <footer class="footer">
@@ -171,5 +228,38 @@ body{
     <span>Quản lý quy trình & tài liệu nghiệp vụ</span>
   </div>
 </footer>
+
+<script>
+const search = document.getElementById('search');
+const docItems = [...document.querySelectorAll('.doc-item')];
+const groups = [...document.querySelectorAll('.category-group')];
+const noResult = document.getElementById('noResult');
+
+search.addEventListener('input', () => {
+  const keyword = search.value.trim().toLowerCase();
+  let totalVisible = 0;
+
+  groups.forEach(group => {
+    const items = [...group.querySelectorAll('.doc-item')];
+    let groupVisible = 0;
+
+    items.forEach(item => {
+      const text = (item.innerText + ' ' + (item.dataset.search || '')).toLowerCase();
+      const show = !keyword || text.includes(keyword);
+      item.style.display = show ? 'flex' : 'none';
+      if (show) groupVisible++;
+    });
+
+    if (items.length > 0) {
+      group.style.display = groupVisible > 0 ? 'block' : 'none';
+      totalVisible += groupVisible;
+    } else {
+      group.style.display = keyword ? 'none' : 'block';
+    }
+  });
+
+  noResult.style.display = (totalVisible === 0 && keyword) ? 'block' : 'none';
+});
+</script>
 </body>
 </html>
