@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy trình tính thưởng Kỹ thuật viên sửa chữa CE | KSNB Automation</title>
+<style>
+:root {
+  --blue: #12358f;
+  --blue2: #0a276f;
+  --blue-light: #edf3ff;
+  --blue-border: #b8c7e8;
+  --yellow: #ffd200;
+  --yellow-bg: #fff9db;
+  --green: #087443;
+  --green-bg: #eaf8f1;
+  --green-border: #a3e0c0;
+  --orange: #c2410c;
+  --orange-bg: #fff7ed;
+  --purple: #6b21a8;
+  --purple-bg: #f3e8ff;
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --line: #dce3ee;
+  --shadow: 0 8px 26px rgba(18, 53, 143, 0.08);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1180px;
+  margin: auto;
+  padding: 24px 20px 60px;
+}
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+.top-nav a {
+  text-decoration: none;
+  font-weight: 700;
+}
+.top-nav .back-cat {
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.top-nav .back-home {
+  color: var(--muted);
+}
+.top-nav a:hover {
+  text-decoration: underline;
+}
+
+.header {
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #fff;
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 24px rgba(18, 53, 143, 0.18);
+}
+.header-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #dce6ff;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.header h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  letter-spacing: -0.3px;
+}
+.header p {
+  margin: 0;
+  font-size: 15px;
+  color: #dce6ff;
+  max-width: 860px;
+}
+
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.toc a {
+  text-decoration: none;
+  color: var(--blue);
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .15s ease;
+}
+.toc a:hover {
+  background: var(--blue-light);
+  border-color: var(--blue-border);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #f0f4f9;
+  padding-bottom: 12px;
+}
+.card-head .num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 15px;
+  flex: none;
+}
+.card-head h2 {
+  margin: 0;
+  font-size: 19px;
+  color: var(--blue2);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 14px 0;
+  font-size: 13.5px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+th, td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+th:last-child, td:last-child {
+  border-right: 0;
+}
+tr:last-child td {
+  border-bottom: 0;
+}
+th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 700;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+tr:nth-child(even) td {
+  background: #fafcff;
+}
+
+.badge-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+.badge-blue { background: #e0f2fe; color: #0284c7; }
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-orange { background: var(--orange-bg); color: var(--orange); }
+.badge-purple { background: var(--purple-bg); color: var(--purple); }
+
+.callout {
+  border-left: 4px solid var(--blue);
+  background: var(--blue-light);
+  padding: 14px 18px;
+  border-radius: 0 10px 10px 0;
+  margin: 14px 0;
+  font-size: 13.5px;
+}
+.callout.green {
+  border-left-color: var(--green);
+  background: var(--green-bg);
+}
+.callout-title {
+  font-weight: 700;
+  color: var(--blue2);
+  margin-bottom: 4px;
+}
+.callout.green .callout-title {
+  color: var(--green);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+.pill-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+}
+.pill-box b {
+  display: block;
+  color: var(--blue2);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.formula-card {
+  background: linear-gradient(135deg, #f8fbff, #edf4ff);
+  border: 2px solid var(--blue-border);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 16px 0;
+}
+.formula-card h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: var(--blue2);
+}
+.formula-box {
+  background: #1e293b;
+  color: #38bdf8;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.flow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0;
+  align-items: center;
+}
+.flow-step {
+  width: 100%;
+  max-width: 680px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+.flow-step .step-no {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  font-size: 12px;
+  flex: none;
+}
+.flow-step .step-text {
+  font-size: 13.5px;
+  color: var(--text);
+}
+.flow-step .step-text strong {
+  color: var(--blue2);
+}
+.flow-arrow {
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.audit-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px dashed var(--line);
+  padding: 16px;
+  border-radius: 12px;
+  margin: 14px 0;
+}
+.chain-node {
+  background: #fff;
+  border: 1px solid var(--blue-border);
+  color: var(--blue2);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.chain-sep {
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+@media(max-width: 850px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .header h1 { font-size: 22px; }
+  .header { padding: 22px 20px; }
+  table { font-size: 12.5px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="top-nav">
+    <a href="CE_Gia_dung.html" class="back-cat">← Quay lại Danh mục CE & Gia dụng</a>
+    <a href="index.html" class="back-home">Về Trang chủ KSNB</a>
+  </div>
+
+  <header class="header">
+    <span class="header-badge">QUY TRÌNH NGHIỆP VỤ & TỰ ĐỘNG HÓA</span>
+    <h1>QUY TRÌNH TÍNH THƯỞNG KỸ THUẬT VIÊN SỬA CHỮA CE</h1>
+    <p>Cơ chế tự động xác định và tính thưởng KTV dựa trên Code tính thưởng, Code dịch vụ, Linh kiện thực tế và đơn giá được duyệt.</p>
+  </header>
+
+  <!-- Mục lục nhanh -->
+  <nav class="toc">
+    <a href="#muc-tieu">1. Mục tiêu</a>
+    <a href="#pham-vi">2. Phạm vi & Hệ thống</a>
+    <a href="#nguyen-tac">3. Nguyên tắc tính thưởng</a>
+    <a href="#quy-trinh-1">4. Tạo Code tính thưởng</a>
+    <a href="#quy-trinh-2">5. Mapping Code tính thưởng</a>
+    <a href="#quy-trinh-3">6. Tự động tính thưởng</a>
+    <a href="#cong-thuc">7. Công thức & Hệ số</a>
+    <a href="#so-do">8. Sơ đồ logic</a>
+    <a href="#ket-qua">9. Kết quả & Đối soát</a>
+  </nav>
+
+  <!-- 1. Mục tiêu -->
+  <section class="card" id="muc-tieu">
+    <div class="card-head">
+      <div class="num">1</div>
+      <h2>Mục tiêu quy trình</h2>
+    </div>
+    <p style="margin-top: 0;">Xây dựng cơ chế tự động xác định và tính thưởng cho Kỹ thuật viên (KTV) dựa trên:</p>
+    <div class="grid-2">
+      <div class="pill-box">
+        <b>🎯 Các yếu tố đầu vào:</b>
+        <ul style="margin: 0; padding-left: 18px; font-size: 13.5px;">
+          <li>Code tính thưởng (Master Key).</li>
+          <li>Code dịch vụ thực hiện trên Vận đơn.</li>
+          <li>Linh kiện thực tế sử dụng (SKU).</li>
+          <li>Đơn giá thưởng hiện hành được KSNB khai báo theo phê duyệt của Giám đốc.</li>
+          <li>Mapping chuẩn giữa: <code>Code tính thưởng ↔ Code dịch vụ ↔ Code linh kiện</code>.</li>
+        </ul>
+      </div>
+      <div class="pill-box">
+        <b>⭐ Giá trị mang lại:</b>
+        <ul style="margin: 0; padding-left: 18px; font-size: 13.5px;">
+          <li><strong>Loại bỏ hoàn toàn</strong> việc tính thưởng thủ công.</li>
+          <li>Đảm bảo tính <strong>đúng Code, đúng linh kiện, đúng đơn giá</strong>.</li>
+          <li>Cung cấp khả năng <strong>đối soát minh bạch và lưu vết lịch sử (Audit Trail)</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Phạm vi áp dụng & Hệ thống -->
+  <section class="card" id="pham-vi">
+    <div class="card-head">
+      <div class="num">2</div>
+      <h2>Phạm vi áp dụng & Hệ thống liên quan</h2>
+    </div>
+    <p>Áp dụng cho các <strong>Vận đơn sửa chữa có phát sinh linh kiện</strong> và có thực hiện tính thưởng cho KTV.</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Hệ thống</th>
+          <th>Vai trò trong quy trình</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Quản lý vận đơn Thợ, ghi nhận linh kiện/dịch vụ thực tế và trạng thái hoàn tất vận đơn (Trigger tính thưởng).</td>
+        </tr>
+        <tr>
+          <td><span class="badge-tag badge-purple">ERP</span></td>
+          <td>Quản lý danh mục Code tính thưởng, bảng Master Mapping và khai báo đơn giá thưởng theo hiệu lực.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3. Nguyên tắc tính thưởng -->
+  <section class="card" id="nguyen-tac">
+    <div class="card-head">
+      <div class="num">3</div>
+      <h2>Nguyên tắc tính thưởng cốt lõi</h2>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title">🔑 3.1. Code tính thưởng là khóa tính thưởng (Master Key)</div>
+      Hệ thống <strong>không sử dụng "Nhóm linh kiện"</strong> làm khóa tính thưởng. Code tính thưởng được tạo riêng biệt và là khóa tham chiếu duy nhất để xác định đơn giá thưởng áp dụng.
+    </div>
+
+    <h3 style="font-size: 16px; color: var(--blue2); margin: 18px 0 10px;">3.2. Phân tách trách nhiệm các bộ phận:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Bộ phận</th>
+          <th>Trách nhiệm cụ thể</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>QLDV</strong></td>
+          <td>Gửi yêu cầu tạo Code tính thưởng và đề xuất Mapping: <code>Code tính thưởng ↔ Code linh kiện ↔ Code Dịch vụ</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>QC</strong></td>
+          <td>Tạo Code tính thưởng trên hệ thống và cập nhật mô tả Code.</td>
+        </tr>
+        <tr>
+          <td><strong>Giám đốc</strong></td>
+          <td>Phê duyệt đơn giá thưởng áp dụng cho từng Code.</td>
+        </tr>
+        <tr>
+          <td><strong>KSNB</strong></td>
+          <td>Khai báo đơn giá thưởng, thời gian hiệu lực và trạng thái theo phê duyệt của Giám đốc.</td>
+        </tr>
+        <tr>
+          <td><strong>Hệ thống</strong></td>
+          <td>Tự động xác định linh kiện/dịch vụ sử dụng và tính thưởng ngay khi Vận đơn hoàn tất.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. Quy trình 1 – Tạo Code tính thưởng -->
+  <section class="card" id="quy-trinh-1">
+    <div class="card-head">
+      <div class="num">4</div>
+      <h2>Quy trình 1 – Tạo Code tính thưởng</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 6%; text-align: center;">Bước</th>
+          <th style="width: 18%;">Ai làm (Actor)</th>
+          <th style="width: 26%;">Làm gì (Action)</th>
+          <th style="width: 14%;">Location</th>
+          <th style="width: 22%;">Hệ thống làm gì (System Logic)</th>
+          <th>Trạng thái & KPIs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;"><strong>1</strong></td>
+          <td>Người dùng nghiệp vụ</td>
+          <td>Gửi yêu cầu tạo Code tính thưởng mới, nêu rõ dịch vụ/linh kiện áp dụng</td>
+          <td>Online</td>
+          <td>Tiếp nhận yêu cầu</td>
+          <td><span class="badge-tag badge-blue">Có thể cấu hình</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>2</strong></td>
+          <td>QC</td>
+          <td>Kiểm tra yêu cầu và tạo Code tính thưởng</td>
+          <td>Online – ERP</td>
+          <td>Sinh Code tính thưởng duy nhất</td>
+          <td><span class="badge-tag badge-orange">Xây mới nếu chưa có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>3</strong></td>
+          <td>QC</td>
+          <td>Cập nhật thông tin mô tả Code</td>
+          <td>Online – ERP</td>
+          <td>Lưu thông tin Code</td>
+          <td><span class="badge-tag badge-blue">Xây mới / Điều chỉnh</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>4</strong></td>
+          <td>KSNB</td>
+          <td>Tiếp nhận Code đã được QC tạo</td>
+          <td>Online – ERP</td>
+          <td>Hiển thị Code cần khai báo đơn giá</td>
+          <td><span class="badge-tag badge-blue">Xây mới / Điều chỉnh</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>5</strong></td>
+          <td>Giám đốc</td>
+          <td>Phê duyệt đơn giá thưởng áp dụng</td>
+          <td>Offline / Online</td>
+          <td>Ghi nhận căn cứ phê duyệt nếu có workflow</td>
+          <td><span class="badge-tag badge-purple">Workflow phê duyệt</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>6</strong></td>
+          <td>KSNB</td>
+          <td>Khai báo đơn giá thưởng, thời gian hiệu lực và trạng thái</td>
+          <td>Online – ERP</td>
+          <td>Lưu đơn giá gắn với Code</td>
+          <td><span class="badge-tag badge-green">Tỷ lệ khai báo đúng</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>7</strong></td>
+          <td>Hệ thống</td>
+          <td>Kích hoạt Code/đơn giá khi đủ điều kiện</td>
+          <td>Online</td>
+          <td>Cho phép Code được sử dụng để tính thưởng</td>
+          <td><span class="badge-tag badge-green">Active tính thưởng</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">📦 Kết quả đầu ra của mỗi Code tính thưởng:</div>
+      Mỗi Code tính thưởng sau khi tạo phải có tối thiểu: <em>Code tính thưởng, Mô tả, Đơn giá thưởng, Thời gian hiệu lực, Trạng thái (Active/Inactive), Người tạo, Người khai báo đơn giá, Căn cứ/phê duyệt đơn giá.</em>
+    </div>
+  </section>
+
+  <!-- 5. Quy trình 2 – Mapping Code tính thưởng -->
+  <section class="card" id="quy-trinh-2">
+    <div class="card-head">
+      <div class="num">5</div>
+      <h2>Quy trình 2 – Mapping Code tính thưởng</h2>
+    </div>
+
+    <p><strong>5.1. Mục đích:</strong> Xác định Code tính thưởng nào được áp dụng cho từng tổ hợp Code dịch vụ/linh kiện.</p>
+
+    <h3 style="font-size: 15px; color: var(--blue2); margin: 14px 0 6px;">5.2. Cấu trúc Master Mapping (Bảng đề xuất: <code>MAP_CODE_THUONG_DICHVU_LINHKIEN</code>):</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 35%;">Trường dữ liệu</th>
+          <th>Mô tả chi tiết</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Code tính thưởng (*)</code></td>
+          <td>Tham chiếu Master Code tính thưởng</td>
+        </tr>
+        <tr>
+          <td><code>Code linh kiện (SKU) (*)</code></td>
+          <td>SKU linh kiện được áp dụng</td>
+        </tr>
+        <tr>
+          <td><code>Code dịch vụ (*)</code></td>
+          <td>Code dịch vụ sửa chữa tương ứng</td>
+        </tr>
+        <tr>
+          <td><code>Trạng thái</code></td>
+          <td>Active / Inactive</td>
+        </tr>
+        <tr>
+          <td><code>Người tạo Mapping</code></td>
+          <td>Người dùng nghiệp vụ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin: 16px 0 6px; color: var(--blue2);">Ví dụ dữ liệu Mapping mẫu:</h4>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 8%; text-align: center;">STT</th>
+          <th style="width: 42%;">MÃ SP TÍNH THƯỞNG</th>
+          <th>MÃ LINH KIỆN _ DỊCH VỤ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">1</td>
+          <td><strong>Dịch vụ thay led_Tivi &lt; 50inch</strong></td>
+          <td>Thanh led_Tivi LED 4K 43P635_TCL_B0101-000584</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">2</td>
+          <td><strong>Dịch vụ sửa chữa không thay linh kiện_Tivi</strong></td>
+          <td>Remote_Tivi 43P715_TCL_G0401-000271</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">3</td>
+          <td><strong>Dịch vụ thay led_Tivi ≥ 50inch &lt; 65inch</strong></td>
+          <td>Đèn led_TIVI LED SAMSUNG UA43T6000_ĐP</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size: 15px; color: var(--blue2); margin: 18px 0 6px;">5.3. Luồng Mapping:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 6%; text-align: center;">Bước</th>
+          <th style="width: 22%;">Ai làm</th>
+          <th style="width: 32%;">Làm gì</th>
+          <th style="width: 12%;">Location</th>
+          <th>System Logic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">1</td>
+          <td>Người dùng nghiệp vụ</td>
+          <td>Xác định Code dịch vụ và SKU cần áp dụng thưởng</td>
+          <td>Online</td>
+          <td>Nhập thông tin Mapping</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">2</td>
+          <td>Người dùng nghiệp vụ</td>
+          <td>Khai báo Code thưởng ↔ Code dịch vụ ↔ SKU</td>
+          <td>ERP</td>
+          <td>Kiểm tra dữ liệu bắt buộc và chống trùng Mapping</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">3</td>
+          <td>Hệ thống</td>
+          <td>Kiểm tra Mapping</td>
+          <td>Online</td>
+          <td>Tìm theo tổ hợp <code>Code dịch vụ + SKU</code></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">4</td>
+          <td>Hệ thống</td>
+          <td>Xác định Code tính thưởng</td>
+          <td>Online</td>
+          <td>Nếu Mapping tồn tại ➔ lấy Code tính thưởng</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">5</td>
+          <td>Hệ thống</td>
+          <td>Kiểm tra trạng thái Code</td>
+          <td>Online</td>
+          <td>Chỉ sử dụng Code đang ở trạng thái Active</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">6</td>
+          <td>Hệ thống</td>
+          <td>Lấy đơn giá hiện hành</td>
+          <td>Online</td>
+          <td>Xác định đơn giá theo thời gian hiệu lực</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. Quy trình 3 – Tự động tính thưởng KTV -->
+  <section class="card" id="quy-trinh-3">
+    <div class="card-head">
+      <div class="num">6</div>
+      <h2>Quy trình 3 – Tự động tính thưởng KTV</h2>
+    </div>
+
+    <p><strong>6.1. Trigger kích hoạt:</strong> Khi <strong>Vận đơn chuyển trạng thái = Hoàn tất</strong>, hệ thống tự động kích hoạt tiến trình tính thưởng.</p>
+
+    <h3 style="font-size: 15px; color: var(--blue2); margin: 14px 0 6px;">6.2. Luồng xử lý chi tiết:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 6%; text-align: center;">Bước</th>
+          <th style="width: 15%;">Actor</th>
+          <th style="width: 25%;">Hành động (Action)</th>
+          <th style="width: 10%;">Location</th>
+          <th style="width: 24%;">System Logic</th>
+          <th>Ghi chú quan trọng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">1</td>
+          <td>Hệ thống</td>
+          <td>Nhận trạng thái Vận đơn = Hoàn tất</td>
+          <td>TMS</td>
+          <td>Trigger quy trình tính thưởng</td>
+          <td>Sự kiện kích hoạt</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">2</td>
+          <td>Hệ thống</td>
+          <td>Lấy toàn bộ linh kiện đã sử dụng</td>
+          <td>TMS</td>
+          <td>Xác định các SKU thực tế đã sử dụng trên JC/Vận đơn</td>
+          <td>Lấy đúng linh kiện xuất</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">3</td>
+          <td>Hệ thống</td>
+          <td>Lấy Code dịch vụ</td>
+          <td>TMS</td>
+          <td>Xác định Code dịch vụ của Vận đơn</td>
+          <td><span class="badge-tag badge-orange">Không phải code dịch vụ mapping với linh kiện</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">4</td>
+          <td>Hệ thống</td>
+          <td>Tìm Mapping</td>
+          <td>TMS</td>
+          <td>Tìm Mapping theo <code>Code dịch vụ + Linh kiện sử dụng</code></td>
+          <td>Khớp dữ liệu Master</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">5</td>
+          <td>Hệ thống</td>
+          <td>Xác định Code tính thưởng</td>
+          <td>TMS</td>
+          <td>Lấy Code tính thưởng từ kết quả Mapping</td>
+          <td>Khóa tham chiếu</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">6</td>
+          <td>Hệ thống</td>
+          <td>Lấy đơn giá</td>
+          <td>TMS</td>
+          <td>Lấy đơn giá hiện hành của Code tính thưởng</td>
+          <td>Theo thời điểm hoàn tất</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">7</td>
+          <td>Hệ thống</td>
+          <td>Tính tổng thưởng</td>
+          <td>TMS</td>
+          <td>Cộng đơn giá thưởng của toàn bộ linh kiện hợp lệ</td>
+          <td>Tổng thưởng trước giảm trừ</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">8</td>
+          <td>Hệ thống</td>
+          <td>Kiểm tra số lượng linh kiện</td>
+          <td>TMS</td>
+          <td>Nếu số lượng linh kiện ≥ 2 ➔ áp dụng hệ số 80%</td>
+          <td><span class="badge-tag badge-purple">Giảm trừ 20%</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">9</td>
+          <td>Hệ thống</td>
+          <td>Lưu giao dịch thưởng KTV</td>
+          <td>TMS</td>
+          <td>Ghi nhận kết quả tính thưởng và dữ liệu nguồn</td>
+          <td>Lưu vết đối soát</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 7. Công thức tính thưởng -->
+  <section class="card" id="cong-thuc">
+    <div class="card-head">
+      <div class="num">7</div>
+      <h2>Công thức tính thưởng & Hệ số điều chỉnh</h2>
+    </div>
+
+    <div class="formula-card">
+      <h3>7.1. Tổng thưởng trước điều chỉnh:</h3>
+      <p style="margin: 0; font-size: 13.5px;">Tổng thưởng bằng tổng đơn giá của tất cả các Code tính thưởng hợp lệ:</p>
+      <div class="formula-box">TongThuong = Σ DonGia(CodeThuong_i)</div>
+
+      <h3>7.2. Điều chỉnh theo số lượng linh kiện (Hệ số Qty):</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 35%;">Số lượng linh kiện sử dụng</th>
+            <th style="width: 35%;">Hệ số thưởng áp dụng</th>
+            <th>Công thức tính tiền thưởng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1 linh kiện</strong></td>
+            <td><span class="badge-tag badge-green">100% (Không giảm)</span></td>
+            <td><code>ThuongKTV = Σ DonGia(CodeThuong_i)</code></td>
+          </tr>
+          <tr>
+            <td><strong>≥ 2 linh kiện</strong></td>
+            <td><span class="badge-tag badge-orange">80% (Giảm 20%)</span></td>
+            <td><code>ThuongKTV = Σ DonGia(CodeThuong_i) × 80%</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 8. Sơ đồ logic tổng thể -->
+  <section class="card" id="so-do">
+    <div class="card-head">
+      <div class="num">8</div>
+      <h2>Sơ đồ logic tổng thể</h2>
+    </div>
+
+    <div class="flow-container">
+      <div class="flow-step">
+        <div class="step-no">1</div>
+        <div class="step-text"><strong>Khởi tạo:</strong> QC tạo Code tính thưởng ➔ GĐ duyệt đơn giá ➔ KSNB khai báo đơn giá & hiệu lực.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">2</div>
+        <div class="step-text"><strong>Cấu hình Mapping:</strong> Khai báo <code>Code dịch vụ + SKU ➔ Code tính thưởng</code>.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">3</div>
+        <div class="step-text"><strong>Sự kiện (Trigger):</strong> Jobcard / Vận đơn chuyển trạng thái <strong>Hoàn tất</strong>.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">4</div>
+        <div class="step-text"><strong>Trích xuất dữ liệu:</strong> Lấy SKU linh kiện thực tế + Lấy Code dịch vụ trên Vận đơn.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">5</div>
+        <div class="step-text"><strong>Tìm Mapping & Trạng thái:</strong> Tìm Code tính thưởng ➔ Kiểm tra Code <strong>Active</strong> và còn hiệu lực.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">6</div>
+        <div class="step-text"><strong>Tính toán & Áp hệ số:</strong> Tính tổng đơn giá ➔ Nếu Qty ≥ 2 nhân <strong>80%</strong> (Qty = 1 giữ <strong>100%</strong>).</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step" style="border-color: var(--green-border); background: var(--green-bg);">
+        <div class="step-no" style="background: var(--green);">7</div>
+        <div class="step-text"><strong>Lưu giao dịch & Đối soát:</strong> Ghi nhận giao dịch thưởng KTV phục vụ đối soát minh bạch.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Kết quả đầu ra & Khả năng truy xuất ngược -->
+  <section class="card" id="ket-qua">
+    <div class="card-head">
+      <div class="num">9</div>
+      <h2>Kết quả đầu ra & Chuỗi truy xuất ngược (Audit Trail)</h2>
+    </div>
+
+    <p>Kết quả cuối cùng của quy trình là một giao dịch thưởng KTV có thể <strong>truy xuất ngược đầy đủ 100%</strong> theo chuỗi:</p>
+
+    <div class="audit-chain">
+      <span class="chain-node">KTV</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node">Jobcard / Vận đơn</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node">Code dịch vụ</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node">SKU Linh kiện</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node">Bảng Mapping</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node">Code tính thưởng</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node">Đơn giá</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node">Hệ số Qty</span>
+      <span class="chain-sep">➔</span>
+      <span class="chain-node" style="background: var(--yellow-bg); border-color: #eab308; color: #854d0e;">Tiền thưởng KTV</span>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title">✅ Điểm chuẩn hóa cốt lõi:</div>
+      <strong>Code tính thưởng là Master Key</strong>, còn <code>Code dịch vụ + SKU</code> là điều kiện để hệ thống tìm ra Code đó thông qua bảng Mapping. Chuẩn hóa này loại bỏ hoàn toàn rủi ro khi dùng “Nhóm linh kiện” làm khóa tính thưởng.
+    </div>
+  </section>
+
+  <footer class="footer">
+    KSNB Automation · Quy trình nghiệp vụ Thợ Điện Máy Xanh · Cập nhật 2026
+  </footer>
+
+</div>
+
+</body>
+</html>
