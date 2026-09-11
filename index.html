@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KSNB Automation | Quy trình sửa chữa CE & Gia dụng</title>
+<title>KSNB Automation | Cổng Quy trình</title>
 <style>
 :root{
   --blue:#12358f;
@@ -24,15 +24,15 @@ body{
   font-family:"Segoe UI",Arial,sans-serif;line-height:1.55;
 }
 .header{
-  background:linear-gradient(135deg,#12358f,#0a276f);
-  color:#fff;padding:24px 24px 38px;
+  background:linear-gradient(135deg,#102f84,#0b2568);
+  color:#fff;padding:28px 24px 44px;
 }
 .header-inner{max-width:1180px;margin:auto}
 .topbar{
   display:flex;align-items:center;justify-content:space-between;
-  gap:20px;margin-bottom:24px;
+  gap:20px;margin-bottom:38px;
 }
-.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;text-decoration:none;color:#fff}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px}
 .logo-mark{
   width:38px;height:38px;border-radius:10px;background:var(--yellow);
   color:var(--blue);display:grid;place-items:center;font-weight:900;
@@ -41,87 +41,97 @@ body{
   padding:7px 12px;border:1px solid rgba(255,255,255,.25);
   border-radius:999px;font-size:13px;color:#e8efff;
 }
-.breadcrumb{
-  font-size:13px;color:#c0d2f8;margin-bottom:12px;display:flex;align-items:center;gap:8px;
-}
-.breadcrumb a{color:#fff;text-decoration:none;font-weight:600}
-.breadcrumb a:hover{text-decoration:underline}
-.hero h1{font-size:32px;line-height:1.2;margin:0 0 10px}
-.hero p{max-width:760px;color:#dce6ff;margin:0;font-size:15px}
-
-.search-wrap{max-width:1180px;margin:-22px auto 0;padding:0 24px;position:relative}
+.hero h1{font-size:36px;line-height:1.2;margin:0 0 12px}
+.hero p{max-width:760px;color:#dce6ff;margin:0;font-size:16px}
+.search-wrap{max-width:1180px;margin:-24px auto 0;padding:0 24px;position:relative}
 .search{
   background:#fff;border:1px solid var(--line);border-radius:16px;
-  box-shadow:var(--shadow);padding:14px 18px;
+  box-shadow:var(--shadow);padding:16px 18px;
   display:flex;align-items:center;gap:12px;
 }
 .search span{font-size:18px;color:var(--muted)}
 .search input{
   width:100%;border:0;outline:0;font-size:15px;color:var(--text);
 }
-
-.container{max-width:1180px;margin:0 auto;padding:32px 24px 60px}
-.section-title{
-  display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;
-}
+.container{max-width:1180px;margin:0 auto;padding:34px 24px 60px}
+.section-title{margin-bottom:20px}
 .section-title h2{margin:0 0 4px;font-size:22px;color:var(--blue2)}
 .section-title p{margin:0;color:var(--muted);font-size:14px}
-.btn-back{
-  display:inline-flex;align-items:center;gap:6px;font-size:13px;
-  padding:8px 14px;background:#fff;border:1px solid var(--line);
-  border-radius:10px;color:var(--blue);text-decoration:none;font-weight:600;
+
+.grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;
+}
+
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:24px;box-shadow:0 3px 12px rgba(16,40,90,.04);
+  transition:.2s ease;text-decoration:none;color:inherit;display:flex;
+  flex-direction:column;justify-content:space-between;
+}
+.card:hover{
+  transform:translateY(-3px);box-shadow:var(--shadow-hover);
+  border-color:#b8c7e8;
+}
+.card-top{display:block;text-decoration:none;color:inherit}
+.card-head{display:flex;align-items:flex-start;gap:16px}
+.icon{
+  flex:0 0 48px;width:48px;height:48px;border-radius:13px;
+  background:#edf3ff;color:var(--blue);display:grid;place-items:center;
+  font-size:16px;font-weight:800;
+}
+.icon.ce{background:#edf3ff;color:var(--blue)}
+.icon.android{background:#e8f5e9;color:#2e7d32}
+.icon.ios{background:#f3e8ff;color:#6b21a8}
+.icon.windows{background:#e0f2fe;color:#0284c7}
+
+.card h3{font-size:18px;margin:0 0 6px;color:var(--text)}
+.card p{font-size:13px;color:var(--muted);margin:0}
+
+.sublist{
+  margin:18px 0 0 0;padding:12px 0 0 0;list-style:none;
+  border-top:1px solid var(--line);
+}
+.sublist li{
+  padding:8px 0;border-bottom:1px solid #f0f4f9;
+  font-size:13px;
+}
+.sublist li:last-child{border-bottom:0}
+.sublist a{
+  color:#344054;text-decoration:none;display:flex;align-items:center;gap:9px;
   transition:.15s ease;
 }
-.btn-back:hover{background:#edf3ff;border-color:#b8c7e8}
+.sublist a:hover{
+  color:var(--blue);font-weight:600;
+}
+.sublist a:hover .arrow{
+  transform:translateX(3px);
+}
+.arrow{color:var(--blue);font-weight:700;transition:.15s ease}
 
-.doc-list{display:flex;flex-direction:column;gap:14px}
-.doc-item{
-  background:var(--card);border:1px solid var(--line);border-radius:16px;
-  padding:20px 24px;box-shadow:0 3px 12px rgba(16,40,90,.04);
-  transition:.2s ease;text-decoration:none;color:inherit;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
+.tag-count{
+  margin-left:auto;font-size:11px;background:#eef2f8;color:var(--muted);
+  padding:2px 8px;border-radius:999px;font-weight:normal;
 }
-.doc-item:hover{
-  transform:translateY(-2px);box-shadow:var(--shadow-hover);
-  border-color:#b8c7e8;background:#fafcff;
-}
-.doc-info{display:flex;align-items:flex-start;gap:16px}
-.doc-icon{
-  width:44px;height:44px;border-radius:12px;background:#edf3ff;color:var(--blue);
-  display:grid;place-items:center;font-size:20px;flex:none;
-}
-.doc-tag{
-  display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;
-  border-radius:6px;background:#eef2f8;color:var(--blue);margin-bottom:4px;
-}
-.doc-info h3{font-size:16px;margin:0 0 4px;color:var(--text)}
-.doc-info p{font-size:13px;color:var(--muted);margin:0}
-.doc-btn{
-  flex:none;display:inline-flex;align-items:center;gap:6px;
-  padding:9px 16px;background:#edf3ff;color:var(--blue);
-  border-radius:10px;font-size:13px;font-weight:700;
-}
-.doc-item:hover .doc-btn{background:var(--blue);color:#fff}
 
-.category-group{margin-bottom:28px}
-.category-header{
-  font-size:15px;font-weight:700;color:var(--muted);text-transform:uppercase;
-  letter-spacing:0.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px;
+.note{
+  margin-top:28px;padding:17px 19px;background:#fff;
+  border:1px dashed #b8c7e8;border-radius:14px;color:var(--muted);
+  font-size:13px;line-height:1.6;
 }
-.category-header::after{content:"";flex:1;height:1px;background:var(--line);margin-left:8px}
-
-.no-result{display:none;margin-top:20px;padding:25px;text-align:center;color:var(--muted)}
 .footer{
   border-top:1px solid var(--line);background:#fff;
   padding:22px 24px;color:var(--muted);font-size:12px;
 }
 .footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px}
+.no-result{display:none;margin-top:20px;padding:25px;text-align:center;color:var(--muted)}
 
 @media(max-width:768px){
-  .header{padding:20px 16px 34px}
-  .hero h1{font-size:24px}
-  .doc-item{flex-direction:column;align-items:flex-start}
-  .doc-btn{width:100%;justify-content:center}
+  .header{padding:22px 18px 38px}
+  .topbar{margin-bottom:28px}
+  .hero h1{font-size:26px}
+  .search-wrap{padding:0 16px}
+  .container{padding:28px 16px 45px}
+  .grid{grid-template-columns:1fr}
   .footer-inner{flex-direction:column}
 }
 </style>
@@ -131,21 +141,18 @@ body{
 <header class="header">
   <div class="header-inner">
     <div class="topbar">
-      <a href="../index.html" class="logo">
+      <div class="logo">
         <div class="logo-mark">KS</div>
         <div>KSNB Automation</div>
-      </a>
-      <div class="badge">CE & Gia dụng</div>
-    </div>
-
-    <div class="breadcrumb">
-      <a href="../index.html">Trang chủ</a> <span>/</span>
-      <span>CE & Gia dụng</span>
+      </div>
+      <div class="badge">Cổng quản lý quy trình</div>
     </div>
 
     <div class="hero">
-      <h1>Quy trình sửa chữa CE & Gia dụng</h1>
-      <p>Tài liệu nghiệp vụ, quản lý kho Thợ ĐMX, sửa chữa dịch vụ Bách Hóa Xanh và điện tử gia dụng.</p>
+      <h1>Hệ thống Quy trình KSNB</h1>
+      <p>
+        Trung tâm truy cập các quy trình sửa chữa và tài liệu nghiệp vụ của Thợ Điện Máy Xanh.
+      </p>
     </div>
   </div>
 </header>
@@ -153,118 +160,150 @@ body{
 <div class="search-wrap">
   <div class="search">
     <span>⌕</span>
-    <input id="search" type="search" placeholder="Tìm kiếm tài liệu trong nhóm CE & Gia dụng..." autocomplete="off">
+    <input id="search" type="search"
+      placeholder="Tìm kiếm nhóm quy trình hoặc tài liệu (CE, Android, iOS, Windows, Jobcard, Magic Mouse...)" autocomplete="off">
   </div>
 </div>
 
 <main class="container">
   <div class="section-title">
-    <div>
-      <h2>Danh sách tài liệu & quy trình</h2>
-      <p>Chọn quy trình để xem chi tiết từng bước thao tác</p>
-    </div>
-    <a href="../index.html" class="btn-back">← Quay lại Trang chủ</a>
+    <h2>Danh mục quy trình</h2>
+    <p>Chọn nhóm quy trình cụ thể để truy cập tài liệu chi tiết</p>
   </div>
 
-  <div id="docContainer">
-    <!-- Nhóm 1: Quản lý kho -->
-    <div class="category-group">
-      <div class="category-header">📦 1. Quản lý kho Thợ ĐMX</div>
-      <div class="doc-list">
-        
-        <a class="doc-item" href="Quy_trinh_trien_khai_tao_kho_Tho_DMX.html"
-           data-search="quy định hướng dẫn triển khai tạo kho thợ đmx điện máy xanh">
-          <div class="doc-info">
-            <div class="doc-icon">🏬</div>
-            <div>
-              <span class="doc-tag">Kho Thợ ĐMX</span>
-              <h3>Quy định & hướng dẫn triển khai các loại kho Thợ ĐMX</h3>
-              <p>Hướng dẫn triển khai tạo kho, quản lý xuất nhập và bảo quản vật tư Thợ Điện Máy Xanh.</p>
-            </div>
-          </div>
-          <div class="doc-btn">Xem tài liệu →</div>
-        </a>
+  <div class="grid" id="processGrid">
 
-      </div>
+    <!-- Card 1: CE & Gia dụng -->
+    <div class="card" data-search="CE gia dụng sửa chữa CE sửa chữa gia dụng kho thợ dmx bách hóa xanh bhx dịch vụ">
+      <a class="card-top" href="CE_Gia_dung.html">
+        <div class="card-head">
+          <div class="icon ce">CE</div>
+          <div>
+            <h3>Quy trình sửa chữa CE & Gia dụng</h3>
+            <p>Nhóm quy trình sửa chữa dịch vụ CE và các sản phẩm gia dụng.</p>
+          </div>
+        </div>
+      </a>
+      <ul class="sublist">
+        <li>
+          <a href="Quy_trinh_trien_khai_tao_kho_Tho_DMX.html">
+            <span class="arrow">→</span> Quy định triển khai các loại kho Thợ ĐMX
+          </a>
+        </li>
+        <li>
+          <a href="Quy_trinh_sua_chua_dich_vu_BHX_Professional.html">
+            <span class="arrow">→</span> Quy trình sửa chữa dịch vụ Bách Hóa Xanh
+          </a>
+        </li>
+        <li>
+          <a href="quy_trinh_tang_goi_dich_vu.html">
+            <span class="arrow">→</span> Quy trình tặng gói dịch vụ
+          </a>
+        </li>
+      </ul>
     </div>
 
-    <!-- Nhóm 2: Dịch vụ sửa chữa BHX & Gia dụng -->
-    <div class="category-group">
-      <div class="category-header">🛠️ 2. Sửa chữa dịch vụ Bách Hóa Xanh & Gói dịch vụ</div>
-      <div class="doc-list">
-
-        <a class="doc-item" href="Quy_trinh_sua_chua_dich_vu_BHX_Professional.html"
-           data-search="quy trình sửa chữa dịch vụ bhx bách hóa xanh professional">
-          <div class="doc-info">
-            <div class="doc-icon">🏪</div>
-            <div>
-              <span class="doc-tag">Dịch vụ BHX</span>
-              <h3>Quy trình sửa chữa dịch vụ Bách Hóa Xanh (Professional)</h3>
-              <p>Chi tiết quy trình tiếp nhận, kiểm tra và sửa chữa thiết bị dịch vụ cho Bách Hóa Xanh.</p>
-            </div>
+    <!-- Card 2: ICT Android -->
+    <div class="card" data-search="ICT android sửa chữa điện thoại android samsung xiaomi oppo jobcard wms">
+      <a class="card-top" href="ICT_Android.html">
+        <div class="card-head">
+          <div class="icon android">AND</div>
+          <div>
+            <h3>Quy trình sửa chữa ICT_Android</h3>
+            <p>Nhóm quy trình sửa chữa thiết bị di động và máy tính bảng Android.</p>
           </div>
-          <div class="doc-btn">Xem tài liệu →</div>
-        </a>
-
-        <a class="doc-item" href="quy_trinh_tang_goi_dich_vu.html"
-           data-search="quy trình tặng gói dịch vụ bảo hành bảo dưỡng">
-          <div class="doc-info">
-            <div class="doc-icon">🎁</div>
-            <div>
-              <span class="doc-tag">Gói Dịch Vụ</span>
-              <h3>Quy trình tặng gói dịch vụ</h3>
-              <p>Chính sách và hướng dẫn quy trình tặng gói dịch vụ sửa chữa, bảo dưỡng cho khách hàng.</p>
-            </div>
-          </div>
-          <div class="doc-btn">Xem tài liệu →</div>
-        </a>
-
-      </div>
+        </div>
+      </a>
+      <ul class="sublist">
+        <li>
+          <a href="ICT_Android.html">
+            <span class="arrow">→</span> Danh mục quy trình Android <span class="tag-count">Xem tất cả</span>
+          </a>
+        </li>
+      </ul>
     </div>
+
+    <!-- Card 3: ICT iOS -->
+    <div class="card" data-search="ICT ios apple iphone ipad macbook magic mouse chuột jobcard tạo jobcard wms sửa chữa">
+      <a class="card-top" href="ICT_IOS.html">
+        <div class="card-head">
+          <div class="icon ios">iOS</div>
+          <div>
+            <h3>Quy trình sửa chữa ICT_IOS</h3>
+            <p>Nhóm quy trình sửa chữa thiết bị Apple (iPhone, iPad, Mac, Phụ kiện).</p>
+          </div>
+        </div>
+      </a>
+      <ul class="sublist">
+        <li>
+          <a href="Huong_dan_nhanh_tao_Jobcard_Apple_Magic_Mouse.html">
+            <span class="arrow">→</span> <strong>Tạo Jobcard:</strong> Apple Magic Mouse
+          </a>
+        </li>
+        <li>
+          <a href="ICT_IOS.html">
+            <span class="arrow">→</span> Xem toàn bộ quy trình iOS <span class="tag-count">Thư mục iOS</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Card 4: ICT Windows -->
+    <div class="card" data-search="ICT windows laptop máy tính pc sửa chữa cài đặt hệ điều hành">
+      <a class="card-top" href="ICT_Windows.html">
+        <div class="card-head">
+          <div class="icon windows">WIN</div>
+          <div>
+            <h3>Quy trình sửa chữa ICT_Windows</h3>
+            <p>Nhóm quy trình sửa chữa máy tính để bàn, laptop hệ điều hành Windows.</p>
+          </div>
+        </div>
+      </a>
+      <ul class="sublist">
+        <li>
+          <a href="ICT_Windows.html">
+            <span class="arrow">→</span> Danh mục quy trình Windows <span class="tag-count">Xem tất cả</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 
   <div class="no-result" id="noResult">
-    Không tìm thấy quy trình phù hợp trong nhóm CE & Gia dụng.
+    Không tìm thấy nhóm quy trình phù hợp.
+  </div>
+
+  <div class="note">
+    <strong>Cấu trúc tài liệu:</strong>
+    Cây thư mục ICT đã được phân tách thành 3 nhóm độc lập (Android, iOS, Windows). Mỗi nhóm có trang danh mục riêng và liên kết trực tiếp đến các file quy trình nghiệp vụ tương ứng.
   </div>
 </main>
 
 <footer class="footer">
   <div class="footer-inner">
-    <span>KSNB Automation - CE & Gia dụng</span>
+    <span>KSNB Automation</span>
     <span>Quản lý quy trình & tài liệu nghiệp vụ</span>
   </div>
 </footer>
 
 <script>
 const search = document.getElementById('search');
-const docItems = [...document.querySelectorAll('.doc-item')];
-const groups = [...document.querySelectorAll('.category-group')];
+const cards = [...document.querySelectorAll('.card')];
 const noResult = document.getElementById('noResult');
 
 search.addEventListener('input', () => {
   const keyword = search.value.trim().toLowerCase();
-  let totalVisible = 0;
+  let visible = 0;
 
-  groups.forEach(group => {
-    const items = [...group.querySelectorAll('.doc-item')];
-    let groupVisible = 0;
-
-    items.forEach(item => {
-      const text = (item.innerText + ' ' + (item.dataset.search || '')).toLowerCase();
-      const show = !keyword || text.includes(keyword);
-      item.style.display = show ? 'flex' : 'none';
-      if (show) groupVisible++;
-    });
-
-    if (items.length > 0) {
-      group.style.display = groupVisible > 0 ? 'block' : 'none';
-      totalVisible += groupVisible;
-    } else {
-      group.style.display = keyword ? 'none' : 'block';
-    }
+  cards.forEach(card => {
+    const text = (card.innerText + ' ' + (card.dataset.search || '')).toLowerCase();
+    const show = !keyword || text.includes(keyword);
+    card.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
   });
 
-  noResult.style.display = (totalVisible === 0 && keyword) ? 'block' : 'none';
+  noResult.style.display = visible ? 'none' : 'block';
 });
 </script>
 </body>
