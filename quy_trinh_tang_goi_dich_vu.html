@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy trình tặng gói dịch vụ cho khách hàng</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;color:#17202a}
+header{background:#0b5cab;color:white;padding:28px 36px}
+header h1{margin:0 0 8px;font-size:28px}
+header p{margin:0;opacity:.9}
+.container{max-width:1500px;margin:24px auto;padding:0 20px}
+.card{background:white;border-radius:12px;padding:22px;margin-bottom:20px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+h2{margin-top:0;color:#0b5cab}
+h3{color:#1f4e79;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid #d9dee5;padding:10px;vertical-align:top}
+th{background:#eaf2fb;color:#123b63;text-align:left}
+.badge{display:inline-block;padding:4px 8px;border-radius:5px;font-size:12px;font-weight:bold}
+.yes{background:#e7f6ec;color:#177245}.build{background:#fff3cd;color:#8a6200}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.node{padding:12px 15px;background:#eaf2fb;border:1px solid #9ec5e8;border-radius:8px;font-weight:bold;text-align:center}
+.arrow{font-size:22px;color:#777}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.alert{background:#fff7e6;border-left:5px solid #f0ad00;padding:14px}
+.control{background:#eef8f1;border-left:5px solid #36a269;padding:14px}
+pre{background:#f6f7f9;padding:16px;border-radius:8px;overflow:auto;line-height:1.5}
+@media(max-width:900px){.split{grid-template-columns:1fr}table{display:block;overflow-x:auto;white-space:normal}.flow{flex-direction:column}.arrow{transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+<header>
+  <h1>QUY TRÌNH TẶNG GÓI DỊCH VỤ CHO KHÁCH HÀNG</h1>
+  <p>Chuẩn hóa luồng SO – CNDV – YCX/HTX/HTN – đối soát cuối tháng</p>
+</header>
+
+<div class="container">
+
+<section class="card">
+<h2>1. Mục tiêu</h2>
+<p>Quản lý xuyên suốt việc tặng gói dịch vụ cho khách hàng khi mua sản phẩm chính: khai báo CTKM → tạo SO gói dịch vụ → đăng ký/phát hành CNDV → xử lý trả/đổi → đối soát cuối tháng → xuất/nhập mua nội bộ và điều chỉnh hóa đơn.</p>
+</section>
+
+<section class="card">
+<h2>2. Hệ thống & bộ phận tham gia</h2>
+<table>
+<tr><th>Đối tượng/Hệ thống</th><th>Vai trò</th></tr>
+<tr><td>ĐMX – Kinh doanh/Bán hàng</td><td>Bán sản phẩm chính, áp dụng CTKM tặng gói.</td></tr>
+<tr><td>ĐMX – Kho/Cửa hàng</td><td>Xuất sản phẩm chính; xử lý nhập trả/xuất trả gói theo nghiệp vụ.</td></tr>
+<tr><td>Thợ ĐMX</td><td>Phát hành/hủy CNDV; xuất bán dịch vụ nội bộ; nhập trả.</td></tr>
+<tr><td>ĐMX – Kế toán</td><td>Nhập mua, thanh toán, đối soát và xử lý xuất trả.</td></tr>
+<tr><td>ERP ĐMX</td><td>Quản lý SO SPC, SO gói, CTKM, phiếu xuất/nhập và nghiệp vụ nội bộ.</td></tr>
+<tr><td>WMS Thợ</td><td>Quản lý SO/OV phát hành CNDV, CNDV, nhập trả và xuất bán.</td></tr>
+<tr><td>TMS</td><td>Không phát sinh trong luồng được mô tả.</td></tr>
+<tr><td>CRM</td><td>Không phát sinh trong luồng được mô tả.</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>3. Mapping nghiệp vụ chuẩn</h2>
+<table>
+<tr><th>Nghiệp vụ</th><th>YCX</th><th>HTX/HTN</th><th>VAT/Hóa đơn</th><th>Mục đích</th></tr>
+<tr><td>ĐMX tặng gói cho KH</td><td>702 – Yêu cầu xuất phát hành CNDV</td><td>4503 – Xuất phát hành CNDV</td><td>Không VAT</td><td>Phát hành CNDV tặng khách hàng</td></tr>
+<tr><td>Khách hàng trả/đổi, CNDV chưa sử dụng</td><td>—</td><td>3904 – Nhập trả từ xuất phát hành CNDV</td><td>Không</td><td>Thu hồi/hủy CNDV</td></tr>
+<tr><td>Thợ xuất bán gói cuối tháng</td><td>703 – Yêu cầu xuất bán gói DV Cty nội bộ</td><td>4504 – Xuất bán gói DV Cty nội bộ</td><td>Có VAT</td><td>Thợ xuất hóa đơn cho ĐMX</td></tr>
+<tr><td>ĐMX nhập mua từ Thợ</td><td>—</td><td>3905 – Nhập mua gói DV Cty nội bộ</td><td>Theo hóa đơn Thợ</td><td>Ghi nhận mua/chi phí</td></tr>
+<tr><td>ĐMX trả gói tháng trước</td><td>704 – Yêu cầu xuất trả gói DV Cty nội bộ</td><td>4505 – Xuất trả gói DV Cty nội bộ</td><td>Không phát hành VAT</td><td>Trả gói đã nhập mua kỳ trước</td></tr>
+<tr><td>Thợ nhận lại gói</td><td>—</td><td>3906 – Nhập trả lại xuất bán gói DV Cty nội bộ</td><td>Hóa đơn điều chỉnh giảm</td><td>Điều chỉnh hóa đơn kỳ trước</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>4. Luồng A – Tặng gói cho khách hàng</h2>
+<div class="flow">
+<div class="node">SO sản phẩm chính</div><div class="arrow">→</div>
+<div class="node">Chọn CTKM tặng gói</div><div class="arrow">→</div>
+<div class="node">ERP tách SO gói</div><div class="arrow">→</div>
+<div class="node">SPC hoàn tất giao</div><div class="arrow">→</div>
+<div class="node">API đăng ký</div><div class="arrow">→</div>
+<div class="node">YCX 702</div><div class="arrow">→</div>
+<div class="node">HTX 4503</div><div class="arrow">→</div>
+<div class="node">CNDV phát hành</div>
+</div>
+</section>
+
+<section class="card">
+<h2>5. Chi tiết luồng A</h2>
+<table>
+<tr><th>Bước</th><th>Ai làm</th><th>Làm gì</th><th>Làm ở đâu</th><th>Hệ thống làm gì</th><th>Trạng thái</th><th>KPI/Metrics</th></tr>
+<tr><td>1</td><td>ĐMX – Bán hàng</td><td>Tạo SO SPC và chọn CTKM có tặng gói.</td><td>Online – ERP</td><td>Kiểm tra CTKM và xác định code gói.</td><td><span class="badge yes">Có</span></td><td>Tỷ lệ SO áp dụng CTKM hợp lệ.</td></tr>
+<tr><td>2</td><td>ERP ĐMX</td><td>Tách gói dịch vụ thành SO riêng.</td><td>Online</td><td>Không xuất gói chung với SPC.</td><td><span class="badge build">Cần kiểm tra</span></td><td>SO gói tạo thành công / SO đủ điều kiện.</td></tr>
+<tr><td>3</td><td>ĐMX – Kho/Cửa hàng</td><td>Hoàn tất giao SPC.</td><td>Offline + ERP</td><td>Cập nhật trạng thái hoàn tất giao.</td><td><span class="badge yes">Có</span></td><td>TAT giao hàng.</td></tr>
+<tr><td>4</td><td>ERP ĐMX</td><td>Kích hoạt luồng đăng ký gói.</td><td>Online</td><td>Gửi yêu cầu đăng ký gói sau khi SPC hoàn tất giao.</td><td><span class="badge build">Cần cấu hình/kiểm tra</span></td><td>Tỷ lệ API thành công.</td></tr>
+<tr><td>5</td><td>ERP → WMS Thợ</td><td>Gửi thông tin SO gói, KH, SĐT, code dịch vụ.</td><td>Online – API</td><td>Thợ tiếp nhận yêu cầu.</td><td><span class="badge build">Cần kiểm tra</span></td><td>API thành công / Tổng API.</td></tr>
+<tr><td>6</td><td>Thợ ĐMX</td><td>Tạo YCX 702.</td><td>Online – WMS</td><td>YCX 702 – Yêu cầu xuất phát hành CNDV.</td><td><span class="badge yes">Có</span></td><td>TAT tiếp nhận.</td></tr>
+<tr><td>7</td><td>Thợ ĐMX</td><td>Thực hiện HTX 4503.</td><td>Online – WMS</td><td>Phát hành CNDV.</td><td><span class="badge yes">Có</span></td><td>Tỷ lệ phát hành thành công.</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>6. Thông tin phải điền trên SO/phiếu gói tặng</h2>
+<table>
+<tr><th>Trường</th><th>Giá trị/Logic</th></tr>
+<tr><td>Loại đơn hàng</td><td>Đơn hàng gói dịch vụ tặng</td></tr>
+<tr><td>Chứng từ liên quan</td><td>SO sản phẩm chính</td></tr>
+<tr><td>CTKM</td><td>CTKM tặng gói dịch vụ</td></tr>
+<tr><td>Code dịch vụ</td><td>Code dịch vụ tương ứng sản phẩm chính</td></tr>
+<tr><td>Giá bán</td><td>0</td></tr>
+<tr><td>Giá vốn</td><td>Tỷ lệ phí gói dịch vụ có VAT × giá bán niêm yết SPC hoặc phí cố định theo cấu hình.</td></tr>
+<tr><td>Nhà cung cấp</td><td>53796 – CÔNG TY CỔ PHẦN THỢ ĐMX</td></tr>
+<tr><td>Khách hàng / SĐT</td><td>Lấy từ SO sản phẩm chính</td></tr>
+<tr><td>Hình thức xuất</td><td>4 – Xuất khuyến mãi</td></tr>
+<tr><td>Loại YCX</td><td>31 – Yêu cầu xuất khuyến mãi</td></tr>
+<tr><td>VAT</td><td>Không phát hành VAT đối với 4503.</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>7. Xử lý trả/đổi gói</h2>
+<div class="split">
+<div class="alert">
+<h3>CNDV chưa sử dụng</h3>
+<p>Kiểm tra CNDV chưa sử dụng và không có yêu cầu sử dụng đang tồn tại.</p>
+<p>→ Thực hiện <b>3904 – Nhập trả từ xuất phát hành CNDV</b>.</p>
+<p>→ Hủy CNDV.</p>
+</div>
+<div class="alert">
+<h3>CNDV đã sử dụng / đang có yêu cầu</h3>
+<p>→ Từ chối nhập trả.</p>
+<p>→ Không cho phép thu hồi/hủy CNDV theo luồng nhập trả này.</p>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>8. Luồng B – Đối soát cuối tháng</h2>
+<div class="flow">
+<div class="node">CNDV phát hành trong tháng</div><div class="arrow">→</div>
+<div class="node">Trừ CNDV trả cùng tháng</div><div class="arrow">→</div>
+<div class="node">YCX 703</div><div class="arrow">→</div>
+<div class="node">HTX 4504</div><div class="arrow">→</div>
+<div class="node">Hóa đơn VAT</div><div class="arrow">→</div>
+<div class="node">ĐMX 3905</div>
+</div>
+<p><b>Công thức:</b> Số gói xuất hóa đơn tháng = Tổng CNDV phát hành trong tháng − CNDV phát hành trong tháng nhưng bị nhập trả trong chính tháng đó.</p>
+</section>
+
+<section class="card">
+<h2>9. Luồng C – Trả gói của tháng trước</h2>
+<div class="flow">
+<div class="node">Gói tháng trước bị trả</div><div class="arrow">→</div>
+<div class="node">ĐMX – YCX 704</div><div class="arrow">→</div>
+<div class="node">ĐMX – 4505</div><div class="arrow">→</div>
+<div class="node">Thợ – 3906</div><div class="arrow">→</div>
+<div class="node">Hóa đơn điều chỉnh giảm</div>
+</div>
+<div class="control">
+<b>Control 3 chiều:</b> Giá trị 4505 = Giá trị 3906 = Giá trị hóa đơn điều chỉnh giảm.
+</div>
+</section>
+
+<section class="card">
+<h2>10. Ma trận chứng từ</h2>
+<table>
+<tr><th>Đối tượng</th><th>ERP ĐMX</th><th>WMS Thợ</th><th>Ý nghĩa</th></tr>
+<tr><td>SO SPC</td><td>Có</td><td>Tham chiếu</td><td>Đơn hàng sản phẩm chính</td></tr>
+<tr><td>SO gói</td><td>Có</td><td>Tham chiếu/tiếp nhận</td><td>Đơn hàng riêng của gói tặng</td></tr>
+<tr><td>OV</td><td>—</td><td>Có</td><td>Đối tượng xuất/phát hành CNDV</td></tr>
+<tr><td>IV</td><td>Chưa mô tả</td><td>Chưa mô tả</td><td>Không tự bổ sung logic ngoài nguồn.</td></tr>
+<tr><td>CM</td><td>Chưa mô tả</td><td>Chưa mô tả</td><td>Không tự bổ sung logic ngoài nguồn.</td></tr>
+<tr><td>CNDV</td><td>Tham chiếu</td><td>Phát hành/hủy/thu hồi</td><td>Chứng nhận dịch vụ</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>11. Các điểm IT cần xây/kiểm soát</h2>
+<ol>
+<li>Tự động tách SO gói dịch vụ từ SO SPC.</li>
+<li>Tự động kích hoạt đăng ký gói sau khi SPC hoàn tất giao.</li>
+<li>API ĐMX → Thợ để đăng ký CNDV.</li>
+<li>Đồng bộ trạng thái đăng ký/phát hành CNDV.</li>
+<li>Đồng bộ tên + SĐT từ SO SPC sang SO gói.</li>
+<li>Tự động hủy SO gói khi SO SPC bị hủy/edit tạo SO mới.</li>
+<li>Rule kiểm tra CNDV đã sử dụng trước khi nhập trả.</li>
+<li>Phân biệt trả cùng tháng và trả khác tháng.</li>
+<li>Tự động tính số lượng hóa đơn cuối tháng.</li>
+<li>Mapping CNDV → IMEI → SO SPC → hóa đơn gốc.</li>
+<li>Đối chiếu 4505 ↔ 3906 ↔ hóa đơn điều chỉnh.</li>
+<li>Không phát hành VAT tại 4503 và 4505.</li>
+</ol>
+</section>
+
+<section class="card">
+<h2>12. Nguyên tắc kiểm soát cốt lõi</h2>
+<pre>
+SO SPC
+  ↓
+SO GÓI DỊCH VỤ
+  ↓
+API ĐĂNG KÝ
+  ↓
+YCX 702 → HTX 4503 → CNDV
+  ↓
+────────────────────────────────
+TRẢ CÙNG THÁNG → 3904
+────────────────────────────────
+CUỐI THÁNG → 703 → 4504 → HÓA ĐƠN → 3905
+────────────────────────────────
+TRẢ GÓI THÁNG TRƯỚC
+704 → 4505 → 3906 → HÓA ĐƠN ĐIỀU CHỈNH GIẢM
+────────────────────────────────
+
+CONTROL:
+4505 = 3906 = HÓA ĐƠN ĐIỀU CHỈNH
+</pre>
+</section>
+
+</div>
+</body>
+</html>
