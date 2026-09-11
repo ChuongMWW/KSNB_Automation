@@ -410,7 +410,7 @@ tr:nth-child(even) td {
       <div class="num">2</div>
       <h2>Phạm vi áp dụng & Hệ thống liên quan</h2>
     </div>
-    <p>Áp dụng cho các <strong>Vận đơn sửa chữa có phát sinh linh kiện</strong> và có thực hiện tính thưởng cho KTV.</p>
+    <p>Áp dụng cho các <strong>Vận đơn sửa chữa có phát sinh linh kiện và dịch vụ </strong> và có thực hiện tính thưởng cho KTV.</p>
     
     <table>
       <thead>
@@ -423,10 +423,6 @@ tr:nth-child(even) td {
         <tr>
           <td><span class="badge-tag badge-blue">TMS</span></td>
           <td>Quản lý vận đơn Thợ, ghi nhận linh kiện/dịch vụ thực tế và trạng thái hoàn tất vận đơn (Trigger tính thưởng).</td>
-        </tr>
-        <tr>
-          <td><span class="badge-tag badge-purple">ERP</span></td>
-          <td>Quản lý danh mục Code tính thưởng, bảng Master Mapping và khai báo đơn giá thưởng theo hiệu lực.</td>
         </tr>
       </tbody>
     </table>
@@ -498,9 +494,9 @@ tr:nth-child(even) td {
       <tbody>
         <tr>
           <td style="text-align: center;"><strong>1</strong></td>
-          <td>Người dùng nghiệp vụ</td>
+          <td>Quản lý dịch vụ</td>
           <td>Gửi yêu cầu tạo Code tính thưởng mới, nêu rõ dịch vụ/linh kiện áp dụng</td>
-          <td>Online</td>
+          <td>BCNB</td>
           <td>Tiếp nhận yêu cầu</td>
           <td><span class="badge-tag badge-blue">Có thể cấu hình</span></td>
         </tr>
@@ -508,7 +504,7 @@ tr:nth-child(even) td {
           <td style="text-align: center;"><strong>2</strong></td>
           <td>QC</td>
           <td>Kiểm tra yêu cầu và tạo Code tính thưởng</td>
-          <td>Online – ERP</td>
+          <td>Masterdata</td>
           <td>Sinh Code tính thưởng duy nhất</td>
           <td><span class="badge-tag badge-orange">Xây mới nếu chưa có</span></td>
         </tr>
@@ -516,7 +512,7 @@ tr:nth-child(even) td {
           <td style="text-align: center;"><strong>3</strong></td>
           <td>QC</td>
           <td>Cập nhật thông tin mô tả Code</td>
-          <td>Online – ERP</td>
+          <td>Masterdata </td>
           <td>Lưu thông tin Code</td>
           <td><span class="badge-tag badge-blue">Xây mới / Điều chỉnh</span></td>
         </tr>
@@ -524,7 +520,7 @@ tr:nth-child(even) td {
           <td style="text-align: center;"><strong>4</strong></td>
           <td>KSNB</td>
           <td>Tiếp nhận Code đã được QC tạo</td>
-          <td>Online – ERP</td>
+          <td>BCNB </td>
           <td>Hiển thị Code cần khai báo đơn giá</td>
           <td><span class="badge-tag badge-blue">Xây mới / Điều chỉnh</span></td>
         </tr>
@@ -532,7 +528,7 @@ tr:nth-child(even) td {
           <td style="text-align: center;"><strong>5</strong></td>
           <td>Giám đốc</td>
           <td>Phê duyệt đơn giá thưởng áp dụng</td>
-          <td>Offline / Online</td>
+          <td>BCNB</td>
           <td>Ghi nhận căn cứ phê duyệt nếu có workflow</td>
           <td><span class="badge-tag badge-purple">Workflow phê duyệt</span></td>
         </tr>
@@ -540,7 +536,7 @@ tr:nth-child(even) td {
           <td style="text-align: center;"><strong>6</strong></td>
           <td>KSNB</td>
           <td>Khai báo đơn giá thưởng, thời gian hiệu lực và trạng thái</td>
-          <td>Online – ERP</td>
+          <td>TMS</td>
           <td>Lưu đơn giá gắn với Code</td>
           <td><span class="badge-tag badge-green">Tỷ lệ khai báo đúng</span></td>
         </tr>
@@ -548,7 +544,7 @@ tr:nth-child(even) td {
           <td style="text-align: center;"><strong>7</strong></td>
           <td>Hệ thống</td>
           <td>Kích hoạt Code/đơn giá khi đủ điều kiện</td>
-          <td>Online</td>
+          <td>TMS</td>
           <td>Cho phép Code được sử dụng để tính thưởng</td>
           <td><span class="badge-tag badge-green">Active tính thưởng</span></td>
         </tr>
@@ -557,7 +553,7 @@ tr:nth-child(even) td {
 
     <div class="callout">
       <div class="callout-title">📦 Kết quả đầu ra của mỗi Code tính thưởng:</div>
-      Mỗi Code tính thưởng sau khi tạo phải có tối thiểu: <em>Code tính thưởng, Mô tả, Đơn giá thưởng, Thời gian hiệu lực, Trạng thái (Active/Inactive), Người tạo, Người khai báo đơn giá, Căn cứ/phê duyệt đơn giá.</em>
+      Mỗi Code tính thưởng sau khi tạo phải có tối thiểu: <em>Code tính thưởng, Mô tả, Đơn giá thưởng, Người tạo, Người khai báo đơn giá, Căn cứ/phê duyệt đơn giá.</em>
     </div>
   </section>
 
@@ -597,7 +593,7 @@ tr:nth-child(even) td {
         </tr>
         <tr>
           <td><code>Người tạo Mapping</code></td>
-          <td>Người dùng nghiệp vụ</td>
+          <td>Quản lý dịch vụ</td>
         </tr>
       </tbody>
     </table>
@@ -620,7 +616,7 @@ tr:nth-child(even) td {
         <tr>
           <td style="text-align: center;">2</td>
           <td><strong>Dịch vụ sửa chữa không thay linh kiện_Tivi</strong></td>
-          <td>Remote_Tivi 43P715_TCL_G0401-000271</td>
+          <td>Dịch vụ sửa chữa cơ bản</td>
         </tr>
         <tr>
           <td style="text-align: center;">3</td>
@@ -637,51 +633,51 @@ tr:nth-child(even) td {
           <th style="width: 6%; text-align: center;">Bước</th>
           <th style="width: 22%;">Ai làm</th>
           <th style="width: 32%;">Làm gì</th>
-          <th style="width: 12%;">Location</th>
+          <th style="width: 12%;">Làm ở đâu</th>
           <th>System Logic</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td style="text-align: center;">1</td>
-          <td>Người dùng nghiệp vụ</td>
+          <td>Quản lý dịch vụ</td>
           <td>Xác định Code dịch vụ và SKU cần áp dụng thưởng</td>
-          <td>Online</td>
+          <td>QT ngoài</td>
           <td>Nhập thông tin Mapping</td>
         </tr>
         <tr>
           <td style="text-align: center;">2</td>
-          <td>Người dùng nghiệp vụ</td>
+          <td>Quản lý dịch vụ</td>
           <td>Khai báo Code thưởng ↔ Code dịch vụ ↔ SKU</td>
-          <td>ERP</td>
+          <td>TMS</td>
           <td>Kiểm tra dữ liệu bắt buộc và chống trùng Mapping</td>
         </tr>
         <tr>
           <td style="text-align: center;">3</td>
           <td>Hệ thống</td>
           <td>Kiểm tra Mapping</td>
-          <td>Online</td>
+          <td>TMS</td>
           <td>Tìm theo tổ hợp <code>Code dịch vụ + SKU</code></td>
         </tr>
         <tr>
           <td style="text-align: center;">4</td>
           <td>Hệ thống</td>
           <td>Xác định Code tính thưởng</td>
-          <td>Online</td>
+          <td>TMS</td>
           <td>Nếu Mapping tồn tại ➔ lấy Code tính thưởng</td>
         </tr>
         <tr>
           <td style="text-align: center;">5</td>
           <td>Hệ thống</td>
           <td>Kiểm tra trạng thái Code</td>
-          <td>Online</td>
+          <td>TMS</td>
           <td>Chỉ sử dụng Code đang ở trạng thái Active</td>
         </tr>
         <tr>
           <td style="text-align: center;">6</td>
           <td>Hệ thống</td>
           <td>Lấy đơn giá hiện hành</td>
-          <td>Online</td>
+          <td>TMS</td>
           <td>Xác định đơn giá theo thời gian hiệu lực</td>
         </tr>
       </tbody>
