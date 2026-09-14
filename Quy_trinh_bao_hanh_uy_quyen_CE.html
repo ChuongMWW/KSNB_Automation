@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy trình Bảo hành ủy quyền tại nhà CE | KSNB Automation</title>
+<style>
+:root {
+  --blue: #12358f;
+  --blue2: #0a276f;
+  --blue-light: #edf3ff;
+  --blue-border: #b8c7e8;
+  --yellow: #ffd200;
+  --yellow-bg: #fff9db;
+  --green: #087443;
+  --green-bg: #eaf8f1;
+  --green-border: #a3e0c0;
+  --orange: #c2410c;
+  --orange-bg: #fff7ed;
+  --red: #d92d20;
+  --red-bg: #fff4f2;
+  --purple: #6b21a8;
+  --purple-bg: #f3e8ff;
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --line: #dce3ee;
+  --shadow: 0 8px 26px rgba(18, 53, 143, 0.08);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px 20px 60px;
+}
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+.top-nav a {
+  text-decoration: none;
+  font-weight: 700;
+}
+.top-nav .back-cat {
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.top-nav .back-home {
+  color: var(--muted);
+}
+.top-nav a:hover {
+  text-decoration: underline;
+}
+
+.header {
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #fff;
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 24px rgba(18, 53, 143, 0.18);
+}
+.header-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #dce6ff;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.header h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  letter-spacing: -0.3px;
+}
+.header p {
+  margin: 0;
+  font-size: 15px;
+  color: #dce6ff;
+  max-width: 900px;
+}
+
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.toc a {
+  text-decoration: none;
+  color: var(--blue);
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .15s ease;
+}
+.toc a:hover {
+  background: var(--blue-light);
+  border-color: var(--blue-border);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #f0f4f9;
+  padding-bottom: 12px;
+}
+.card-head .num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 15px;
+  flex: none;
+}
+.card-head h2 {
+  margin: 0;
+  font-size: 19px;
+  color: var(--blue2);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 14px 0;
+  font-size: 13.5px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+th, td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+th:last-child, td:last-child {
+  border-right: 0;
+}
+tr:last-child td {
+  border-bottom: 0;
+}
+th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 700;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+tr:nth-child(even) td {
+  background: #fafcff;
+}
+
+.badge-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+.badge-blue { background: #e0f2fe; color: #0284c7; }
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-orange { background: var(--orange-bg); color: var(--orange); }
+.badge-purple { background: var(--purple-bg); color: var(--purple); }
+.badge-red { background: var(--red-bg); color: var(--red); }
+
+.callout {
+  border-left: 4px solid var(--blue);
+  background: var(--blue-light);
+  padding: 14px 18px;
+  border-radius: 0 10px 10px 0;
+  margin: 14px 0;
+  font-size: 13.5px;
+}
+.callout.green {
+  border-left-color: var(--green);
+  background: var(--green-bg);
+}
+.callout.orange {
+  border-left-color: var(--orange);
+  background: var(--orange-bg);
+}
+.callout.red {
+  border-left-color: var(--red);
+  background: var(--red-bg);
+}
+.callout-title {
+  font-weight: 700;
+  color: var(--blue2);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.callout.green .callout-title { color: var(--green); }
+.callout.orange .callout-title { color: var(--orange); }
+.callout.red .callout-title { color: var(--red); }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+.pill-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+}
+.pill-box b {
+  display: block;
+  color: var(--blue2);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.branch-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 18px 0;
+}
+.branch-card {
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  background: #fff;
+}
+.branch-card.success {
+  border-color: var(--green-border);
+  background: #fafdfb;
+}
+.branch-card.process {
+  border-color: var(--blue-border);
+  background: #fbfcff;
+}
+.branch-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.branch-card.success h3 { color: var(--green); }
+.branch-card.process h3 { color: var(--blue2); }
+
+.flow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0;
+  align-items: center;
+}
+.flow-step {
+  width: 100%;
+  max-width: 780px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+.flow-step .step-no {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  font-size: 12px;
+  flex: none;
+}
+.flow-step .step-text {
+  font-size: 13.5px;
+  color: var(--text);
+}
+.flow-step .step-text strong {
+  color: var(--blue2);
+}
+.flow-arrow {
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.checkpoint-card {
+  border: 2px solid #fca5a5;
+  background: #fffafa;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 18px 0;
+}
+.checkpoint-card h3 {
+  margin: 0 0 10px;
+  color: var(--red);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+@media(max-width: 850px) {
+  .grid-2, .grid-3, .branch-container { grid-template-columns: 1fr; }
+  .header h1 { font-size: 22px; }
+  .header { padding: 22px 20px; }
+  table { font-size: 12.5px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="top-nav">
+    <a href="CE_Gia_dung.html" class="back-cat">← Quay lại Danh mục CE & Gia dụng</a>
+    <a href="index.html" class="back-home">Về Trang chủ KSNB</a>
+  </div>
+
+  <header class="header">
+    <span class="header-badge">QUY TRÌNH BẢO HÀNH & ỦY QUYỀN HÃNG</span>
+    <h1>QUY TRÌNH BẢO HÀNH ỦY QUYỀN TẠI NHÀ (CE)</h1>
+    <p>Quản lý trọn vòng đời bảo hành ủy quyền: Tiếp nhận CRM ➔ Xác thực điều kiện ➔ Phân nhánh Tư vấn/Kỹ thuật ➔ Tạo Jobcard & Vận đơn ➔ Phê duyệt Hãng ➔ Linh kiện & Xác linh kiện ➔ Đối soát Claim 3 bên.</p>
+  </header>
+
+  <!-- Mục lục nhanh -->
+  <nav class="toc">
+    <a href="#muc-tieu">1. Mục tiêu quy trình</a>
+    <a href="#bo-phan">2. Bộ phận tham gia</a>
+    <a href="#luong-tong-the">3. Luồng tổng thể</a>
+    <a href="#chi-tiet">4. Chi tiết 25 bước quy trình</a>
+    <a href="#phan-nhanh">5. Cơ chế phân nhánh tư vấn</a>
+    <a href="#kiem-soat">6. Điểm kiểm soát trọng yếu</a>
+  </nav>
+
+  <!-- 1. Mục tiêu quy trình -->
+  <section class="card" id="muc-tieu">
+    <div class="card-head">
+      <div class="num">1</div>
+      <h2>Mục tiêu quy trình</h2>
+    </div>
+    <p style="margin-top: 0;">
+      Quy trình Bảo hành ủy quyền nhằm quản lý toàn bộ vòng đời bảo hành đối với sản phẩm được Hãng/Đối tác ủy quyền cho Thợ ĐMX thực hiện dịch vụ, từ tiếp nhận, chẩn đoán, sửa chữa, quản lý linh kiện đến đối soát claim và thanh toán chi phí.
+    </p>
+
+    <div class="grid-3">
+      <div class="pill-box">
+        <b>🎯 Kiểm soát phạm vi</b>
+        <span style="font-size: 13px; color: var(--muted);">Xác định chính xác sản phẩm thuộc diện ủy quyền; <strong>tuyệt đối không</strong> để phát sinh sửa chữa ngoài phạm vi nhưng ghi nhận thành bảo hành.</span>
+      </div>
+      <div class="pill-box">
+        <b>🔍 Dữ liệu xuyên suốt</b>
+        <span style="font-size: 13px; color: var(--muted);">Kiểm soát chặt chẽ liên kết: <code>IMEI/Serial ↔ Jobcard ↔ Linh kiện xuất ↔ Linh kiện xác ↔ Chứng từ</code>.</span>
+      </div>
+      <div class="pill-box">
+        <b>💰 Đối soát & Thanh toán</b>
+        <span style="font-size: 13px; color: var(--muted);">Cung cấp dữ liệu chuẩn phục vụ đối soát claim với Hãng/Đối tác theo 3 phần: Linh kiện mới, Linh kiện xác và Tiền công.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Các bộ phận tham gia -->
+  <section class="card" id="bo-phan">
+    <div class="card-head">
+      <div class="num">2</div>
+      <h2>Các bộ phận tham gia & Vai trò</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Bộ phận</th>
+          <th>Vai trò & Trách nhiệm chính</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hãng / Đối tác ủy quyền</strong></td>
+          <td>Cấp quyền bảo hành, ban hành chính sách, danh mục Model/Serial ủy quyền và phê duyệt các trường hợp cần xác nhận (Approval ID).</td>
+        </tr>
+        <tr>
+          <td><strong>Tổng đài / CSKH</strong></td>
+          <td>Tiếp nhận yêu cầu bảo hành từ khách hàng qua CRM/Xfone, kiểm tra điều kiện bảo hành và thực hiện tư vấn ban đầu.</td>
+        </tr>
+        <tr>
+          <td><strong>Siêu thị ĐMX</strong></td>
+          <td>Tiếp nhận máy tại siêu thị, tạo Jobcard, bàn giao/nhận máy với khách hàng hoặc KTV.</td>
+        </tr>
+        <tr>
+          <td><strong>Kỹ thuật viên (KTV)</strong></td>
+          <td>Kiểm tra ngoại quan, chẩn đoán lỗi, đề xuất linh kiện, thực hiện sửa chữa, QC chất lượng và hoàn tất Jobcard/Vận đơn.</td>
+        </tr>
+        <tr>
+          <td><strong>Kho / WMS</strong></td>
+          <td>Quản lý nhập – xuất – tồn máy, linh kiện mới và quản lý thu hồi linh kiện xác trả hãng.</td>
+        </tr>
+        <tr>
+          <td><strong>Điều phối / TMS</strong></td>
+          <td>Định nghĩa danh mục Sản phẩm/Nhóm hàng/Hãng được phép BHUQ; điều phối vận đơn cho KTV và vận chuyển linh kiện.</td>
+        </tr>
+        <tr>
+          <td><strong>Kế toán</strong></td>
+          <td>Kiểm soát doanh thu, chi phí phải thu từ Hãng, chứng từ kế toán và đối soát thanh toán.</td>
+        </tr>
+        <tr>
+          <td><strong>Bộ phận Bảo hành / Kỹ thuật</strong></td>
+          <td>Quản lý chính sách, lập Claim Batch, đối soát với Hãng/Đối tác và xử lý các claim bị từ chối.</td>
+        </tr>
+        <tr>
+          <td><strong>KSNB</strong></td>
+          <td>Kiểm soát tuân thủ quy trình, tính toàn vẹn của dữ liệu và giám sát các trường hợp ngoại lệ.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3. Luồng tổng thể -->
+  <section class="card" id="luong-tong-the">
+    <div class="card-head">
+      <div class="num">3</div>
+      <h2>Luồng tổng thể quy trình Bảo hành ủy quyền</h2>
+    </div>
+
+    <div class="flow-container">
+      <div class="flow-step">
+        <div class="step-no">1</div>
+        <div class="step-text"><strong>Tiếp nhận:</strong> Khách hàng liên hệ ➔ CRM tiếp nhận và truy vấn IMEI/Serial/Model.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">2</div>
+        <div class="step-text"><strong>Kiểm tra điều kiện:</strong> Đối chiếu Master Hãng + Model + Serial/IMEI + Thời hạn bảo hành.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step" style="border-color: var(--blue-border); background: var(--blue-light);">
+        <div class="step-no">3</div>
+        <div class="step-text"><strong>Phân nhánh tư vấn:</strong>
+          <br>• <em>Tư vấn thành công:</em> Đóng ticket ➔ Đẩy thông tin lên Portal Hãng đối soát.
+          <br>• <em>Tư vấn không thành công:</em> Chuyển Kỹ thuật ➔ Tạo Jobcard BHUQ (WMS) & Vận đơn (TMS).
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">4</div>
+        <div class="step-text"><strong>Kiểm tra & Chẩn đoán:</strong> KTV kiểm tra ngoại quan + Chẩn đoán lỗi thực tế ➔ Đề xuất linh kiện.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">5</div>
+        <div class="step-text"><strong>Phê duyệt & Xuất kho:</strong> Hãng duyệt sửa chữa (Portal) ➔ Kho xuất linh kiện mới ➔ KTV nhận linh kiện.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">6</div>
+        <div class="step-text"><strong>Sửa chữa & Thu hồi xác:</strong> Thực hiện sửa chữa ➔ QC sau sửa chữa ➔ Nhập linh kiện xác vào kho.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="step-no">7</div>
+        <div class="step-text"><strong>Hoàn tất & Trả máy:</strong> Hoàn tất JC (WMS/TMS) ➔ Bàn giao trả máy cho khách hàng.</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step" style="border-color: var(--green-border); background: var(--green-bg);">
+        <div class="step-no" style="background: var(--green);">8</div>
+        <div class="step-text"><strong>Claim & Đối soát thanh toán:</strong> Tổng hợp Claim Batch gửi Hãng ➔ Đối soát 3 bên: <strong>Linh kiện mới + Linh kiện xác + Tiền công</strong> ➔ Thanh toán.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Chi tiết quy trình (25 bước) -->
+  <section class="card" id="chi-tiet">
+    <div class="card-head">
+      <div class="num">4</div>
+      <h2>Bảng chi tiết 25 bước thực hiện quy trình</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 5%; text-align: center;">STT</th>
+          <th style="width: 16%;">Ai làm (Actor)</th>
+          <th style="width: 25%;">Làm gì (Action)</th>
+          <th style="width: 11%;">Hệ thống</th>
+          <th>System Logic & Điểm kiểm soát</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;"><strong>1</strong></td>
+          <td>CRM / Tổng đài</td>
+          <td>Tiếp nhận yêu cầu bảo hành của khách hàng</td>
+          <td><span class="badge-tag badge-blue">CRM</span></td>
+          <td>Tạo yêu cầu dịch vụ, ghi nhận thông tin khách hàng và sản phẩm.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>2</strong></td>
+          <td>CRM / Tổng đài</td>
+          <td>Nhập IMEI / Serial / Model</td>
+          <td><span class="badge-tag badge-blue">CRM</span></td>
+          <td>CRM truy vấn dữ liệu sản phẩm từ ERP/WMS.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>3</strong></td>
+          <td>Hệ thống</td>
+          <td>Kiểm tra sản phẩm có thuộc chương trình BH ủy quyền</td>
+          <td><span class="badge-tag badge-blue">CRM</span></td>
+          <td>Đối chiếu <strong>Master Hãng + Model + Serial/IMEI + Thời hạn bảo hành</strong>.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>4</strong></td>
+          <td>Tổng đài</td>
+          <td>Xác nhận khách hàng đủ điều kiện tiếp nhận</td>
+          <td><span class="badge-tag badge-blue">Xfone</span></td>
+          <td>Hiển thị loại bảo hành dự kiến cho nhân viên tiếp nhận.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>5</strong></td>
+          <td>Tổng đài</td>
+          <td>Tư vấn / Hướng dẫn sử dụng</td>
+          <td><span class="badge-tag badge-blue">Xfone</span></td>
+          <td>Thực hiện phân nhánh xử lý (Thành công vs Không thành công).</td>
+        </tr>
+
+        <!-- Nhánh: Tư vấn thành công -->
+        <tr style="background: #f0fdf4;">
+          <td style="text-align: center; font-weight: bold; color: var(--green);">5.1</td>
+          <td><strong>Tổng đài</strong><br><span class="badge-tag badge-green">Tư vấn thành công</span></td>
+          <td>Đóng ticket tư vấn thành công</td>
+          <td><span class="badge-tag badge-blue">CRM</span></td>
+          <td>Đóng ticket trạng thái "Tư vấn thành công". Đẩy thông tin ticket (Thông tin khách, Đơn hàng, SP) sang WMS.</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td style="text-align: center; font-weight: bold; color: var(--green);">5.2</td>
+          <td><strong>Hệ thống</strong><br><span class="badge-tag badge-green">Tư vấn thành công</span></td>
+          <td>Đẩy dữ liệu lên Portal Hãng</td>
+          <td><span class="badge-tag badge-purple">WMS / Portal</span></td>
+          <td>Đẩy thông tin ticket lên Portal Hãng (giao diện ticket tư vấn thành công) phục vụ đối soát chi phí tư vấn.</td>
+        </tr>
+
+        <!-- Nhánh: Tư vấn không thành công -->
+        <tr style="background: #eff6ff;">
+          <td style="text-align: center; font-weight: bold; color: var(--blue);">6.1</td>
+          <td><strong>Tổng đài</strong><br><span class="badge-tag badge-blue">Cần kỹ thuật</span></td>
+          <td>Thao tác chuyển kỹ thuật viên</td>
+          <td><span class="badge-tag badge-blue">CRM</span></td>
+          <td>Ghi nhận chuyển điều phối kỹ thuật tại nhà / tiếp nhận máy.</td>
+        </tr>
+        <tr style="background: #eff6ff;">
+          <td style="text-align: center; font-weight: bold; color: var(--blue);">6.2</td>
+          <td><strong>Hệ thống</strong><br><span class="badge-tag badge-blue">Kiểm tra BHUQ</span></td>
+          <td>Kiểm tra điều kiện BH ủy quyền</td>
+          <td><span class="badge-tag badge-purple">WMS</span></td>
+          <td>Nếu <em>không thỏa</em>: Đi luồng sửa chữa thông thường.<br>Nếu <em>thỏa điều kiện</em>: Tự động khởi tạo JC Bảo hành ủy quyền.</td>
+        </tr>
+
+        <tr>
+          <td style="text-align: center;"><strong>7</strong></td>
+          <td>Hệ thống</td>
+          <td>Tạo JC = Bảo hành ủy quyền & Vận đơn TMS</td>
+          <td><span class="badge-tag badge-purple">WMS / TMS</span></td>
+          <td>Tự động fill Loại JC = BHUQ trên WMS và sinh Vận đơn BHUQ tương ứng trên TMS.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>8</strong></td>
+          <td>KTV</td>
+          <td>Kiểm tra ngoại quan sản phẩm</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Chụp ảnh, nhập kết quả kiểm tra ngoại quan và tình trạng tem/máy.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>9</strong></td>
+          <td>KTV</td>
+          <td>Chẩn đoán lỗi kỹ thuật</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Ghi nhận mã lỗi, nguyên nhân và phương án sửa chữa.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>10</strong></td>
+          <td>KTV</td>
+          <td>Cập nhật lỗi thực tế & đề xuất linh kiện</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Hệ thống đối chiếu mã lỗi với chính sách Hãng (thuộc hay không thuộc diện bảo hành).</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>11</strong></td>
+          <td>Hãng / Đối tác</td>
+          <td>Phê duyệt trường hợp yêu cầu xác nhận</td>
+          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+          <td>Ghi nhận mã phê duyệt (Approval ID / Reference).</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>12</strong></td>
+          <td>Hệ thống</td>
+          <td>Tạo yêu cầu tạm ứng / đặt linh kiện</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Nếu có tồn kho: Tạo yêu cầu tạm ứng linh kiện.<br>Nếu hết tồn kho: Tạo yêu cầu đặt linh kiện với Hãng.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>13</strong></td>
+          <td>Kho LK</td>
+          <td>Xuất linh kiện cho Jobcard</td>
+          <td><span class="badge-tag badge-blue">TMS / WMS</span></td>
+          <td>Tạo giao dịch xuất kho đích danh linh kiện và trừ tồn kho.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>14</strong></td>
+          <td>KTV</td>
+          <td>Thực hiện sửa chữa</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Cập nhật trạng thái JC = Đang sửa chữa.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>15</strong></td>
+          <td>KTV</td>
+          <td>Thay thế linh kiện & ghi nhận Serial</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Liên kết chặt chẽ: <code>Part SKU ↔ Part Serial ↔ JC ↔ Serial máy</code>.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>16</strong></td>
+          <td>KTV</td>
+          <td>Kiểm tra chất lượng (QC) sau sửa chữa</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Thực hiện checklist QC bắt buộc trước khi cho phép hoàn tất JC.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>17</strong></td>
+          <td>KTV</td>
+          <td>Hoàn tất Jobcard & Nhập linh kiện xác</td>
+          <td><span class="badge-tag badge-purple">WMS / TMS</span></td>
+          <td>Khóa JC, chốt lỗi, linh kiện sử dụng, công sửa chữa và ghi nhận thu hồi linh kiện xác.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>18</strong></td>
+          <td>KTV / Siêu thị</td>
+          <td>Trả máy cho khách hàng</td>
+          <td><span class="badge-tag badge-purple">WMS</span></td>
+          <td>Cập nhật trạng thái máy = Đã trả khách; khách ký nhận nghiệm thu.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>19</strong></td>
+          <td>Bộ phận Bảo hành</td>
+          <td>Tập hợp các JC bảo hành ủy quyền</td>
+          <td><span class="badge-tag badge-purple">WMS</span></td>
+          <td>Tạo danh sách claim theo từng Hãng và chu kỳ đối soát.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>20</strong></td>
+          <td>Bộ phận Bảo hành</td>
+          <td>Gửi claim Hãng / Đối tác</td>
+          <td><span class="badge-tag badge-purple">WMS / Portal</span></td>
+          <td>Sinh Claim Batch + danh sách Jobcard kèm hình ảnh, chứng từ.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>21</strong></td>
+          <td>Hãng / Đối tác</td>
+          <td>Kiểm tra và phản hồi claim</td>
+          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+          <td>Cập nhật trạng thái: <em>Approved (Duyệt) / Rejected (Từ chối) / Need Info (Bổ sung thông tin)</em>.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>22</strong></td>
+          <td>Bộ phận Bảo hành</td>
+          <td>Xử lý claim bị từ chối / cần bổ sung</td>
+          <td><span class="badge-tag badge-purple">WMS</span></td>
+          <td>Ghi nhận lý do từ chối, bổ sung bằng chứng hoặc chuyển đổi chi phí nội bộ.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>23</strong></td>
+          <td>Kế toán / Bảo hành</td>
+          <td>Đối soát số tiền được duyệt</td>
+          <td><span class="badge-tag badge-blue">ERP</span></td>
+          <td>Đối chiếu 3 bên: <strong>Jobcard ↔ Linh kiện mới/xác ↔ Tiền công ↔ Claim được duyệt</strong>.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>24</strong></td>
+          <td>Kế toán</td>
+          <td>Ghi nhận doanh thu / chi phí phải thu Hãng</td>
+          <td><span class="badge-tag badge-blue">ERP</span></td>
+          <td>Hạch toán công nợ phải thu Hãng theo chính sách hợp đồng.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>25</strong></td>
+          <td>Bộ phận Bảo hành</td>
+          <td>Lưu chứng từ và kết thúc claim</td>
+          <td><span class="badge-tag badge-blue">Online</span></td>
+          <td>Khóa hồ sơ claim và lưu trữ lịch sử phục vụ thanh tra/kiểm toán.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5. Cơ chế phân nhánh tư vấn -->
+  <section class="card" id="phan-nhanh">
+    <div class="card-head">
+      <div class="num">5</div>
+      <h2>Cơ chế phân nhánh Tư vấn & Đẩy Portal Hãng</h2>
+    </div>
+
+    <div class="branch-container">
+      <!-- Nhánh 1 -->
+      <div class="branch-card success">
+        <h3>✅ Nhánh 1: Tư vấn thành công (Không cần KTV)</h3>
+        <p style="font-size: 13.5px; margin: 0 0 10px;">Áp dụng khi Tổng đài viên hướng dẫn khách hàng xử lý thành công từ xa qua điện thoại/Xfone:</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: #334155;">
+          <li>Đóng Ticket với trạng thái <strong>Tư vấn thành công</strong>.</li>
+          <li>Hệ thống tự động đẩy gói dữ liệu sang WMS gồm: <em>Thông tin khách hàng + Thông tin đơn hàng + Thông tin sản phẩm</em>.</li>
+          <li>WMS tự động đồng bộ Ticket lên <strong>Portal Hãng</strong> (giao diện ticket tư vấn thành công) để Hãng xác nhận và thanh toán phí tư vấn cho ĐMX.</li>
+        </ul>
+      </div>
+
+      <!-- Nhánh 2 -->
+      <div class="branch-card process">
+        <h3>🔧 Nhánh 2: Chuyển Kỹ thuật viên (Tạo Jobcard BHUQ)</h3>
+        <p style="font-size: 13.5px; margin: 0 0 10px;">Áp dụng khi lỗi cần kiểm tra trực tiếp hoặc thay thế linh kiện:</p>
+        <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: #334155;">
+          <li>Tổng đài chuyển thông tin sang nhánh Kỹ thuật.</li>
+          <li>WMS kiểm tra điều kiện BHUQ:
+            <br>• <em>Không thỏa:</em> Chuyển sang luồng Sửa chữa dịch vụ / Bảo hành thường.
+            <br>• <em>Thỏa điều kiện:</em> Tự động sinh <strong>Jobcard BHUQ</strong> trên WMS và <strong>Vận đơn BHUQ</strong> trên TMS.
+          </li>
+          <li>Điều phối kỹ thuật viên đến nhà khách hàng hoặc tiếp nhận máy tại siêu thị.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Điểm kiểm soát trọng yếu -->
+  <section class="card" id="kiem-soat">
+    <div class="card-head">
+      <div class="num">6</div>
+      <h2>Điểm kiểm soát trọng yếu (KSNB Checkpoints)</h2>
+    </div>
+
+    <div class="checkpoint-card">
+      <h3>⚠️ 4 Nguyên tắc kiểm soát bắt buộc không thể bỏ qua:</h3>
+      <ol style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.7; color: #334155;">
+        <li><strong>Không tạo sai loại Jobcard:</strong> Sản phẩm không thuộc Master Hãng ủy quyền hoặc đã hết hạn BH tuyệt đối không được tạo JC Bảo hành ủy quyền.</li>
+        <li><strong>Kiểm soát linh kiện xác:</strong> Mỗi linh kiện mới được xuất cho JC BHUQ <strong>bắt buộc phải có linh kiện xác thu hồi</strong> tương ứng để bàn giao cho Hãng đối soát (trừ các trường hợp Hãng miễn thu hồi xác theo chính sách).</li>
+        <li><strong>Phê duyệt trước khi sửa (Pre-approval):</strong> Đối với các lỗi nặng hoặc linh kiện giá trị cao vượt ngưỡng quy định, KTV bắt buộc phải có <strong>Approval ID</strong> từ Portal Hãng trước khi xuất linh kiện và thực hiện sửa chữa.</li>
+        <li><strong>Đối soát 3 bên minh bạch:</strong> Tiền claim được Hãng thanh toán phải khớp đúng theo từng Jobcard: <code>Tiền công KTV + Giá trị linh kiện mới + Hoàn tất thu hồi linh kiện xác</code>.</li>
+      </ol>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title">🎯 Khả năng truy xuất vết (Audit Trail):</div>
+      Hệ thống đảm bảo kiểm tra ngược 100% từ bất kỳ giao dịch thanh toán nào của Hãng về đúng <code>Số Claim ➔ Mã Jobcard ➔ Vận đơn TMS ➔ Serial máy ➔ Mã lỗi ➔ Serial linh kiện mới & xác ➔ KTV thực hiện</code>.
+    </div>
+  </section>
+
+  <footer class="footer">
+    KSNB Automation · Quy trình nghiệp vụ Bảo hành Thợ Điện Máy Xanh · Cập nhật 2026
+  </footer>
+
+</div>
+
+</body>
+</html>
