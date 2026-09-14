@@ -74,7 +74,7 @@ body {
   color: #fff;
   border-radius: 18px;
   padding: 28px 32px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   box-shadow: 0 6px 24px rgba(18, 53, 143, 0.18);
 }
 .header-badge {
@@ -99,6 +99,58 @@ body {
   color: #dce6ff;
   max-width: 980px;
   line-height: 1.5;
+}
+
+/* Master Tab Navigation */
+.main-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 12px;
+}
+.tab-btn {
+  background: #fff;
+  border: 2px solid var(--line);
+  color: #475569;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all .2s ease;
+}
+.tab-btn:hover {
+  border-color: var(--blue-border);
+  color: var(--blue);
+  background: var(--blue-light);
+}
+.tab-btn.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  box-shadow: 0 4px 14px rgba(18, 53, 143, 0.25);
+}
+.tab-btn .badge-pill {
+  background: rgba(255, 255, 255, 0.25);
+  color: inherit;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+.tab-btn:not(.active) .badge-pill {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.tab-pane {
+  display: none;
+}
+.tab-pane.active {
+  display: block;
 }
 
 .toc {
@@ -250,12 +302,6 @@ tr:nth-child(even) td {
   gap: 14px;
   margin: 16px 0;
 }
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 16px 0;
-}
 .pill-box {
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -393,6 +439,26 @@ tr:nth-child(even) td {
   gap: 8px;
 }
 
+/* CRM Mockup Card */
+.mockup-card {
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  font-family: monospace;
+}
+.mockup-header {
+  font-weight: bold;
+  color: #1e293b;
+  font-size: 13.5px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #cbd5e1;
+  display: flex;
+  justify-content: space-between;
+}
+
 .footer {
   text-align: center;
   font-size: 12px;
@@ -403,7 +469,7 @@ tr:nth-child(even) td {
 }
 
 @media(max-width: 900px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .main-tabs { flex-direction: column; }
   .header h1 { font-size: 22px; }
   .header { padding: 22px 20px; }
   table { font-size: 12.5px; }
@@ -422,605 +488,830 @@ tr:nth-child(even) td {
   <header class="header">
     <span class="header-badge">QUY TRÌNH BẢO HÀNH & ỦY QUYỀN HÃNG</span>
     <h1>QUY TRÌNH BẢO HÀNH ỦY QUYỀN TẠI NHÀ (CE)</h1>
-    <p>Quy trình chuẩn hóa toàn diện: Tiếp nhận CRM ➔ Xác thực điều kiện ➔ <strong>Phân loại 2 Mô hình: (1) Ủy quyền cả Tư vấn & Sửa chữa vs (2) Chỉ ủy quyền Sửa chữa</strong> ➔ Xử lý chuyển Hãng & Đóng ticket ➔ <strong>Tạo Vận đơn Thợ ĐMX khi Hãng tư vấn không thành công</strong> ➔ Sửa chữa tại nhà ➔ <strong>Đối soát Claim 3 bên & Nguyên tắc tài chính</strong>.</p>
+    <p>Quy trình nghiệp vụ chuẩn hóa & Hệ thống Khai báo cấu hình CRM Master: Tiếp nhận ➔ <strong>Phân loại 2 Mô hình (Ủy quyền Tư vấn & Sửa chữa vs Chỉ ủy quyền Sửa chữa)</strong> ➔ Xử lý chuyển Hãng & Đóng ticket ➔ Tạo Vận đơn Thợ ĐMX ➔ <strong>Cấu hình Master BHUQ CRM (Ngành hàng, Nhóm hàng, Sản phẩm, Phường áp dụng)</strong>.</p>
   </header>
 
-  <!-- Mục lục nhanh -->
-  <nav class="toc">
-    <a href="#muc-tieu">1. Mục tiêu quy trình</a>
-    <a href="#bo-phan">2. Bộ phận tham gia</a>
-    <a href="#2-mo-hinh-uy-quyen">3. Chi tiết 2 Mô hình Bảo hành ủy quyền</a>
-    <a href="#luong-tong-the">4. Luồng tổng thể xuyên suốt</a>
-    <a href="#chi-tiet-26-buoc">5. Bảng chi tiết các bước thực hiện</a>
-    <a href="#kiem-soat">6. Điểm kiểm soát KSNB trọng yếu</a>
-  </nav>
+  <!-- Thanh điều hướng Tab chính -->
+  <div class="main-tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-quy-trinh', this)">
+      📋 1. QUY TRÌNH NGHIỆP VỤ BHUQ <span class="badge-pill">6 Mục</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-khai-bao', this)">
+      ⚙️ 2. CÁC KHAI BÁO TẠO MỚI (CRM MASTER) <span class="badge-pill">Mới</span>
+    </button>
+  </div>
 
-  <!-- 1. Mục tiêu quy trình -->
-  <section class="card" id="muc-tieu">
-    <div class="card-head">
-      <div class="num">1</div>
-      <h2>Mục tiêu quy trình</h2>
-    </div>
-    <p style="margin-top: 0;">
-      Quy trình Bảo hành ủy quyền (BHUQ) nhằm quản lý toàn bộ vòng đời dịch vụ bảo hành đối với các sản phẩm được Hãng/Đối tác ủy quyền cho Thợ Điện Máy Xanh thực hiện, từ khâu tiếp nhận yêu cầu, phân luồng tư vấn theo thỏa thuận ủy quyền, tạo vận đơn điều phối KTV, đến kiểm soát linh kiện và đối soát quyết toán tài chính 3 bên.
-    </p>
+  <!-- ==================== TAB 1: QUY TRÌNH NGHIỆP VỤ ĐÃ CHỐT ==================== -->
+  <div id="tab-quy-trinh" class="tab-pane active">
 
-    <div class="grid-3">
-      <div class="pill-box">
-        <b>🎯 Phân định 2 mô hình ủy quyền</b>
-        <span style="font-size: 13px; color: var(--muted);">Phân định rõ Hãng ủy quyền cả Tư vấn & Sửa chữa vs Hãng <strong>chỉ ủy quyền Sửa chữa</strong> để xử lý cuộc gọi chuẩn xác ngay từ đầu.</span>
+    <!-- Mục lục nhanh Tab 1 -->
+    <nav class="toc">
+      <a href="#muc-tieu">1. Mục tiêu quy trình</a>
+      <a href="#bo-phan">2. Bộ phận tham gia</a>
+      <a href="#2-mo-hinh-uy-quyen">3. Chi tiết 2 Mô hình BHUQ</a>
+      <a href="#luong-tong-the">4. Luồng tổng thể xuyên suốt</a>
+      <a href="#chi-tiet-26-buoc">5. Bảng chi tiết các bước thực hiện</a>
+      <a href="#kiem-soat">6. Điểm kiểm soát KSNB trọng yếu</a>
+    </nav>
+
+    <!-- 1. Mục tiêu quy trình -->
+    <section class="card" id="muc-tieu">
+      <div class="card-head">
+        <div class="num">1</div>
+        <h2>Mục tiêu quy trình</h2>
       </div>
-      <div class="pill-box">
-        <b>⚙️ Chuẩn hóa đóng ticket & Tạo VĐ</b>
-        <span style="font-size: 13px; color: var(--muted);">Tự động đóng ticket CRM khi chuyển Hãng (Mô hình B) và chỉ tạo Vận đơn Thợ ĐMX khi Hãng tư vấn thất bại trên Portal.</span>
+      <p style="margin-top: 0;">
+        Quy trình Bảo hành ủy quyền (BHUQ) nhằm quản lý toàn bộ vòng đời dịch vụ bảo hành đối với các sản phẩm được Hãng/Đối tác ủy quyền cho Thợ Điện Máy Xanh thực hiện, từ khâu tiếp nhận yêu cầu, phân luồng tư vấn theo thỏa thuận ủy quyền, tạo vận đơn điều phối KTV, đến kiểm soát linh kiện và đối soát quyết toán tài chính 3 bên.
+      </p>
+
+      <div class="grid-3">
+        <div class="pill-box">
+          <b>🎯 Phân định 2 mô hình ủy quyền</b>
+          <span style="font-size: 13px; color: var(--muted);">Phân định rõ Hãng ủy quyền cả Tư vấn & Sửa chữa vs Hãng <strong>chỉ ủy quyền Sửa chữa</strong> để xử lý cuộc gọi chuẩn xác ngay từ đầu.</span>
+        </div>
+        <div class="pill-box">
+          <b>⚙️ Chuẩn hóa đóng ticket & Tạo VĐ</b>
+          <span style="font-size: 13px; color: var(--muted);">Tự động đóng ticket CRM khi chuyển Hãng (Mô hình B) và chỉ tạo Vận đơn Thợ ĐMX khi Hãng tư vấn thất bại trên Portal.</span>
+        </div>
+        <div class="pill-box">
+          <b>💰 Minh bạch tài chính & Đối soát</b>
+          <span style="font-size: 13px; color: var(--muted);">Quy tắc đối soát rõ ràng: ĐMX tư vấn thành công thì đối soát phí; Hãng tự tư vấn thành công thì <strong>không đối soát</strong>.</span>
+        </div>
       </div>
-      <div class="pill-box">
-        <b>💰 Minh bạch tài chính & Đối soát</b>
-        <span style="font-size: 13px; color: var(--muted);">Quy tắc đối soát rõ ràng: ĐMX tư vấn thành công thì đối soát phí; Hãng tự tư vấn thành công thì <strong>không đối soát</strong>.</span>
+    </section>
+
+    <!-- 2. Các bộ phận tham gia -->
+    <section class="card" id="bo-phan">
+      <div class="card-head">
+        <div class="num">2</div>
+        <h2>Các bộ phận tham gia & Vai trò</h2>
       </div>
-    </div>
-  </section>
 
-  <!-- 2. Các bộ phận tham gia -->
-  <section class="card" id="bo-phan">
-    <div class="card-head">
-      <div class="num">2</div>
-      <h2>Các bộ phận tham gia & Vai trò</h2>
-    </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">Bộ phận</th>
+            <th>Vai trò & Trách nhiệm chính</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hãng / Đối tác ủy quyền</strong></td>
+            <td>Cấp quyền BHUQ; tiếp nhận ticket/Jobcard trên Portal Hãng; thực hiện tư vấn Cấp 2 (Mô hình 1) hoặc tư vấn trực tiếp (Mô hình 2). Nếu tư vấn không thành công, Hãng bấm nút <em>"Tạo vận đơn cho Thợ ĐMX"</em> trên Portal.</td>
+          </tr>
+          <tr>
+            <td><strong>Tổng đài / CSKH (ĐMX)</strong></td>
+            <td>Tiếp nhận cuộc gọi qua CRM/Xfone, kiểm tra điều kiện BHUQ:<br>• <em>Hãng ủy quyền tư vấn & sửa chữa:</em> Thực hiện tư vấn Cấp 1; nếu không thành công bấm <em>"Chuyển Hãng"</em>.<br>• <em>Hãng chỉ ủy quyền sửa chữa:</em> <strong>Không tư vấn ➔ Bấm "Chuyển Hãng" ➔ Đóng ticket luôn</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>Kỹ thuật viên (Thợ ĐMX)</strong></td>
+            <td>Tiếp nhận Vận đơn TMS (sinh ra sau khi Hãng tư vấn thất bại), đến tận nhà kiểm tra ngoại quan, chẩn đoán lỗi, thay thế linh kiện, QC chất lượng, thu hồi xác linh kiện và bàn giao cho khách hàng.</td>
+          </tr>
+          <tr>
+            <td><strong>Điều phối / TMS</strong></td>
+            <td>Định nghĩa Master Hãng/Model được BHUQ và loại hình ủy quyền; tự động tiếp nhận trigger từ Portal Hãng để tạo Vận đơn BHUQ điều phối cho KTV Thợ ĐMX theo khu vực.</td>
+          </tr>
+          <tr>
+            <td><strong>Kho Linh kiện / WMS</strong></td>
+            <td>Quản lý xuất kho linh kiện mới theo Jobcard và quản lý thu hồi nhập kho linh kiện xác để trả cho Hãng.</td>
+          </tr>
+          <tr>
+            <td><strong>Bộ phận Bảo hành / Kỹ thuật</strong></td>
+            <td>Quản lý chính sách, theo dõi Portal Hãng, lập Claim Batch gửi Hãng, quản lý các yêu cầu Pre-approval và xử lý các claim bị từ chối/cần bổ sung.</td>
+          </tr>
+          <tr>
+            <td><strong>Kế toán</strong></td>
+            <td>Kiểm soát doanh thu, chi phí phải thu Hãng; đối soát claim 3 bên và hạch toán tài chính theo đúng quy tắc đối soát từng loại hình dịch vụ.</td>
+          </tr>
+          <tr>
+            <td><strong>Kiểm soát nội bộ (KSNB)</strong></td>
+            <td>Kiểm soát tính tuân thủ quy trình, kiểm tra chéo nguồn tạo Vận đơn, ngăn ngừa rủi ro thất thoát linh kiện và sai lệch chi phí đối soát.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 25%;">Bộ phận</th>
-          <th>Vai trò & Trách nhiệm chính</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Hãng / Đối tác ủy quyền</strong></td>
-          <td>Cấp quyền BHUQ; tiếp nhận ticket/Jobcard trên Portal Hãng; thực hiện tư vấn Cấp 2 (Mô hình A) hoặc tư vấn trực tiếp (Mô hình B). Nếu tư vấn không thành công, Hãng bấm nút <em>"Tạo vận đơn cho Thợ ĐMX"</em> trên Portal.</td>
-        </tr>
-        <tr>
-          <td><strong>Tổng đài / CSKH (ĐMX)</strong></td>
-          <td>Tiếp nhận cuộc gọi qua CRM/Xfone, kiểm tra điều kiện BHUQ:<br>• <em>Hãng ủy quyền tư vấn & sửa chữa:</em> Thực hiện tư vấn Cấp 1; nếu không thành công bấm <em>"Chuyển Hãng"</em>.<br>• <em>Hãng chỉ ủy quyền sửa chữa:</em> <strong>Không tư vấn ➔ Bấm "Chuyển Hãng" ➔ Đóng ticket luôn</strong>.</td>
-        </tr>
-        <tr>
-          <td><strong>Kỹ thuật viên (Thợ ĐMX)</strong></td>
-          <td>Tiếp nhận Vận đơn TMS (sinh ra sau khi Hãng tư vấn thất bại), đến tận nhà kiểm tra ngoại quan, chẩn đoán lỗi, thay thế linh kiện, QC chất lượng, thu hồi xác linh kiện và bàn giao cho khách hàng.</td>
-        </tr>
-        <tr>
-          <td><strong>Điều phối / TMS</strong></td>
-          <td>Định nghĩa Master Hãng/Model được BHUQ và loại hình ủy quyền; tự động tiếp nhận trigger từ Portal Hãng để tạo Vận đơn BHUQ điều phối cho KTV Thợ ĐMX theo khu vực.</td>
-        </tr>
-        <tr>
-          <td><strong>Kho Linh kiện / WMS</strong></td>
-          <td>Quản lý xuất kho linh kiện mới theo Jobcard và quản lý thu hồi nhập kho linh kiện xác để trả cho Hãng.</td>
-        </tr>
-        <tr>
-          <td><strong>Bộ phận Bảo hành / Kỹ thuật</strong></td>
-          <td>Quản lý chính sách, theo dõi Portal Hãng, lập Claim Batch gửi Hãng, quản lý các yêu cầu Pre-approval và xử lý các claim bị từ chối/cần bổ sung.</td>
-        </tr>
-        <tr>
-          <td><strong>Kế toán</strong></td>
-          <td>Kiểm soát doanh thu, chi phí phải thu Hãng; đối soát claim 3 bên và hạch toán tài chính theo đúng quy tắc đối soát từng loại hình dịch vụ.</td>
-        </tr>
-        <tr>
-          <td><strong>Kiểm soát nội bộ (KSNB)</strong></td>
-          <td>Kiểm soát tính tuân thủ quy trình, kiểm tra chéo nguồn tạo Vận đơn, ngăn ngừa rủi ro thất thoát linh kiện và sai lệch chi phí đối soát.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <!-- 3. Chi tiết 2 Mô hình Bảo hành ủy quyền -->
+    <section class="card" id="2-mo-hinh-uy-quyen">
+      <div class="card-head">
+        <div class="num">3</div>
+        <h2>Phân loại 2 Mô hình Bảo hành Ủy quyền (BHUQ)</h2>
+      </div>
 
-  <!-- 3. Chi tiết 2 Mô hình Bảo hành ủy quyền -->
-  <section class="card" id="2-mo-hinh-uy-quyen">
-    <div class="card-head">
-      <div class="num">3</div>
-      <h2>Phân loại 2 Mô hình Bảo hành Ủy quyền (BHUQ)</h2>
-    </div>
+      <div class="grid-2">
+        
+        <!-- Mô hình A -->
+        <div class="model-box model-a">
+          <div class="model-header">
+            <h3>🅰️ MÔ HÌNH 1: ỦY QUYỀN CẢ TƯ VẤN & SỬA CHỮA</h3>
+            <span class="badge-tag badge-blue">Ủy quyền toàn diện</span>
+          </div>
+          <p style="font-size: 13px; color: #475569; margin: 0 0 12px;">Hãng ủy quyền cho ĐMX tư vấn Cấp 1 trước, nếu không được mới chuyển Hãng:</p>
+          
+          <div class="step-item">
+            <div class="step-badge">1</div>
+            <div><strong>ĐMX tư vấn thành công:</strong> Đóng ticket trên CRM ➔ <strong style="color: var(--green);">GHI NHẬN ĐỐI SOÁT PHÍ TƯ VẤN</strong> cho ĐMX.</div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-badge">2</div>
+            <div><strong>ĐMX tư vấn không thành công:</strong> Bấm <strong>"Chuyển Hãng"</strong> ➔ Jobcard đẩy lên Portal Hãng để Hãng tư vấn Cấp 2.</div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-badge">3</div>
+            <div><strong>Hãng tư vấn thành công:</strong> Hãng đóng ca trên Portal kết thúc ➔ <strong style="color: var(--red);">KHÔNG ĐỐI SOÁT PHÍ TƯ VẤN</strong> cho ĐMX.</div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-badge">4</div>
+            <div><strong>Hãng tư vấn không thành công:</strong> Hãng bấm <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trên Portal ➔ TMS sinh Vận đơn Thợ ĐMX đến nhà sửa chữa.</div>
+          </div>
+        </div>
 
-    <div class="grid-2">
+        <!-- Mô hình B -->
+        <div class="model-box model-b">
+          <div class="model-header">
+            <h3>🅱️ MÔ HÌNH 2: CHỈ ỦY QUYỀN PHẦN SỬA CHỮA</h3>
+            <span class="badge-tag badge-purple">Chỉ ủy quyền Kỹ thuật</span>
+          </div>
+          <p style="font-size: 13px; color: #475569; margin: 0 0 12px;">Hãng <strong>không ủy quyền tư vấn</strong>, Tổng đài ĐMX chuyển Hãng ngay từ đầu:</p>
+          
+          <div class="step-item">
+            <div class="step-badge">1</div>
+            <div><strong>Khách hàng gọi lên ĐMX:</strong> Tổng đài nhận diện Hãng chỉ ủy quyền sửa chữa ➔ <strong>KHÔNG TƯ VẤN</strong>.</div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-badge">2</div>
+            <div><strong>Chuyển Hãng & Đóng Ticket ĐMX:</strong> Tổng đài bấm <strong>"Chuyển Hãng"</strong> ➔ <strong style="color: var(--blue);">ĐÓNG TICKET TRÊN CRM LUÔN</strong> ➔ Jobcard đẩy lên Portal Hãng.</div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-badge">3</div>
+            <div><strong>Hãng tư vấn thành công:</strong> Hãng tự xử lý xong và tự đóng ca trên Portal ➔ <strong style="color: var(--red);">KHÔNG PHÁT SINH ĐỐI SOÁT</strong> với ĐMX.</div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-badge">4</div>
+            <div><strong>Hãng tư vấn không thành công:</strong> Hãng bấm <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trên Portal ➔ TMS sinh Vận đơn cho Thợ ĐMX đến nhà sửa chữa.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bảng ma trận đối chiếu 2 mô hình -->
+      <h3 style="margin: 22px 0 10px; font-size: 15.5px; color: var(--blue2);">📊 Bảng so sánh chi tiết giữa 2 Mô hình Ủy quyền:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">Nội dung nghiệp vụ</th>
+            <th style="width: 39%;">Mô hình 1: Ủy quyền Tư vấn & Sửa chữa</th>
+            <th>Mô hình 2: CHỈ Ủy quyền Sửa chữa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Vai trò của Tổng đài ĐMX</strong></td>
+            <td>Thực hiện <strong>Tư vấn Cấp 1</strong> với khách hàng qua Xfone.</td>
+            <td><strong>Không tư vấn</strong>; chỉ tiếp nhận thông tin và bấm Chuyển Hãng.</td>
+          </tr>
+          <tr>
+            <td><strong>Hành động khi Chuyển Hãng</strong></td>
+            <td>Bấm "Chuyển Hãng" khi tư vấn Cấp 1 thất bại.</td>
+            <td>Bấm "Chuyển Hãng" ➔ <strong>Đóng ticket CRM ngay lập tức</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>Kênh tư vấn của Hãng</strong></td>
+            <td>Hãng tư vấn Cấp 2 (sàng lọc ca khó sau ĐMX).</td>
+            <td>Hãng tự thực hiện tư vấn trực tiếp 100% với khách hàng.</td>
+          </tr>
+          <tr>
+            <td><strong>Khi Hãng tư vấn THÀNH CÔNG</strong></td>
+            <td>Hãng tự đóng ca trên Portal ➔ <strong style="color: var(--red);">Không đối soát phí tư vấn cho ĐMX</strong>.</td>
+            <td>Hãng tự đóng ca trên Portal ➔ <strong style="color: var(--red);">Không phát sinh chi phí / đối soát với ĐMX</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>Khi Hãng tư vấn THẤT BẠI</strong></td>
+            <td colspan="2" style="background: #faf5ff; text-align: center;">
+              <strong style="color: var(--purple);">Hãng bấm nút "Tạo vận đơn cho Thợ ĐMX" trên Portal Hãng</strong> ➔ Hệ thống TMS tự động sinh Vận đơn cho Thợ ĐMX đi làm tận nhà ➔ Đối soát chi phí bảo hành tại nhà (Công KTV + Linh kiện mới/xác).
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Điều kiện đối soát phí tư vấn</strong></td>
+            <td><strong style="color: var(--green);">Có</strong> (Chỉ khi Tổng đài ĐMX tự tư vấn thành công).</td>
+            <td><strong style="color: var(--red);">Không bao giờ phát sinh</strong> đối soát phí tư vấn.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout red">
+        <div class="callout-title">⚠️ NGUYÊN TẮC KSNB QUAN TRỌNG:</div>
+        Đối với Hãng chỉ ủy quyền phần sửa chữa (Mô hình 2), Tổng đài ĐMX <strong>bắt buộc phải đóng ticket ngay khi bấm Chuyển Hãng</strong> để tránh tình trạng ticket treo vô thời hạn trên hệ thống CRM ĐMX. Toàn bộ tiến trình theo dõi tiếp theo sẽ do Hãng quản trị trên Portal Hãng.
+      </div>
+    </section>
+
+    <!-- 4. Luồng tổng thể xuyên suốt -->
+    <section class="card" id="luong-tong-the">
+      <div class="card-head">
+        <div class="num">4</div>
+        <h2>Luồng tổng thể quy trình Bảo hành ủy quyền (BHUQ)</h2>
+      </div>
+
+      <div class="flow-diagram">
+        <!-- Bước 1: Tiếp nhận -->
+        <div class="flow-step-node">
+          <div class="node-num">1</div>
+          <div class="node-content">
+            <strong>Tiếp nhận & Định tuyến Mô hình (CRM):</strong> Khách hàng gọi Tổng đài ĐMX ➔ Hệ thống đối chiếu Serial/Model trên Master BHUQ ➔ Phân luồng theo thỏa thuận ủy quyền của Hãng (Mô hình 1 hay Mô hình 2).
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+        <!-- Bước 2: Phân nhánh xử lý -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px;">
+          
+          <div style="background: #f0f6ff; border: 1.5px solid var(--blue-border); border-radius: 10px; padding: 12px 14px;">
+            <strong style="color: var(--blue2); font-size: 13.5px;">Nhánh 1: Hãng ủy quyền Tư vấn & Sửa chữa</strong>
+            <p style="font-size: 12.8px; margin: 6px 0 0; color: #334155;">
+              • ĐMX tư vấn thành công ➔ Đóng ticket ➔ <strong>Được đối soát phí</strong>.
+              <br>• ĐMX tư vấn thất bại ➔ Bấm <strong>Chuyển Hãng</strong> ➔ Đẩy lên Portal.
+            </p>
+          </div>
+
+          <div style="background: #faf5ff; border: 1.5px solid var(--purple-border); border-radius: 10px; padding: 12px 14px;">
+            <strong style="color: var(--purple); font-size: 13.5px;">Nhánh 2: Hãng CHỈ ủy quyền Sửa chữa</strong>
+            <p style="font-size: 12.8px; margin: 6px 0 0; color: #334155;">
+              • Tổng đài ĐMX <strong>không tư vấn</strong>.
+              <br>• Bấm <strong>"Chuyển Hãng"</strong> ➔ <strong style="color: var(--red);">ĐÓNG TICKET CRM NGAY</strong> ➔ Đẩy lên Portal.
+            </p>
+          </div>
+
+        </div>
+
+        <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+        <!-- Bước 3: Hãng tư vấn trên Portal -->
+        <div class="flow-step-node active-purple">
+          <div class="node-num">3</div>
+          <div class="node-content">
+            <strong>Hãng thực hiện Tư vấn trên Portal:</strong>
+            <br>• 🟢 <em>Hãng tư vấn thành công:</em> Hãng tự đóng ca trên Portal kết thúc ➔ <strong>Không đối soát phí tư vấn với ĐMX</strong>.
+            <br>• 🔴 <em>Hãng tư vấn không thành công:</em> Chuyên viên Hãng bấm nút <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trực tiếp trên Portal Hãng.
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+        <!-- Bước 4: TMS Sinh vận đơn & Thợ ĐMX làm việc -->
+        <div class="flow-step-node active-blue">
+          <div class="node-num">4</div>
+          <div class="node-content">
+            <strong>TMS Sinh Vận đơn & Thợ ĐMX tiếp nhận:</strong> TMS nhận trigger từ Portal Hãng ➔ Tự động sinh <strong>Vận đơn BHUQ</strong> điều phối Thợ ĐMX ➔ KTV đến nhà kiểm tra ngoại quan, chẩn đoán lỗi & đề xuất linh kiện.
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+        <!-- Bước 5: Pre-approval & Xuất kho -->
+        <div class="flow-step-node active-orange">
+          <div class="node-num">5</div>
+          <div class="node-content">
+            <strong>Phê duyệt Hãng (Pre-approval) & Xuất kho LK:</strong> Đồng bộ đề xuất lên Portal Hãng lấy <strong>Approval ID</strong> (với ca chỉ định) ➔ Kho WMS xuất kho linh kiện mới theo Jobcard ➔ KTV nhận linh kiện.
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+        <!-- Bước 6: Sửa chữa & Thu hồi xác -->
+        <div class="flow-step-node">
+          <div class="node-num">6</div>
+          <div class="node-content">
+            <strong>Sửa chữa, QC & Thu hồi LK xác:</strong> KTV thay thế linh kiện tại nhà ➔ Thực hiện quy trình QC kiểm tra vận hành ➔ Thu hồi linh kiện xác về kho nhập WMS ➔ Hoàn tất Jobcard & nghiệm thu với khách.
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+        <!-- Bước 7: Claim & Đối soát 3 bên -->
+        <div class="flow-step-node active-green">
+          <div class="node-num">7</div>
+          <div class="node-content">
+            <strong>Claim Batch & Đối soát 3 bên:</strong> Tập hợp Claim Batch gửi Hãng ➔ Đối soát quyết toán 3 phần: <strong>Linh kiện mới + Linh kiện xác đã trả + Tiền công KTV</strong> ➔ Kế toán hạch toán thanh toán.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. Chi tiết quy trình (26 bước) -->
+    <section class="card" id="chi-tiet-26-buoc">
+      <div class="card-head">
+        <div class="num">5</div>
+        <h2>Bảng chi tiết các bước thực hiện quy trình BHUQ</h2>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 5%; text-align: center;">STT</th>
+            <th style="width: 17%;">Ai làm (Actor)</th>
+            <th style="width: 25%;">Làm gì (Action)</th>
+            <th style="width: 12%;">Hệ thống</th>
+            <th>System Logic & Điểm kiểm soát KSNB</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center;"><strong>1</strong></td>
+            <td>CRM / Tổng đài</td>
+            <td>Tiếp nhận yêu cầu bảo hành</td>
+            <td><span class="badge-tag badge-blue">CRM</span></td>
+            <td>Tạo yêu cầu dịch vụ bảo hành tận nhà theo thông tin khách hàng.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>2</strong></td>
+            <td>Tổng đài</td>
+            <td>Nhập IMEI / Serial / Model</td>
+            <td><span class="badge-tag badge-blue">CRM</span></td>
+            <td>CRM truy vấn lịch sử mua hàng, bảo hành từ ERP/WMS.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>3</strong></td>
+            <td>Hệ thống</td>
+            <td>Kiểm tra điều kiện BH ủy quyền</td>
+            <td><span class="badge-tag badge-blue">CRM</span></td>
+            <td>Đối chiếu Master Hãng + Model + Serial + Thời hạn BH + <strong>Phân loại Mô hình ủy quyền (1 hay 2)</strong>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>4</strong></td>
+            <td>Tổng đài</td>
+            <td>Xác nhận định tuyến tiếp nhận</td>
+            <td><span class="badge-tag badge-blue">Xfone</span></td>
+            <td>Hệ thống hiển thị luồng xử lý: Tư vấn Cấp 1 (Mô hình 1) hoặc Chuyển Hãng đóng ticket (Mô hình 2).</td>
+          </tr>
+
+          <!-- Mô hình 1: Có ủy quyền tư vấn -->
+          <tr style="background: #f0fdf4;">
+            <td style="text-align: center; font-weight: bold; color: var(--green);">5a.1</td>
+            <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-green">Mô hình 1: TV Thành công</span></td>
+            <td>Đóng ticket tư vấn thành công</td>
+            <td><span class="badge-tag badge-blue">CRM</span></td>
+            <td>Tổng đài xử lý xong từ xa ➔ Đóng ticket "Tư vấn thành công". Đẩy dữ liệu sang WMS.</td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td style="text-align: center; font-weight: bold; color: var(--green);">5a.2</td>
+            <td><strong>Hệ thống</strong><br><span class="badge-tag badge-green">Sync Portal đối soát</span></td>
+            <td>Đẩy dữ liệu lên Portal Hãng</td>
+            <td><span class="badge-tag badge-purple">WMS / Portal</span></td>
+            <td>Đồng bộ ticket thành công lên Portal Hãng ➔ <strong style="color: var(--green);">Ghi nhận đối soát phí tư vấn cho ĐMX</strong>.</td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td style="text-align: center; font-weight: bold; color: var(--blue);">5a.3</td>
+            <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-orange">Mô hình 1: Chuyển Hãng</span></td>
+            <td>Bấm "Chuyển Hãng"</td>
+            <td><span class="badge-tag badge-blue">CRM</span></td>
+            <td>Tư vấn không thành công ➔ Tổng đài bấm <strong>"Chuyển Hãng"</strong> để chuyển ticket sang Portal Hãng tư vấn Cấp 2.</td>
+          </tr>
+
+          <!-- Mô hình 2: Chỉ ủy quyền sửa chữa -->
+          <tr style="background: #faf5ff;">
+            <td style="text-align: center; font-weight: bold; color: var(--purple);">5b.1</td>
+            <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-purple">Mô hình 2: Chuyển Hãng</span></td>
+            <td>Bấm "Chuyển Hãng" (Không tư vấn)</td>
+            <td><span class="badge-tag badge-blue">CRM</span></td>
+            <td>Nhận diện Hãng chỉ ủy quyền sửa chữa ➔ Tổng đài <strong>không tư vấn</strong>, bấm nút <strong>"Chuyển Hãng"</strong>.</td>
+          </tr>
+          <tr style="background: #faf5ff;">
+            <td style="text-align: center; font-weight: bold; color: var(--purple);">5b.2</td>
+            <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-purple">Mô hình 2: Đóng Ticket</span></td>
+            <td>Đóng Ticket trên CRM</td>
+            <td><span class="badge-tag badge-blue">CRM</span></td>
+            <td>Tổng đài <strong>đóng ticket CRM ngay lập tức</strong> (Trạng thái: <em>Đã chuyển Hãng tư vấn</em>).</td>
+          </tr>
+
+          <!-- Các bước Hãng xử lý trên Portal chung cho cả 2 mô hình khi chuyển Hãng -->
+          <tr style="background: #f8fafc;">
+            <td style="text-align: center; font-weight: bold; color: var(--purple);">5.3</td>
+            <td><strong>Hệ thống</strong><br><span class="badge-tag badge-purple">Sync Portal Hãng</span></td>
+            <td>Đẩy Jobcard lên Portal của Hãng</td>
+            <td><span class="badge-tag badge-purple">WMS / Portal</span></td>
+            <td>Hệ thống tự động sinh Jobcard BHUQ và đồng bộ trực tiếp lên <strong>Portal của Hãng</strong>.</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="text-align: center; font-weight: bold; color: var(--purple);">5.4</td>
+            <td><strong>Hãng / Đối tác</strong><br><span class="badge-tag badge-orange">Hãng Tư vấn</span></td>
+            <td>Hãng thực hiện tư vấn khách hàng</td>
+            <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+            <td>Chuyên viên của Hãng tiếp nhận Jobcard trên Portal và liên hệ tư vấn/hướng dẫn kỹ thuật cho khách hàng.</td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td style="text-align: center; font-weight: bold; color: var(--red);">5.5a</td>
+            <td><strong>Hãng</strong><br><span class="badge-tag badge-red">Hãng TV Thành công</span></td>
+            <td>Hãng đóng ticket tư vấn thành công</td>
+            <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+            <td>Hãng xử lý được từ xa ➔ Đóng ticket trên Portal ➔ Kết thúc ca ➔ <strong style="color: var(--red);">KHÔNG ĐỐI SOÁT PHÍ TƯ VẤN CHO ĐMX</strong>.</td>
+          </tr>
+          <tr style="background: #f5f3ff;">
+            <td style="text-align: center; font-weight: bold; color: var(--purple);">5.5b</td>
+            <td><strong>Hãng</strong><br><span class="badge-tag badge-purple">Hãng tạo Vận đơn</span></td>
+            <td>Hãng bấm "Tạo vận đơn cho Thợ ĐMX"</td>
+            <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+            <td>Hãng tư vấn không thành công ➔ Chuyên viên Hãng bấm nút <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trực tiếp trên Portal.</td>
+          </tr>
+          <tr style="background: #f5f3ff;">
+            <td style="text-align: center; font-weight: bold; color: var(--purple);">6</td>
+            <td><strong>Hệ thống TMS</strong><br><span class="badge-tag badge-blue">Sinh Vận đơn TMS</span></td>
+            <td>Tự động sinh Vận đơn BHUQ</td>
+            <td><span class="badge-tag badge-blue">TMS</span></td>
+            <td>Nhận trigger từ Portal Hãng ➔ Tự động tạo <strong>Vận đơn BHUQ trên TMS</strong> và điều phối cho KTV Thợ ĐMX.</td>
+          </tr>
+
+          <!-- Các bước thực thi kỹ thuật tại nhà -->
+          <tr>
+            <td style="text-align: center;"><strong>7</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Kiểm tra ngoại quan tại nhà KH</td>
+            <td><span class="badge-tag badge-blue">TMS App</span></td>
+            <td>Chụp ảnh ngoại quan sản phẩm, kiểm tra tem niêm phong/mác Serial.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>8</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Chẩn đoán lỗi kỹ thuật</td>
+            <td><span class="badge-tag badge-blue">TMS App</span></td>
+            <td>Xác định triệu chứng lỗi, khoanh vùng bo mạch/linh kiện hỏng.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>9</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Cập nhật mã lỗi & đề xuất LK</td>
+            <td><span class="badge-tag badge-blue">TMS App</span></td>
+            <td>Ghi nhận mã lỗi chuẩn Hãng và đề xuất mã linh kiện thay thế tương ứng.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>10</strong></td>
+            <td>Hãng / Đối tác</td>
+            <td>Phê duyệt Pre-approval (nếu có)</td>
+            <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+            <td>Hãng phê duyệt đối với các linh kiện giá trị cao hoặc quy định đặc thù (Approval ID).</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>11</strong></td>
+            <td>Hệ thống</td>
+            <td>Tạo yêu cầu tạm ứng / đặt linh kiện</td>
+            <td><span class="badge-tag badge-blue">TMS</span></td>
+            <td>Kiểm tra tồn kho trung tâm/kho thợ; tạo lệnh tạm ứng hoặc lệnh PO đặt hàng Hãng.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>12</strong></td>
+            <td>Kho LK / WMS</td>
+            <td>Xuất kho linh kiện mới</td>
+            <td><span class="badge-tag badge-purple">WMS</span></td>
+            <td>Xuất đích danh Part Number / Part Serial theo đúng Jobcard BHUQ.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>13</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Thực hiện sửa chữa tại nhà</td>
+            <td><span class="badge-tag badge-blue">TMS App</span></td>
+            <td>Tiến hành thay thế linh kiện theo đúng quy chuẩn an toàn kỹ thuật.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>14</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Ghi nhận Serial linh kiện thay thế</td>
+            <td><span class="badge-tag badge-blue">TMS App</span></td>
+            <td>Mapping chặt chẽ: <code>Serial Máy ↔ Serial LK Mới ↔ Serial LK Xác</code>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>15</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Kiểm tra chất lượng (QC)</td>
+            <td><span class="badge-tag badge-blue">TMS App</span></td>
+            <td>Thực hiện checklist kiểm tra vận hành sau sửa chữa bắt buộc.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>16</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Hoàn tất JC & Nhập linh kiện xác</td>
+            <td><span class="badge-tag badge-purple">WMS / TMS</span></td>
+            <td>Khóa Jobcard, thu hồi linh kiện xác về kho làm thủ tục nhập kho trả Hãng.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>17</strong></td>
+            <td>KTV Thợ ĐMX</td>
+            <td>Bàn giao & Nghiệm thu với khách</td>
+            <td><span class="badge-tag badge-blue">TMS App</span></td>
+            <td>Khách hàng ký nghiệm thu biên bản dịch vụ hoàn tất.</td>
+          </tr>
+
+          <!-- Các bước Claim & Đối soát tài chính -->
+          <tr>
+            <td style="text-align: center;"><strong>18</strong></td>
+            <td>Bộ phận BH</td>
+            <td>Tập hợp Claim Batch theo Hãng</td>
+            <td><span class="badge-tag badge-purple">WMS</span></td>
+            <td>Tổng hợp danh sách các Jobcard BHUQ hoàn tất trong kỳ đối soát.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>19</strong></td>
+            <td>Bộ phận BH</td>
+            <td>Gửi Claim lên Portal Hãng</td>
+            <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+            <td>Gửi kèm dữ liệu Jobcard, hình ảnh ngoại quan, chứng từ thu hồi xác và biên bản nghiệm thu.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>20</strong></td>
+            <td>Hãng / Đối tác</td>
+            <td>Thẩm định & Phê duyệt Claim</td>
+            <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
+            <td>Cập nhật trạng thái: <em>Approved / Rejected / Need Information</em>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>21</strong></td>
+            <td>Bộ phận BH</td>
+            <td>Xử lý Claim bị từ chối/bổ sung</td>
+            <td><span class="badge-tag badge-purple">WMS</span></td>
+            <td>Bổ sung bằng chứng hình ảnh hoặc chuyển chi phí nội bộ nếu vi phạm quy chế.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>22</strong></td>
+            <td>Kế toán</td>
+            <td>Đối soát 3 bên</td>
+            <td><span class="badge-tag badge-blue">ERP</span></td>
+            <td>Đối soát khớp 100%: <strong>Linh kiện mới + Linh kiện xác đã trả + Tiền công KTV</strong>.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>23</strong></td>
+            <td>Kế toán</td>
+            <td>Ghi nhận doanh thu & công nợ phải thu</td>
+            <td><span class="badge-tag badge-blue">ERP</span></td>
+            <td>Hạch toán số tiền Hãng thanh toán theo hợp đồng BHUQ.</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><strong>24</strong></td>
+            <td>Bộ phận BH</td>
+            <td>Khóa hồ sơ & Lưu trữ lịch sử</td>
+            <td><span class="badge-tag badge-blue">Online</span></td>
+            <td>Đóng hồ sơ Claim Batch, lưu vết phục vụ công tác thanh kiểm tra KSNB.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 6. Điểm kiểm soát trọng yếu KSNB -->
+    <section class="card" id="kiem-soat">
+      <div class="card-head">
+        <div class="num">6</div>
+        <h2>Điểm kiểm soát trọng yếu (KSNB Checkpoints)</h2>
+      </div>
+
+      <div class="checkpoint-card">
+        <h3>⚠️ 5 NGUYÊN TẮC VÀNG KIỂM SOÁT TUÂN THỦ:</h3>
+        <ol style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.8; color: #334155;">
+          <li>
+            <strong>Đúng nghiệp vụ đóng Ticket (Mô hình 2):</strong> Khi khách hàng yêu cầu bảo hành Hãng chỉ ủy quyền sửa chữa, Tổng đài ĐMX bắt buộc bấm Chuyển Hãng và <strong>đóng ticket CRM ngay lập tức</strong>, tuyệt đối không giữ ticket mở gây sai lệch SLA tiếp nhận.
+          </li>
+          <li>
+            <strong>Đúng điều kiện sinh Vận đơn Thợ ĐMX:</strong> Vận đơn chỉ được khởi tạo khi Hãng tiếp nhận trên Portal và chuyên viên Hãng bấm nút <em>"Tạo vận đơn cho Thợ ĐMX"</em> sau khi đã tư vấn không thành công.
+          </li>
+          <li>
+            <strong>Chặn đối soát phí tư vấn khi Hãng tự xử lý:</strong> Bất kể Mô hình 1 hay Mô hình 2, khi Hãng đã tự tư vấn thành công với khách hàng thì <strong>tuyệt đối không ghi nhận đối soát phí tư vấn cho ĐMX</strong>.
+          </li>
+          <li>
+            <strong>Thu hồi 100% linh kiện xác:</strong> Mọi linh kiện bảo hành xuất kho bắt buộc phải có linh kiện xác đối ứng bàn giao cho Hãng (trừ khi chính sách Hãng miễn thu hồi bằng văn bản).
+          </li>
+          <li>
+            <strong>Toàn vẹn dữ liệu truy vết (Audit Trail):</strong> Đảm bảo truy vết 100% hai chiều từ giao dịch thanh toán tài chính về đúng <code>Số Claim ↔ Mã Jobcard ↔ Vận đơn TMS ↔ Serial Máy ↔ Serial LK Mới ↔ Serial LK Xác ↔ KTV thực hiện</code>.
+          </li>
+        </ol>
+      </div>
+
+      <div class="callout green">
+        <div class="callout-title">🎯 Giá trị mang lại cho KSNB & Vận hành:</div>
+        Chuẩn hóa rõ 2 mô hình giúp Tổng đài thao tác nhanh gọn (không tư vấn thừa với Hãng không ủy quyền), tránh ticket tồn đọng, minh bạch chi phí đối soát và quản lý Thợ ĐMX làm việc đúng chỉ định từ Hãng.
+      </div>
+    </section>
+
+  </div>
+  <!-- ==================== HẾT TAB 1 ==================== -->
+
+  <!-- ==================== TAB 2: CÁC KHAI BÁO TẠO MỚI (CRM MASTER) ==================== -->
+  <div id="tab-khai-bao" class="tab-pane">
+
+    <!-- Card Giới thiệu Cấu hình -->
+    <section class="card">
+      <div class="card-head">
+        <div class="num" style="background: var(--purple);">⚙️</div>
+        <h2>1. Định nghĩa BHUQ ở đầu Tổng đài CRM</h2>
+      </div>
+
+      <div class="callout" style="border-left-color: var(--purple); background: var(--purple-bg);">
+        <div class="callout-title" style="color: var(--purple);">🎯 Mục đích Khai báo:</div>
+        Thiết lập bảng dữ liệu Master trên CRM nhằm <strong>hiển thị thông tin chuẩn xác và định tuyến kịch bản hành động</strong> cho nhân viên tổng đài (Call Center Agent) ngay khi tiếp nhận cuộc gọi từ khách hàng, đảm bảo nhân viên xử lý đúng thỏa thuận với từng Hãng theo từng Ngành hàng, Nhóm hàng, Sản phẩm, Tỉnh/Thành, Phường áp dụng và thời gian hiệu lực.
+      </div>
+
+      <!-- Bảng đặc tả các trường khai báo (Đã bỏ cột Kiểu dữ liệu/Nguồn, bổ sung Ngành hàng, Nhóm hàng, Phường áp dụng, đổi Sản phẩm) -->
+      <h3 style="margin: 22px 0 10px; font-size: 16px; color: var(--blue2);">📋 Danh mục các Trường Khai báo Master BHUQ trên CRM:</h3>
       
-      <!-- Mô hình A -->
-      <div class="model-box model-a">
-        <div class="model-header">
-          <h3>🅰️ MÔ HÌNH 1: ỦY QUYỀN CẢ TƯ VẤN & SỬA CHỮA</h3>
-          <span class="badge-tag badge-blue">Ủy quyền toàn diện</span>
-        </div>
-        <p style="font-size: 13px; color: #475569; margin: 0 0 12px;">Hãng ủy quyền cho ĐMX tư vấn Cấp 1 trước, nếu không được mới chuyển Hãng:</p>
-        
-        <div class="step-item">
-          <div class="step-badge">1</div>
-          <div><strong>ĐMX tư vấn thành công:</strong> Đóng ticket trên CRM ➔ <strong style="color: var(--green);">GHI NHẬN ĐỐI SOÁT PHÍ TƯ VẤN</strong> cho ĐMX.</div>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-badge">2</div>
-          <div><strong>ĐMX tư vấn không thành công:</strong> Bấm <strong>"Chuyển Hãng"</strong> ➔ Jobcard đẩy lên Portal Hãng để Hãng tư vấn Cấp 2.</div>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-badge">3</div>
-          <div><strong>Hãng tư vấn thành công:</strong> Hãng đóng ca trên Portal kết thúc ➔ <strong style="color: var(--red);">KHÔNG ĐỐI SOÁT PHÍ TƯ VẤN</strong> cho ĐMX.</div>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-badge">4</div>
-          <div><strong>Hãng tư vấn không thành công:</strong> Hãng bấm <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trên Portal ➔ TMS sinh Vận đơn Thợ ĐMX đến nhà sửa chữa.</div>
-        </div>
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">Trường khai báo</th>
+            <th style="width: 14%; text-align: center;">Bắt buộc</th>
+            <th>Ý nghĩa & Quy tắc nghiệp vụ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hãng</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Hãng / Thương hiệu sản phẩm áp dụng chính sách BHUQ (VD: <em>Panasonic, Casper, Daikin, TCL, Sharp...</em>).</td>
+          </tr>
+          <tr>
+            <td><strong>Ngành hàng</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Ngành hàng áp dụng chính sách bảo hành ủy quyền (VD: <em>Điện tử, Điện lạnh, Gia dụng...</em>).</td>
+          </tr>
+          <tr>
+            <td><strong>Nhóm hàng</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Nhóm hàng cụ thể thuộc ngành hàng (VD: <em>Máy lạnh, Tủ lạnh, Máy giặt, Tivi, Máy lọc nước...</em>).</td>
+          </tr>
+          <tr>
+            <td><strong>Sản phẩm</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Danh sách Model cụ thể hoặc Mã sản phẩm (SKU) thuộc phạm vi bảo hành ủy quyền của Hãng.</td>
+          </tr>
+          <tr>
+            <td><strong>Tỉnh/Thành</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Phạm vi Tỉnh/Thành phố áp dụng chính sách BHUQ (Cho phép chọn <em>Toàn quốc</em> hoặc danh sách các Tỉnh/Thành cụ thể).</td>
+          </tr>
+          <tr>
+            <td><strong>Phường áp dụng</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Phạm vi Phường/Xã (kèm Quận/Huyện) cụ thể trên địa bàn có Thợ ĐMX hỗ trợ dịch vụ bảo hành ủy quyền tại nhà.</td>
+          </tr>
+          <tr>
+            <td><strong>Loại ủy quyền</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>
+              Phân định kịch bản hiển thị trên CRM:
+              <br>• <strong style="color: var(--blue);">Tư vấn + sửa chữa:</strong> Tổng đài tư vấn Cấp 1, thất bại mới chuyển Hãng.
+              <br>• <strong style="color: var(--purple);">Chỉ sửa chữa:</strong> Tổng đài không tư vấn ➔ Chuyển Hãng & đóng ticket luôn.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Từ ngày</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Ngày bắt đầu có hiệu lực của hợp đồng / chương trình ủy quyền với Hãng (Định dạng: DD/MM/YYYY).</td>
+          </tr>
+          <tr>
+            <td><strong>Đến ngày</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>Ngày kết thúc hiệu lực của hợp đồng ủy quyền (Ràng buộc: <code>Đến ngày &ge; Từ ngày</code>).</td>
+          </tr>
+          <tr>
+            <td><strong>Trạng thái</strong></td>
+            <td style="text-align: center;"><span class="badge-tag badge-red">✓ Bắt buộc</span></td>
+            <td>
+              Trạng thái kích hoạt cấu hình:
+              <br>• <span class="badge-tag badge-green">Active:</span> Đang áp dụng (Hệ thống tự động kích hoạt kịch bản tương ứng).
+              <br>• <span class="badge-tag badge-gray">Inactive:</span> Tạm ngưng hoặc hết hạn (Không hiển thị gợi ý BHUQ cho Tổng đài).
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-      <!-- Mô hình B -->
-      <div class="model-box model-b">
-        <div class="model-header">
-          <h3>🅱️ MÔ HÌNH 2: CHỈ ỦY QUYỀN PHẦN SỬA CHỮA</h3>
-          <span class="badge-tag badge-purple">Chỉ ủy quyền Kỹ thuật</span>
+      <!-- Bảng ví dụ cấu hình mẫu -->
+      <h3 style="margin: 24px 0 10px; font-size: 16px; color: var(--blue2);">📊 Bảng Dữ liệu Cấu hình Mẫu (Master Data Example):</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Hãng</th>
+            <th>Ngành hàng</th>
+            <th>Nhóm hàng</th>
+            <th>Sản phẩm</th>
+            <th>Tỉnh / Thành</th>
+            <th>Phường áp dụng</th>
+            <th>Loại ủy quyền</th>
+            <th>Hiệu lực</th>
+            <th style="text-align: center;">Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CASPER</strong></td>
+            <td>Điện lạnh</td>
+            <td>Máy lạnh</td>
+            <td>Inverter 1.5HP (AC_CASPER_15IN)</td>
+            <td>Toàn quốc</td>
+            <td>Tất cả Phường/Xã</td>
+            <td><span class="badge-tag badge-blue">Tư vấn + Sửa chữa</span></td>
+            <td>01/01/2026 ➔ 31/12/2026</td>
+            <td style="text-align: center;"><span class="badge-tag badge-green">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>PANASONIC</strong></td>
+            <td>Điện lạnh</td>
+            <td>Tủ lạnh</td>
+            <td>Multi-Door (NR-CW530XMMV)</td>
+            <td>TP. Hồ Chí Minh</td>
+            <td>Phường Tân Phong, Tân Phú (Quận 7)...</td>
+            <td><span class="badge-tag badge-purple">Chỉ sửa chữa</span></td>
+            <td>15/02/2026 ➔ 31/12/2026</td>
+            <td style="text-align: center;"><span class="badge-tag badge-green">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>TCL</strong></td>
+            <td>Điện tử</td>
+            <td>Tivi</td>
+            <td>QLED 4K 65 inch (65C745)</td>
+            <td>Cần Thơ</td>
+            <td>Phường An Khánh, Ninh Kiều...</td>
+            <td><span class="badge-tag badge-blue">Tư vấn + Sửa chữa</span></td>
+            <td>01/03/2026 ➔ 30/09/2026</td>
+            <td style="text-align: center;"><span class="badge-tag badge-green">Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>SHARP</strong></td>
+            <td>Điện lạnh</td>
+            <td>Máy giặt</td>
+            <td>Lồng ngang 10.5kg (ES-FK1054SV)</td>
+            <td>Bình Dương</td>
+            <td>Phường Lái Thiêu, Thuận An...</td>
+            <td><span class="badge-tag badge-purple">Chỉ sửa chữa</span></td>
+            <td>01/01/2026 ➔ 31/12/2026</td>
+            <td style="text-align: center;"><span class="badge-tag badge-green">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Minh họa Giao diện Popup trên CRM -->
+      <h3 style="margin: 24px 0 10px; font-size: 16px; color: var(--blue2);">💡 Minh họa Giao diện Màn hình Tiếp nhận của Tổng đài viên:</h3>
+
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <span>🖥️ CRM CALL CENTER POPUP · MÃ ĐƠN TIẾP NHẬN: #BH-202609-08892</span>
+          <span style="color: var(--blue);">[KẾT QUẢ TỰ ĐỘNG MASTER BHUQ]</span>
         </div>
-        <p style="font-size: 13px; color: #475569; margin: 0 0 12px;">Hãng <strong>không ủy quyền tư vấn</strong>, Tổng đài ĐMX chuyển Hãng ngay từ đầu:</p>
-        
-        <div class="step-item">
-          <div class="step-badge">1</div>
-          <div><strong>Khách hàng gọi lên ĐMX:</strong> Tổng đài nhận diện Hãng chỉ ủy quyền sửa chữa ➔ <strong>KHÔNG TƯ VẤN</strong>.</div>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-badge">2</div>
-          <div><strong>Chuyển Hãng & Đóng Ticket ĐMX:</strong> Tổng đài bấm <strong>"Chuyển Hãng"</strong> ➔ <strong style="color: var(--blue);">ĐÓNG TICKET TRÊN CRM LUÔN</strong> ➔ Jobcard đẩy lên Portal Hãng.</div>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-badge">3</div>
-          <div><strong>Hãng tư vấn thành công:</strong> Hãng tự xử lý xong và tự đóng ca trên Portal ➔ <strong style="color: var(--red);">KHÔNG PHÁT SINH ĐỐI SOÁT</strong> với ĐMX.</div>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-badge">4</div>
-          <div><strong>Hãng tư vấn không thành công:</strong> Hãng bấm <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trên Portal ➔ TMS sinh Vận đơn cho Thợ ĐMX đến nhà sửa chữa.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Bảng ma trận đối chiếu 2 mô hình -->
-    <h3 style="margin: 22px 0 10px; font-size: 15.5px; color: var(--blue2);">📊 Bảng so sánh chi tiết giữa 2 Mô hình Ủy quyền:</h3>
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 22%;">Nội dung nghiệp vụ</th>
-          <th style="width: 39%;">Mô hình 1: Ủy quyền Tư vấn & Sửa chữa</th>
-          <th>Mô hình 2: CHỈ Ủy quyền Sửa chữa</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Vai trò của Tổng đài ĐMX</strong></td>
-          <td>Thực hiện <strong>Tư vấn Cấp 1</strong> với khách hàng qua Xfone.</td>
-          <td><strong>Không tư vấn</strong>; chỉ tiếp nhận thông tin và bấm Chuyển Hãng.</td>
-        </tr>
-        <tr>
-          <td><strong>Hành động khi Chuyển Hãng</strong></td>
-          <td>Bấm "Chuyển Hãng" khi tư vấn Cấp 1 thất bại.</td>
-          <td>Bấm "Chuyển Hãng" ➔ <strong>Đóng ticket CRM ngay lập tức</strong>.</td>
-        </tr>
-        <tr>
-          <td><strong>Kênh tư vấn của Hãng</strong></td>
-          <td>Hãng tư vấn Cấp 2 (sàng lọc ca khó sau ĐMX).</td>
-          <td>Hãng tự thực hiện tư vấn trực tiếp 100% với khách hàng.</td>
-        </tr>
-        <tr>
-          <td><strong>Khi Hãng tư vấn THÀNH CÔNG</strong></td>
-          <td>Hãng tự đóng ca trên Portal ➔ <strong style="color: var(--red);">Không đối soát phí tư vấn cho ĐMX</strong>.</td>
-          <td>Hãng tự đóng ca trên Portal ➔ <strong style="color: var(--red);">Không phát sinh chi phí / đối soát với ĐMX</strong>.</td>
-        </tr>
-        <tr>
-          <td><strong>Khi Hãng tư vấn THẤT BẠI</strong></td>
-          <td colspan="2" style="background: #faf5ff; text-align: center;">
-            <strong style="color: var(--purple);">Hãng bấm nút "Tạo vận đơn cho Thợ ĐMX" trên Portal Hãng</strong> ➔ Hệ thống TMS tự động sinh Vận đơn cho Thợ ĐMX đi làm tận nhà ➔ Đối soát chi phí bảo hành tại nhà (Công KTV + Linh kiện mới/xác).
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Điều kiện đối soát phí tư vấn</strong></td>
-          <td><strong style="color: var(--green);">Có</strong> (Chỉ khi Tổng đài ĐMX tự tư vấn thành công).</td>
-          <td><strong style="color: var(--red);">Không bao giờ phát sinh</strong> đối soát phí tư vấn.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="callout red">
-      <div class="callout-title">⚠️ NGUYÊN TẮC KSNB QUAN TRỌNG:</div>
-      Đối với Hãng chỉ ủy quyền phần sửa chữa (Mô hình 2), Tổng đài ĐMX <strong>bắt buộc phải đóng ticket ngay khi bấm Chuyển Hãng</strong> để tránh tình trạng ticket treo vô thời hạn trên hệ thống CRM ĐMX. Toàn bộ tiến trình theo dõi tiếp theo sẽ do Hãng quản trị trên Portal Hãng.
-    </div>
-  </section>
-
-  <!-- 4. Luồng tổng thể xuyên suốt -->
-  <section class="card" id="luong-tong-the">
-    <div class="card-head">
-      <div class="num">4</div>
-      <h2>Luồng tổng thể quy trình Bảo hành ủy quyền (BHUQ)</h2>
-    </div>
-
-    <div class="flow-diagram">
-      <!-- Bước 1: Tiếp nhận -->
-      <div class="flow-step-node">
-        <div class="node-num">1</div>
-        <div class="node-content">
-          <strong>Tiếp nhận & Định tuyến Mô hình (CRM):</strong> Khách hàng gọi Tổng đài ĐMX ➔ Hệ thống đối chiếu Serial/Model trên Master BHUQ ➔ Phân luồng theo thỏa thuận ủy quyền của Hãng (Mô hình 1 hay Mô hình 2).
-        </div>
-      </div>
-
-      <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
-
-      <!-- Bước 2: Phân nhánh xử lý -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px;">
-        
-        <div style="background: #f0f6ff; border: 1.5px solid var(--blue-border); border-radius: 10px; padding: 12px 14px;">
-          <strong style="color: var(--blue2); font-size: 13.5px;">Nhánh 1: Hãng ủy quyền Tư vấn & Sửa chữa</strong>
-          <p style="font-size: 12.8px; margin: 6px 0 0; color: #334155;">
-            • ĐMX tư vấn thành công ➔ Đóng ticket ➔ <strong>Được đối soát phí</strong>.
-            <br>• ĐMX tư vấn thất bại ➔ Bấm <strong>Chuyển Hãng</strong> ➔ Đẩy lên Portal.
-          </p>
-        </div>
-
-        <div style="background: #faf5ff; border: 1.5px solid var(--purple-border); border-radius: 10px; padding: 12px 14px;">
-          <strong style="color: var(--purple); font-size: 13.5px;">Nhánh 2: Hãng CHỈ ủy quyền Sửa chữa</strong>
-          <p style="font-size: 12.8px; margin: 6px 0 0; color: #334155;">
-            • Tổng đài ĐMX <strong>không tư vấn</strong>.
-            <br>• Bấm <strong>"Chuyển Hãng"</strong> ➔ <strong style="color: var(--red);">ĐÓNG TICKET CRM NGAY</strong> ➔ Đẩy lên Portal.
-          </p>
-        </div>
-
-      </div>
-
-      <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
-
-      <!-- Bước 3: Hãng tư vấn trên Portal -->
-      <div class="flow-step-node active-purple">
-        <div class="node-num">3</div>
-        <div class="node-content">
-          <strong>Hãng thực hiện Tư vấn trên Portal:</strong>
-          <br>• 🟢 <em>Hãng tư vấn thành công:</em> Hãng tự đóng ca trên Portal kết thúc ➔ <strong>Không đối soát phí tư vấn với ĐMX</strong>.
-          <br>• 🔴 <em>Hãng tư vấn không thành công:</em> Chuyên viên Hãng bấm nút <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trực tiếp trên Portal Hãng.
-        </div>
-      </div>
-
-      <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
-
-      <!-- Bước 4: TMS Sinh vận đơn & Thợ ĐMX làm việc -->
-      <div class="flow-step-node active-blue">
-        <div class="node-num">4</div>
-        <div class="node-content">
-          <strong>TMS Sinh Vận đơn & Thợ ĐMX tiếp nhận:</strong> TMS nhận trigger từ Portal Hãng ➔ Tự động sinh <strong>Vận đơn BHUQ</strong> điều phối Thợ ĐMX ➔ KTV đến nhà kiểm tra ngoại quan, chẩn đoán lỗi & đề xuất linh kiện.
+        <div style="color: #334155; font-size: 13px; line-height: 1.7;">
+          • Khách hàng: <strong>Nguyễn Văn A</strong> | SĐT: <strong>0908.xxx.xxx</strong>
+          <br>• Địa chỉ: <strong>Phường Tân Phong, Quận 7, TP. Hồ Chí Minh</strong>
+          <br>• Ngành hàng: <strong>Điện lạnh</strong> | Nhóm hàng: <strong>Tủ lạnh</strong> | Sản phẩm: <strong>Tủ lạnh Panasonic NR-CW530XMMV</strong>
+          <br>• Serial máy: <strong>PANA-TL-2026-88991</strong>
+          <br>• Kết quả đối chiếu Master: <span class="badge-tag badge-purple">BHUQ: CHỈ ỦY QUYỀN SỬA CHỮA</span> (Hãng: Panasonic | Hiệu lực đến: 31/12/2026)
+          <br><br>
+          <div style="background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 14px; font-family: 'Segoe UI', sans-serif;">
+            <strong style="color: var(--purple);">🔔 HƯỚNG DẪN HÀNH ĐỘNG TỔNG ĐÀI VIÊN:</strong>
+            <p style="margin: 4px 0; font-size: 13px; color: #475569;">
+              Hãng Panasonic <strong>không ủy quyền tư vấn</strong> cho ca này. Nhân viên <strong>không thực hiện tư vấn kỹ thuật</strong>.
+              <br>Vui lòng thông báo khách hàng: <em>"Dạ thông tin của anh/chị đã được chuyển trực tiếp cho chuyên viên kỹ thuật của Hãng Panasonic liên hệ hỗ trợ ạ"</em>.
+            </p>
+            <div style="margin-top: 8px; display: flex; gap: 10px;">
+              <button style="background: var(--purple); color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                🚀 Bấm Chuyển Hãng & Đóng Ticket CRM
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+    </section>
 
-      <!-- Bước 5: Pre-approval & Xuất kho -->
-      <div class="flow-step-node active-orange">
-        <div class="node-num">5</div>
-        <div class="node-content">
-          <strong>Phê duyệt Hãng (Pre-approval) & Xuất kho LK:</strong> Đồng bộ đề xuất lên Portal Hãng lấy <strong>Approval ID</strong> (với ca chỉ định) ➔ Kho WMS xuất kho linh kiện mới theo Jobcard ➔ KTV nhận linh kiện.
-        </div>
-      </div>
-
-      <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
-
-      <!-- Bước 6: Sửa chữa & Thu hồi xác -->
-      <div class="flow-step-node">
-        <div class="node-num">6</div>
-        <div class="node-content">
-          <strong>Sửa chữa, QC & Thu hồi LK xác:</strong> KTV thay thế linh kiện tại nhà ➔ Thực hiện quy trình QC kiểm tra vận hành ➔ Thu hồi linh kiện xác về kho nhập WMS ➔ Hoàn tất Jobcard & nghiệm thu với khách.
-        </div>
-      </div>
-
-      <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
-
-      <!-- Bước 7: Claim & Đối soát 3 bên -->
-      <div class="flow-step-node active-green">
-        <div class="node-num">7</div>
-        <div class="node-content">
-          <strong>Claim Batch & Đối soát 3 bên:</strong> Tập hợp Claim Batch gửi Hãng ➔ Đối soát quyết toán 3 phần: <strong>Linh kiện mới + Linh kiện xác đã trả + Tiền công KTV</strong> ➔ Kế toán hạch toán thanh toán.
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 5. Chi tiết quy trình (26 bước) -->
-  <section class="card" id="chi-tiet-26-buoc">
-    <div class="card-head">
-      <div class="num">5</div>
-      <h2>Bảng chi tiết các bước thực hiện quy trình BHUQ</h2>
-    </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 5%; text-align: center;">STT</th>
-          <th style="width: 17%;">Ai làm (Actor)</th>
-          <th style="width: 25%;">Làm gì (Action)</th>
-          <th style="width: 12%;">Hệ thống</th>
-          <th>System Logic & Điểm kiểm soát KSNB</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: center;"><strong>1</strong></td>
-          <td>CRM / Tổng đài</td>
-          <td>Tiếp nhận yêu cầu bảo hành</td>
-          <td><span class="badge-tag badge-blue">CRM</span></td>
-          <td>Tạo yêu cầu dịch vụ bảo hành tận nhà theo thông tin khách hàng.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>2</strong></td>
-          <td>Tổng đài</td>
-          <td>Nhập IMEI / Serial / Model</td>
-          <td><span class="badge-tag badge-blue">CRM</span></td>
-          <td>CRM truy vấn lịch sử mua hàng, bảo hành từ ERP/WMS.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>3</strong></td>
-          <td>Hệ thống</td>
-          <td>Kiểm tra điều kiện BH ủy quyền</td>
-          <td><span class="badge-tag badge-blue">CRM</span></td>
-          <td>Đối chiếu Master Hãng + Model + Serial + Thời hạn BH + <strong>Phân loại Mô hình ủy quyền (1 hay 2)</strong>.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>4</strong></td>
-          <td>Tổng đài</td>
-          <td>Xác nhận định tuyến tiếp nhận</td>
-          <td><span class="badge-tag badge-blue">Xfone</span></td>
-          <td>Hệ thống hiển thị luồng xử lý: Tư vấn Cấp 1 (Mô hình 1) hoặc Chuyển Hãng đóng ticket (Mô hình 2).</td>
-        </tr>
-
-        <!-- Mô hình 1: Có ủy quyền tư vấn -->
-        <tr style="background: #f0fdf4;">
-          <td style="text-align: center; font-weight: bold; color: var(--green);">5a.1</td>
-          <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-green">Mô hình 1: TV Thành công</span></td>
-          <td>Đóng ticket tư vấn thành công</td>
-          <td><span class="badge-tag badge-blue">CRM</span></td>
-          <td>Tổng đài xử lý xong từ xa ➔ Đóng ticket "Tư vấn thành công". Đẩy dữ liệu sang WMS.</td>
-        </tr>
-        <tr style="background: #f0fdf4;">
-          <td style="text-align: center; font-weight: bold; color: var(--green);">5a.2</td>
-          <td><strong>Hệ thống</strong><br><span class="badge-tag badge-green">Sync Portal đối soát</span></td>
-          <td>Đẩy dữ liệu lên Portal Hãng</td>
-          <td><span class="badge-tag badge-purple">WMS / Portal</span></td>
-          <td>Đồng bộ ticket thành công lên Portal Hãng ➔ <strong style="color: var(--green);">Ghi nhận đối soát phí tư vấn cho ĐMX</strong>.</td>
-        </tr>
-        <tr style="background: #eff6ff;">
-          <td style="text-align: center; font-weight: bold; color: var(--blue);">5a.3</td>
-          <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-orange">Mô hình 1: Chuyển Hãng</span></td>
-          <td>Bấm "Chuyển Hãng"</td>
-          <td><span class="badge-tag badge-blue">CRM</span></td>
-          <td>Tư vấn không thành công ➔ Tổng đài bấm <strong>"Chuyển Hãng"</strong> để chuyển ticket sang Portal Hãng tư vấn Cấp 2.</td>
-        </tr>
-
-        <!-- Mô hình 2: Chỉ ủy quyền sửa chữa -->
-        <tr style="background: #faf5ff;">
-          <td style="text-align: center; font-weight: bold; color: var(--purple);">5b.1</td>
-          <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-purple">Mô hình 2: Chuyển Hãng</span></td>
-          <td>Bấm "Chuyển Hãng" (Không tư vấn)</td>
-          <td><span class="badge-tag badge-blue">CRM</span></td>
-          <td>Nhận diện Hãng chỉ ủy quyền sửa chữa ➔ Tổng đài <strong>không tư vấn</strong>, bấm nút <strong>"Chuyển Hãng"</strong>.</td>
-        </tr>
-        <tr style="background: #faf5ff;">
-          <td style="text-align: center; font-weight: bold; color: var(--purple);">5b.2</td>
-          <td><strong>Tổng đài ĐMX</strong><br><span class="badge-tag badge-purple">Mô hình 2: Đóng Ticket</span></td>
-          <td>Đóng Ticket trên CRM</td>
-          <td><span class="badge-tag badge-blue">CRM</span></td>
-          <td>Tổng đài <strong>đóng ticket CRM ngay lập tức</strong> (Trạng thái: <em>Đã chuyển Hãng tư vấn</em>).</td>
-        </tr>
-
-        <!-- Các bước Hãng xử lý trên Portal chung cho cả 2 mô hình khi chuyển Hãng -->
-        <tr style="background: #f8fafc;">
-          <td style="text-align: center; font-weight: bold; color: var(--purple);">5.3</td>
-          <td><strong>Hệ thống</strong><br><span class="badge-tag badge-purple">Sync Portal Hãng</span></td>
-          <td>Đẩy Jobcard lên Portal của Hãng</td>
-          <td><span class="badge-tag badge-purple">WMS / Portal</span></td>
-          <td>Hệ thống tự động sinh Jobcard BHUQ và đồng bộ trực tiếp lên <strong>Portal của Hãng</strong>.</td>
-        </tr>
-        <tr style="background: #f8fafc;">
-          <td style="text-align: center; font-weight: bold; color: var(--purple);">5.4</td>
-          <td><strong>Hãng / Đối tác</strong><br><span class="badge-tag badge-orange">Hãng Tư vấn</span></td>
-          <td>Hãng thực hiện tư vấn khách hàng</td>
-          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
-          <td>Chuyên viên của Hãng tiếp nhận Jobcard trên Portal và liên hệ tư vấn/hướng dẫn kỹ thuật cho khách hàng.</td>
-        </tr>
-        <tr style="background: #fff1f2;">
-          <td style="text-align: center; font-weight: bold; color: var(--red);">5.5a</td>
-          <td><strong>Hãng</strong><br><span class="badge-tag badge-red">Hãng TV Thành công</span></td>
-          <td>Hãng đóng ticket tư vấn thành công</td>
-          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
-          <td>Hãng xử lý được từ xa ➔ Đóng ticket trên Portal ➔ Kết thúc ca ➔ <strong style="color: var(--red);">KHÔNG ĐỐI SOÁT PHÍ TƯ VẤN CHO ĐMX</strong>.</td>
-        </tr>
-        <tr style="background: #f5f3ff;">
-          <td style="text-align: center; font-weight: bold; color: var(--purple);">5.5b</td>
-          <td><strong>Hãng</strong><br><span class="badge-tag badge-purple">Hãng tạo Vận đơn</span></td>
-          <td>Hãng bấm "Tạo vận đơn cho Thợ ĐMX"</td>
-          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
-          <td>Hãng tư vấn không thành công ➔ Chuyên viên Hãng bấm nút <strong>"Tạo vận đơn cho Thợ ĐMX"</strong> trực tiếp trên Portal.</td>
-        </tr>
-        <tr style="background: #f5f3ff;">
-          <td style="text-align: center; font-weight: bold; color: var(--purple);">6</td>
-          <td><strong>Hệ thống TMS</strong><br><span class="badge-tag badge-blue">Sinh Vận đơn TMS</span></td>
-          <td>Tự động sinh Vận đơn BHUQ</td>
-          <td><span class="badge-tag badge-blue">TMS</span></td>
-          <td>Nhận trigger từ Portal Hãng ➔ Tự động tạo <strong>Vận đơn BHUQ trên TMS</strong> và điều phối cho KTV Thợ ĐMX.</td>
-        </tr>
-
-        <!-- Các bước thực thi kỹ thuật tại nhà -->
-        <tr>
-          <td style="text-align: center;"><strong>7</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Kiểm tra ngoại quan tại nhà KH</td>
-          <td><span class="badge-tag badge-blue">TMS App</span></td>
-          <td>Chụp ảnh ngoại quan sản phẩm, kiểm tra tem niêm phong/mác Serial.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>8</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Chẩn đoán lỗi kỹ thuật</td>
-          <td><span class="badge-tag badge-blue">TMS App</span></td>
-          <td>Xác định triệu chứng lỗi, khoanh vùng bo mạch/linh kiện hỏng.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>9</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Cập nhật mã lỗi & đề xuất LK</td>
-          <td><span class="badge-tag badge-blue">TMS App</span></td>
-          <td>Ghi nhận mã lỗi chuẩn Hãng và đề xuất mã linh kiện thay thế tương ứng.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>10</strong></td>
-          <td>Hãng / Đối tác</td>
-          <td>Phê duyệt Pre-approval (nếu có)</td>
-          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
-          <td>Hãng phê duyệt đối với các linh kiện giá trị cao hoặc quy định đặc thù (Approval ID).</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>11</strong></td>
-          <td>Hệ thống</td>
-          <td>Tạo yêu cầu tạm ứng / đặt linh kiện</td>
-          <td><span class="badge-tag badge-blue">TMS</span></td>
-          <td>Kiểm tra tồn kho trung tâm/kho thợ; tạo lệnh tạm ứng hoặc lệnh PO đặt hàng Hãng.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>12</strong></td>
-          <td>Kho LK / WMS</td>
-          <td>Xuất kho linh kiện mới</td>
-          <td><span class="badge-tag badge-purple">WMS</span></td>
-          <td>Xuất đích danh Part Number / Part Serial theo đúng Jobcard BHUQ.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>13</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Thực hiện sửa chữa tại nhà</td>
-          <td><span class="badge-tag badge-blue">TMS App</span></td>
-          <td>Tiến hành thay thế linh kiện theo đúng quy chuẩn an toàn kỹ thuật.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>14</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Ghi nhận Serial linh kiện thay thế</td>
-          <td><span class="badge-tag badge-blue">TMS App</span></td>
-          <td>Mapping chặt chẽ: <code>Serial Máy ↔ Serial LK Mới ↔ Serial LK Xác</code>.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>15</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Kiểm tra chất lượng (QC)</td>
-          <td><span class="badge-tag badge-blue">TMS App</span></td>
-          <td>Thực hiện checklist kiểm tra vận hành sau sửa chữa bắt buộc.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>16</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Hoàn tất JC & Nhập linh kiện xác</td>
-          <td><span class="badge-tag badge-purple">WMS / TMS</span></td>
-          <td>Khóa Jobcard, thu hồi linh kiện xác về kho làm thủ tục nhập kho trả Hãng.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>17</strong></td>
-          <td>KTV Thợ ĐMX</td>
-          <td>Bàn giao & Nghiệm thu với khách</td>
-          <td><span class="badge-tag badge-blue">TMS App</span></td>
-          <td>Khách hàng ký nghiệm thu biên bản dịch vụ hoàn tất.</td>
-        </tr>
-
-        <!-- Các bước Claim & Đối soát tài chính -->
-        <tr>
-          <td style="text-align: center;"><strong>18</strong></td>
-          <td>Bộ phận BH</td>
-          <td>Tập hợp Claim Batch theo Hãng</td>
-          <td><span class="badge-tag badge-purple">WMS</span></td>
-          <td>Tổng hợp danh sách các Jobcard BHUQ hoàn tất trong kỳ đối soát.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>19</strong></td>
-          <td>Bộ phận BH</td>
-          <td>Gửi Claim lên Portal Hãng</td>
-          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
-          <td>Gửi kèm dữ liệu Jobcard, hình ảnh ngoại quan, chứng từ thu hồi xác và biên bản nghiệm thu.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>20</strong></td>
-          <td>Hãng / Đối tác</td>
-          <td>Thẩm định & Phê duyệt Claim</td>
-          <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
-          <td>Cập nhật trạng thái: <em>Approved / Rejected / Need Information</em>.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>21</strong></td>
-          <td>Bộ phận BH</td>
-          <td>Xử lý Claim bị từ chối/bổ sung</td>
-          <td><span class="badge-tag badge-purple">WMS</span></td>
-          <td>Bổ sung bằng chứng hình ảnh hoặc chuyển chi phí nội bộ nếu vi phạm quy chế.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>22</strong></td>
-          <td>Kế toán</td>
-          <td>Đối soát 3 bên</td>
-          <td><span class="badge-tag badge-blue">ERP</span></td>
-          <td>Đối soát khớp 100%: <strong>Linh kiện mới + Linh kiện xác đã trả + Tiền công KTV</strong>.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>23</strong></td>
-          <td>Kế toán</td>
-          <td>Ghi nhận doanh thu & công nợ phải thu</td>
-          <td><span class="badge-tag badge-blue">ERP</span></td>
-          <td>Hạch toán số tiền Hãng thanh toán theo hợp đồng BHUQ.</td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><strong>24</strong></td>
-          <td>Bộ phận BH</td>
-          <td>Khóa hồ sơ & Lưu trữ lịch sử</td>
-          <td><span class="badge-tag badge-blue">Online</span></td>
-          <td>Đóng hồ sơ Claim Batch, lưu vết phục vụ công tác thanh kiểm tra KSNB.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- 6. Điểm kiểm soát trọng yếu KSNB -->
-  <section class="card" id="kiem-soat">
-    <div class="card-head">
-      <div class="num">6</div>
-      <h2>Điểm kiểm soát trọng yếu (KSNB Checkpoints)</h2>
-    </div>
-
-    <div class="checkpoint-card">
-      <h3>⚠️ 5 NGUYÊN TẮC VÀNG KIỂM SOÁT TUÂN THỦ:</h3>
-      <ol style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.8; color: #334155;">
-        <li>
-          <strong>Đúng nghiệp vụ đóng Ticket (Mô hình 2):</strong> Khi khách hàng yêu cầu bảo hành Hãng chỉ ủy quyền sửa chữa, Tổng đài ĐMX bắt buộc bấm Chuyển Hãng và <strong>đóng ticket CRM ngay lập tức</strong>, tuyệt đối không giữ ticket mở gây sai lệch SLA tiếp nhận.
-        </li>
-        <li>
-          <strong>Đúng điều kiện sinh Vận đơn Thợ ĐMX:</strong> Vận đơn chỉ được khởi tạo khi Hãng tiếp nhận trên Portal và chuyên viên Hãng bấm nút <em>"Tạo vận đơn cho Thợ ĐMX"</em> sau khi đã tư vấn không thành công.
-        </li>
-        <li>
-          <strong>Chặn đối soát phí tư vấn khi Hãng tự xử lý:</strong> Bất kể Mô hình 1 hay Mô hình 2, khi Hãng đã tự tư vấn thành công với khách hàng thì <strong>tuyệt đối không ghi nhận đối soát phí tư vấn cho ĐMX</strong>.
-        </li>
-        <li>
-          <strong>Thu hồi 100% linh kiện xác:</strong> Mọi linh kiện bảo hành xuất kho bắt buộc phải có linh kiện xác đối ứng bàn giao cho Hãng (trừ khi chính sách Hãng miễn thu hồi bằng văn bản).
-        </li>
-        <li>
-          <strong>Toàn vẹn dữ liệu truy vết (Audit Trail):</strong> Đảm bảo truy vết 100% hai chiều từ giao dịch thanh toán tài chính về đúng <code>Số Claim ↔ Mã Jobcard ↔ Vận đơn TMS ↔ Serial Máy ↔ Serial LK Mới ↔ Serial LK Xác ↔ KTV thực hiện</code>.
-        </li>
-      </ol>
-    </div>
-
-    <div class="callout green">
-      <div class="callout-title">🎯 Giá trị mang lại cho KSNB & Vận hành:</div>
-      Chuẩn hóa rõ 2 mô hình giúp Tổng đài thao tác nhanh gọn (không tư vấn thừa với Hãng không ủy quyền), tránh ticket tồn đọng, minh bạch chi phí đối soát và quản lý Thợ ĐMX làm việc đúng chỉ định từ Hãng.
-    </div>
-  </section>
+  </div>
+  <!-- ==================== HẾT TAB 2 ==================== -->
 
   <footer class="footer">
     KSNB Automation · Quy trình nghiệp vụ Bảo hành Thợ Điện Máy Xanh · Phiên bản chuẩn hóa 2026
   </footer>
 
 </div>
+
+<!-- Script chuyển Tab -->
+<script>
+function switchTab(tabId, btnElement) {
+  // Ẩn tất cả tab pane
+  const panes = document.querySelectorAll('.tab-pane');
+  panes.forEach(pane => pane.classList.remove('active'));
+  
+  // Bỏ active tất cả buttons
+  const btns = document.querySelectorAll('.tab-btn');
+  btns.forEach(btn => btn.classList.remove('active'));
+  
+  // Kích hoạt tab được chọn
+  const activePane = document.getElementById(tabId);
+  if (activePane) {
+    activePane.classList.add('active');
+  }
+  if (btnElement) {
+    btnElement.classList.add('active');
+  }
+}
+</script>
 
 </body>
 </html>
