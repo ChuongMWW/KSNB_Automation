@@ -723,7 +723,7 @@ tr:nth-child(even) td {
         <div class="flow-step-node">
           <div class="node-num">1</div>
           <div class="node-content">
-            <strong>Tiếp nhận & Định tuyến Mô hình (CRM):</strong> Khách hàng gọi Tổng đài ĐMX ➔ Hệ thống đối chiếu Serial/Model trên Master BHUQ ➔ Phân luồng theo thỏa thuận ủy quyền của Hãng (Mô hình 1 hay Mô hình 2).
+            <strong>Tiếp nhận & Định tuyến Mô hình (CRM):</strong> Khách hàng gọi Tổng đài ĐMX ➔ Tổng đài: Dựa vào số điện thoại để xác định Sp khách hàng báo lỗi ➔ Hệ thống đối chiếu Serial/Model trên Master BHUQ ➔ Phân luồng theo thỏa thuận ủy quyền của Hãng (Mô hình 1 hay Mô hình 2).
           </div>
         </div>
 
@@ -736,7 +736,7 @@ tr:nth-child(even) td {
             <strong style="color: var(--blue2); font-size: 13.5px;">Nhánh 1: Hãng ủy quyền Tư vấn & Sửa chữa</strong>
             <p style="font-size: 12.8px; margin: 6px 0 0; color: #334155;">
               • ĐMX tư vấn thành công ➔ Đóng ticket ➔ <strong>Được đối soát phí</strong>.
-              <br>• ĐMX tư vấn thất bại ➔ Bấm <strong>Chuyển Hãng</strong> ➔ Đẩy lên Portal.
+              <br>• ĐMX tư vấn thất bại ➔ Bấm <strong>Chuyển Hãng</strong> ➔ <strong style="color: var(--red);">ĐÓNG TICKET CRM </strong> ➔ Đẩy thông tin sang WMS để tạo Jobcard ➔ Đẩy lên Portal.
             </p>
           </div>
 
@@ -744,7 +744,7 @@ tr:nth-child(even) td {
             <strong style="color: var(--purple); font-size: 13.5px;">Nhánh 2: Hãng CHỈ ủy quyền Sửa chữa</strong>
             <p style="font-size: 12.8px; margin: 6px 0 0; color: #334155;">
               • Tổng đài ĐMX <strong>không tư vấn</strong>.
-              <br>• Bấm <strong>"Chuyển Hãng"</strong> ➔ <strong style="color: var(--red);">ĐÓNG TICKET CRM NGAY</strong> ➔ Đẩy lên Portal.
+              <br>• Bấm <strong>"Chuyển Hãng"</strong> ➔ <strong style="color: var(--red);">ĐÓNG TICKET CRM </strong> ➔ Đẩy thông tin sang WMS để tạo Jobcard ➔ Đẩy lên Portal.
             </p>
           </div>
 
@@ -778,7 +778,7 @@ tr:nth-child(even) td {
         <div class="flow-step-node active-orange">
           <div class="node-num">5</div>
           <div class="node-content">
-            <strong>Phê duyệt Hãng (Pre-approval) & Xuất kho LK:</strong> Đồng bộ đề xuất lên Portal Hãng lấy <strong>Approval ID</strong> (với ca chỉ định) ➔ Kho WMS xuất kho linh kiện mới theo Jobcard ➔ KTV nhận linh kiện.
+            <strong>Phê duyệt Hãng (Pre-approval) & Xuất kho LK:</strong> Đồng bộ đề xuất lên Portal Hãng lấy <strong>Approval ID</strong> (với ca chỉ định) ➔ Kho WMS xuất kho linh kiện mới theo Jobcard ➔ KTV nhận linh kiện --> Đề xuất tạo quyền duyệt (Có hãng sẽ duyệt ca, có hãng duyệt tự động)
           </div>
         </div>
 
@@ -909,9 +909,9 @@ tr:nth-child(even) td {
           <tr style="background: #fff1f2;">
             <td style="text-align: center; font-weight: bold; color: var(--red);">5.5a</td>
             <td><strong>Hãng</strong><br><span class="badge-tag badge-red">Hãng TV Thành công</span></td>
-            <td>Hãng đóng ticket tư vấn thành công</td>
+            <td>Hãng đóng Jobcard tư vấn thành công</td>
             <td><span class="badge-tag badge-orange">Portal Hãng</span></td>
-            <td>Hãng xử lý được từ xa ➔ Đóng ticket trên Portal ➔ Kết thúc ca ➔ <strong style="color: var(--red);">KHÔNG ĐỐI SOÁT PHÍ TƯ VẤN CHO ĐMX</strong>.</td>
+            <td>Hãng xử lý được từ xa ➔ Đóng Jocbard trên Portal ➔ Kết thúc ca ➔ <strong style="color: var(--red);">KHÔNG ĐỐI SOÁT PHÍ TƯ VẤN CHO ĐMX</strong>.</td>
           </tr>
           <tr style="background: #f5f3ff;">
             <td style="text-align: center; font-weight: bold; color: var(--purple);">5.5b</td>
