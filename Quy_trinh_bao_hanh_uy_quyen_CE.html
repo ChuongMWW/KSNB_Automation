@@ -104,6 +104,157 @@ body {
 /* Master Tab Navigation */
 .main-tabs {
   display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 12px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  background: #fff;
+  border: 2px solid var(--line);
+  color: #475569;
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all .2s ease;
+}
+.tab-btn:hover {
+  border-color: var(--blue-border);
+  color: var(--blue);
+  background: var(--blue-light);
+}
+.tab-btn.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  box-shadow: 0 4px 14px rgba(18, 53, 143, 0.25);
+}
+.tab-btn .badge-pill {
+  background: rgba(255, 255, 255, 0.25);
+  color: inherit;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+.tab-btn:not(.active) .badge-pill {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* Call Center Flow Tree Styles */
+.tree-node {
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  max-width: 320px;
+  margin: 0 auto;
+}
+.tree-node.primary {
+  background: linear-gradient(135deg, var(--blue), var(--blue2));
+  color: #fff;
+  border-color: var(--blue2);
+}
+.tree-node.condition {
+  background: #f0f7ff;
+  border: 2px solid var(--blue);
+  color: var(--blue2);
+  max-width: 480px;
+}
+.tree-arrow-down {
+  text-align: center;
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 6px 0;
+}
+.branch-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 14px;
+}
+.branch-col {
+  border-radius: 14px;
+  padding: 16px;
+  border: 2px solid var(--line);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.branch-col.col-gray {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+.branch-col.col-blue {
+  border-color: var(--blue-border);
+  background: #f0f7ff;
+}
+.branch-col.col-purple {
+  border-color: var(--purple-border);
+  background: #faf5ff;
+}
+.branch-header {
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.col-gray .branch-header { background: #e2e8f0; color: #475569; }
+.col-blue .branch-header { background: #dbeafe; color: var(--blue); }
+.col-purple .branch-header { background: #f3e8ff; color: var(--purple); }
+
+.flow-box-mini {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  text-align: center;
+  font-weight: 600;
+  color: #334155;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.flow-box-mini.success {
+  background: #ecfdf5;
+  border-color: var(--green-border);
+  color: var(--green);
+  font-weight: 700;
+}
+.flow-box-mini.warning {
+  background: #fff7ed;
+  border-color: var(--orange-border);
+  color: var(--orange);
+  font-weight: 700;
+}
+.flow-box-mini.action {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue2);
+}
+.flow-box-mini.purple {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+}
+
+.main-tabs {
+  display: flex;
   gap: 12px;
   margin-bottom: 22px;
   border-bottom: 2px solid var(--line);
@@ -474,6 +625,275 @@ tr:nth-child(even) td {
   .header { padding: 22px 20px; }
   table { font-size: 12.5px; }
 }
+
+
+
+
+
+/* ==================== UNIVERSAL FLOATING NAVIGATION DOCK ==================== */
+.floating-nav-dock {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  left: auto !important;
+  z-index: 99999;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 4px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(18, 53, 143, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  max-width: calc(100vw - 32px);
+  width: auto;
+}
+.floating-nav-dock:hover {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 24px rgba(18, 53, 143, 0.22);
+}
+.dock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.dock-btn-back {
+  background: #edf3ff;
+  color: #12358f;
+  border: 1px solid #b8c7e8;
+}
+.dock-btn-back:hover {
+  background: #dbe7ff;
+  color: #0a276f;
+  border-color: #12358f;
+}
+.dock-btn-home {
+  background: linear-gradient(135deg, #12358f, #0a276f);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(18, 53, 143, 0.2);
+}
+.dock-btn-home:hover {
+  background: linear-gradient(135deg, #0a276f, #061948);
+  color: #ffd200;
+}
+.dock-btn-top {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+  justify-content: center;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+.dock-btn-top:hover {
+  background: #12358f;
+  color: #ffffff;
+  border-color: #12358f;
+}
+.dock-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .floating-nav-dock {
+    bottom: 12px;
+    right: 12px;
+    left: auto !important;
+    gap: 4px;
+    padding: 3px 5px;
+  }
+  .dock-btn {
+    padding: 5px 9px;
+    font-size: 11.5px;
+    gap: 4px;
+  }
+  .dock-btn-top {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
+}
+@media (max-width: 480px) {
+  .floating-nav-dock {
+    bottom: 10px;
+    right: 10px;
+    left: auto !important;
+    gap: 3px;
+    padding: 3px 4px;
+  }
+  .dock-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
+
+/* ==================== UNIVERSAL BOTTOM NAVIGATION CARD ==================== */
+.bottom-nav-card {
+  margin: 40px auto 24px;
+  background: linear-gradient(145deg, #ffffff, #f8faff);
+  border: 1.5px solid #dce3ee;
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 28px rgba(18, 53, 143, 0.06);
+  text-align: center;
+  box-sizing: border-box;
+}
+.bottom-nav-header {
+  margin-bottom: 20px;
+}
+.bnav-badge {
+  display: inline-block;
+  background: #edf3ff;
+  color: #12358f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+  border: 1px solid #b8c7e8;
+}
+.bnav-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #12358f;
+  margin-bottom: 4px;
+}
+.bnav-desc {
+  font-size: 13px;
+  color: #667085;
+}
+.bottom-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.bnav-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-family: inherit;
+  border: 1.5px solid #dce3ee;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.bnav-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(18, 53, 143, 0.1);
+}
+.bnav-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.bnav-action:hover .bnav-icon-circle {
+  transform: scale(1.1);
+}
+.bnav-action-text {
+  display: flex;
+  flex-direction: column;
+}
+.bnav-sub {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #667085;
+}
+.bnav-main {
+  font-size: 14px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.bnav-action-back {
+  border-color: #b8c7e8;
+  background: #fafcff;
+}
+.bnav-action-back .bnav-icon-circle {
+  background: #edf3ff;
+  color: #12358f;
+}
+.bnav-action-back:hover {
+  border-color: #12358f;
+  background: #edf3ff;
+}
+.bnav-action-back:hover .bnav-main {
+  color: #12358f;
+}
+
+.bnav-action-home {
+  border-color: #ffd200;
+  background: #fffdf0;
+}
+.bnav-action-home .bnav-icon-circle {
+  background: #12358f;
+  color: #ffd200;
+}
+.bnav-action-home:hover {
+  border-color: #12358f;
+  background: #edf3ff;
+}
+.bnav-action-home:hover .bnav-main {
+  color: #12358f;
+}
+
+.bnav-action-top {
+  border-color: #dce3ee;
+  background: #ffffff;
+}
+.bnav-action-top .bnav-icon-circle {
+  background: #f3f6fb;
+  color: #475467;
+}
+.bnav-action-top:hover {
+  border-color: #667085;
+  background: #f8faff;
+}
+.bnav-action-top:hover .bnav-main {
+  color: #12358f;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  
+  .dock-btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .bottom-nav-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -481,8 +901,8 @@ tr:nth-child(even) td {
 <div class="wrap">
 
   <div class="top-nav">
-    <a href="CE_Gia_dung.html" class="back-cat">← Quay lại Danh mục CE & Gia dụng</a>
-    <a href="index.html" class="back-home">Về Trang chủ KSNB</a>
+    <a href="../index.html" class="back-cat">← Quay lại Danh mục & Gia dụng</a>
+    <a href="../index.html" class="back-home">Về Trang chủ</a>
   </div>
 
   <header class="header">
@@ -493,16 +913,265 @@ tr:nth-child(even) td {
 
   <!-- Thanh điều hướng Tab chính -->
   <div class="main-tabs">
-    <button class="tab-btn active" onclick="switchTab('tab-quy-trinh', this)">
-      📋 1. QUY TRÌNH NGHIỆP VỤ BHUQ <span class="badge-pill">6 Mục</span>
+    <button class="tab-btn active" onclick="switchTab('tab-tong-quan', this)">
+      🧭 1. QT TỔNG QUAN BHUQ_TỔNG ĐÀI <span class="badge-pill">Sơ đồ luồng</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-quy-trinh', this)">
+      📋 2. QUY TRÌNH NGHIỆP VỤ CHI TIẾT <span class="badge-pill">6 Mục</span>
     </button>
     <button class="tab-btn" onclick="switchTab('tab-khai-bao', this)">
-      ⚙️ 2. CÁC KHAI BÁO TẠO MỚI (CRM MASTER) <span class="badge-pill">Mới</span>
+      ⚙️ 3. CÁC KHAI BÁO TẠO MỚI (CRM MASTER) <span class="badge-pill">Cấu hình</span>
     </button>
   </div>
 
   <!-- ==================== TAB 1: QUY TRÌNH NGHIỆP VỤ ĐÃ CHỐT ==================== -->
-  <div id="tab-quy-trinh" class="tab-pane active">
+    <!-- ==================== TAB 1: QT TỔNG QUAN BHUQ_TỔNG ĐÀI ==================== -->
+  <div id="tab-tong-quan" class="tab-pane active">
+
+    <section class="card">
+      <div class="card-head">
+        <div class="num" style="background: #0284c7;">🧭</div>
+        <h2>Sơ đồ Cây Phân luồng Tổng quan tại Đầu Tổng đài CRM</h2>
+      </div>
+
+      <p style="margin-top: 0; font-size: 14px; color: #334155;">
+        Trực quan hóa toàn bộ chu trình xử lý cuộc gọi từ khi <strong>Khách hàng gọi Tổng đài ĐMX</strong> ➔ Xem lịch sử đơn hàng & chọn sản phẩm lỗi ➔ Hệ thống CRM tự động định tuyến sang <strong>3 Nhánh nghiệp vụ chính</strong>:
+      </p>
+
+      <!-- SƠ ĐỒ CÂY PHÂN LUỒNG TỔNG ĐÀI -->
+      <div style="background: #f8fafc; border: 1.5px solid var(--line); border-radius: 16px; padding: 24px; margin: 18px 0;">
+        
+        <!-- Khối 1: Khách hàng -->
+        <div class="tree-node primary">
+          👤 KHÁCH HÀNG
+        </div>
+        
+        <div class="tree-arrow-down">│<br>▼</div>
+
+        <!-- Khối 2: Gọi Tổng đài -->
+        <div class="tree-node" style="border-color: var(--blue-border);">
+          📞 Gọi Tổng đài ĐMX (CRM / Xfone)
+        </div>
+
+        <div class="tree-arrow-down">│<br>▼</div>
+
+        <!-- Khối 3: Xem lịch sử -->
+        <div class="tree-node">
+          🔍 Tổng đài xem lịch sử đơn hàng
+        </div>
+
+        <div class="tree-arrow-down">│<br>▼</div>
+
+        <!-- Khối 4: Chọn SP lỗi -->
+        <div class="tree-node">
+          📦 Chọn sản phẩm báo lỗi
+        </div>
+
+        <div class="tree-arrow-down">│<br>▼</div>
+
+        <!-- Khối 5: CRM Engine -->
+        <div class="tree-node condition">
+          ⚙️ <strong>CRM XÁC ĐỊNH LOẠI BẢO HÀNH</strong>
+          <div style="font-size: 12px; font-weight: normal; margin-top: 4px; color: #475569;">
+            Đối chiếu: <code>Hãng</code> + <code>Model/SKU</code> + <code>Serial/IMEI</code> + <code>Thời hạn BH</code> + <code>Khai báo Loại BHUQ</code>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--blue); font-size: 18px; font-weight: 900; margin: 8px 0 2px;">
+          ┌───────────────────────────┼───────────────────────────┐
+        </div>
+
+        <!-- 3 NHÁNH RẼ -->
+        <div class="branch-grid-3">
+
+          <!-- Nhánh 1: KHÔNG BHUQ -->
+          <div class="branch-col col-gray">
+            <div class="branch-header">🔴 1. KHÔNG BHUQ</div>
+            <p style="font-size: 12.5px; color: #64748b; margin: 0 0 10px; text-align: center;">
+              Sản phẩm hết hạn BH / Không thuộc hãng ủy quyền / Lỗi ngoài phạm vi
+            </p>
+            
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; margin: 12px 0;">
+              <div class="flow-box-mini">
+                Xác nhận bảo hành hoặc Sửa chữa dịch vụ
+              </div>
+              <div style="text-align: center; color: #94a3b8; font-weight: bold;">↓</div>
+              <div class="flow-box-mini action" style="background: #475569; border-color: #334155;">
+                🛵 LUỒNG VẬN HÀNH HIỆN TẠI
+              </div>
+            </div>
+            
+            <div style="font-size: 12px; color: #475569; background: #fff; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 8px; text-align: center;">
+              Điều phối Thợ ĐMX sửa chữa dịch vụ có phí hoặc hỗ trợ bảo hành hãng theo quy trình cũ.
+            </div>
+          </div>
+
+          <!-- Nhánh 2: BHUQ TƯ VẤN -->
+          <div class="branch-col col-blue">
+            <div class="branch-header">🟢 2. BHUQ TƯ VẤN</div>
+            <p style="font-size: 12.5px; color: var(--blue); margin: 0 0 10px; text-align: center; font-weight: 600;">
+              Hãng ủy quyền toàn diện Tư vấn & Sửa chữa
+            </p>
+
+            <div class="flow-box-mini" style="background: #dbeafe; border-color: var(--blue); color: var(--blue2); font-weight: 700;">
+              📞 TỔNG ĐÀI ĐMX TƯ VẤN CẤP 1
+            </div>
+
+            <div style="text-align: center; color: var(--blue); font-size: 14px; font-weight: bold; margin: 6px 0 2px;">
+              ┌──────────────┴──────────────┐
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+              <!-- 2A. Thành công -->
+              <div style="background: #fff; border: 1.5px solid var(--green-border); border-radius: 10px; padding: 8px; display: flex; flex-direction: column; gap: 6px;">
+                <div style="font-size: 11.5px; font-weight: 800; color: var(--green); text-align: center;">
+                  🟢 THÀNH CÔNG
+                </div>
+                <div class="flow-box-mini success" style="font-size: 11px; padding: 5px;">
+                  1. Đóng Ticket CRM
+                </div>
+                <div class="flow-box-mini success" style="font-size: 11px; padding: 5px;">
+                  2. CRM ➔ WMS
+                </div>
+                <div class="flow-box-mini success" style="font-size: 11px; padding: 5px;">
+                  3. Tạo JC tư vấn
+                </div>
+                <div class="flow-box-mini success" style="font-size: 11px; padding: 5px;">
+                  4. Portal Hãng
+                </div>
+                <div class="flow-box-mini success" style="font-size: 11.5px; padding: 6px; background: #087443; color: #fff;">
+                  💰 ĐỐI SOÁT PHÍ TƯ VẤN
+                </div>
+              </div>
+
+              <!-- 2B. Không thành công -->
+              <div style="background: #fff; border: 1.5px solid var(--orange-border); border-radius: 10px; padding: 8px; display: flex; flex-direction: column; gap: 6px;">
+                <div style="font-size: 11.5px; font-weight: 800; color: var(--orange); text-align: center;">
+                  🔴 KHÔNG THÀNH CÔNG
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;">
+                  <span style="font-size: 11.5px; color: #64748b; text-align: center;">Tư vấn từ xa không giải quyết được</span>
+                  <div style="color: var(--orange); font-weight: bold;">↓</div>
+                  <div class="flow-box-mini warning" style="font-size: 11px; padding: 6px;">
+                    Tổng đài bấm:
+                    <br><strong>[CHUYỂN HÃNG]</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: center; color: var(--blue); font-weight: bold; font-size: 14px;">↓</div>
+            <div class="flow-box-mini action" style="margin-top: 4px;">
+              🌐 CHUYỂN HÃNG ➔ Luồng Hãng xử lý
+            </div>
+          </div>
+
+          <!-- Nhánh 3: BHUQ SỬA CHỮA -->
+          <div class="branch-col col-purple">
+            <div class="branch-header">🟣 3. BHUQ SỬA CHỮA</div>
+            <p style="font-size: 12.5px; color: var(--purple); margin: 0 0 10px; text-align: center; font-weight: 600;">
+              Hãng chỉ ủy quyền Kỹ thuật (Không ủy quyền tư vấn)
+            </p>
+
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; margin: 10px 0;">
+              <div class="flow-box-mini" style="background: #fff1f2; border-color: #fca5a5; color: var(--red); font-weight: 700;">
+                🚫 TỔNG ĐÀI KHÔNG TƯ VẤN
+              </div>
+              <div style="text-align: center; color: var(--purple); font-weight: bold;">↓</div>
+              <div class="flow-box-mini purple">
+                🚀 Bấm [CHUYỂN HÃNG]
+                <br><span style="font-size: 11px; font-weight: normal; opacity: 0.9;">& Đóng Ticket CRM ngay</span>
+              </div>
+              <div style="text-align: center; color: var(--purple); font-weight: bold;">↓</div>
+              <div class="flow-box-mini purple" style="background: #581c87;">
+                🌐 Chuyển sang Portal Hãng
+              </div>
+            </div>
+
+            <div style="font-size: 12px; color: var(--purple); background: #fff; border: 1px dashed var(--purple-border); border-radius: 8px; padding: 8px; text-align: center;">
+              Chuyên viên Hãng tự thực hiện tư vấn. Nếu thất bại, Hãng bấm tạo vận đơn Thợ ĐMX.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Khối Chuyển Hãng chung -->
+        <div style="background: #fff; border: 2px solid var(--blue-border); border-radius: 12px; padding: 14px 20px; margin-top: 18px; text-align: center;">
+          <strong style="color: var(--blue2); font-size: 14.5px;">🏢 LUỒNG TIẾP NỐI SAU KHI "CHUYỂN HÃNG" (Portal Hãng):</strong>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; text-align: left; font-size: 13px;">
+            <div style="background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px;">
+              🟢 <strong>Hãng tư vấn THÀNH CÔNG:</strong> Hãng tự đóng ca trên Portal kết thúc quy trình ➔ <strong style="color: var(--red);">KHÔNG ĐỐI SOÁT PHÍ CHO ĐMX</strong>.
+            </div>
+            <div style="background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px;">
+              🔴 <strong>Hãng tư vấn THẤT BẠI:</strong> Hãng bấm nút <em>"Tạo vận đơn cho Thợ ĐMX"</em> trên Portal ➔ <strong style="color: var(--blue);">TMS sinh Vận đơn Thợ ĐMX đến nhà sửa chữa</strong>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BẢNG SO SÁNH HÀNH XỬ TỔNG ĐÀI -->
+    <section class="card">
+      <div class="card-head">
+        <div class="num" style="background: var(--blue2);">📋</div>
+        <h2>Bảng Ma trận Hướng dẫn Thao tác Nhân viên Tổng đài theo từng Kịch bản</h2>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">Kịch bản / Phân loại</th>
+            <th style="width: 22%;">Dấu hiệu trên CRM</th>
+            <th style="width: 25%;">Hành động của Tổng đài viên</th>
+            <th style="width: 18%;">Trạng thái Ticket CRM</th>
+            <th>Quyền lợi Đối soát</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #fffafa;">
+            <td><strong>1. Không thuộc BHUQ</strong></td>
+            <td><span class="badge-tag badge-gray">Ngoài phạm vi BHUQ</span></td>
+            <td>Thông báo chính sách bảo hành / sửa chữa dịch vụ có phí.</td>
+            <td>Chuyển luồng BH hiện tại</td>
+            <td><span class="badge-tag badge-gray">Không có đối soát</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td><strong>2A. BHUQ Tư vấn (Thành công)</strong></td>
+            <td><span class="badge-tag badge-blue">BHUQ: Tư vấn + Sửa chữa</span></td>
+            <td>Thực hiện theo kịch bản hướng dẫn xử lý lỗi từ xa cho khách hàng.</td>
+            <td><strong style="color: var(--green);">Đóng Ticket thành công</strong> ➔ Đồng bộ WMS_Tạo Jobcard</td>
+            <td><strong style="color: var(--green);">✔️ ĐƯỢC ĐỐI SOÁT</strong> phí tư vấn cho ĐMX</td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td><strong>2B. BHUQ Tư vấn (Thất bại)</strong></td>
+            <td><span class="badge-tag badge-blue">BHUQ: Tư vấn + Sửa chữa</span></td>
+            <td>Tư vấn không thành công ➔ Bấm nút <strong>[Chuyển Hãng]</strong>.</td>
+            <td>Đóng ticket: <em>Đồng bộ dữ liệu sang WMS</em></td>
+            <td>Không đối soát phí tư vấn (Chờ Hãng xử lý)</td>
+          </tr>
+          <tr style="background: #faf5ff;">
+            <td><strong>3. BHUQ Sửa chữa</strong></td>
+            <td><span class="badge-tag badge-purple">BHUQ: Chỉ sửa chữa</span></td>
+            <td><strong>Tuyệt đối không tư vấn</strong> ➔ Bấm nút <strong>[Chuyển Hãng]</strong>.</td>
+            <td><strong style="color: var(--purple);">Đóng Ticket CRM ngay lập tức</strong></td>
+            <td><strong style="color: var(--red);">❌ Không bao giờ</strong> phát sinh phí tư vấn</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout green" style="margin-top: 16px;">
+        <div class="callout-title">💡 Ghi nhớ nhanh cho Tổng đài viên (Call Center Quick Guide):</div>
+        • Thấy tem <strong>Xanh (Tư vấn + Sửa chữa)</strong> ➔ Tư vấn nhiệt tình; thành công thì đóng ticket ghi nhận thưởng đối soát; thất bại thì Chuyển Hãng.
+        <br>• Thấy tem <strong>Tím (Chỉ sửa chữa)</strong> ➔ Không cần tư vấn kỹ thuật; bấm Chuyển Hãng và Đóng ticket ngay để Hãng tự liên hệ khách.
+      </div>
+    </section>
+
+  </div>
+  <!-- ==================== HẾT TAB 1: QT TỔNG QUAN ==================== -->
+
+  <!-- ==================== TAB 2: QUY TRÌNH NGHIỆP VỤ ĐÃ CHỐT ==================== -->
+  <div id="tab-quy-trinh" class="tab-pane">
 
     <!-- Mục lục nhanh Tab 1 -->
     <nav class="toc">
@@ -1283,6 +1952,43 @@ tr:nth-child(even) td {
   </div>
   <!-- ==================== HẾT TAB 2 ==================== -->
 
+  
+  
+  
+  
+  
+  <!-- BOTTOM NAVIGATION CARD -->
+  <div class="bottom-nav-card">
+    <div class="bottom-nav-header">
+      <div class="bnav-badge">KSNB AUTOMATION</div>
+      <div class="bnav-title">Điều Hướng & Thao Tác Nhanh</div>
+      <div class="bnav-desc">Bạn đã xem xong nội dung quy trình. Nhấn để quay lại danh mục hoặc về trang chủ hệ thống.</div>
+    </div>
+    <div class="bottom-nav-grid">
+      <a href="../index.html" class="bnav-action bnav-action-back">
+        <span class="bnav-icon-circle">←</span>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Quay lại danh mục</span>
+          <span class="bnav-main">CE & Gia dụng</span>
+        </div>
+      </a>
+      <a href="../index.html" class="bnav-action bnav-action-home">
+        <span class="bnav-icon-circle">🏠</span>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Hệ thống nghiệp vụ</span>
+          <span class="bnav-main">Trang chủ</span>
+        </div>
+      </a>
+      <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bnav-action bnav-action-top">
+        <span class="bnav-icon-circle">▲</span>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Trở lên</span>
+          <span class="bnav-main">Đầu trang</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
   <footer class="footer">
     KSNB Automation · Quy trình nghiệp vụ Bảo hành Thợ Điện Máy Xanh · Phiên bản chuẩn hóa 2026
   </footer>
@@ -1310,6 +2016,26 @@ function switchTab(tabId, btnElement) {
   }
 }
 </script>
+
+
+
+
+
+
+<!-- FLOATING QUICK NAVIGATION DOCK -->
+<div class="floating-nav-dock" id="floatingNavDock" aria-label="Điều hướng nhanh">
+  <a href="../index.html" class="dock-btn dock-btn-back" title="Quay lại danh mục CE & Gia dụng">
+    <span class="dock-icon">←</span>
+    <span class="dock-text">Quay lại danh mục</span>
+  </a>
+  <a href="../index.html" class="dock-btn dock-btn-home" title="Trở về Trang chủ">
+    <span class="dock-icon">🏠</span>
+    <span class="dock-text">Trang chủ</span>
+  </a>
+  <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="dock-btn dock-btn-top" title="Cuộn lên đầu trang" aria-label="Cuộn lên đầu trang">
+    <span class="dock-icon">▲</span>
+  </button>
+</div>
 
 </body>
 </html>
