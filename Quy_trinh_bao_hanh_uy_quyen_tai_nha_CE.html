@@ -1,0 +1,3682 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUY TRÌNH BẢO HÀNH ỦY QUYỀN TẠI NHÀ (CE &amp; GIA DỤNG) — V1.0</title>
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #e0f2fe;
+            --accent: #2563eb;
+            --navy: #0f172a;
+            --slate: #475569;
+            --light-slate: #f8fafc;
+            --border-color: #e2e8f0;
+            --success: #16a34a;
+            --success-light: #dcfce7;
+            --warning: #d97706;
+            --warning-light: #fef3c7;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --purple: #7c3aed;
+            --purple-light: #f3e8ff;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.5;
+            padding-bottom: 90px;
+        }
+
+        /* Top Sticky Navbar */
+        .top-nav {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-logo {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+        }
+
+        .brand-text h1 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -0.01em;
+            margin-bottom: 2px;
+        }
+
+        .brand-text p {
+            font-size: 0.78rem;
+            color: var(--slate);
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Live Save Indicator Badge */
+        .live-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+            transition: all 0.2s ease;
+        }
+
+        .live-status-badge.offline {
+            background: #fffbeb;
+            color: #92400e;
+            border-color: #fde68a;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+
+        .live-status-badge.offline .pulse-dot {
+            background: #f59e0b;
+            animation: pulse-amber 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        @keyframes pulse-amber {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+
+        /* Buttons */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn-toggle-edit {
+            background: #ffffff;
+            color: #1e293b;
+            border-color: #cbd5e1;
+        }
+
+        .btn-toggle-edit:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .btn-toggle-edit.active {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #0284c7;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+        }
+
+        .btn-save-code {
+            background: #10b981;
+            color: #ffffff;
+            border-color: #059669;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-save-code:hover {
+            background: #059669;
+        }
+
+        .btn-save-code.dirty {
+            background: #f59e0b;
+            border-color: #d97706;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.35);
+        }
+
+        .btn-secondary {
+            background: #f8fafc;
+            color: #475569;
+            border-color: #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1560px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        /* Hero Header */
+        .hero-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(2, 132, 199, 0.2) 0%, rgba(2, 132, 199, 0) 70%);
+            border-radius: 50%;
+        }
+
+        .hero-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-subtitle {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            max-width: 950px;
+            line-height: 1.6;
+        }
+
+        .hero-badge-wrap {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-badge.confirmed {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .hero-badge.highlight {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fcd34d;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        /* Metrics Strip */
+        .metric-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-top: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .metric-val {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 2px;
+        }
+
+        .metric-lbl {
+            font-size: 0.76rem;
+            color: #cbd5e1;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Tab Navigation */
+        .tab-bar {
+            display: flex;
+            gap: 8px;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: #f1f5f9;
+            color: var(--navy);
+        }
+
+        .tab-btn.active {
+            background: #0284c7;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Card Wrapper */
+        .content-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .card-header h2 {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Flowchart Styles (Tab 1) */
+        .fc-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .fc-phase-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            position: relative;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .fc-phase-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .fc-phase-card.phase-0 {
+            border-left: 5px solid #f59e0b;
+            background: #fffdfa;
+        }
+
+        .fc-phase-card.phase-1 {
+            border-left: 5px solid #0284c7;
+            background: #f8fbfe;
+        }
+
+        .fc-phase-card.phase-2 {
+            border-left: 5px solid #7c3aed;
+            background: #fbf9ff;
+        }
+
+        .fc-phase-card.phase-3 {
+            border-left: 5px solid #10b981;
+            background: #f6fdf9;
+        }
+
+        .fc-phase-card.phase-4 {
+            border-left: 5px solid #0891b2;
+            background: #f6fcfe;
+        }
+
+        .fc-phase-card.phase-5 {
+            border-left: 5px solid #059669;
+            background: #f6fdf9;
+        }
+
+        .fc-phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .fc-phase-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fc-phase-badge {
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 9999px;
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .fc-grid-nodes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .fc-node {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius-md);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            position: relative;
+        }
+
+        .fc-node.decision {
+            border-color: #f59e0b;
+            background: #fffdf5;
+        }
+
+        .fc-node.success {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .fc-node.danger {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .fc-node-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fc-node-desc {
+            font-size: 0.8rem;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .fc-node-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.74rem;
+            color: #64748b;
+            padding-top: 8px;
+            border-top: 1px dashed #e2e8f0;
+        }
+
+        .fc-connector-arrow {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin: 6px 0;
+        }
+
+        /* Table & 5-Column Model (Tab 2) */
+        .filter-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .pill-btn {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #475569;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .pill-btn:hover {
+            background: #f1f5f9;
+            color: var(--navy);
+        }
+
+        .pill-btn.active {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #0284c7;
+        }
+
+        .search-box-wrap {
+            position: relative;
+            min-width: 240px;
+        }
+
+        .search-box-wrap i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 0.82rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 7px 12px 7px 32px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.82rem;
+            outline: none;
+            transition: border 0.15s ease;
+        }
+
+        .search-input:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15);
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            background: #ffffff;
+        }
+
+        .matrix-table thead th {
+            background: #f8fafc;
+            color: #334155;
+            font-weight: 700;
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 2px solid #cbd5e1;
+            white-space: nowrap;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .matrix-table tbody td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .matrix-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        /* STT */
+        .m-stt {
+            font-weight: 800;
+            color: #0369a1;
+            text-align: center;
+            width: 58px;
+            font-size: 0.92rem;
+            background: #f0f9ff;
+        }
+
+        /* Actor Cell */
+        .m-actor-name {
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+        }
+
+        .m-actor-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .badge-phase0 { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .badge-mh1 { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .badge-mh2 { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+        .badge-hang { background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+        .badge-ktv { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .badge-claim { background: #ccfbf1; color: #115e59; border: 1px solid #99f6e4; }
+        .badge-crm { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+        /* Action Cell */
+        .m-action-text .action-title {
+            font-weight: 700;
+            color: var(--navy);
+            font-size: 0.86rem;
+            line-height: 1.4;
+        }
+
+        /* System Pills */
+        .sys-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin: 2px;
+            white-space: nowrap;
+        }
+
+        .sys-crm { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .sys-wms { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .sys-tms { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+        .sys-app { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .sys-portal { background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+        .sys-erp { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+        .sys-online { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+
+        /* Logic & KSNB Checkpoint Cell */
+        .m-logic-cell {
+            font-size: 0.82rem;
+        }
+
+        .m-logic-main {
+            color: #1e293b;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .logic-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 6px;
+            margin: 8px 0;
+            background: #f8fafc;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .logic-meta-item {
+            font-size: 0.76rem;
+            color: #475569;
+        }
+
+        .status-chip {
+            background: #e2e8f0;
+            color: #334155;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.72rem;
+        }
+
+        .m-ksnb-box {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+        }
+
+        .ksnb-box-critical {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .ksnb-box-standard {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+        }
+
+        .m-ksnb-header {
+            font-weight: 700;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.74rem;
+        }
+
+        .ksnb-tag-red {
+            background: #dc2626;
+            color: #ffffff;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.68rem;
+            font-weight: 700;
+        }
+
+        .ksnb-tag-amber {
+            background: #d97706;
+            color: #ffffff;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.68rem;
+            font-weight: 700;
+        }
+
+        .m-exc-box {
+            margin-top: 6px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            font-size: 0.76rem;
+            color: #475569;
+        }
+
+        /* Row Delete Button (only visible during Live Edit) */
+        .btn-row-del {
+            display: none;
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        .btn-row-del:hover {
+            background: #fecaca;
+        }
+
+        /* Live Edit Styling */
+        body.is-live-editing [contenteditable="true"] {
+            outline: 2px dashed #0284c7;
+            background: #f0f9ff !important;
+            border-radius: 4px;
+            padding: 2px 4px;
+            cursor: text;
+        }
+
+        body.is-live-editing .btn-row-del {
+            display: inline-block;
+        }
+
+        body.is-live-editing .editable-directive-cell {
+            outline: 2px solid #2563eb !important;
+            background: #eff6ff !important;
+        }
+
+        /* Open Issues Editable Directive Cell */
+        .editable-directive-cell {
+            background: #fffdf5;
+            border: 2px solid #1e3a8a;
+            border-radius: 6px;
+            padding: 10px;
+            font-weight: 600;
+            color: #1e3a8a;
+            min-height: 48px;
+            transition: all 0.2s ease;
+        }
+
+        .editable-directive-cell:hover {
+            background: #fefce8;
+        }
+
+        .placeholder-text {
+            color: #94a3b8;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        /* Badges & Tables (Tabs 3 & 4) */
+        .badge-role {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+        }
+
+        .badge-tag-confirm {
+            background: #dcfce7;
+            color: #166534;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            border: 1px solid #bbf7d0;
+        }
+
+        .badge-risk-high {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            border: 1px solid #fecaca;
+        }
+
+        .badge-status-pending {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            border: 1px solid #fde68a;
+        }
+
+        /* Toast Notification */
+        .live-toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1e293b;
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.86rem;
+            font-weight: 500;
+            z-index: 9999;
+            transform: translateY(120%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .live-toast.show {
+            transform: translateY(0);
+        }
+
+        .live-toast.success { border-left: 4px solid #10b981; }
+        .live-toast.warning { border-left: 4px solid #f59e0b; }
+        .live-toast.danger { border-left: 4px solid #ef4444; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .top-nav { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .hero-title-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body class="">
+
+    <!-- Sticky Navigation Top Bar -->
+    <header class="top-nav">
+        <div class="brand-wrap">
+            <div class="brand-logo">
+                <i class="fas fa-screwdriver-wrench"></i>
+            </div>
+            <div class="brand-text">
+                <h1>BẢO HÀNH ỦY QUYỀN TẠI NHÀ (CE &amp; GIA DỤNG)</h1>
+                <p>Quy trình chuẩn hóa 10 Sheet V1.0 • Thợ ĐMX &amp; KTV Tận Tâm • KSNB Automation</p>
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <!-- Daemon Status Indicator -->
+            <div class="live-status-badge" id="liveStatusBadge">
+                <span class="pulse-dot"></span>
+                <span id="liveStatusText">Tự động lưu: Đã kết nối Code</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <button type="button" class="btn-action btn-toggle-edit active" id="btnToggleEdit" onclick="toggleLiveEditing()">
+                <i class="fas fa-pen-to-square"></i> <span id="btnEditText">Đang Sửa (Bấm để Khóa)</span>
+            </button>
+
+            <button type="button" class="btn-action btn-save-code" id="btnSaveToCode" onclick="saveDirectlyToCode()"><i class="fas fa-spinner fa-spin"></i> Đang lưu...</button>
+
+            <button type="button" class="btn-action btn-secondary" onclick="addNewModelRow()">
+                <i class="fas fa-plus"></i> Thêm dòng mới
+            </button>
+
+            <button type="button" class="btn-action btn-secondary" onclick="fallbackSaveHtml(document.documentElement.outerHTML)">
+                <i class="fas fa-file-arrow-down"></i> Tải HTML
+            </button>
+
+            <a href="index.html" class="btn-action btn-secondary">
+                <i class="fas fa-house"></i> Về Menu CE
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Hero Header -->
+        <section class="hero-header">
+            <div class="hero-title-row">
+                <div>
+                    <h1 class="hero-title">QUY TRÌNH BẢO HÀNH ỦY QUYỀN TẠI NHÀ KHÁCH HÀNG (BHUQ — CE &amp; GIA DỤNG)</h1>
+                    <p class="hero-subtitle">
+                        Kiểm soát toàn diện vòng đời tiếp nhận &amp; sửa chữa tại nhà: Mốc ≤ 30 ngày (Vận đơn 1025) ➔ Định tuyến 2 Mô hình ủy quyền ➔ Chẩn đoán &amp; Sửa chữa tại nhà ➔ Mapping Serial 3 chiều ➔ Thu hồi linh kiện xác 1:1 ➔ Claim &amp; Đối soát tài chính 3 bên với Hãng.
+                    </p>
+                    <div class="hero-badge-wrap">
+                        <span class="hero-badge confirmed"><i class="fas fa-circle-check"></i> Phiên bản V1.0 CONFIRMED</span>
+                        <span class="hero-badge"><i class="fas fa-tv"></i> Ngành hàng CE &amp; Gia dụng</span>
+                        <span class="hero-badge"><i class="fas fa-user-gear"></i> Thợ ĐMX &amp; KTV Tận Tâm</span>
+                        <span class="hero-badge highlight"><i class="fas fa-bolt"></i> Live Edit &amp; Auto-Save Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Strip -->
+            <div class="metric-strip">
+                <div class="metric-card">
+                    <div class="metric-val">26</div>
+                    <div class="metric-lbl">Bước quy trình chuẩn hóa (12 cột dữ liệu)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">≤ 30 Ngày</div>
+                    <div class="metric-lbl">Nhánh nghiệp vụ mới: Tư vấn ➔ Vận đơn 1025</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">2 Mô hình</div>
+                    <div class="metric-lbl">MH1 (TV + SC có phí) vs MH2 (Chỉ SC)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">1:1</div>
+                    <div class="metric-lbl">Thu hồi LK xác &amp; Mapping Serial 3 chiều</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">100%</div>
+                    <div class="metric-lbl">Đối soát 3 bên (LK mới + LK xác + Công thợ)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">16 BR / 10 EXC</div>
+                    <div class="metric-lbl">16 Quy tắc nghiệp vụ &amp; 10 Ngoại lệ KSNB</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">12</div>
+                    <div class="metric-lbl">Câu hỏi mở sẵn sàng nhập Ý kiến chỉ đạo</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Tab Bar -->
+        <nav class="tab-bar">
+            <button type="button" class="tab-btn" onclick="switchMainTab('tab-flowchart', this)">
+                <i class="fas fa-diagram-project"></i> 1. Sơ đồ Flowchart Tổng quan
+            </button>
+            <button type="button" class="tab-btn active" onclick="switchMainTab('tab-detail-matrix', this)">
+                <i class="fas fa-table-list"></i> 2. Ma trận 26 Bước thực hiện (5 Cột chuẩn)
+            </button>
+            <button type="button" class="tab-btn" onclick="switchMainTab('tab-rules-exceptions', this)">
+                <i class="fas fa-scale-balanced"></i> 3. 16 Business Rules &amp; 10 Ngoại lệ KSNB
+            </button>
+            <button type="button" class="tab-btn" onclick="switchMainTab('tab-systems-issues', this)">
+                <i class="fas fa-server"></i> 4. Hệ thống &amp; 12 Vấn đề cần chỉ đạo
+            </button>
+        </nav>
+
+        <!-- ==================== TAB 1: FLOWCHART TỔNG QUAN ==================== -->
+        <div id="tab-flowchart" class="tab-pane">
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-route text-sky-600"></i> SƠ ĐỒ LUỒNG QUY TRÌNH BHUQ TẠI NHÀ (DẠNG FLOW — ÍT CHỮ, DỄ HIỂU)</h2>
+                    <span class="badge-role">Chuẩn hóa từ Sheet 2 Process Flow</span>
+                </div>
+
+                <div class="fc-wrapper">
+
+                    <!-- GIAI ĐOẠN 0: KIỂM TRA MỐC 30 NGÀY -->
+                    <div class="fc-phase-card phase-0">
+                        <div class="fc-phase-header">
+                            <div class="fc-phase-title">
+                                <i class="fas fa-clock-rotate-left text-amber-500"></i>
+                                GIAI ĐOẠN 0 — KIỂM TRA MỐC 30 NGÀY (NGHIỆP VỤ MỚI BỔ SUNG)
+                            </div>
+                            <span class="fc-phase-badge">Bắt buộc cho cả MH1 &amp; MH2</span>
+                        </div>
+                        <div class="fc-grid-nodes">
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-phone-volume text-sky-600"></i> ① KH gọi Tổng đài ĐMX báo lỗi</div>
+                                <div class="fc-node-desc">Tra cứu Serial/Model + Ngày mua hàng/xuất hóa đơn trên CRM.</div>
+                                <div class="fc-node-footer"><span>Actor: CRM / Tổng đài</span><span class="sys-pill sys-crm">CRM</span></div>
+                            </div>
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-diamond text-amber-500"></i> ◆ Còn trong 30 ngày từ ngày mua?</div>
+                                <div class="fc-node-desc">Nếu ≤ 30 ngày: <b>BẮT BUỘC TƯ VẤN CẤP 1</b> (kể cả Hãng thuộc MH2). Nếu &gt; 30 ngày: chuyển Giai đoạn 1.</div>
+                                <div class="fc-node-footer"><span>Rule: BR-14</span><span class="status-chip">Điểm rẽ nhánh</span></div>
+                            </div>
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-comments text-sky-600"></i> ② Tổng đài tư vấn Cấp 1</div>
+                                <div class="fc-node-desc">
+                                    • <b>TV Thành công:</b> Đóng ticket, kết thúc ca.<br>
+                                    • <b>TV Thất bại:</b> Bấm 'Chuyển kỹ thuật' ➔ TMS tự động sinh <b>Vận đơn 1025</b> (Đổi trả tại nhà).
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-15</span><span class="sys-pill sys-tms">TMS</span></div>
+                            </div>
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-wrench text-emerald-600"></i> ⑤ KTV đi Vận đơn 1025 tại nhà</div>
+                                <div class="fc-node-desc">
+                                    • <b>Sửa được:</b> Hoàn tất Vận đơn 1025, kết thúc ca.<br>
+                                    • <b>Không sửa được:</b> KTV bấm 'Chuyển Hãng' trên Vận đơn 1025.
+                                </div>
+                                <div class="fc-node-footer"><span>Actor: KTV Thợ ĐMX</span><span class="sys-pill sys-app">TMS App</span></div>
+                            </div>
+                            <div class="fc-node success">
+                                <div class="fc-node-title"><i class="fas fa-rotate text-emerald-600"></i> ⑥ Hệ thống TỰ ĐỘNG đồng bộ</div>
+                                <div class="fc-node-desc">
+                                    (1) Tạo Jobcard BHUQ mới.<br>
+                                    (2) Đóng Vận đơn 1025.<br>
+                                    (3) Đóng Jobcard Đổi trả ban đầu.<br>
+                                    ➔ <b>Chuyển thẳng vào Giai đoạn 2 (Portal Hãng)!</b>
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-16</span><span class="sys-pill sys-wms">WMS / Portal</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fc-connector-arrow"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- GIAI ĐOẠN 1: ĐỊNH TUYẾN 2 MÔ HÌNH -->
+                    <div class="fc-phase-card phase-1">
+                        <div class="fc-phase-header">
+                            <div class="fc-phase-title">
+                                <i class="fas fa-shuffle text-sky-600"></i>
+                                GIAI ĐOẠN 1 — ĐỊNH TUYẾN MÔ HÌNH ỦY QUYỀN (&gt; 30 NGÀY)
+                            </div>
+                            <span class="fc-phase-badge">Phân loại theo Master BHUQ</span>
+                        </div>
+                        <div class="fc-grid-nodes">
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-code-branch text-sky-600"></i> ◆ Hãng ủy quyền Mô hình nào?</div>
+                                <div class="fc-node-desc">Đối chiếu Master BHUQ trên CRM để định tuyến kịch bản Tổng đài ngay từ đầu cuộc gọi.</div>
+                                <div class="fc-node-footer"><span>Rule: BR-01</span><span class="sys-pill sys-crm">CRM</span></div>
+                            </div>
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-layer-group text-sky-600"></i> MÔ HÌNH 1: Tư vấn + Sửa chữa</div>
+                                <div class="fc-node-desc">
+                                    • ĐMX tư vấn Cấp 1 cho KH.<br>
+                                    • <b>TV Thành công:</b> Đóng ticket, <b>GHI NHẬN ĐỐI SOÁT PHÍ TƯ VẤN</b> cho ĐMX.<br>
+                                    • <b>TV Thất bại:</b> Bấm 'Chuyển Hãng' ➔ Đẩy Jobcard lên Portal Hãng.
+                                </div>
+                                <div class="fc-node-footer"><span>Bước: 5a.1, 5a.2, 5a.3</span><span class="badge-tag-confirm">CÓ PHÍ TƯ VẤN</span></div>
+                            </div>
+                            <div class="fc-node danger">
+                                <div class="fc-node-title"><i class="fas fa-ban text-rose-600"></i> MÔ HÌNH 2: Chỉ ủy quyền Sửa chữa</div>
+                                <div class="fc-node-desc">
+                                    • ĐMX <b>KHÔNG TƯ VẤN</b> (tuyệt đối không tư vấn nhầm).<br>
+                                    • Bấm 'Chuyển Hãng' ngay + <b>ĐÓNG TICKET CRM LẬP TỨC</b>.<br>
+                                    • Tự động sinh Jobcard đẩy lên Portal Hãng.
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-02</span><span class="ksnb-tag-red">KHÔNG CÓ PHÍ TƯ VẤN</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fc-connector-arrow"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- GIAI ĐOẠN 2: HÃNG XỬ LÝ TRÊN PORTAL -->
+                    <div class="fc-phase-card phase-2">
+                        <div class="fc-phase-header">
+                            <div class="fc-phase-title">
+                                <i class="fas fa-globe text-purple-600"></i>
+                                GIAI ĐOẠN 2 — HÃNG XỬ LÝ TRÊN PORTAL (ĐIỂM HỘI TỤ CHUNG)
+                            </div>
+                            <span class="fc-phase-badge">Hội tụ từ Nhánh 30 ngày &amp; Nhánh &gt;30 ngày</span>
+                        </div>
+                        <div class="fc-grid-nodes">
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-headset text-purple-600"></i> ④ Hãng tư vấn Cấp 2 trên Portal</div>
+                                <div class="fc-node-desc">Chuyên viên Hãng tiếp nhận Jobcard trên Portal Hãng và trực tiếp liên hệ hướng dẫn KH.</div>
+                                <div class="fc-node-footer"><span>Actor: Hãng / Đối tác</span><span class="sys-pill sys-portal">Portal Hãng</span></div>
+                            </div>
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-diamond text-amber-500"></i> ◆ Kết quả tư vấn của Hãng?</div>
+                                <div class="fc-node-desc">Xác định ca được xử lý từ xa hay cần kích hoạt kỹ thuật viên đến tận nhà.</div>
+                                <div class="fc-node-footer"><span>Bước: 5.4</span><span class="status-chip">Gateway Hãng</span></div>
+                            </div>
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-flag-checkered text-slate-700"></i> ⑤a Hãng tư vấn THÀNH CÔNG</div>
+                                <div class="fc-node-desc">
+                                    Hãng đóng Jobcard trên Portal, kết thúc ca.<br>
+                                    <b>CHẶN ĐỐI SOÁT:</b> Tuyệt đối KHÔNG đối soát phí tư vấn cho ĐMX khi Hãng tự xử lý.
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-03</span><span class="ksnb-tag-red">CHẶN PHÍ TƯ VẤN</span></div>
+                            </div>
+                            <div class="fc-node success">
+                                <div class="fc-node-title"><i class="fas fa-paper-plane text-emerald-600"></i> ⑤b Hãng bấm 'Tạo vận đơn Thợ ĐMX'</div>
+                                <div class="fc-node-desc">
+                                    Tư vấn thất bại ➔ Hãng xác nhận chuyển KTV Thợ ĐMX đến nhà sửa chữa.<br>
+                                    Kích hoạt TMS tự động sinh Vận đơn BHUQ.
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-04</span><span class="sys-pill sys-tms">TMS</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fc-connector-arrow"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- GIAI ĐOẠN 3: CHẨN ĐOÁN & SỬA CHỮA TẠI NHÀ -->
+                    <div class="fc-phase-card phase-3">
+                        <div class="fc-phase-header">
+                            <div class="fc-phase-title">
+                                <i class="fas fa-toolbox text-emerald-600"></i>
+                                GIAI ĐOẠN 3 — CHẨN ĐOÁN &amp; SỬA CHỮA TẠI NHÀ KHÁCH HÀNG
+                            </div>
+                            <span class="fc-phase-badge">Thao tác thực địa KTV</span>
+                        </div>
+                        <div class="fc-grid-nodes">
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-truck-ramp-box text-sky-600"></i> ⑥ TMS sinh Vận đơn &amp; Điều phối</div>
+                                <div class="fc-node-desc">TMS nhận trigger từ Portal Hãng, sinh Vận đơn BHUQ, điều phối KTV theo khu vực trong SLA.</div>
+                                <div class="fc-node-footer"><span>Bước: 6</span><span class="sys-pill sys-tms">TMS</span></div>
+                            </div>
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-camera text-slate-700"></i> ⑦ Kiểm tra ngoại quan &amp; Serial</div>
+                                <div class="fc-node-desc">KTV chụp đủ ảnh ngoại quan, kiểm tra tem niêm phong/Serial tại hiện trường chống gian lận.</div>
+                                <div class="fc-node-footer"><span>Bước: 7</span><span class="sys-pill sys-app">TMS App</span></div>
+                            </div>
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-stethoscope text-indigo-600"></i> ⑧ Chẩn đoán lỗi &amp; Đề xuất LK</div>
+                                <div class="fc-node-desc">Cập nhật mã lỗi chuẩn Hãng + đề xuất Part Number linh kiện thay thế vào hệ thống.</div>
+                                <div class="fc-node-footer"><span>Bước: 8, 9</span><span class="sys-pill sys-app">TMS App</span></div>
+                            </div>
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-stamp text-amber-600"></i> ⑩ Phê duyệt Pre-approval (Nếu có)</div>
+                                <div class="fc-node-desc">Linh kiện giá trị cao/đặc thù phải được Hãng cấp Approval ID trên Portal trước khi xuất kho.</div>
+                                <div class="fc-node-footer"><span>Rule: BR-10</span><span class="sys-pill sys-portal">Portal Hãng</span></div>
+                            </div>
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-box-open text-amber-700"></i> ⑫ Xuất kho linh kiện mới</div>
+                                <div class="fc-node-desc">Kho WMS xuất đúng đích danh Part Number/Serial theo Jobcard (phân biệt LK Ký gửi/Mua đứt).</div>
+                                <div class="fc-node-footer"><span>Rule: BR-09</span><span class="sys-pill sys-wms">WMS</span></div>
+                            </div>
+                            <div class="fc-node success">
+                                <div class="fc-node-title"><i class="fas fa-screwdriver text-emerald-600"></i> ⑬ Thay thế linh kiện tại nhà</div>
+                                <div class="fc-node-desc">KTV thực hiện thay thế linh kiện tại nhà khách hàng theo đúng quy chuẩn an toàn của Hãng.</div>
+                                <div class="fc-node-footer"><span>Bước: 13</span><span class="sys-pill sys-app">TMS App</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fc-connector-arrow"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- GIAI ĐOẠN 4: NGHIỆM THU & THU HỒI LINH KIỆN -->
+                    <div class="fc-phase-card phase-4">
+                        <div class="fc-phase-header">
+                            <div class="fc-phase-title">
+                                <i class="fas fa-clipboard-check text-cyan-600"></i>
+                                GIAI ĐOẠN 4 — NGHIỆM THU &amp; THU HỒI LINH KIỆN XÁC (MAPPING 3 CHIỀU)
+                            </div>
+                            <span class="fc-phase-badge">Chốt KSNB Kiểm soát chặt</span>
+                        </div>
+                        <div class="fc-grid-nodes">
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-link text-indigo-600"></i> ⑭ Mapping Serial 3 Chiều Bắt Buộc</div>
+                                <div class="fc-node-desc">
+                                    <b>BẮT BUỘC KHỚP 3 CHIỀU:</b><br>
+                                    <code>Serial Máy ↔ Serial LK Mới ↔ Serial LK Xác</code><br>
+                                    Chặn hoàn tất Jobcard nếu thiếu bất kỳ Serial nào!
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-05</span><span class="ksnb-tag-red">KSNB TRỌNG YẾU</span></div>
+                            </div>
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-list-check text-emerald-600"></i> ⑮ Kiểm tra chất lượng (QC)</div>
+                                <div class="fc-node-desc">Checklist vận hành sau sửa chữa bắt buộc. <b>CHẶN ĐÓNG JOBCARD</b> nếu QC chưa Pass.</div>
+                                <div class="fc-node-footer"><span>Rule: BR-06</span><span class="status-chip">QC Pass = Mới cho đóng</span></div>
+                            </div>
+                            <div class="fc-node danger">
+                                <div class="fc-node-title"><i class="fas fa-box-archive text-amber-700"></i> ⑯ Thu hồi LK xác &amp; Nhập kho WMS</div>
+                                <div class="fc-node-desc">
+                                    Đối chiếu 1:1 Phiếu xuất LK mới vs Phiếu nhập xác.<br>
+                                    <b>CHẶN ĐÓNG JOBCARD</b> nếu thiếu LK xác trả Hãng (trừ văn bản miễn trừ).
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-07</span><span class="ksnb-tag-red">THU HỒI XÁC 1:1</span></div>
+                            </div>
+                            <div class="fc-node success">
+                                <div class="fc-node-title"><i class="fas fa-signature text-emerald-600"></i> ⑰ Bàn giao &amp; Nghiệm thu với KH</div>
+                                <div class="fc-node-desc">Khách hàng nghiệm thu hoạt động và ký xác nhận biên bản dịch vụ hoàn tất trên App.</div>
+                                <div class="fc-node-footer"><span>Bước: 17</span><span class="sys-pill sys-app">TMS App</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fc-connector-arrow"><i class="fas fa-arrow-down"></i></div>
+
+                    <!-- GIAI ĐOẠN 5: CLAIM & ĐỐI SOÁT TÀI CHÍNH -->
+                    <div class="fc-phase-card phase-5">
+                        <div class="fc-phase-header">
+                            <div class="fc-phase-title">
+                                <i class="fas fa-file-invoice-dollar text-emerald-700"></i>
+                                GIAI ĐOẠN 5 — CLAIM &amp; ĐỐI SOÁT TÀI CHÍNH 3 BÊN
+                            </div>
+                            <span class="fc-phase-badge">Hạch toán ERP &amp; Quyết toán Hãng</span>
+                        </div>
+                        <div class="fc-grid-nodes">
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-folder-tree text-sky-700"></i> ⑱ Tập hợp Claim Batch</div>
+                                <div class="fc-node-desc">Bộ phận BH tổng hợp các Jobcard hoàn tất theo kỳ đối soát của từng Hãng.</div>
+                                <div class="fc-node-footer"><span>Rule: BR-13</span><span class="sys-pill sys-wms">WMS</span></div>
+                            </div>
+                            <div class="fc-node">
+                                <div class="fc-node-title"><i class="fas fa-cloud-arrow-up text-purple-700"></i> ⑲ Gửi Claim lên Portal Hãng</div>
+                                <div class="fc-node-desc">Gửi kèm dữ liệu Jobcard, ảnh hiện trường, chứng từ thu hồi xác và biên bản nghiệm thu KH.</div>
+                                <div class="fc-node-footer"><span>Bước: 19</span><span class="sys-pill sys-portal">Portal Hãng</span></div>
+                            </div>
+                            <div class="fc-node decision">
+                                <div class="fc-node-title"><i class="fas fa-clipboard-question text-amber-600"></i> ⑳ Hãng thẩm định Claim</div>
+                                <div class="fc-node-desc">
+                                    • <b>Approved:</b> Chuyển đối soát 3 bên.<br>
+                                    • <b>Reject/Bổ sung:</b> Phân loại nguyên nhân chủ quan/chuyên môn để xử lý trách nhiệm tài chính.
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-11</span><span class="status-chip">Duyệt Claim</span></div>
+                            </div>
+                            <div class="fc-node danger">
+                                <div class="fc-node-title"><i class="fas fa-scale-balanced text-rose-700"></i> ㉒ ĐỐI SOÁT 3 BÊN KHỚP 100%</div>
+                                <div class="fc-node-desc">
+                                    Kế toán bắt buộc đối soát khớp 100% cả 3 phần:<br>
+                                    <code>[Linh kiện mới] + [Linh kiện xác đã trả] + [Tiền công KTV]</code><br>
+                                    <b>CHẶN HẠCH TOÁN NẾU LỆCH BẤT KỲ PHẦN NÀO!</b>
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-08</span><span class="ksnb-tag-red">KHỚP 100% MỚI HẠCH TOÁN</span></div>
+                            </div>
+                            <div class="fc-node success">
+                                <div class="fc-node-title"><i class="fas fa-money-check-dollar text-emerald-700"></i> ㉓ Ghi nhận Doanh thu &amp; Khóa hồ sơ</div>
+                                <div class="fc-node-desc">
+                                    • Hạch toán doanh thu và công nợ phải thu từ Hãng trên ERP.<br>
+                                    • Khóa hồ sơ Claim Batch, lưu trữ phục vụ KSNB. Kết thúc quy trình!
+                                </div>
+                                <div class="fc-node-footer"><span>Rule: BR-12</span><span class="sys-pill sys-erp">ERP</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: MA TRẬN 26 BƯỚC THỰC HIỆN ==================== -->
+        <div id="tab-detail-matrix" class="tab-pane active">
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-table-list text-sky-600"></i> CHI TIẾT 26 BƯỚC THỰC HIỆN (FORMAT 5 CỘT CHUẨN)</h2>
+                    <span class="badge-role">Ai làm • Làm gì • Hệ thống nào • System Logic &amp; Điểm kiểm soát KSNB</span>
+                </div>
+
+                <!-- Filters & Search Toolbar -->
+                <div class="filter-toolbar">
+                    <div class="filter-pills">
+                        <button type="button" class="pill-btn" onclick="filterTableRows('all', this)">Tất cả (26 bước)</button>
+                        <button type="button" class="pill-btn active" onclick="filterTableRows('filter-p0', this)"><i class="fas fa-bolt text-amber-500"></i> Mốc ≤ 30 Ngày (VĐ 1025)</button>
+                        <button type="button" class="pill-btn" onclick="filterTableRows('filter-mh1', this)">Mô hình 1 (&gt;30d)</button>
+                        <button type="button" class="pill-btn" onclick="filterTableRows('filter-mh2', this)">Mô hình 2 (&gt;30d)</button>
+                        <button type="button" class="pill-btn" onclick="filterTableRows('filter-hang', this)">Portal Hãng</button>
+                        <button type="button" class="pill-btn" onclick="filterTableRows('filter-ktv', this)">KTV Sửa tại nhà</button>
+                        <button type="button" class="pill-btn" onclick="filterTableRows('filter-claim', this)">Claim &amp; Đối soát</button>
+                        <button type="button" class="pill-btn" onclick="filterTableRows('filter-ksnb', this)"><i class="fas fa-shield-halved text-rose-600"></i> Chốt KSNB Trọng yếu</button>
+                    </div>
+
+                    <div class="search-box-wrap">
+                        <i class="fas fa-magnifying-glass"></i>
+                        <input type="text" class="search-input" id="tableSearchInput" placeholder="Tìm kiếm bước, actor, rule, KSNB..." onkeyup="searchTableRows(this.value)">
+                    </div>
+                </div>
+
+                <!-- 5-Column Table -->
+                <div class="table-wrap">
+                    <table class="matrix-table" id="matrixModelTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px; text-align: center;">STT</th>
+                                <th style="width: 200px;">AI LÀM (ACTOR)</th>
+                                <th style="width: 240px;">LÀM GÌ (ACTION)</th>
+                                <th style="width: 140px; text-align: center;">HỆ THỐNG</th>
+                                <th>SYSTEM LOGIC &amp; ĐIỂM KIỂM SOÁT KSNB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+        <tr class="filter-crm" data-step="1" style="display: none;">
+            <td class="m-stt">1</td>
+            <td>
+        <div class="m-actor-name">Tổng đài/CRM</div>
+        <span class="m-actor-badge badge-crm">CRM Khởi Tạo</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Tiếp nhận yêu cầu bảo hành</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tạo ticket theo thông tin KH gọi vào</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> SĐT khách hàng</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Ticket BHUQ</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Mới</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Ticket CRM</div><div class="logic-meta-item"><b><i class="fas fa-clock text-amber-600"></i> KPI/SLA:</b> SLA tiếp nhận ≤ 2 phút</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Xác định đúng ticket cho từng cuộc gọi</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> KH cung cấp sai SĐT/thông tin
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-crm" data-step="2" style="display: none;">
+            <td class="m-stt">2</td>
+            <td>
+        <div class="m-actor-name">Tổng đài</div>
+        <span class="m-actor-badge badge-crm">CRM Khởi Tạo</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Nhập IMEI/Serial/Model</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">CRM truy vấn lịch sử mua hàng/bảo hành từ ERP-WMS</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Serial/IMEI/Model</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Thông tin bảo hành sản phẩm</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang xử lý</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Đối chiếu đúng Serial với hồ sơ mua hàng</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Không tìm thấy Serial trong hệ thống
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-crm" data-step="3" style="display: none;">
+            <td class="m-stt">3</td>
+            <td>
+        <div class="m-actor-name">Hệ thống</div>
+        <span class="m-actor-badge badge-crm">CRM Khởi Tạo</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Kiểm tra điều kiện BH ủy quyền</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Đối chiếu Master Hãng+Model+Serial+Thời hạn BH, phân loại Mô hình 1/2</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Serial, Model, Hãng</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kết quả phân loại Mô hình ủy quyền</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang xử lý</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Master BHUQ CRM</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Chỉ xử lý BHUQ nếu Hãng có Master khai báo hợp lệ</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Sản phẩm hết hạn BH hoặc Hãng không có Master BHUQ
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-crm" data-step="4" style="display: none;">
+            <td class="m-stt">4</td>
+            <td>
+        <div class="m-actor-name">Tổng đài</div>
+        <span class="m-actor-badge badge-crm">CRM Khởi Tạo</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Xác nhận định tuyến tiếp nhận</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Hiển thị luồng xử lý theo Mô hình 1_BHUQ Tư vấn + Sửa chữa (Tư vấn Cấp 1) hoặc Mô hình 2_BHUQ Sửa chữa (Chuyển Hãng ngay)</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả phân loại Mô hình</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kịch bản xử lý cho Tổng đài</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang xử lý</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Tuân thủ đúng kịch bản theo Mô hình đã khai báo</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Tổng đài xử lý sai kịch bản (tư vấn nhầm Mô hình 2)
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-mh1 filter-ksnb" data-step="5a.1" style="display: none;">
+            <td class="m-stt">5a.1</td>
+            <td>
+        <div class="m-actor-name">Tổng đài (Mô hình 1_BHUQ Tư vấn + Sửa chữa)</div>
+        <span class="m-actor-badge badge-mh1">Mô hình 1</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Đóng ticket tư vấn thành công</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tổng đài xử lý xong từ xa, đóng ticket, đẩy dữ liệu WMS</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả tư vấn</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Jobcard tạo mới</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Hoàn tất tư vấn</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Ticket CRM đóng</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">GHI NHẬN đối soát phí tư vấn cho ĐMX</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-mh1 filter-ksnb" data-step="5a.2" style="display: none;">
+            <td class="m-stt">5a.2</td>
+            <td>
+        <div class="m-actor-name">Hệ thống</div>
+        <span class="m-actor-badge badge-mh1">Mô hình 1</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Đẩy dữ liệu lên Portal Hãng</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-wms"><i class="fas fa-warehouse"></i> WMS</span> <span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Đồng bộ ticket + Jobcard lên Portal Hãng</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Jobcard</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Jobcard trên Portal Hãng</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đồng bộ</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Jobcard</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Ghi nhận đối soát phí tư vấn cho ĐMX</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Lỗi đồng bộ API Portal Hãng
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-mh1 filter-ksnb" data-step="5a.3" style="display: none;">
+            <td class="m-stt">5a.3</td>
+            <td>
+        <div class="m-actor-name">Tổng đài (Mô hình 1)</div>
+        <span class="m-actor-badge badge-mh1">Mô hình 1</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Bấm 'Chuyển Hãng'</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tư vấn không thành công, chuyển ticket sang Portal Hãng tư vấn Cấp 2</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả tư vấn thất bại</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Ticket chuyển trạng thái</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Chuyển Hãng</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Không đóng ticket khi chưa xác nhận kết quả tư vấn Cấp 1</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-mh2 filter-ksnb" data-step="5b.1" style="display: none;">
+            <td class="m-stt">5b.1</td>
+            <td>
+        <div class="m-actor-name">Tổng đài (Mô hình 2)</div>
+        <span class="m-actor-badge badge-mh2">Mô hình 2</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Bấm 'Chuyển Hãng' (không tư vấn)</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Nhận diện Hãng chỉ ủy quyền sửa chữa, không tư vấn</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả phân loại Mô hình 2</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Ticket chuyển Portal Hãng</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Chuyển Hãng</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Tổng đài KHÔNG được tư vấn khi Hãng chỉ ủy quyền sửa chữa</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Tổng đài tư vấn nhầm dù Mô hình 2
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-mh2 filter-ksnb" data-step="5b.2" style="display: none;">
+            <td class="m-stt">5b.2</td>
+            <td>
+        <div class="m-actor-name">Tổng đài (Mô hình 2)</div>
+        <span class="m-actor-badge badge-mh2">Mô hình 2</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Đóng Ticket trên CRM</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Đóng ticket CRM ngay lập tức khi bấm Chuyển Hãng</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Ticket đóng</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã chuyển Hãng tư vấn</span></div><div class="logic-meta-item"><b><i class="fas fa-clock text-amber-600"></i> KPI/SLA:</b> SLA đóng ticket ngay khi chuyển Hãng</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Bắt buộc đóng ticket ngay, không giữ ticket mở</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Giữ ticket mở gây sai lệch SLA
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-hang" data-step="5.3" style="display: none;">
+            <td class="m-stt">5.3</td>
+            <td>
+        <div class="m-actor-name">Hệ thống</div>
+        <span class="m-actor-badge badge-hang">Portal Hãng</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Đẩy Jobcard lên Portal Hãng</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-wms"><i class="fas fa-warehouse"></i> WMS</span> <span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tự động sinh Jobcard BHUQ, đồng bộ Portal Hãng</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Ticket đã chuyển Hãng</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Jobcard trên Portal</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đồng bộ</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Jobcard</div></div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Lỗi đồng bộ API
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-hang" data-step="5.4" style="display: none;">
+            <td class="m-stt">5.4</td>
+            <td>
+        <div class="m-actor-name">Hãng/Đối tác</div>
+        <span class="m-actor-badge badge-hang">Portal Hãng</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Hãng thực hiện tư vấn KH</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Chuyên viên Hãng tiếp nhận, tư vấn/hướng dẫn kỹ thuật cho KH</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Jobcard</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kết quả tư vấn Hãng</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang xử lý</span></div><div class="logic-meta-item"><b><i class="fas fa-clock text-amber-600"></i> KPI/SLA:</b> SLA Hãng phản hồi (theo hợp đồng)</div></div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Hãng không phản hồi trong SLA cam kết
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-hang filter-ksnb" data-step="5.5a" style="display: none;">
+            <td class="m-stt">5.5a</td>
+            <td>
+        <div class="m-actor-name">Hãng</div>
+        <span class="m-actor-badge badge-hang">Portal Hãng</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Hãng đóng Jobcard tư vấn thành công</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Hãng xử lý được từ xa, đóng Jobcard, kết thúc ca</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Jobcard đóng</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Hoàn tất (Hãng tự xử lý)</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">KHÔNG đối soát phí tư vấn cho ĐMX trong mọi trường hợp Hãng tự xử lý</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-hang" data-step="5.5b" style="display: none;">
+            <td class="m-stt">5.5b</td>
+            <td>
+        <div class="m-actor-name">Hãng</div>
+        <span class="m-actor-badge badge-hang">Portal Hãng</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Hãng bấm 'Tạo vận đơn cho Thợ ĐMX'</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tư vấn không thành công, kích hoạt Vận đơn TMS</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Jobcard chưa xử lý xong</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Trigger tạo Vận đơn</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Chuyển KTV</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Vận đơn chỉ khởi tạo khi Hãng xác nhận trên Portal</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv" data-step="6" style="display: none;">
+            <td class="m-stt">6</td>
+            <td>
+        <div class="m-actor-name">Hệ thống TMS</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Tự động sinh Vận đơn BHUQ</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-tms"><i class="fas fa-truck-fast"></i> TMS</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Nhận trigger từ Portal Hãng, tạo Vận đơn, điều phối KTV</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Trigger từ Portal Hãng</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Vận đơn BHUQ</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã điều phối</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Vận đơn TMS</div><div class="logic-meta-item"><b><i class="fas fa-clock text-amber-600"></i> KPI/SLA:</b> SLA điều phối ≤ X giờ (CẦN HỎI)</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Vận đơn gắn đúng Jobcard, đúng KTV khu vực</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Không có KTV khả dụng trong khu vực
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv filter-ksnb" data-step="7" style="display: none;">
+            <td class="m-stt">7</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Kiểm tra ngoại quan tại nhà KH</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Chụp ảnh ngoại quan, kiểm tra tem niêm phong/Serial</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Sản phẩm thực tế</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Ảnh ngoại quan, xác nhận Serial</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Tại hiện trường</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Ảnh hiện trường</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Bắt buộc chụp đủ ảnh theo checklist chống gian lận</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Không gặp khách / sai địa chỉ
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv" data-step="8" style="display: none;">
+            <td class="m-stt">8</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Chẩn đoán lỗi kỹ thuật</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Xác định triệu chứng lỗi, khoanh vùng linh kiện hỏng</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Triệu chứng lỗi</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kết luận chẩn đoán</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang chẩn đoán</span></div></div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Chẩn đoán sai dẫn tới thay nhầm linh kiện
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv" data-step="9" style="display: none;">
+            <td class="m-stt">9</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Cập nhật mã lỗi &amp; đề xuất LK</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Ghi nhận mã lỗi chuẩn Hãng, đề xuất mã linh kiện thay thế</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết luận chẩn đoán</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Mã lỗi + Đề xuất LK</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đề xuất LK</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Dùng đúng mã lỗi chuẩn theo Hãng công bố</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-hang" data-step="10" style="display: none;">
+            <td class="m-stt">10</td>
+            <td>
+        <div class="m-actor-name">Hãng/Đối tác</div>
+        <span class="m-actor-badge badge-hang">Portal Hãng</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Phê duyệt Pre-approval (nếu có)</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Hãng phê duyệt LK giá trị cao/đặc thù (Approval ID)</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Đề xuất LK</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Approval ID</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Chờ duyệt/Đã duyệt</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Approval ID</div><div class="logic-meta-item"><b><i class="fas fa-clock text-amber-600"></i> KPI/SLA:</b> PHASE 2 — chưa triển khai</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Có Hãng duyệt thủ công, có Hãng duyệt tự động — CẦN HỎI danh sách Hãng nào áp dụng</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Hãng không phản hồi phê duyệt (timeout)
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv" data-step="11" style="display: none;">
+            <td class="m-stt">11</td>
+            <td>
+        <div class="m-actor-name">Hệ thống</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Tạo yêu cầu tạm ứng/đặt linh kiện</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-tms"><i class="fas fa-truck-fast"></i> TMS</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Kiểm tra tồn kho trung tâm/kho thợ, tạo lệnh tạm ứng hoặc PO</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Đề xuất LK đã duyệt</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Lệnh tạm ứng/PO</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đặt hàng</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> PO/Lệnh tạm ứng</div></div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Thiếu tồn kho toàn hệ thống
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv" data-step="12" style="display: none;">
+            <td class="m-stt">12</td>
+            <td>
+        <div class="m-actor-name">Kho LK/WMS</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Xuất kho linh kiện mới</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-wms"><i class="fas fa-warehouse"></i> WMS</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Xuất đích danh Part Number/Serial theo đúng Jobcard</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Lệnh xuất theo Jobcard</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Phiếu xuất kho LK</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã xuất kho</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Phiếu xuất kho</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Mã hình thức xuất kho phân biệt Ký gửi/Mua đứt — CẦN HỎI (xem file Ma trận xuất LK)</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Xuất sai Part Number/Serial
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv" data-step="13" style="display: none;">
+            <td class="m-stt">13</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Thực hiện sửa chữa tại nhà</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Thay thế linh kiện theo đúng quy chuẩn an toàn kỹ thuật</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Linh kiện đã xuất</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Sản phẩm đã sửa</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang sửa chữa</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Tuân thủ quy trình kỹ thuật chuẩn Hãng</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Gây hư hỏng phát sinh tại nhà KH
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv filter-ksnb" data-step="14" style="display: none;">
+            <td class="m-stt">14</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Ghi nhận Serial linh kiện thay thế</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Mapping Serial Máy ↔ Serial LK Mới ↔ Serial LK Xác</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Serial LK mới/xác</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Bảng mapping Serial</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã mapping</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Nhật ký Serial</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Bắt buộc mapping đầy đủ 3 chiều — điểm kiểm soát trọng yếu</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Thiếu/sai Serial mapping
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv filter-ksnb" data-step="15" style="display: none;">
+            <td class="m-stt">15</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Kiểm tra chất lượng (QC)</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Checklist kiểm tra vận hành sau sửa chữa bắt buộc</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Sản phẩm đã sửa</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kết quả QC Pass/Fail</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">QC</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Checklist QC</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Không đóng Jobcard nếu chưa đạt QC</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> QC không đạt phải sửa lại
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv filter-ksnb" data-step="16" style="display: none;">
+            <td class="m-stt">16</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Hoàn tất JC &amp; Nhập linh kiện xác</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-wms"><i class="fas fa-warehouse"></i> WMS</span> <span class="sys-pill sys-tms"><i class="fas fa-truck-fast"></i> TMS</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Khóa Jobcard, thu hồi LK xác nhập kho trả Hãng</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> QC đạt</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Phiếu nhập xác LK</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Hoàn tất kỹ thuật</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Phiếu nhập xác</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Không đóng Jobcard nếu thiếu LK xác tương ứng (trừ Hãng miễn thu hồi bằng văn bản)</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Mất/thiếu xác linh kiện
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-ktv" data-step="17" style="display: none;">
+            <td class="m-stt">17</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-ktv">KTV Tại Nhà</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Bàn giao &amp; Nghiệm thu với khách</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Khách hàng ký nghiệm thu biên bản dịch vụ hoàn tất</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Sản phẩm đã sửa xong</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Biên bản nghiệm thu</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Nghiệm thu</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Biên bản nghiệm thu</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Khách phải ký xác nhận trước khi đóng Jobcard</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Khách không đồng ý ký nghiệm thu
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-claim" data-step="18" style="display: none;">
+            <td class="m-stt">18</td>
+            <td>
+        <div class="m-actor-name">Bộ phận BH</div>
+        <span class="m-actor-badge badge-claim">Claim &amp; Đối Soát</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Tập hợp Claim Batch theo Hãng</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-wms"><i class="fas fa-warehouse"></i> WMS</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tổng hợp Jobcard BHUQ hoàn tất trong kỳ đối soát</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Jobcard hoàn tất</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Claim Batch</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Tổng hợp</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Claim Batch</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Tần suất tập hợp Claim theo Hãng — CẦN HỎI (từng lần hay theo kỳ)</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-claim" data-step="19" style="display: none;">
+            <td class="m-stt">19</td>
+            <td>
+        <div class="m-actor-name">Bộ phận BH</div>
+        <span class="m-actor-badge badge-claim">Claim &amp; Đối Soát</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Gửi Claim lên Portal Hãng</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Gửi kèm dữ liệu Jobcard, ảnh, chứng từ thu hồi xác, biên bản nghiệm thu</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Claim Batch</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Hồ sơ Claim gửi Hãng</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã gửi Claim</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Hồ sơ Claim</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Hồ sơ phải đủ bằng chứng theo yêu cầu từng Hãng</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Thiếu hồ sơ bị Hãng từ chối tiếp nhận
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-hang" data-step="20" style="display: none;">
+            <td class="m-stt">20</td>
+            <td>
+        <div class="m-actor-name">Hãng/Đối tác</div>
+        <span class="m-actor-badge badge-hang">Portal Hãng</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Thẩm định &amp; Phê duyệt Claim</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Cập nhật trạng thái Approved/Rejected/Need Information</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Hồ sơ Claim</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Trạng thái Claim</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã thẩm định</span></div><div class="logic-meta-item"><b><i class="fas fa-clock text-amber-600"></i> KPI/SLA:</b> SLA thẩm định Claim (theo hợp đồng Hãng)</div></div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Claim bị Reject hoặc yêu cầu bổ sung
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-claim" data-step="21" style="display: none;">
+            <td class="m-stt">21</td>
+            <td>
+        <div class="m-actor-name">Bộ phận BH</div>
+        <span class="m-actor-badge badge-claim">Claim &amp; Đối Soát</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Xử lý Claim bị từ chối/bổ sung</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-wms"><i class="fas fa-warehouse"></i> WMS</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Bổ sung bằng chứng hoặc chuyển chi phí nội bộ nếu vi phạm quy chế</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Claim bị Reject</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Hồ sơ bổ sung / Quyết định xử lý nội bộ</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Xử lý ngoại lệ</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Biên bản xử lý Reject</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">CẦN HỎI: khung phân loại nguyên nhân Reject và trách nhiệm tài chính (KTV/Công ty)</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Hãng vẫn từ chối sau bổ sung
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-claim" data-step="22" style="display: none;">
+            <td class="m-stt">22</td>
+            <td>
+        <div class="m-actor-name">Kế toán</div>
+        <span class="m-actor-badge badge-claim">Claim &amp; Đối Soát</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Đối soát 3 bên</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-erp"><i class="fas fa-file-invoice-dollar"></i> ERP</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Đối soát khớp 100%: Linh kiện mới + Linh kiện xác đã trả + Tiền công KTV</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Claim đã duyệt</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Bảng đối soát 3 bên</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đối soát</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Bảng đối soát</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Không hạch toán khi 3 phần chưa khớp 100%</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Lệch số liệu giữa 3 phần
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-claim" data-step="23" style="display: none;">
+            <td class="m-stt">23</td>
+            <td>
+        <div class="m-actor-name">Kế toán</div>
+        <span class="m-actor-badge badge-claim">Claim &amp; Đối Soát</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Ghi nhận doanh thu &amp; công nợ phải thu</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-erp"><i class="fas fa-file-invoice-dollar"></i> ERP</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Hạch toán số tiền Hãng thanh toán theo hợp đồng BHUQ</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Bảng đối soát</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Bút toán doanh thu/công nợ</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã hạch toán</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Chứng từ kế toán</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Thời điểm ghi nhận doanh thu — CẦN HỎI (khi Jobcard hoàn tất/khi Hãng duyệt Claim/khi thu tiền)</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-claim" data-step="24" style="display: none;">
+            <td class="m-stt">24</td>
+            <td>
+        <div class="m-actor-name">Bộ phận BH</div>
+        <span class="m-actor-badge badge-claim">Claim &amp; Đối Soát</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Khóa hồ sơ &amp; Lưu trữ lịch sử</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-online"><i class="fas fa-cloud"></i> Online</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Đóng hồ sơ Claim Batch, lưu vết phục vụ KSNB</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Bảng đối soát đã hạch toán</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Hồ sơ lưu trữ</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã đóng hồ sơ</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Hồ sơ lưu trữ</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Lưu trữ tối thiểu theo quy định pháp lý/kiểm toán</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0" data-step="0.1" style="">
+            <td class="m-stt">0.1</td>
+            <td>
+        <div class="m-actor-name">Tổng đài/CRM</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Kiểm tra mốc 30 ngày kể từ ngày mua hàng/xuất hóa đơn</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Đối chiếu ngày hiện tại với ngày xuất hóa đơn trên hồ sơ mua hàng</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Serial/Model, Ngày mua hàng</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kết quả: Còn/Hết hạn 30 ngày</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang kiểm tra</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Áp dụng cho CẢ Mô hình 1 và Mô hình 2 — trong 30 ngày luôn tư vấn trước bất kể Hãng ủy quyền gì</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Sai lệch ngày mua hàng trên hệ thống
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0 filter-ksnb" data-step="0.2" style="">
+            <td class="m-stt">0.2</td>
+            <td>
+        <div class="m-actor-name">Tổng đài</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Tư vấn Cấp 1 cho KH (áp dụng bắt buộc khi còn trong 30 ngày)</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tổng đài tư vấn bất kể Mô hình 1 hay 2</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả kiểm tra 30 ngày = Còn hạn</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kết quả tư vấn</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang tư vấn</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-critical">
+                <div class="m-ksnb-header"><i class="fas fa-shield-halved text-rose-600"></i> <span class="ksnb-tag-red">ĐIỂM KIỂM SOÁT KSNB TRỌNG YẾU</span></div>
+                <div class="m-ksnb-content">Không được bỏ qua bước tư vấn khi còn trong 30 ngày, kể cả Hãng thuộc Mô hình 2</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0" data-step="0.3" style="">
+            <td class="m-stt">0.3</td>
+            <td>
+        <div class="m-actor-name">Tổng đài</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Thao tác 'Chuyển kỹ thuật' khi tư vấn không thành công</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-crm"><i class="fas fa-headset"></i> CRM</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Tư vấn thất bại trong 30 ngày → chuyển sang xử lý kỹ thuật tại nhà (không phải chuyển Hãng ngay)</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả tư vấn thất bại</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Trigger tạo Vận đơn 1025</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Chuyển kỹ thuật</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Đây là nhánh riêng biệt, KHÔNG dùng nút 'Chuyển Hãng' như luồng thường</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0" data-step="0.4" style="">
+            <td class="m-stt">0.4</td>
+            <td>
+        <div class="m-actor-name">Hệ thống TMS</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Tự động tạo Vận đơn 1025 (Đổi trả tại nhà)</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-tms"><i class="fas fa-truck-fast"></i> TMS</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Sinh Vận đơn loại 1025 có sẵn trong hệ thống, điều phối KTV</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Trigger 'Chuyển kỹ thuật'</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Vận đơn 1025</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã tạo vận đơn</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Vận đơn 1025</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Dùng lại vận đơn 1025 sẵn có, không tạo loại vận đơn mới</div>
+            </div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0" data-step="0.5" style="">
+            <td class="m-stt">0.5</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Đi Vận đơn 1025 như quy trình bình thường</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">Đến nhà KH, kiểm tra, chẩn đoán, thử sửa tại chỗ</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Vận đơn 1025</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Kết quả xử lý tại nhà</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đang xử lý</span></div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Theo đúng quy trình vận đơn đổi trả tại nhà hiện hành</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Không gặp khách/sai địa chỉ
+            </div>
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0" data-step="0.6a" style="">
+            <td class="m-stt">0.6a</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">[Sửa được] Hoàn tất Vận đơn 1025</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">KTV sửa thành công tại nhà, đóng vận đơn bình thường</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả sửa = Thành công</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Vận đơn 1025 hoàn tất</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Hoàn tất</span></div></div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0" data-step="0.6b" style="">
+            <td class="m-stt">0.6b</td>
+            <td>
+        <div class="m-actor-name">KTV Thợ ĐMX</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">[Không sửa được] Thao tác 'Chuyển Hãng' trên Vận đơn 1025</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-app"><i class="fas fa-mobile-screen"></i> TMS App</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">KTV không xử lý được tại nhà → chuyển Hãng ngay trên vận đơn 1025</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Kết quả sửa = Thất bại</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Trigger tạo Jobcard mới</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Chuyển Hãng</span></div></div>
+        
+        
+    </td>
+        </tr>
+    
+
+        <tr class="filter-p0" data-step="0.7" style="">
+            <td class="m-stt">0.7</td>
+            <td>
+        <div class="m-actor-name">Hệ thống</div>
+        <span class="m-actor-badge badge-phase0">Mốc ≤ 30 Ngày</span>
+        <div class="row-action-btns">
+            <button type="button" class="btn-row-del" onclick="deleteModelRow(this)" title="Xóa dòng này">✕ Xóa</button>
+        </div>
+    </td>
+            <td class="m-action-text">
+                <div class="action-title">Tự động tạo Jobcard mới (BHUQ) + đẩy Portal Hãng + đóng Vận đơn 1025 + đóng Jobcard đổi trả tại nhà</div>
+            </td>
+            <td style="text-align: center;"><span class="sys-pill sys-wms"><i class="fas fa-warehouse"></i> WMS</span> <span class="sys-pill sys-tms"><i class="fas fa-truck-fast"></i> TMS</span> <span class="sys-pill sys-portal"><i class="fas fa-globe"></i> Portal Hãng</span></td>
+            <td class="m-logic-cell">
+        <div class="m-logic-main">3 hành động đồng thời: (1) Tạo Jobcard BHUQ mới, (2) Đóng Vận đơn 1025, (3) Đóng Jobcard đổi trả tại nhà ban đầu</div>
+        <div class="logic-meta-grid"><div class="logic-meta-item"><b><i class="fas fa-arrow-right-to-bracket text-sky-600"></i> Input:</b> Trigger 'Chuyển Hãng' từ Vận đơn 1025</div><div class="logic-meta-item"><b><i class="fas fa-arrow-right-from-bracket text-emerald-600"></i> Output:</b> Jobcard BHUQ mới trên Portal Hãng</div><div class="logic-meta-item"><b><i class="fas fa-tag text-indigo-600"></i> Trạng thái:</b> <span class="status-chip">Đã chuyển sang BHUQ</span></div><div class="logic-meta-item"><b><i class="fas fa-file-lines text-slate-600"></i> Chứng từ:</b> Jobcard BHUQ, Log đóng Vận đơn 1025</div></div>
+        
+            <div class="m-ksnb-box ksnb-box-standard">
+                <div class="m-ksnb-header"><i class="fas fa-triangle-exclamation text-amber-600"></i> <span class="ksnb-tag-amber">QUY TẮC NGHIỆP VỤ BẮT BUỘC</span></div>
+                <div class="m-ksnb-content">Đảm bảo không tồn tại song song 2 hồ sơ (Vận đơn 1025 + Jobcard BHUQ) cùng mở</div>
+            </div>
+        
+        
+            <div class="m-exc-box">
+                <i class="fas fa-bolt text-rose-500"></i> <b>Rủi ro &amp; Xử lý ngoại lệ:</b> Lỗi đồng bộ khi đóng 1 trong 2 hồ sơ
+            </div>
+        
+    </td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: BUSINESS RULES & EXCEPTIONS ==================== -->
+        <div id="tab-rules-exceptions" class="tab-pane">
+            <!-- 16 Business Rules -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-scale-balanced text-sky-600"></i> DANH MỤC 16 QUY TẮC NGHIỆP VỤ (BUSINESS RULES — BR)</h2>
+                    <span class="badge-role">Sheet 4 Business Rules</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">Mã Rule</th>
+                                <th style="width: 220px;">Tên quy tắc</th>
+                                <th style="width: 240px;">Điều kiện áp dụng</th>
+                                <th>Hành động hệ thống</th>
+                                <th style="width: 220px;">Kết quả mong đợi</th>
+                                <th style="width: 140px; text-align: center;">Phụ trách</th>
+                                <th style="width: 100px; text-align: center;">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-01</td>
+            <td class="font-semibold text-slate-800">Phân loại Mô hình ủy quyền</td>
+            <td class="text-slate-600">Serial/Model đối chiếu Master BHUQ trên CRM</td>
+            <td class="text-slate-800 font-medium">Hệ thống tự phân loại Mô hình 1 (Tư vấn+Sửa chữa) hoặc Mô hình 2 (Chỉ sửa chữa)</td>
+            <td class="text-emerald-700">Tổng đài xử lý đúng kịch bản ngay từ đầu cuộc gọi</td>
+            <td class="text-center"><span class="badge-role">CRM/IT</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-02</td>
+            <td class="font-semibold text-slate-800">Đóng ticket ngay khi Mô hình 2</td>
+            <td class="text-slate-600">Hãng chỉ ủy quyền sửa chữa (Mô hình 2)</td>
+            <td class="text-slate-800 font-medium">Tổng đài bấm Chuyển Hãng → CRM tự đóng ticket ngay lập tức</td>
+            <td class="text-emerald-700">Không giữ ticket mở gây sai SLA</td>
+            <td class="text-center"><span class="badge-role">Tổng đài/CRM</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-03</td>
+            <td class="font-semibold text-slate-800">Chặn đối soát phí tư vấn khi Hãng tự xử lý</td>
+            <td class="text-slate-600">Hãng tự tư vấn thành công và đóng Jobcard trên Portal</td>
+            <td class="text-slate-800 font-medium">Hệ thống KHÔNG cho phép ghi nhận đối soát phí tư vấn cho ĐMX</td>
+            <td class="text-emerald-700">Tránh claim sai phí tư vấn</td>
+            <td class="text-center"><span class="badge-role">Kế toán/BH</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-04</td>
+            <td class="font-semibold text-slate-800">Điều kiện sinh Vận đơn Thợ ĐMX</td>
+            <td class="text-slate-600">Hãng tư vấn không thành công và bấm 'Tạo vận đơn cho Thợ ĐMX' trên Portal</td>
+            <td class="text-slate-800 font-medium">TMS nhận trigger, tự động sinh Vận đơn BHUQ</td>
+            <td class="text-emerald-700">Vận đơn chỉ tạo khi có xác nhận chính thức từ Hãng</td>
+            <td class="text-center"><span class="badge-role">TMS/IT</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-05</td>
+            <td class="font-semibold text-slate-800">Mapping Serial 3 chiều bắt buộc</td>
+            <td class="text-slate-600">Sau khi KTV thay linh kiện</td>
+            <td class="text-slate-800 font-medium">Hệ thống bắt buộc nhập đủ Serial Máy ↔ Serial LK Mới ↔ Serial LK Xác</td>
+            <td class="text-emerald-700">Truy vết 100% từng linh kiện đã thay</td>
+            <td class="text-center"><span class="badge-role">KTV/WMS</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-06</td>
+            <td class="font-semibold text-slate-800">Không đóng Jobcard khi thiếu QC</td>
+            <td class="text-slate-600">Sau khi sửa chữa xong</td>
+            <td class="text-slate-800 font-medium">Hệ thống chặn nút Hoàn tất Jobcard nếu checklist QC chưa Pass</td>
+            <td class="text-emerald-700">Đảm bảo chất lượng trước khi đóng ca</td>
+            <td class="text-center"><span class="badge-role">KTV/WMS</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-07</td>
+            <td class="font-semibold text-slate-800">Không đóng Jobcard khi thiếu xác linh kiện</td>
+            <td class="text-slate-600">Đã xuất linh kiện mới cho Jobcard bảo hành</td>
+            <td class="text-slate-800 font-medium">Hệ thống chặn đóng Jobcard nếu chưa nhập kho LK xác tương ứng (trừ Hãng miễn thu hồi bằng văn bản)</td>
+            <td class="text-emerald-700">Đảm bảo thu hồi 100% xác linh kiện</td>
+            <td class="text-center"><span class="badge-role">KTV/Kho/KSNB</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-08</td>
+            <td class="font-semibold text-slate-800">Đối soát 3 phần khớp 100% trước hạch toán</td>
+            <td class="text-slate-600">Trước khi Kế toán ghi nhận doanh thu/công nợ</td>
+            <td class="text-slate-800 font-medium">Hệ thống yêu cầu khớp: Linh kiện mới + Linh kiện xác đã trả + Tiền công KTV</td>
+            <td class="text-emerald-700">Không hạch toán sai lệch số liệu</td>
+            <td class="text-center"><span class="badge-role">Kế toán</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-09</td>
+            <td class="font-semibold text-slate-800">Mã hình thức xuất kho theo nguồn gốc LK</td>
+            <td class="text-slate-600">Xuất kho linh kiện cho Jobcard BHUQ</td>
+            <td class="text-slate-800 font-medium">Phân biệt rõ mã xuất kho: LK Ký gửi (BH/Sửa chữa phí) vs LK Mua đứt (BH/Sửa chữa phí)</td>
+            <td class="text-emerald-700">Đúng bản chất kế toán và đúng đối tượng claim</td>
+            <td class="text-center"><span class="badge-role">Kế toán Kho/IT ERP</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-10</td>
+            <td class="font-semibold text-slate-800">Cơ chế Pre-approval linh kiện giá trị cao</td>
+            <td class="text-slate-600">Linh kiện đề xuất thuộc danh mục giá trị cao/đặc thù theo Hãng</td>
+            <td class="text-slate-800 font-medium">Hệ thống gửi yêu cầu Approval ID lên Portal Hãng trước khi xuất kho</td>
+            <td class="text-emerald-700">Kiểm soát chi phí linh kiện giá trị lớn</td>
+            <td class="text-center"><span class="badge-role">Vận hành/Hãng</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI (Phase 2)</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-11</td>
+            <td class="font-semibold text-slate-800">Phân loại nguyên nhân Claim bị Reject</td>
+            <td class="text-slate-600">Hãng trả kết quả Rejected trên Portal</td>
+            <td class="text-slate-800 font-medium">Bộ phận BH phân loại nguyên nhân: lỗi chủ quan/chuyên môn/khách quan để xác định trách nhiệm tài chính</td>
+            <td class="text-emerald-700">Minh bạch trách nhiệm tài chính khi Claim bị từ chối</td>
+            <td class="text-center"><span class="badge-role">Vận hành BHSC/KSNB</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-12</td>
+            <td class="font-semibold text-slate-800">Thời điểm ghi nhận doanh thu</td>
+            <td class="text-slate-600">Jobcard hoàn tất / Claim được Hãng duyệt / Hãng thanh toán</td>
+            <td class="text-slate-800 font-medium">Kế toán ghi nhận doanh thu tại đúng 1 trong 3 mốc đã chốt</td>
+            <td class="text-emerald-700">Đảm bảo nhất quán chuẩn mực kế toán, đúng kỳ kế toán</td>
+            <td class="text-center"><span class="badge-role">Kế toán Nghiệp vụ Thợ ĐMX</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-13</td>
+            <td class="font-semibold text-slate-800">Tần suất tập hợp Claim Batch</td>
+            <td class="text-slate-600">Jobcard đã hoàn tất trong kỳ</td>
+            <td class="text-slate-800 font-medium">Bộ phận BH tổng hợp Claim theo tần suất đã thống nhất với từng Hãng</td>
+            <td class="text-emerald-700">Đồng bộ chu kỳ đối soát với Hãng</td>
+            <td class="text-center"><span class="badge-role">Vận hành + Hãng + Kế toán</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-14</td>
+            <td class="font-semibold text-slate-800">Bắt buộc tư vấn khi còn trong 30 ngày</td>
+            <td class="text-slate-600">Sản phẩm còn trong 30 ngày kể từ ngày mua hàng/xuất hóa đơn</td>
+            <td class="text-slate-800 font-medium">Hệ thống bắt buộc luồng tư vấn Cấp 1 trước, áp dụng cho CẢ Mô hình 1 và Mô hình 2</td>
+            <td class="text-emerald-700">Không bỏ sót cơ hội xử lý nhanh trong giai đoạn đổi trả/bảo hành sớm</td>
+            <td class="text-center"><span class="badge-role">Tổng đài/CRM</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-15</td>
+            <td class="font-semibold text-slate-800">Dùng Vận đơn 1025 cho nhánh 30 ngày</td>
+            <td class="text-slate-600">Tư vấn trong 30 ngày thất bại, thao tác 'Chuyển kỹ thuật'</td>
+            <td class="text-slate-800 font-medium">Hệ thống tạo Vận đơn 1025 (loại Đổi trả tại nhà có sẵn), không tạo Jobcard BHUQ ở bước này</td>
+            <td class="text-emerald-700">Tận dụng luồng vận đơn đổi trả sẵn có, không phát sinh nghiệp vụ mới cho IT</td>
+            <td class="text-center"><span class="badge-role">TMS/CRM</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-700 text-center">BR-16</td>
+            <td class="font-semibold text-slate-800">Chuyển đổi Vận đơn 1025 sang Jobcard BHUQ khi không sửa được</td>
+            <td class="text-slate-600">KTV không sửa được tại nhà trên Vận đơn 1025, bấm 'Chuyển Hãng'</td>
+            <td class="text-slate-800 font-medium">Hệ thống tự động: tạo Jobcard BHUQ mới + đẩy Portal Hãng + đóng Vận đơn 1025 + đóng Jobcard đổi trả tại nhà ban đầu</td>
+            <td class="text-emerald-700">Không tồn tại song song 2 hồ sơ mở cho cùng 1 yêu cầu của khách</td>
+            <td class="text-center"><span class="badge-role">KTV/TMS/WMS/IT</span></td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 10 Exceptions & Risk Controls -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-triangle-exclamation text-rose-600"></i> BẢNG KIỂM SOÁT 10 ĐIỂM NGOẠI LỆ &amp; RỦI RO KSNB (EXC)</h2>
+                    <span class="badge-role">Sheet 8 Exception &amp; Control</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">Mã EXC</th>
+                                <th style="width: 220px;">Tình huống rủi ro</th>
+                                <th style="width: 200px;">Hậu quả tiềm tàng</th>
+                                <th>Hành động xử lý</th>
+                                <th style="width: 260px;">Điểm kiểm soát hệ thống</th>
+                                <th style="width: 140px; text-align: center;">Phụ trách</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-01</td>
+            <td class="font-semibold text-slate-800">Tổng đài tư vấn nhầm khi Hãng chỉ ủy quyền sửa chữa (Mô hình 2)</td>
+            <td class="text-rose-700">Sai lệch nghiệp vụ, có thể phát sinh tranh chấp phí tư vấn không hợp lệ</td>
+            <td class="text-slate-800">Đào tạo lại, cảnh báo hệ thống khi phát hiện sai kịch bản</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">CRM chặn thao tác tư vấn khi Mô hình = 2</td>
+            <td class="text-center"><span class="badge-role">Tổng đài/KSNB</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-02</td>
+            <td class="font-semibold text-slate-800">Giữ ticket mở quá lâu không đóng khi đã chuyển Hãng</td>
+            <td class="text-rose-700">Sai lệch SLA tiếp nhận, ảnh hưởng báo cáo KPI</td>
+            <td class="text-slate-800">Cảnh báo tự động sau X phút chưa đóng ticket</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Auto-close hoặc cảnh báo ticket tồn đọng</td>
+            <td class="text-center"><span class="badge-role">CRM/Giám sát vận hành</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-03</td>
+            <td class="font-semibold text-slate-800">Hãng tự xử lý thành công nhưng ĐMX vẫn claim phí tư vấn</td>
+            <td class="text-rose-700">Sai lệch tài chính, claim khống</td>
+            <td class="text-slate-800">Chặn hệ thống không cho tạo yêu cầu đối soát phí tư vấn khi Jobcard đóng bởi Hãng</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Rule BR-03 tự động chặn</td>
+            <td class="text-center"><span class="badge-role">Kế toán/KSNB</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-04</td>
+            <td class="font-semibold text-slate-800">Vận đơn được tạo khi Hãng chưa xác nhận trên Portal</td>
+            <td class="text-rose-700">Điều phối sai, lãng phí nguồn lực KTV</td>
+            <td class="text-slate-800">Chỉ cho phép TMS nhận trigger hợp lệ từ Portal Hãng</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Rule BR-04, kiểm tra nguồn trigger</td>
+            <td class="text-center"><span class="badge-role">TMS/IT</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-05</td>
+            <td class="font-semibold text-slate-800">Thiếu mapping Serial Máy/LK Mới/LK Xác</td>
+            <td class="text-rose-700">Không truy vết được, rủi ro gian lận tráo linh kiện</td>
+            <td class="text-slate-800">Chặn hoàn tất Jobcard nếu thiếu bất kỳ Serial nào</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Rule BR-05, validation bắt buộc trên App</td>
+            <td class="text-center"><span class="badge-role">KTV/WMS/KSNB</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-06</td>
+            <td class="font-semibold text-slate-800">Hoàn tất Jobcard khi QC chưa Pass</td>
+            <td class="text-rose-700">Sản phẩm giao cho KH chưa đạt chất lượng</td>
+            <td class="text-slate-800">Chặn nút Hoàn tất Jobcard trên hệ thống nếu QC = Fail</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Rule BR-06</td>
+            <td class="text-center"><span class="badge-role">KTV/Giám sát kỹ thuật</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-07</td>
+            <td class="font-semibold text-slate-800">Mất/thiếu linh kiện xác thu hồi</td>
+            <td class="text-rose-700">Hãng từ chối claim toàn bộ lô, tổn thất tài chính</td>
+            <td class="text-slate-800">Đối chiếu bắt buộc Phiếu xuất LK mới vs Phiếu nhập xác trước khi đóng Jobcard</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Rule BR-07</td>
+            <td class="text-center"><span class="badge-role">KTV/Kho/KSNB</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-08</td>
+            <td class="font-semibold text-slate-800">Khách hàng không đồng ý ký nghiệm thu</td>
+            <td class="text-rose-700">Không có bằng chứng hoàn tất dịch vụ</td>
+            <td class="text-slate-800">Quy trình xử lý riêng: ghi nhận lý do, xin xác nhận qua kênh khác (SMS/OTP) — CẦN HỎI</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Chưa có quy định chính thức</td>
+            <td class="text-center"><span class="badge-role">Vận hành KTV/KSNB</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-09</td>
+            <td class="font-semibold text-slate-800">Claim bị Hãng Reject nhiều lần</td>
+            <td class="text-rose-700">Tổn thất tài chính không thu hồi được, tồn đọng chi phí</td>
+            <td class="text-slate-800">Phân loại nguyên nhân, xác định trách nhiệm KTV/Công ty — CẦN HỎI khung xử lý chính thức</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Chưa có quy định chính thức đầy đủ</td>
+            <td class="text-center"><span class="badge-role">Vận hành BHSC/KSNB/Kế toán</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-rose-600 text-center">EXC-10</td>
+            <td class="font-semibold text-slate-800">Đối soát 3 bên không khớp (LK mới / LK xác / Tiền công)</td>
+            <td class="text-rose-700">Sai lệch hạch toán, rủi ro kiểm toán</td>
+            <td class="text-slate-800">Không cho phép hạch toán khi số liệu lệch, phải tra soát nguyên nhân trước</td>
+            <td class="bg-amber-50 text-amber-900 font-medium p-2 rounded">Rule BR-08</td>
+            <td class="text-center"><span class="badge-role">Kế toán/KSNB</span></td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 4: SYSTEMS & OPEN ISSUES ==================== -->
+        <div id="tab-systems-issues" class="tab-pane">
+            <!-- 12 Open Issues With Directives from Anh Chuong -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-clipboard-question text-amber-600"></i> DANH MỤC 12 CÂU HỎI MỞ &amp; Ý KIẾN CHỈ ĐẠO CỦA ANH CHƯƠNG</h2>
+                    <span class="badge-tag-confirm"><i class="fas fa-pen"></i> Có thể gõ trực tiếp ý kiến chỉ đạo vào cột vàng bên dưới</span>
+                </div>
+                <p style="font-size: 0.84rem; color: #64748b; margin-bottom: 14px;">
+                    💡 <b>Hướng dẫn cho Anh Chương:</b> Bấm trực tiếp vào các ô ở <b>Cột Ý KIẾN / CHỈ ĐẠO CỦA ANH CHƯƠNG</b> bên dưới để gõ chỉ đạo, sau đó bấm nút <b>"Lưu vào Code (Ctrl+S)"</b> ở góc trên cùng bên phải. Hệ thống sẽ tự động ghi nhớ và lưu thẳng vào file mã nguồn!
+                </p>
+                <div class="table-wrap">
+                    <table class="matrix-table" id="issuesTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">Mã</th>
+                                <th style="width: 220px;">Nội dung chưa rõ</th>
+                                <th style="width: 260px;">Câu hỏi chi tiết</th>
+                                <th style="width: 140px; text-align: center;">Hỏi ai</th>
+                                <th style="width: 90px; text-align: center;">Mức độ</th>
+                                <th style="width: 320px; background: #fef3c7; color: #92400e;">Ý KIẾN / CHỈ ĐẠO CỦA ANH CHƯƠNG</th>
+                                <th style="width: 90px; text-align: center;">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-01</td>
+            <td class="font-semibold text-slate-800">Mã hình thức xuất kho phân biệt LK Ký gửi/Mua đứt dùng cho BH hay Sửa chữa có phí</td>
+            <td class="text-slate-700 text-sm">Mã hình thức xuất kho trên ERP/WMS cho từng trường hợp trong 4 trường hợp là mã số mấy?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Kế toán Kho + IT ERP</td>
+            <td class="text-center"><span class="badge-risk-high">Cao</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-01"><br></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-02</td>
+            <td class="font-semibold text-slate-800">Cơ chế Pre-approval Hãng (Approval ID)</td>
+            <td class="text-slate-700 text-sm">Những Hãng nào yêu cầu duyệt thủ công, Hãng nào duyệt tự động? Ngưỡng giá trị linh kiện nào cần duyệt?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành Thợ ĐMX + Hãng</td>
+            <td class="text-center"><span class="badge-risk-high">Trung bình (Phase 2)</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-02"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-03</td>
+            <td class="font-semibold text-slate-800">Khách hàng không ký nghiệm thu</td>
+            <td class="text-slate-700 text-sm">Quy trình thay thế: SMS OTP, ghi âm xác nhận, hay biên bản đơn phương của KTV có nhân chứng?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành KTV + KSNB</td>
+            <td class="text-center"><span class="badge-risk-high">Cao</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-03"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-04</td>
+            <td class="font-semibold text-slate-800">Khung xử lý khi Claim bị Hãng Reject</td>
+            <td class="text-slate-700 text-sm">Ai phân loại nguyên nhân (chủ quan/chuyên môn/khách quan)? Tỷ lệ trách nhiệm tài chính KTV/Công ty là bao nhiêu?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành BHSC + KSNB + Kế toán</td>
+            <td class="text-center"><span class="badge-risk-high">Cao</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-04"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-05</td>
+            <td class="font-semibold text-slate-800">Thời điểm ghi nhận doanh thu</td>
+            <td class="text-slate-700 text-sm">Ghi nhận khi Jobcard hoàn tất, khi Hãng duyệt Claim, hay khi thực nhận tiền từ Hãng?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Kế toán Nghiệp vụ Thợ ĐMX</td>
+            <td class="text-center"><span class="badge-risk-high">Cao</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-05"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-06</td>
+            <td class="font-semibold text-slate-800">Tần suất tập hợp và gửi Claim Batch</td>
+            <td class="text-slate-700 text-sm">Theo từng Jobcard, theo ngày, theo tuần hay theo tháng? Có khác nhau giữa các Hãng không?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành + từng Hãng + Kế toán</td>
+            <td class="text-center"><span class="badge-risk-high">Cao</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-06"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-07</td>
+            <td class="font-semibold text-slate-800">Bộ hồ sơ Claim tối thiểu theo từng Hãng</td>
+            <td class="text-slate-700 text-sm">Mỗi Hãng có yêu cầu hồ sơ khác nhau không? Có chuẩn hóa được bộ hồ sơ chung không?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành Thợ ĐMX + từng Hãng</td>
+            <td class="text-center"><span class="badge-risk-high">Trung bình</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-07"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-08</td>
+            <td class="font-semibold text-slate-800">SLA điều phối và xử lý theo cam kết với từng Hãng</td>
+            <td class="text-slate-700 text-sm">Thời gian điều phối KTV, thời gian hoàn tất sửa chữa theo hợp đồng với từng Hãng là bao nhiêu?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành + Hãng</td>
+            <td class="text-center"><span class="badge-risk-high">Trung bình</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-08"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-09</td>
+            <td class="font-semibold text-slate-800">Chính sách miễn thu hồi linh kiện xác</td>
+            <td class="text-slate-700 text-sm">Những trường hợp nào Hãng miễn thu hồi xác bằng văn bản? Quy trình xin miễn trừ ra sao?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành + Hãng</td>
+            <td class="text-center"><span class="badge-risk-high">Trung bình</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-09"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-10</td>
+            <td class="font-semibold text-slate-800">Đơn giá Claim chi phí Hãng (di chuyển + bảo hành theo mức độ)</td>
+            <td class="text-slate-700 text-sm">Đơn giá chính thức cho Chi phí di chuyển và 4 mức Chi phí bảo hành (Không thay LK/Cơ bản/Nâng cao/Phức tạp) là bao nhiêu theo từng Hãng?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Vận hành Thợ ĐMX + Hãng + Kế toán</td>
+            <td class="text-center"><span class="badge-risk-high">Cao</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-10"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-11</td>
+            <td class="font-semibold text-slate-800">Vận đơn 1025 dùng chung hay tách riêng cho nghiệp vụ BHUQ 30 ngày</td>
+            <td class="text-slate-700 text-sm">Vận đơn 1025 hiện dùng chung cho đổi trả thông thường — có cần gắn thêm cờ/nhãn phân biệt để báo cáo tách riêng nhóm '30 ngày BHUQ' không?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">IT/TMS + Vận hành</td>
+            <td class="text-center"><span class="badge-risk-high">Trung bình</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-11"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-center text-amber-700 text-base">OI-12</td>
+            <td class="font-semibold text-slate-800">Xử lý đối soát phí tư vấn cho nhánh 30 ngày</td>
+            <td class="text-slate-700 text-sm">Khi tư vấn trong 30 ngày thành công, có ghi nhận đối soát phí tư vấn cho ĐMX như Mô hình 1 không, hay không phát sinh phí vì đây là nghiệp vụ đổi trả?</td>
+            <td class="text-indigo-700 text-center font-medium text-sm">Kế toán Nghiệp vụ Thợ ĐMX + Vận hành</td>
+            <td class="text-center"><span class="badge-risk-high">Cao</span></td>
+            <td class="editable-directive-cell" data-issue-id="OI-12"><span class="placeholder-text"><i class="fas fa-pen-to-square"></i> Bấm để nhập ý kiến chỉ đạo của Anh Chương...</span></td>
+            <td class="text-center"><span class="badge-status-pending">CẦN HỎI</span></td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 6 Core Systems -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-network-wired text-sky-600"></i> MA TRẬN 6 HỆ THỐNG CÔNG NGHỆ THAM GIA (SYSTEM MAPPING)</h2>
+                    <span class="badge-role">Sheet 5 System Mapping</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 120px; text-align: center;">Hệ thống</th>
+                                <th style="width: 220px;">Vai trò chính</th>
+                                <th style="width: 180px;">Dữ liệu đầu vào (Input)</th>
+                                <th>Xử lý logic</th>
+                                <th style="width: 180px;">Dữ liệu đầu ra (Output)</th>
+                                <th style="width: 180px;">Hình thức tích hợp</th>
+                                <th style="width: 130px; text-align: center;">Phụ trách</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+        <tr>
+            <td class="font-bold text-sky-800 text-center text-base">CRM</td>
+            <td class="font-medium text-slate-800">Tiếp nhận ticket, quản lý Master BHUQ (Hãng/Model/Mô hình ủy quyền)</td>
+            <td class="text-slate-600 text-sm">SĐT, Serial/IMEI/Model</td>
+            <td class="text-slate-700 text-sm">Phân loại Mô hình 1/2, định tuyến kịch bản tổng đài</td>
+            <td class="text-emerald-700 font-medium text-sm">Ticket, kết quả phân loại</td>
+            <td class="text-indigo-700 text-sm font-semibold">Nhập liệu trực tiếp bởi Tổng đài</td>
+            <td class="text-center"><span class="badge-role">Tổng đài/CRM Admin</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-800 text-center text-base">WMS</td>
+            <td class="font-medium text-slate-800">Tạo Jobcard, quản lý kho linh kiện, thu hồi xác</td>
+            <td class="text-slate-600 text-sm">Ticket CRM đã chuyển Hãng, đề xuất LK</td>
+            <td class="text-slate-700 text-sm">Tạo Jobcard, xuất/nhập kho linh kiện, khóa Jobcard</td>
+            <td class="text-emerald-700 font-medium text-sm">Jobcard, Phiếu xuất/nhập kho</td>
+            <td class="text-indigo-700 text-sm font-semibold">Đồng bộ tự động từ CRM + nhập liệu KTV</td>
+            <td class="text-center"><span class="badge-role">Kho/WMS Admin</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-800 text-center text-base">Portal Hãng</td>
+            <td class="font-medium text-slate-800">Hãng tư vấn Cấp 2, phê duyệt Pre-approval, thẩm định Claim</td>
+            <td class="text-slate-600 text-sm">Jobcard từ WMS/CRM, Claim Batch</td>
+            <td class="text-slate-700 text-sm">Hãng xử lý tư vấn, duyệt LK, duyệt/reject Claim</td>
+            <td class="text-emerald-700 font-medium text-sm">Trạng thái Jobcard, Approval ID, Trạng thái Claim</td>
+            <td class="text-indigo-700 text-sm font-semibold">API/tích hợp theo từng Hãng (cần xác nhận khả năng API)</td>
+            <td class="text-center"><span class="badge-role">Hãng/IT tích hợp</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-800 text-center text-base">TMS</td>
+            <td class="font-medium text-slate-800">Sinh Vận đơn BHUQ, điều phối KTV</td>
+            <td class="text-slate-600 text-sm">Trigger từ Portal Hãng</td>
+            <td class="text-slate-700 text-sm">Tạo vận đơn, phân công KTV theo khu vực</td>
+            <td class="text-emerald-700 font-medium text-sm">Vận đơn BHUQ</td>
+            <td class="text-indigo-700 text-sm font-semibold">Tự động nhận trigger từ Portal Hãng</td>
+            <td class="text-center"><span class="badge-role">TMS Admin</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-800 text-center text-base">TMS App (KTV)</td>
+            <td class="font-medium text-slate-800">Công cụ thao tác thực địa của KTV</td>
+            <td class="text-slate-600 text-sm">Vận đơn, thông tin Jobcard</td>
+            <td class="text-slate-700 text-sm">Chụp ảnh, chẩn đoán, mapping Serial, QC, nghiệm thu</td>
+            <td class="text-emerald-700 font-medium text-sm">Ảnh, kết quả chẩn đoán, checklist QC, biên bản nghiệm thu</td>
+            <td class="text-indigo-700 text-sm font-semibold">App di động đồng bộ real-time về WMS/TMS</td>
+            <td class="text-center"><span class="badge-role">IT App/Vận hành KTV</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-sky-800 text-center text-base">ERP</td>
+            <td class="font-medium text-slate-800">Đối soát tài chính, hạch toán kế toán</td>
+            <td class="text-slate-600 text-sm">Claim đã duyệt, dữ liệu Jobcard/Kho</td>
+            <td class="text-slate-700 text-sm">Đối soát 3 bên, hạch toán doanh thu/công nợ</td>
+            <td class="text-emerald-700 font-medium text-sm">Bút toán kế toán, báo cáo công nợ Hãng</td>
+            <td class="text-indigo-700 text-sm font-semibold">Đồng bộ dữ liệu từ WMS/Claim Hãng</td>
+            <td class="text-center"><span class="badge-role">Kế toán/ERP Admin</span></td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 14 Documents -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-folder-closed text-slate-700"></i> DANH MỤC 14 CHỨNG TỪ &amp; HẠCH TOÁN VẬN HÀNH (DOC MAPPING)</h2>
+                    <span class="badge-role">Sheet 6 Doc Mapping</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 220px;">Loại chứng từ</th>
+                                <th style="width: 120px; text-align: center;">Mã / Ký hiệu</th>
+                                <th style="width: 140px;">Phân loại</th>
+                                <th style="width: 120px; text-align: center;">Nguồn tạo</th>
+                                <th>Mục đích sử dụng</th>
+                                <th style="width: 240px;">Ràng buộc / Điểm cần hỏi</th>
+                                <th style="width: 100px; text-align: center;">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+        <tr>
+            <td class="font-bold text-slate-800">Jobcard</td>
+            <td class="font-mono text-center text-sky-700">JC-xxxxxxx</td>
+            <td><span class="badge-role">Chứng từ vận hành</span></td>
+            <td class="text-center font-medium text-slate-700">WMS</td>
+            <td class="text-slate-700">Quản lý vòng đời ca sửa chữa/bảo hành</td>
+            <td class="text-amber-700 text-sm">—</td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Vận đơn BHUQ</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ điều phối</span></td>
+            <td class="text-center font-medium text-slate-700">TMS</td>
+            <td class="text-slate-700">Điều phối KTV đến nhà khách</td>
+            <td class="text-amber-700 text-sm">—</td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Ảnh ngoại quan/Serial hiện trường</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Bằng chứng kỹ thuật</span></td>
+            <td class="text-center font-medium text-slate-700">TMS App (KTV)</td>
+            <td class="text-slate-700">Xác minh sản phẩm, chống gian lận</td>
+            <td class="text-amber-700 text-sm">Cần chuẩn hóa bộ ảnh bắt buộc (bao nhiêu góc/kiểu ảnh) — CẦN HỎI</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Approval ID</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ phê duyệt Hãng</span></td>
+            <td class="text-center font-medium text-slate-700">Portal Hãng</td>
+            <td class="text-slate-700">Phê duyệt linh kiện giá trị cao/đặc thù</td>
+            <td class="text-amber-700 text-sm">Phase 2, cần xác nhận danh sách Hãng áp dụng</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Phiếu xuất kho linh kiện mới</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ kho</span></td>
+            <td class="text-center font-medium text-slate-700">WMS/ERP</td>
+            <td class="text-slate-700">Xuất linh kiện mới cho Jobcard</td>
+            <td class="text-amber-700 text-sm">Cần chốt mã hình thức xuất riêng Ký gửi/Mua đứt (xem file Ma trận xuất LK CE)</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Phiếu nhập kho linh kiện xác</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ kho</span></td>
+            <td class="text-center font-medium text-slate-700">WMS</td>
+            <td class="text-slate-700">Thu hồi linh kiện xác từ KTV</td>
+            <td class="text-amber-700 text-sm">Bắt buộc đối chiếu 1-1 với Phiếu xuất LK mới</td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Checklist QC</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ kỹ thuật</span></td>
+            <td class="text-center font-medium text-slate-700">TMS App</td>
+            <td class="text-slate-700">Xác nhận chất lượng sau sửa chữa</td>
+            <td class="text-amber-700 text-sm">—</td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Biên bản nghiệm thu khách hàng</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ nghiệm thu</span></td>
+            <td class="text-center font-medium text-slate-700">TMS App</td>
+            <td class="text-slate-700">KH xác nhận hoàn tất dịch vụ</td>
+            <td class="text-amber-700 text-sm">Trường hợp KH không ký xử lý thế nào — CẦN HỎI</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Claim Batch</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ tài chính</span></td>
+            <td class="text-center font-medium text-slate-700">WMS/Bộ phận BH</td>
+            <td class="text-slate-700">Tổng hợp các Jobcard hoàn tất để gửi Hãng</td>
+            <td class="text-amber-700 text-sm">Tần suất tập hợp theo Hãng — CẦN HỎI</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Hồ sơ Claim gửi Hãng</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ tài chính</span></td>
+            <td class="text-center font-medium text-slate-700">Bộ phận BH</td>
+            <td class="text-slate-700">Đề nghị Hãng thanh toán chi phí BHUQ</td>
+            <td class="text-amber-700 text-sm">Bộ hồ sơ tối thiểu theo từng Hãng — CẦN HỎI</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Biên bản xử lý Claim Reject</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ xử lý ngoại lệ</span></td>
+            <td class="text-center font-medium text-slate-700">Bộ phận BH/KSNB</td>
+            <td class="text-slate-700">Ghi nhận nguyên nhân và trách nhiệm tài chính khi Claim bị từ chối</td>
+            <td class="text-amber-700 text-sm">Khung phân loại + tỷ lệ trách nhiệm — CẦN HỎI</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Bảng đối soát 3 bên</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ kế toán</span></td>
+            <td class="text-center font-medium text-slate-700">ERP/Kế toán</td>
+            <td class="text-slate-700">Đối soát Linh kiện mới + Linh kiện xác + Tiền công</td>
+            <td class="text-amber-700 text-sm">—</td>
+            <td class="text-center"><span class="badge-tag-confirm">CONFIRMED</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-bold text-slate-800">Bút toán doanh thu/công nợ Hãng</td>
+            <td class="font-mono text-center text-sky-700">—</td>
+            <td><span class="badge-role">Chứng từ kế toán</span></td>
+            <td class="text-center font-medium text-slate-700">ERP</td>
+            <td class="text-slate-700">Ghi nhận doanh thu và công nợ phải thu từ Hãng</td>
+            <td class="text-amber-700 text-sm">Thời điểm ghi nhận doanh thu — CẦN HỎI</td>
+            <td class="text-center"><span class="badge-tag-confirm">CẦN HỎI</span></td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- KPIs -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-pie text-emerald-600"></i> CHỈ SỐ CAM KẾT CHẤT LƯỢNG (KPI / SLA ĐỀ XUẤT)</h2>
+                    <span class="badge-role">Sheet 9 KPI - SLA</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 220px;">Hoạt động</th>
+                                <th style="width: 260px;">Chỉ số KPI</th>
+                                <th style="width: 180px; text-align: center;">Mục tiêu SLA</th>
+                                <th style="width: 100px; text-align: center;">Đơn vị</th>
+                                <th style="width: 120px; text-align: center;">Nguồn đo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+        <tr>
+            <td class="font-medium text-slate-800">Tiếp nhận cuộc gọi</td>
+            <td class="font-semibold text-sky-900">Thời gian tiếp nhận ticket</td>
+            <td class="text-center font-bold text-emerald-700 text-base">≤ 2 phút/cuộc gọi</td>
+            <td class="text-center text-slate-600">Phút</td>
+            <td class="text-center"><span class="sys-pill sys-crm">CRM</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Đóng ticket khi chuyển Hãng</td>
+            <td class="font-semibold text-sky-900">Tỷ lệ đóng ticket đúng thời điểm (Mô hình 2)</td>
+            <td class="text-center font-bold text-emerald-700 text-base">100%</td>
+            <td class="text-center text-slate-600">%</td>
+            <td class="text-center"><span class="sys-pill sys-crm">CRM</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Điều phối KTV</td>
+            <td class="font-semibold text-sky-900">Thời gian từ khi có Vận đơn đến khi KTV nhận ca</td>
+            <td class="text-center font-bold text-emerald-700 text-base">≤ 30 phút</td>
+            <td class="text-center text-slate-600">Phút</td>
+            <td class="text-center"><span class="sys-pill sys-crm">TMS</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Đến nhà khách hàng</td>
+            <td class="font-semibold text-sky-900">Thời gian từ nhận ca đến có mặt tại nhà KH</td>
+            <td class="text-center font-bold text-emerald-700 text-base">Theo cam kết SLA với Hãng — CẦN HỎI</td>
+            <td class="text-center text-slate-600">Giờ</td>
+            <td class="text-center"><span class="sys-pill sys-crm">TMS App</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Hoàn tất sửa chữa</td>
+            <td class="font-semibold text-sky-900">Thời gian từ tiếp nhận đến hoàn tất Jobcard</td>
+            <td class="text-center font-bold text-emerald-700 text-base">Theo cam kết SLA với Hãng — CẦN HỎI</td>
+            <td class="text-center text-slate-600">Giờ/Ngày</td>
+            <td class="text-center"><span class="sys-pill sys-crm">WMS</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Chất lượng QC</td>
+            <td class="font-semibold text-sky-900">Tỷ lệ Jobcard đạt QC lần đầu</td>
+            <td class="text-center font-bold text-emerald-700 text-base">≥ 95% (đề xuất)</td>
+            <td class="text-center text-slate-600">%</td>
+            <td class="text-center"><span class="sys-pill sys-crm">TMS App</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Thu hồi linh kiện xác</td>
+            <td class="font-semibold text-sky-900">Tỷ lệ LK xác thu hồi / LK mới xuất</td>
+            <td class="text-center font-bold text-emerald-700 text-base">100% (trừ miễn trừ có văn bản)</td>
+            <td class="text-center text-slate-600">%</td>
+            <td class="text-center"><span class="sys-pill sys-crm">WMS</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Claim Hãng</td>
+            <td class="font-semibold text-sky-900">Tỷ lệ Claim được duyệt lần đầu</td>
+            <td class="text-center font-bold text-emerald-700 text-base">≥ 90% (đề xuất)</td>
+            <td class="text-center text-slate-600">%</td>
+            <td class="text-center"><span class="sys-pill sys-crm">Portal Hãng</span></td>
+        </tr>
+    
+
+        <tr>
+            <td class="font-medium text-slate-800">Đối soát tài chính</td>
+            <td class="font-semibold text-sky-900">Thời gian hoàn tất đối soát 3 bên sau khi Claim duyệt</td>
+            <td class="text-center font-bold text-emerald-700 text-base">≤ 5 ngày làm việc (đề xuất)</td>
+            <td class="text-center text-slate-600">Ngày</td>
+            <td class="text-center"><span class="sys-pill sys-crm">ERP</span></td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Live Toast Notification -->
+    <div class="live-toast warning" id="liveToast">
+        <i class="fas fa-triangle-exclamation text-amber-400" id="liveToastIcon" style="font-size: 1.25rem;"></i>
+        <span id="liveToastMessage">✏️ Chế độ sửa trực tiếp đã BẬT! Anh có thể click vào bất kỳ văn bản nào để sửa.</span>
+    </div>
+
+    <!-- Client-Side JavaScript Logic -->
+    <script>
+        const SYNC_SERVER_URL = "http://127.0.0.1:8765";
+        const TARGET_REPO_PATH = "d:\\CHƯƠNG TRÌNH PYTHON\\GIBHUB TÀI LIỆU\\CE_Gia_dung\\Quy_trinh_bao_hanh_uy_quyen_tai_nha_CE.html";
+        const DOWNLOADS_PATH = "C:\\Users\\PC\\Downloads\\quy_trinh_bao_hanh_uy_quyen_tai_nha_CE_v1.html";
+
+        let isLiveEditActive = false;
+        let hasUnsavedChanges = false;
+        let isConnectedToDaemon = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkDaemonConnection();
+            setInterval(checkDaemonConnection, 5000);
+
+            // Setup keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+                    e.preventDefault();
+                    saveDirectlyToCode();
+                }
+            });
+
+            // Listen for input modifications in contenteditable cells
+            document.addEventListener('input', (e) => {
+                if (e.target && e.target.isContentEditable) {
+                    onContentModified();
+                }
+            });
+        });
+
+        // Check Connection with Python Daemon
+        async function checkDaemonConnection() {
+            const badge = document.getElementById('liveStatusBadge');
+            const text = document.getElementById('liveStatusText');
+            try {
+                const res = await fetch(`${SYNC_SERVER_URL}/health`, { method: 'GET', cache: 'no-store' });
+                if (res.ok) {
+                    isConnectedToDaemon = true;
+                    if (badge) badge.className = "live-status-badge";
+                    if (text) text.textContent = "Tự động lưu: Đã kết nối Code";
+                } else {
+                    throw new Error("Bad status");
+                }
+            } catch (err) {
+                isConnectedToDaemon = false;
+                if (badge) badge.className = "live-status-badge offline";
+                if (text) text.textContent = "Chưa bật Daemon (Lưu file thủ công)";
+            }
+        }
+
+        // Mark content modified
+        function onContentModified() {
+            hasUnsavedChanges = true;
+            const btnSave = document.getElementById('btnSaveToCode');
+            if (btnSave) {
+                btnSave.classList.add('dirty');
+                btnSave.innerHTML = '<i class="fas fa-floppy-disk"></i> Lưu vào Code *';
+            }
+        }
+
+        // Toggle Live Editing
+        function toggleLiveEditing() {
+            isLiveEditActive = !isLiveEditActive;
+            const btn = document.getElementById('btnToggleEdit');
+            const btnText = document.getElementById('btnEditText');
+
+            if (isLiveEditActive) {
+                document.body.classList.add('is-live-editing');
+                if (btn) btn.classList.add('active');
+                if (btnText) btnText.textContent = "Đang Sửa (Bấm để Khóa)";
+                enableContentEditing(true);
+                showToast("✏️ Chế độ sửa trực tiếp đã BẬT! Anh có thể click vào bất kỳ văn bản nào để sửa.", "warning");
+            } else {
+                document.body.classList.remove('is-live-editing');
+                if (btn) btn.classList.remove('active');
+                if (btnText) btnText.textContent = "Sửa trực tiếp";
+                enableContentEditing(false);
+                showToast("🔒 Đã khóa chế độ sửa. Trở lại chế độ đọc xem chuẩn.", "success");
+            }
+        }
+
+        function enableContentEditing(enable) {
+            // Select all editable targets
+            const targets = document.querySelectorAll(
+                '#matrixModelTable tbody td:not(.m-stt), ' +
+                '.m-logic-main, .m-action-text, .m-ksnb-content, .m-actor-name, ' +
+                '.editable-directive-cell'
+            );
+            targets.forEach(el => {
+                if (enable) {
+                    el.setAttribute('contenteditable', 'true');
+                } else {
+                    // keep editable-directive-cell always editable if needed, or lock
+                    el.removeAttribute('contenteditable');
+                }
+            });
+        }
+
+        // Tab Switching
+        function switchMainTab(tabId, btn) {
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            const targetPane = document.getElementById(tabId);
+            if (targetPane) targetPane.classList.add('active');
+            if (btn) btn.classList.add('active');
+        }
+
+        // Filter Table Rows
+        function filterTableRows(filterClass, btn) {
+            document.querySelectorAll('.filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const rows = document.querySelectorAll('#matrixModelTable tbody tr');
+            rows.forEach(row => {
+                if (filterClass === 'all') {
+                    row.style.display = '';
+                } else if (row.classList.contains(filterClass)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Search Table Rows
+        function searchTableRows(keyword) {
+            const val = (keyword || '').toLowerCase().trim();
+            const rows = document.querySelectorAll('#matrixModelTable tbody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                if (!val || text.includes(val)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Delete Row in Table
+        function deleteModelRow(btn) {
+            if (!isLiveEditActive) return;
+            const row = btn.closest('tr');
+            if (row && confirm('Anh có chắc muốn xóa bước này khỏi bảng không?')) {
+                row.remove();
+                onContentModified();
+                showToast("🗑️ Đã xóa bước thành công!", "warning");
+            }
+        }
+
+        // Add New Row in Table
+        function addNewModelRow() {
+            const tbody = document.querySelector('#matrixModelTable tbody');
+            if (!tbody) return;
+
+            const newRow = document.createElement('tr');
+            newRow.className = "filter-crm";
+            newRow.innerHTML = `
+                <td class="m-stt" contenteditable="true">+</td>
+                <td>
+                    <div class="m-actor-name" contenteditable="true">Actor Mới</div>
+                    <span class="m-actor-badge badge-crm" contenteditable="true">Giai đoạn</span>
+                    <div class="row-action-btns">
+                        <button type="button" class="btn-row-del" onclick="deleteModelRow(this)">✕ Xóa</button>
+                    </div>
+                </td>
+                <td class="m-action-text" contenteditable="true">
+                    <div class="action-title" contenteditable="true">Hành động mới vừa thêm</div>
+                </td>
+                <td style="text-align: center;"><span class="sys-pill sys-crm">CRM</span></td>
+                <td class="m-logic-cell" contenteditable="true">
+                    <div class="m-logic-main" contenteditable="true">Nhập logic hệ thống và điểm kiểm soát tại đây...</div>
+                </td>
+            `;
+
+            tbody.appendChild(newRow);
+            if (!isLiveEditActive) {
+                toggleLiveEditing();
+            }
+            onContentModified();
+            newRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            showToast("✨ Đã thêm dòng mới vào bảng! Anh nhập nội dung rồi bấm 'Lưu vào Code' nhé.", "success");
+        }
+
+        // Save Directly to Code
+        async function saveDirectlyToCode() {
+            const btnSave = document.getElementById('btnSaveToCode');
+            if (btnSave) {
+                btnSave.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang lưu...';
+            }
+
+            // Clean transient editable state before serializing
+            const editables = document.querySelectorAll('[contenteditable="true"]');
+            editables.forEach(el => el.removeAttribute('contenteditable'));
+            document.body.classList.remove('is-live-editing');
+
+            const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+
+            // Re-enable edit mode if it was active
+            if (isLiveEditActive) {
+                document.body.classList.add('is-live-editing');
+                enableContentEditing(true);
+            }
+
+            try {
+                const res = await fetch(`${SYNC_SERVER_URL}/api/save`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        html: fullHtml,
+                        targetPath: TARGET_REPO_PATH,
+                        downloadsPath: DOWNLOADS_PATH
+                    })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    hasUnsavedChanges = false;
+                    if (btnSave) {
+                        btnSave.classList.remove('dirty');
+                        btnSave.innerHTML = '<i class="fas fa-floppy-disk"></i> Lưu vào Code (Ctrl+S)';
+                    }
+                    showToast("🎉 TUYỆT VỜI! Đã tự động cập nhật trực tiếp vào file code thành công!", "success");
+                } else {
+                    throw new Error("Server response error: " + res.status);
+                }
+            } catch (err) {
+                console.warn("Could not save via local daemon:", err);
+                if (btnSave) {
+                    btnSave.innerHTML = '<i class="fas fa-floppy-disk"></i> Lưu vào Code *';
+                }
+                fallbackSaveHtml(fullHtml);
+            }
+        }
+
+        // Fallback file download
+        function fallbackSaveHtml(htmlContent) {
+            showToast("⚠️ Chưa bật Daemon ngầm. Đang tải file HTML cập nhật về máy cho anh...", "warning");
+            const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Quy_trinh_bao_hanh_uy_quyen_tai_nha_CE.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Toast Helper
+        function showToast(message, type = "success") {
+            const toast = document.getElementById('liveToast');
+            const toastMsg = document.getElementById('liveToastMessage');
+            const toastIcon = document.getElementById('liveToastIcon');
+            if (!toast || !toastMsg) return;
+
+            toast.className = `live-toast ${type} show`;
+            toastMsg.textContent = message;
+
+            if (type === "success") {
+                toastIcon.className = "fas fa-circle-check text-emerald-400";
+            } else if (type === "warning") {
+                toastIcon.className = "fas fa-triangle-exclamation text-amber-400";
+            } else {
+                toastIcon.className = "fas fa-circle-xmark text-rose-400";
+            }
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+    </script>
+
+
+</body></html>
