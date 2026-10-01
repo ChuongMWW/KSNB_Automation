@@ -119,40 +119,38 @@ body {
 .stat-info .stat-val { font-size: 15px; font-weight: 800; color: var(--text); line-height: 1.2; }
 .stat-info .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
 
-/* ================= MAIN CONTAINER ================= */
+/* ================= MAIN LAYOUT ================= */
 .container { max-width: 1240px; margin: 32px auto 60px; padding: 0 24px; }
 
-/* ================= SEARCH FILTER BOX ================= */
+/* ================= SEARCH FILTER ================= */
 .search-filter-box {
-  background: #fff; border: 1.5px solid var(--line); border-radius: 16px;
-  padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center;
-  gap: 14px; box-shadow: var(--shadow-sm);
+  background: #fff; border: 1.5px solid var(--line); border-radius: 14px;
+  padding: 12px 18px; margin-bottom: 24px; box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; gap: 12px;
 }
 .search-filter-box input {
-  flex: 1; border: none; outline: none; font-size: 14.5px; color: var(--text);
-  font-family: inherit;
+  flex: 1; border: none; outline: none; font-size: 14px; color: var(--text);
+  font-family: inherit; background: transparent;
 }
-.search-filter-box span { color: var(--text-muted); font-size: 18px; }
+.search-filter-box input::placeholder { color: #94a3b8; }
 
-/* ================= SECTION TABS NAVIGATION ================= */
+/* ================= STAGE NAVIGATION TABS ================= */
 .stage-nav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  padding: 4px 0 20px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
   margin-bottom: 28px;
-  border-bottom: 2px solid var(--line);
 }
 .stage-tab {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-radius: 12px;
   border: 1.5px solid var(--line);
   background: #fff;
   color: var(--text-muted);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -171,9 +169,9 @@ body {
   box-shadow: 0 4px 14px rgba(18, 53, 143, 0.25);
 }
 .tab-num {
-  width: 24px; height: 24px; border-radius: 6px;
+  width: 26px; height: 26px; border-radius: 8px;
   background: rgba(0,0,0,0.06); display: grid; place-items: center;
-  font-size: 11.5px; font-weight: 900;
+  font-size: 12px; font-weight: 900;
 }
 .stage-tab.active .tab-num {
   background: var(--yellow);
@@ -221,48 +219,49 @@ body {
   place-items: center; font-size: 16px;
 }
 
-/* ================= STRUCTURED STEP FLOW ================= */
+/* ================= ULTRA-STRUCTURED SOP STEP FLOW ================= */
 .flow-steps {
-  display: flex; flex-direction: column; gap: 16px; margin-top: 14px;
+  display: flex; flex-direction: column; gap: 20px; margin-top: 14px;
 }
 .step-item {
-  display: flex; gap: 16px; padding: 18px 20px; border-radius: 14px;
+  display: flex; gap: 18px; padding: 22px 24px; border-radius: 16px;
   border: 1.5px solid var(--line); background: #ffffff;
-  box-shadow: var(--shadow-sm); transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm); transition: all 0.25s ease;
 }
-.step-item:hover { border-color: var(--blue-border); transform: translateX(3px); box-shadow: var(--shadow-md); }
+.step-item:hover { border-color: var(--blue-border); transform: translateX(4px); box-shadow: var(--shadow-md); }
 .step-item.highlight { background: #fbfdff; border-color: var(--blue-border); }
 .step-item.alert-danger { background: #fffdfd; border-color: var(--red-border); }
 .step-item.alert-warning { background: #fffdfa; border-color: var(--orange-border); }
 .step-item.alert-success { background: #fafffc; border-color: var(--green-border); }
 
 .step-num-box {
-  width: 36px; height: 36px; border-radius: 10px; background: var(--blue);
-  color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 14px;
+  width: 42px; height: 42px; border-radius: 12px; background: var(--blue);
+  color: #fff; display: grid; place-items: center; font-weight: 900; font-size: 16px;
   flex-shrink: 0; margin-top: 2px;
+  box-shadow: 0 4px 10px rgba(18, 53, 143, 0.25);
 }
-.step-item.alert-danger .step-num-box { background: var(--red); }
-.step-item.alert-warning .step-num-box { background: var(--orange); }
-.step-item.alert-success .step-num-box { background: var(--green); }
+.step-item.alert-danger .step-num-box { background: var(--red); box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25); }
+.step-item.alert-warning .step-num-box { background: var(--orange); box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25); }
+.step-item.alert-success .step-num-box { background: var(--green); box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25); }
 
 .step-content { flex: 1; }
 .step-head {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 10px; flex-wrap: wrap;
-  padding-bottom: 8px; border-bottom: 1px dashed var(--line);
+  gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
+  padding-bottom: 10px; border-bottom: 1.5px dashed var(--line);
 }
-.step-name { font-weight: 800; font-size: 15.5px; color: var(--text); }
+.step-name { font-weight: 800; font-size: 16.5px; color: var(--primary); }
 
 /* Structured Detail Blocks */
 .step-desc-grid {
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex; flex-direction: column; gap: 12px;
 }
 .desc-box {
-  background: #f8fafc; border: 1px solid #edf2f7; border-radius: 10px;
-  padding: 10px 14px;
+  background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px;
+  padding: 12px 16px;
 }
 .desc-box.warning {
-  background: #fffbeb; border-color: #fde68a;
+  background: #fffdf5; border-color: #fde68a;
 }
 .desc-box.danger {
   background: #fef2f2; border-color: #fecaca;
@@ -271,8 +270,8 @@ body {
   background: #ecfdf5; border-color: #a7f3d0;
 }
 .desc-label {
-  font-size: 11.5px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;
+  font-size: 12px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px;
   display: flex; align-items: center; gap: 6px;
 }
 .desc-box.warning .desc-label { color: #92400e; }
@@ -280,28 +279,39 @@ body {
 .desc-box.success .desc-label { color: #065f46; }
 
 .clean-list {
-  margin: 0; padding-left: 18px; font-size: 13.5px; color: #334155; line-height: 1.65;
+  margin: 0; padding-left: 20px; font-size: 13.5px; color: #334155; line-height: 1.7;
 }
-.clean-list li { margin-bottom: 4px; }
+.clean-list li { margin-bottom: 6px; }
 .clean-list li:last-child { margin-bottom: 0; }
+
+/* Sub-items with numbered badges */
+.action-sub-step {
+  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: 13.5px; color: #334155; line-height: 1.6;
+}
+.action-sub-step:last-child { margin-bottom: 0; }
+.action-sub-num {
+  width: 22px; height: 22px; border-radius: 6px; background: var(--blue-light);
+  color: var(--blue); font-weight: 800; font-size: 11.5px; display: grid; place-items: center;
+  flex-shrink: 0; margin-top: 2px;
+}
 
 /* Meta tags footer for step items */
 .step-meta-row {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px; margin-top: 10px;
 }
-.meta-chip {
-  font-size: 11.5px; padding: 4px 10px; border-radius: 6px;
-  background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1;
-  display: inline-flex; align-items: center; gap: 5px;
+.meta-chip-box {
+  background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  padding: 8px 12px; font-size: 12.5px; line-height: 1.5;
 }
-.meta-chip strong { color: #1e293b; }
-.meta-chip.in { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; }
-.meta-chip.out { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
-.meta-chip.ksnb { background: #fff1f2; border-color: #fecdd3; color: #9f1239; }
+.meta-chip-box.in { background: #f0f7ff; border-color: #bfdbfe; color: #1e40af; }
+.meta-chip-box.out { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+.meta-chip-box.form { background: #fdf4ff; border-color: #f5d0fe; color: #86198f; }
+.meta-chip-box .meta-title { font-weight: 800; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
 
 /* ================= PILLS & TAGS ================= */
 .status-pill {
-  font-size: 11px; padding: 4px 10px; border-radius: 999px; font-weight: 700;
+  font-size: 11.5px; padding: 4px 10px; border-radius: 999px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 4px;
 }
 .pill-blue { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-border); }
@@ -312,7 +322,7 @@ body {
 .pill-yellow { background: var(--yellow-light); color: #854d0e; border: 1px solid var(--orange-border); }
 
 .sys-tag {
-  font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;
+  font-size: 11.5px; font-weight: 800; padding: 4px 10px; border-radius: 8px;
   background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1;
 }
 .sys-crm { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
@@ -323,160 +333,56 @@ body {
 
 /* ================= TABLES ================= */
 .table-wrap {
-  width: 100%; overflow-x: auto; border: 1px solid var(--line);
-  border-radius: 12px; margin-top: 14px;
+  width: 100%; overflow-x: auto; border: 1.5px solid var(--line);
+  border-radius: 14px; margin-top: 14px;
 }
 table {
-  width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;
+  width: 100%; border-collapse: collapse; font-size: 13.5px; text-align: left;
 }
 th {
   background: #f8fafc; color: var(--text); font-weight: 800;
-  padding: 12px 14px; border-bottom: 1.5px solid var(--line); white-space: nowrap;
+  padding: 14px 16px; border-bottom: 2px solid var(--line); white-space: nowrap;
 }
 td {
-  padding: 12px 14px; border-bottom: 1px solid var(--line); color: #334155;
+  padding: 14px 16px; border-bottom: 1px solid var(--line); color: #334155;
   vertical-align: top;
 }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: #f8fbff; }
 
 .table-bullet-list {
-  margin: 0; padding-left: 16px; line-height: 1.6;
+  margin: 0; padding-left: 18px; line-height: 1.65;
 }
-.table-bullet-list li { margin-bottom: 3px; }
+.table-bullet-list li { margin-bottom: 4px; }
+.table-bullet-list li:last-child { margin-bottom: 0; }
 
 /* ================= SPLIT GRID ================= */
 .split-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px; margin-top: 14px;
+  gap: 16px; margin-top: 12px;
 }
 
-/* ================= VISUAL FLOWCHART ================= */
+/* ================= FLOWCHART VISUAL ================= */
 .flowchart-visual {
-  display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0;
+  display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 18px 0;
 }
 .fc-step {
-  width: 100%; max-width: 820px; padding: 14px 18px; border-radius: 12px;
-  border: 1.5px solid var(--line); background: #fff; box-shadow: var(--shadow-sm);
+  width: 100%; max-width: 820px; background: #fff; border: 1.5px solid var(--line);
+  border-radius: 14px; padding: 16px 20px; box-shadow: var(--shadow-sm);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-}
-.fc-arrow { color: var(--blue); font-size: 18px; font-weight: 900; }
-.fc-step.gateway {
-  border-color: var(--orange-border); background: var(--orange-light);
-}
-
-/* ================= UNIVERSAL BOTTOM NAV CARD ================= */
-.bottom-nav-card {
-  margin-top: 40px;
-  padding: 24px;
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1.5px solid #dce3ee;
-  box-shadow: var(--shadow-sm);
-}
-.bottom-nav-header {
-  margin-bottom: 18px;
-  text-align: center;
-}
-.bnav-badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: #12358f;
-  background: #edf3ff;
-  border: 1px solid #b8c7e8;
-  padding: 3px 10px;
-  border-radius: 999px;
-  margin-bottom: 6px;
-}
-.bnav-title {
-  font-size: 17px;
-  font-weight: 800;
-  color: #172033;
-}
-.bnav-desc {
-  font-size: 13px;
-  color: #667085;
-  margin-top: 2px;
-}
-.bottom-nav-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
-}
-.bnav-action {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1.5px solid #dce3ee;
-  background: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
 }
-.bnav-icon-circle {
-  width: 40px; height: 40px; border-radius: 10px; display: grid;
-  place-items: center; font-size: 18px; flex-shrink: 0; transition: transform 0.2s ease;
+.fc-step:hover { border-color: var(--blue-border); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.fc-step.gateway {
+  background: #fffbeb; border-color: #fde68a; border-left: 6px solid #f59e0b;
 }
-.bnav-action:hover .bnav-icon-circle { transform: scale(1.1); }
-.bnav-action-text { display: flex; flex-direction: column; }
-.bnav-sub { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; color: #667085; }
-.bnav-main { font-size: 14px; font-weight: 700; color: #172033; }
+.fc-arrow { font-size: 18px; color: #94a3b8; font-weight: 900; }
 
-.bnav-action-back { border-color: #b8c7e8; background: #fafcff; }
-.bnav-action-back .bnav-icon-circle { background: #edf3ff; color: #12358f; }
-.bnav-action-back:hover { border-color: #12358f; background: #edf3ff; }
-.bnav-action-back:hover .bnav-main { color: #12358f; }
-
-.bnav-action-home { border-color: #ffd200; background: #fffdf0; }
-.bnav-action-home .bnav-icon-circle { background: #12358f; color: #ffd200; }
-.bnav-action-home:hover { border-color: #12358f; background: #edf3ff; }
-.bnav-action-home:hover .bnav-main { color: #12358f; }
-
-.bnav-action-top { border-color: #dce3ee; background: #ffffff; }
-.bnav-action-top .bnav-icon-circle { background: #f3f6fb; color: #475467; }
-.bnav-action-top:hover { border-color: #667085; background: #f8faff; }
-
-/* ================= UNIVERSAL FLOATING NAVIGATION DOCK ================= */
-.floating-nav-dock {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  background: rgba(18, 53, 143, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(18, 53, 143, 0.28), 0 2px 6px rgba(0, 0, 0, 0.08);
-  z-index: 9999;
-  transition: all 0.25s ease;
-}
-.dock-btn {
-  display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px;
-  border-radius: 999px; border: none; text-decoration: none; color: #ffffff;
-  font-size: 12.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;
-  background: transparent; font-family: inherit;
-}
-.dock-btn:hover { background: rgba(255, 255, 255, 0.18); color: #ffffff; transform: translateY(-1px); }
-.dock-btn-back { background: rgba(255, 255, 255, 0.12); }
-.dock-btn-home { background: var(--yellow); color: var(--primary) !important; font-weight: 800; }
-.dock-btn-home:hover { background: #ffe033; color: var(--primary) !important; }
-.dock-btn-top { width: 34px; height: 34px; padding: 0; justify-content: center; background: rgba(255, 255, 255, 0.12); }
-
-@media (max-width: 768px) {
-  .stage-nav { grid-template-columns: 1fr; }
-  .floating-nav-dock { bottom: 16px; right: 16px; }
-  .hero h1 { font-size: 22px; }
-  .hero-badges { flex-direction: column; }
+/* ================= FOOTER ================= */
+.footer {
+  text-align: center; padding: 32px 20px; color: var(--text-muted);
+  font-size: 13px; border-top: 1.5px solid var(--line); background: #fff;
+  margin-top: 60px;
 }
 </style>
 </head>
@@ -487,16 +393,16 @@ tr:hover td { background: #f8fbff; }
   <div class="header-inner">
     <div class="topbar">
       <a href="index.html" class="logo">
-        <div class="logo-mark">ĐMX</div>
-        <span>QUY TRÌNH THỢ ĐIỆN MÁY XANH</span>
+        <div class="logo-mark">⚡</div>
+        <div>THỢ ĐIỆN MÁY XANH</div>
       </a>
-      <div class="badge-header">TÀI LIỆU KSNB 2026 · FORMAT 4 PHẦN V1</div>
+      <div class="badge-header">SOP-HOANTIEN-VSML-2026-V1</div>
     </div>
 
     <div class="breadcrumb">
-      <a href="../index.html">Trang chủ KSNB</a>
+      <a href="../index.html">Trang chủ</a>
       <span>/</span>
-      <a href="index.html">Thợ Điện Máy XANH</a>
+      <a href="index.html">Thợ ĐMX</a>
       <span>/</span>
       <span>Hủy & Hoàn tiền gói vệ sinh máy lạnh</span>
     </div>
@@ -698,51 +604,54 @@ tr:hover td { background: #f8fbff; }
               </td>
               <td>
                 <ul class="table-bullet-list">
-                  <li>Tiếp nhận Phiếu thông tin hoàn tiền (Mã CF) trên Web ACC DMX.</li>
-                  <li>Kiểm tra tính hợp lệ của hồ sơ và Phiếu nhập trả 10 trên ERP.</li>
-                  <li>Thực hiện duyệt chi tiền hoàn qua ngân hàng cho khách.</li>
-                  <li>Lập Biên bản hủy HĐ (nếu có HĐ Cty); đối soát và đóng đơn.</li>
+                  <li>Kiểm tra Phiếu thông tin hoàn tiền (Mã CF) trên Web ACC DMX.</li>
+                  <li>Kiểm tra Phiếu nhập trả 10 trên ERP.</li>
+                  <li>Lập Biên bản hủy HĐ điện tử (nếu khách có HĐ Công ty).</li>
+                  <li>Duyệt chi tiền hoàn qua tài khoản ngân hàng cho khách.</li>
+                  <li>Đối soát sao kê, cập nhật đơn hàng 551 thành 'Hoàn tiền - Đã hủy'.</li>
                 </ul>
               </td>
               <td>
                 <ul class="table-bullet-list">
-                  <li>Phiếu chi hoàn tiền đã xác nhận</li>
-                  <li>Biên bản hủy HĐ có chữ ký 2 bên</li>
-                  <li>Đơn 551 cập nhật Hoàn tất</li>
+                  <li>Lệnh duyệt chi tiền thành công</li>
+                  <li>Biên bản hủy HĐ có ký duyệt</li>
+                  <li>Đơn hàng 551 đóng hoàn tất</li>
                 </ul>
               </td>
-              <td><strong style="color:var(--red);">Có HĐ Công ty: BẮT BUỘC có Biên bản hủy HĐ</strong> mới được duyệt chi tiền. Khách cá nhân chi tiền trực tiếp.</td>
+              <td><strong style="color:var(--red);">CÓ HĐ CÔNG TY BẮT BUỘC KÝ BIÊN BẢN HỦY</strong> mới được chi tiền. Số tiền chi khớp 100% Phiếu nhập 10.</td>
             </tr>
             <tr>
-              <td><strong>🔍 Kiểm soát Nội bộ (KSNB)</strong></td>
+              <td><strong>🤖 Hệ thống Tự Động</strong></td>
               <td>
                 <ul class="table-bullet-list">
-                  <li>Giám sát tính tuân thủ 3 điều kiện hoàn tiền tự động trên hệ thống.</li>
-                  <li>Kiểm tra đối soát số tiền chi hoàn với Phiếu nhập trả 10 và CNDV.</li>
-                  <li>Kiểm toán ngẫu nhiên hồ sơ Biên bản hủy HĐ Công ty.</li>
+                  <li>NewCRM tự động validate 3 điều kiện khi nhận input Mã CNDV.</li>
+                  <li>ERP tự động sinh Phiếu nhập trả hình thức 10 (Đơn 551).</li>
+                  <li>Web ACC DMX tự động sinh Phiếu thông tin hoàn tiền (Mã CF).</li>
+                  <li>SMS Gateway tự động gửi tin nhắn báo tiền về cho khách.</li>
                 </ul>
               </td>
               <td>
                 <ul class="table-bullet-list">
-                  <li>Báo cáo kiểm soát tuân thủ</li>
-                  <li>Biên bản xử lý sai lệch</li>
+                  <li>Phiếu nhập trả 10 (ERP)</li>
+                  <li>Phiếu thông tin CF (Web ACC)</li>
+                  <li>Tin nhắn SMS báo hoàn tiền</li>
                 </ul>
               </td>
-              <td>Ngăn chặn hoàn tiền khống hoặc hoàn tiền cho CNDV đã qua sử dụng / quá hạn 30 ngày.</td>
+              <td>Kiểm soát 100% tự động theo thuật toán; không sinh phiếu nếu CNDV đã dùng hoặc quá hạn 30 ngày.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Card 1.3: Hệ thống tham gia & Ranh giới -->
+    <!-- Card 1.3: 4 Hệ thống tham gia -->
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">
-          <span class="icon" style="background:#faf5ff; color:#7c3aed;">💻</span>
-          3. Phân Định Ranh Giới 4 Hệ Thống Công Nghệ Tham Gia
+          <span class="icon" style="background:#faf5ff; color:#7c3aed;">🖥️</span>
+          3. Ranh Giới 4 Hệ Thống Ứng Dụng & Liên Kết Tích Hợp
         </h3>
-        <span class="sys-tag sys-acc">Multi-System Integration</span>
+        <span class="sys-tag sys-acc">System Architecture</span>
       </div>
 
       <div class="table-wrap">
@@ -1053,7 +962,7 @@ tr:hover td { background: #f8fbff; }
           <div class="step-num-box">1</div>
           <div class="step-content">
             <div class="step-head">
-              <span class="step-name">Tiếp nhận yêu cầu hủy gói & Tra cứu CNDV</span>
+              <span class="step-name">Tiếp nhận yêu cầu hủy gói & Tra cứu Mã CNDV</span>
               <div>
                 <span class="status-pill pill-blue">Khách Hàng & Tổng Đài Viên</span>
                 <span class="sys-tag sys-crm" style="margin-left:6px;">xFone / NewCRM</span>
@@ -1061,27 +970,46 @@ tr:hover td { background: #f8fbff; }
             </div>
             
             <div class="step-desc-grid">
+              <!-- Hộp 1: Thao tác thực hiện bóc tách từng ý -->
               <div class="desc-box">
-                <div class="desc-label">📝 Chi tiết công việc thực hiện:</div>
-                <ul class="clean-list">
-                  <li>Khách hàng gọi lên Tổng đài CSKH yêu cầu hủy gói vệ sinh máy lạnh đã mua.</li>
-                  <li>Khách hàng cung cấp <strong>Số điện thoại mua hàng</strong>, lý do hủy gói và thông tin tài khoản ngân hàng nhận tiền.</li>
-                  <li>Tổng đài viên tra cứu lịch sử mua hàng theo SĐT trên hệ thống NewCRM để trích xuất <strong>Mã CNDV gốc tương ứng</strong>.</li>
-                </ul>
+                <div class="desc-label">📝 Thao tác thực hiện chi tiết:</div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">1</div>
+                  <div>Khách hàng liên hệ lên Tổng đài CSKH yêu cầu hủy gói dịch vụ vệ sinh máy lạnh đã mua.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">2</div>
+                  <div>Khách hàng cung cấp <strong>Số điện thoại mua hàng gốc</strong>, nêu rõ lý do yêu cầu hủy gói và cung cấp thông tin tài khoản ngân hàng nhận tiền hoàn.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">3</div>
+                  <div>Tổng đài viên thực hiện tra cứu lịch sử mua hàng theo SĐT trên hệ thống NewCRM để trích xuất chính xác <strong>Mã CNDV gốc tương ứng</strong>.</div>
+                </div>
               </div>
 
+              <!-- Hộp 2: Điểm kiểm soát KSNB -->
               <div class="desc-box warning">
                 <div class="desc-label">🛡️ Điểm kiểm soát KSNB trọng yếu:</div>
                 <ul class="clean-list">
-                  <li><strong>BẮT BUỘC</strong> tra cứu đúng Số điện thoại mua hàng để lấy chính xác Mã CNDV gốc.</li>
-                  <li>Ghi nhận rõ ràng, trung thực lý do khách hàng yêu cầu hủy gói để phục vụ báo cáo chất lượng dịch vụ.</li>
+                  <li><strong style="color:var(--red);">BẮT BUỘC</strong> tra cứu đúng Số điện thoại mua hàng để lấy đúng Mã CNDV gốc tương ứng.</li>
+                  <li>Ghi nhận chính xác và trung thực lý do khách hàng hủy gói vào hệ thống để phục vụ công tác kiểm soát chất lượng dịch vụ.</li>
                 </ul>
               </div>
 
+              <!-- Hộp 3: Đầu vào - Đầu ra - Biểu mẫu -->
               <div class="step-meta-row">
-                <span class="meta-chip in"><strong>📥 Đầu vào:</strong> Cuộc gọi khách hàng · Số điện thoại mua hàng</span>
-                <span class="meta-chip out"><strong>📤 Đầu ra:</strong> Mã CNDV hợp lệ cần hủy · Thông tin STK ngân hàng</span>
-                <span class="meta-chip"><strong>📄 Chứng từ / Form:</strong> Ghi âm cuộc gọi xFone · Thông tin đơn hàng NewCRM</span>
+                <div class="meta-chip-box in">
+                  <div class="meta-title">📥 Dữ liệu đầu vào (Input)</div>
+                  <div>• Cuộc gọi tiếp nhận từ khách hàng<br>• Số điện thoại mua hàng gốc</div>
+                </div>
+                <div class="meta-chip-box out">
+                  <div class="meta-title">📤 Kết quả đầu ra (Output)</div>
+                  <div>• Mã CNDV hợp lệ cần hủy<br>• Thông tin STK ngân hàng nhận tiền hoàn</div>
+                </div>
+                <div class="meta-chip-box form">
+                  <div class="meta-title">📄 Biểu mẫu & Chứng từ</div>
+                  <div>• File ghi âm cuộc gọi xFone<br>• Dữ liệu đơn hàng gốc trên NewCRM</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1100,29 +1028,54 @@ tr:hover td { background: #f8fbff; }
             </div>
             
             <div class="step-desc-grid">
+              <!-- Hộp 1: Thao tác thực hiện bóc tách từng ý -->
               <div class="desc-box">
-                <div class="desc-label">📝 Chi tiết công việc thực hiện:</div>
-                <ul class="clean-list">
-                  <li>Truy cập hệ thống NewCRM tại địa chỉ: <code>newcrm.thegioididong.com</code>.</li>
-                  <li>Điều hướng vào: <strong>Menu [Gói dịch vụ] ➔ Tab [Tạo yêu cầu hủy/hoàn tiền gói dịch vụ]</strong>.</li>
-                  <li>Nhập <strong>Mã CNDV</strong> vào form yêu cầu.</li>
-                  <li>Nhập đầy đủ thông tin tài khoản ngân hàng của khách: <em>Số tài khoản, Tên chủ tài khoản, Tên ngân hàng nhận</em>.</li>
-                  <li>Nhấn nút <strong>[Gửi yêu cầu]</strong> để chuyển dữ liệu sang bộ kiểm tra tự động của hệ thống.</li>
-                </ul>
+                <div class="desc-label">📝 Thao tác thực hiện chi tiết:</div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">1</div>
+                  <div>Truy cập hệ thống NewCRM tại địa chỉ: <code>newcrm.thegioididong.com</code>.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">2</div>
+                  <div>Điều hướng theo luồng: <strong>Menu [Gói dịch vụ] ➔ Tab [Tạo yêu cầu hủy/hoàn tiền gói dịch vụ]</strong>.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">3</div>
+                  <div>Nhập <strong>Mã CNDV</strong> đã tra cứu vào ô thông tin trên form.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">4</div>
+                  <div>Nhập đầy đủ thông tin tài khoản ngân hàng của khách: <em>Số tài khoản, Tên chủ tài khoản, Tên ngân hàng nhận tiền</em>.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">5</div>
+                  <div>Bấm nút <strong>[Gửi yêu cầu]</strong> để hệ thống tiếp nhận và kích hoạt cơ chế kiểm tra tự động.</div>
+                </div>
               </div>
 
+              <!-- Hộp 2: Điểm kiểm soát KSNB -->
               <div class="desc-box danger">
                 <div class="desc-label">🛡️ Điểm kiểm soát KSNB trọng yếu:</div>
                 <ul class="clean-list">
-                  <li><strong style="color:var(--red);">BẮT BUỘC INPUT TẠO YÊU CẦU LÀ MÃ CNDV</strong> (hệ thống không cho phép tìm theo tên khách hàng hay mã đơn hàng để tránh sai lệch).</li>
-                  <li>Đối chiếu tên chủ tài khoản ngân hàng thụ hưởng phải trùng khớp với thông tin khách hàng mua gói.</li>
+                  <li><strong style="color:var(--red);">BẮT BUỘC INPUT TẠO YÊU CẦU LÀ MÃ CNDV</strong> (hệ thống không cho phép tìm theo tên khách hàng hay mã đơn hàng nhằm tránh sai lệch).</li>
+                  <li>Kiểm tra đối chiếu thông tin chủ tài khoản ngân hàng thụ hưởng phải trùng khớp với thông tin khách hàng mua gói.</li>
                 </ul>
               </div>
 
+              <!-- Hộp 3: Đầu vào - Đầu ra - Biểu mẫu -->
               <div class="step-meta-row">
-                <span class="meta-chip in"><strong>📥 Đầu vào:</strong> Mã CNDV đã tra cứu · Thông tin STK ngân hàng</span>
-                <span class="meta-chip out"><strong>📤 Đầu ra:</strong> Yêu cầu hủy gửi thành công · Chuyển sang bước Validation</span>
-                <span class="meta-chip"><strong>📄 Chứng từ / Form:</strong> Form yêu cầu hủy NewCRM</span>
+                <div class="meta-chip-box in">
+                  <div class="meta-title">📥 Dữ liệu đầu vào (Input)</div>
+                  <div>• Mã CNDV đã tra cứu chính xác<br>• Thông tin STK ngân hàng của khách</div>
+                </div>
+                <div class="meta-chip-box out">
+                  <div class="meta-title">📤 Kết quả đầu ra (Output)</div>
+                  <div>• Yêu cầu hủy gửi thành công trên NewCRM<br>• Chuyển sang bộ kiểm tra tự động</div>
+                </div>
+                <div class="meta-chip-box form">
+                  <div class="meta-title">📄 Biểu mẫu & Hệ thống</div>
+                  <div>• Form [Tạo yêu cầu hủy/hoàn tiền gói DV]<br>• Hệ thống NewCRM</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1141,41 +1094,61 @@ tr:hover td { background: #f8fbff; }
             </div>
             
             <div class="step-desc-grid">
+              <!-- Hộp 1: Thuật toán kiểm tra 3 điều kiện -->
               <div class="desc-box">
                 <div class="desc-label">⚙️ Thuật toán tự động kiểm tra 3 điều kiện:</div>
-                <ul class="clean-list">
-                  <li><strong>1. Thời hạn:</strong> Thời gian xuất bán / kích hoạt CNDV ≤ 30 ngày.</li>
-                  <li><strong>2. Hạn mức sử dụng:</strong> Còn nguyên 100% (chưa từng sử dụng lần nào trong gói).</li>
-                  <li><strong>3. Trạng thái:</strong> CNDV hợp lệ, không có yêu cầu đang xử lý dở dang (Pending).</li>
-                </ul>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">1</div>
+                  <div><strong>Kiểm tra Thời hạn:</strong> Thời gian kể từ ngày xuất bán / kích hoạt CNDV đến thời điểm yêu cầu phải <strong>≤ 30 ngày</strong>.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">2</div>
+                  <div><strong>Kiểm tra Hạn mức:</strong> Gói dịch vụ còn nguyên <strong>100% hạn mức</strong> (chưa từng sử dụng lần vệ sinh nào).</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">3</div>
+                  <div><strong>Kiểm tra Trạng thái CNDV:</strong> CNDV đang ở trạng thái hợp lệ, không có yêu cầu đang xử lý dở dang (Pending).</div>
+                </div>
               </div>
 
+              <!-- Hộp 2: Xử lý kết quả tự động -->
               <div class="desc-box success">
-                <div class="desc-label">🔄 Xử lý kết quả kiểm tra (Tự động 100%):</div>
+                <div class="desc-label">🔄 Cơ chế xử lý liên thông tự động 100%:</div>
                 <ul class="clean-list">
-                  <li><strong>NẾU PASS 3 ĐIỀU KIỆN:</strong>
+                  <li><strong>NẾU THỎA MÃN ĐỦ 3 ĐIỀU KIỆN (PASS):</strong>
                     <ul class="clean-list" style="margin-top:4px;">
-                      <li>• ERP tự động sinh <strong>Phiếu nhập trả hình thức 10</strong> (Loại đơn hàng 551).</li>
-                      <li>• Tự động đẩy dữ liệu sang Web ACC DMX tạo <strong>[Phiếu thông tin hoàn tiền] (Mã CF)</strong>.</li>
-                      <li>• Cập nhật trạng thái CNDV trên NewCRM thành <em>"Đã hủy hoặc nhập trả"</em>.</li>
+                      <li>• Hệ thống lõi ERP tự động sinh <strong>Phiếu nhập trả hình thức 10</strong> (thuộc Đơn hàng loại 551).</li>
+                      <li>• Tự động đồng bộ dữ liệu sang Web ACC DMX sinh <strong>[Phiếu thông tin hoàn tiền] (Mã CF)</strong>.</li>
+                      <li>• Tự động cập nhật trạng thái CNDV trên NewCRM thành <em>"Đã hủy hoặc nhập trả"</em>.</li>
                     </ul>
                   </li>
-                  <li><strong>NẾU FAIL (Vi phạm bất kỳ điều kiện nào):</strong> Hệ thống từ chối yêu cầu và hiển thị rõ lý do vi phạm.</li>
+                  <li><strong>NẾU KHÔNG THỎA MÃN (FAIL):</strong> Hệ thống tự động từ chối, chặn thao tác và thông báo lý do cụ thể trên màn hình.</li>
                 </ul>
               </div>
 
+              <!-- Hộp 3: Điểm kiểm soát KSNB -->
               <div class="desc-box danger">
                 <div class="desc-label">🛡️ Điểm kiểm soát KSNB trọng yếu:</div>
                 <ul class="clean-list">
-                  <li><strong>KIỂM SOÁT TỰ ĐỘNG 100%:</strong> Hệ thống tự quyết định, không cho phép can thiệp duyệt tay thủ công.</li>
-                  <li>Tuyệt đối không sinh phiếu nhập 10 nếu CNDV đã qua sử dụng hoặc quá hạn 30 ngày.</li>
+                  <li><strong>KIỂM SOÁT TỰ ĐỘNG 100%:</strong> Hệ thống tự động kiểm tra theo logic phần mềm, tuyệt đối không cho phép can thiệp duyệt tay thủ công.</li>
+                  <li>Tuyệt đối không sinh Phiếu nhập trả 10 nếu CNDV đã qua sử dụng dù chỉ 1 lần hoặc đã quá hạn 30 ngày.</li>
                 </ul>
               </div>
 
+              <!-- Hộp 4: Đầu vào - Đầu ra - Biểu mẫu -->
               <div class="step-meta-row">
-                <span class="meta-chip in"><strong>📥 Đầu vào:</strong> Yêu cầu hủy từ Bước 2 · Dữ liệu CNDV và Đơn 551</span>
-                <span class="meta-chip out"><strong>📤 Đầu ra:</strong> Phiếu nhập trả 10 (ERP) · Phiếu thông tin hoàn tiền CF</span>
-                <span class="meta-chip"><strong>📄 Chứng từ / Form:</strong> Phiếu nhập trả 10 (ERP) · Phiếu thông tin CF (Web ACC)</span>
+                <div class="meta-chip-box in">
+                  <div class="meta-title">📥 Dữ liệu đầu vào (Input)</div>
+                  <div>• Yêu cầu hủy từ Bước 2<br>• Dữ liệu CNDV và Đơn hàng 551</div>
+                </div>
+                <div class="meta-chip-box out">
+                  <div class="meta-title">📤 Kết quả đầu ra (Output)</div>
+                  <div>• Phiếu nhập trả 10 trên ERP<br>• Phiếu thông tin hoàn tiền CF trên Web ACC</div>
+                </div>
+                <div class="meta-chip-box form">
+                  <div class="meta-title">📄 Chứng từ & Hệ thống</div>
+                  <div>• Phiếu nhập 10 (ERP lõi)<br>• Mã CF (Web ACC DMX)</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1194,33 +1167,55 @@ tr:hover td { background: #f8fbff; }
             </div>
             
             <div class="step-desc-grid">
+              <!-- Hộp 1: Thao tác thực hiện bóc tách từng ý -->
               <div class="desc-box">
-                <div class="desc-label">📝 Chi tiết công việc thực hiện:</div>
-                <ul class="clean-list">
-                  <li>Kế toán Nghiệp vụ Tận Tâm <strong>(NV 68908 - Nguyễn Thị Hằng)</strong> đăng nhập Web ACC DMX (<code>accounting.dienmayxanh.com</code>).</li>
-                  <li>Kiểm tra Phiếu thông tin hoàn tiền (Mã CF), kiểm tra tính hợp lệ của Phiếu nhập 10 và STK ngân hàng khách hàng.</li>
-                  <li><strong>Phân loại xử lý theo hóa đơn:</strong>
+                <div class="desc-label">📝 Thao tác thực hiện chi tiết:</div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">1</div>
+                  <div>Kế toán Nghiệp vụ Tận Tâm <strong>(NV 68908 - Nguyễn Thị Hằng)</strong> đăng nhập Web ACC DMX tại: <code>accounting.dienmayxanh.com</code>.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">2</div>
+                  <div>Kiểm tra danh sách <strong>Phiếu thông tin hoàn tiền (Mã CF)</strong> được đẩy tự động từ NewCRM sang.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">3</div>
+                  <div>Kiểm tra tính hợp lệ của Phiếu nhập 10, thông tin tài khoản ngân hàng và kiểm tra hóa đơn gốc:
                     <ul class="clean-list" style="margin-top:4px;">
-                      <li>• <strong>Có Hóa đơn Công ty:</strong> <strong style="color:var(--red);">BẮT BUỘC lập Biên bản hủy HĐ điện tử</strong>, gửi khách hàng ký xác nhận 2 bên rồi mới duyệt chi.</li>
-                      <li>• <strong>Không có Hóa đơn Công ty (Khách cá nhân):</strong> Không cần lập biên bản hủy HĐ, thực hiện duyệt chi tiền hoàn trực tiếp.</li>
+                      <li>• <strong>Khách hàng có Hóa đơn Công ty:</strong> <strong style="color:var(--red);">BẮT BUỘC lập Biên bản hủy HĐ điện tử</strong>, gửi khách hàng ký xác nhận 2 bên đầy đủ rồi mới thực hiện duyệt chi.</li>
+                      <li>• <strong>Khách hàng cá nhân (không lấy HĐ Công ty):</strong> Không cần lập biên bản hủy HĐ, tiến hành duyệt chi tiền hoàn trực tiếp.</li>
                     </ul>
-                  </li>
-                  <li>Thực hiện duyệt lệnh chi tiền hoàn qua tài khoản ngân hàng cho khách hàng.</li>
-                </ul>
+                  </div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">4</div>
+                  <div>Thực hiện thao tác duyệt lệnh chi tiền hoàn trả qua tài khoản ngân hàng cho khách hàng.</div>
+                </div>
               </div>
 
+              <!-- Hộp 2: Điểm kiểm soát KSNB -->
               <div class="desc-box danger">
                 <div class="desc-label">🛡️ Điểm kiểm soát KSNB trọng yếu:</div>
                 <ul class="clean-list">
-                  <li><strong style="color:var(--red);">CÓ HÓA ĐƠN CÔNG TY BẮT BUỘC PHẢI CÓ BIÊN BẢN HỦY HÓA ĐƠN</strong> mới được duyệt chi tiền.</li>
-                  <li>Số tiền chi hoàn phải khớp đúng 100% từng đồng với giá trị ghi nhận trên Phiếu nhập trả 10.</li>
+                  <li><strong style="color:var(--red);">CÓ HÓA ĐƠN CÔNG TY BẮT BUỘC PHẢI CÓ BIÊN BẢN HỦY HÓA ĐƠN</strong> có chữ ký số/chữ ký hợp lệ của 2 bên mới được duyệt chi tiền hoàn.</li>
+                  <li>Số tiền duyệt chi hoàn trả phải khớp đúng 100% từng đồng với giá trị ghi nhận trên Phiếu nhập trả 10.</li>
                 </ul>
               </div>
 
+              <!-- Hộp 3: Đầu vào - Đầu ra - Biểu mẫu -->
               <div class="step-meta-row">
-                <span class="meta-chip in"><strong>📥 Đầu vào:</strong> Phiếu CF · Phiếu nhập trả 10 · Hóa đơn GTGT gốc</span>
-                <span class="meta-chip out"><strong>📤 Đầu ra:</strong> Lệnh chuyển tiền hoàn tất · Phiếu chi gắn Phiếu nhập 10</span>
-                <span class="meta-chip"><strong>📄 Chứng từ / Form:</strong> Phiếu chi hoàn tiền · Biên bản hủy HĐ điện tử (nếu có)</span>
+                <div class="meta-chip-box in">
+                  <div class="meta-title">📥 Dữ liệu đầu vào (Input)</div>
+                  <div>• Phiếu thông tin CF trên Web ACC<br>• Phiếu nhập 10 & Hóa đơn gốc</div>
+                </div>
+                <div class="meta-chip-box out">
+                  <div class="meta-title">📤 Kết quả đầu ra (Output)</div>
+                  <div>• Lệnh chuyển tiền hoàn tất<br>• Phiếu chi tiền gắn Phiếu nhập 10</div>
+                </div>
+                <div class="meta-chip-box form">
+                  <div class="meta-title">📄 Chứng từ & Biểu mẫu</div>
+                  <div>• Phiếu chi hoàn tiền<br>• Biên bản hủy HĐ điện tử (nếu có)</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1239,27 +1234,46 @@ tr:hover td { background: #f8fbff; }
             </div>
             
             <div class="step-desc-grid">
+              <!-- Hộp 1: Thao tác tự động bóc tách từng ý -->
               <div class="desc-box">
-                <div class="desc-label">📲 Chi tiết tác vụ tự động:</div>
-                <ul class="clean-list">
-                  <li>Ngay khi Kế toán Nghiệp vụ xác nhận duyệt chi tiền thành công trên hệ thống:</li>
-                  <li>Hệ thống SMS Gateway tự động kích hoạt trigger gửi tin nhắn SMS thương hiệu Thợ ĐMX đến SĐT khách hàng.</li>
-                  <li><strong>Nội dung SMS:</strong> Thông báo số tiền đã hoàn, số tài khoản thụ hưởng và lời cảm ơn từ Thợ Điện Máy XANH.</li>
-                </ul>
+                <div class="desc-label">📲 Tác vụ tự động của hệ thống SMS Gateway:</div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">1</div>
+                  <div>Ngay khi Kế toán Nghiệp vụ xác nhận duyệt chi tiền thành công trên Web ACC DMX:</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">2</div>
+                  <div>Hệ thống SMS Gateway tự động nhận tín hiệu trigger và tạo tin nhắn SMS Brandname Thợ Điện Máy XANH.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">3</div>
+                  <div>Tự động gửi tin nhắn đến Số điện thoại khách hàng với nội dung: <em>Thông báo số tiền đã hoàn, số tài khoản nhận và lời cảm ơn quý khách</em>.</div>
+                </div>
               </div>
 
+              <!-- Hộp 2: Điểm kiểm soát KSNB -->
               <div class="desc-box success">
                 <div class="desc-label">🛡️ Điểm kiểm soát KSNB trọng yếu:</div>
                 <ul class="clean-list">
-                  <li>Thời gian gửi tin nhắn SMS <strong>không quá 05 phút</strong> kể từ khi lệnh chi tiền được xác nhận thành công.</li>
-                  <li>Log tin nhắn SMS gửi đi được lưu vết đầy đủ trên hệ thống để phục vụ tra cứu đối soát.</li>
+                  <li>Thời gian tự động gửi SMS <strong>không quá 05 phút</strong> kể từ khi lệnh chi tiền được xác nhận thành công trên hệ thống.</li>
+                  <li>Toàn bộ log tin nhắn SMS gửi đi được lưu vết đầy đủ trên hệ thống phục vụ tra cứu và kiểm tra đối soát.</li>
                 </ul>
               </div>
 
+              <!-- Hộp 3: Đầu vào - Đầu ra - Biểu mẫu -->
               <div class="step-meta-row">
-                <span class="meta-chip in"><strong>📥 Đầu vào:</strong> Trạng thái Phiếu chi xác nhận thành công · SĐT khách hàng</span>
-                <span class="meta-chip out"><strong>📤 Đầu ra:</strong> Tin nhắn SMS gửi thành công đến điện thoại khách hàng</span>
-                <span class="meta-chip"><strong>📄 Chứng từ / Form:</strong> Log tin nhắn SMS Brandname Thợ ĐMX</span>
+                <div class="meta-chip-box in">
+                  <div class="meta-title">📥 Dữ liệu đầu vào (Input)</div>
+                  <div>• Trạng thái Phiếu chi xác nhận thành công<br>• Số điện thoại nhận tin của khách</div>
+                </div>
+                <div class="meta-chip-box out">
+                  <div class="meta-title">📤 Kết quả đầu ra (Output)</div>
+                  <div>• Tin nhắn SMS hoàn tiền gửi đến khách hàng thành công</div>
+                </div>
+                <div class="meta-chip-box form">
+                  <div class="meta-title">📄 Chứng từ & Nhật ký</div>
+                  <div>• Log tin nhắn SMS Gateway Brandname Thợ ĐMX</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1278,27 +1292,46 @@ tr:hover td { background: #f8fbff; }
             </div>
             
             <div class="step-desc-grid">
+              <!-- Hộp 1: Thao tác thực hiện bóc tách từng ý -->
               <div class="desc-box">
-                <div class="desc-label">📝 Chi tiết công việc thực hiện:</div>
-                <ul class="clean-list">
-                  <li>Rà soát đối chiếu số tiền chi thực tế trên sao kê ngân hàng với Phiếu nhập trả 10 và Phiếu thu gốc CM (hình thức 2).</li>
-                  <li>Cập nhật trạng thái Đơn hàng loại 551 trên ERP thành <strong>"Hoàn tiền - Đã hủy"</strong>.</li>
-                  <li>Khóa liên kết chứng từ và lưu trữ hồ sơ hoàn tiền (bao gồm Biên bản hủy HĐ nếu có).</li>
-                </ul>
+                <div class="desc-label">📝 Thao tác thực hiện chi tiết:</div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">1</div>
+                  <div>Rà soát đối chiếu số tiền chi thực tế trên sao kê ngân hàng với Phiếu nhập trả 10 và Phiếu thu gốc CM (hình thức thu 2).</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">2</div>
+                  <div>Thực hiện cập nhật trạng thái Đơn hàng gốc loại 551 trên ERP thành <strong>"Hoàn tiền - Đã hủy"</strong>.</div>
+                </div>
+                <div class="action-sub-step">
+                  <div class="action-sub-num">3</div>
+                  <div>Khóa liên kết chứng từ và tiến hành lưu trữ trọn bộ hồ sơ hoàn tiền (bao gồm Biên bản hủy HĐ nếu có).</div>
+                </div>
               </div>
 
+              <!-- Hộp 2: Điểm kiểm soát KSNB -->
               <div class="desc-box warning">
                 <div class="desc-label">🛡️ Điểm kiểm soát KSNB trọng yếu:</div>
                 <ul class="clean-list">
-                  <li>Số dư đối soát phải cân bằng 100%, không để phát sinh công nợ treo dở dang.</li>
-                  <li>Lưu trữ hồ sơ chứng từ kế toán <strong>tối thiểu 10 năm</strong> theo đúng quy định của Luật Kế toán.</li>
+                  <li>Số dư đối soát phải cân bằng 100%, không để phát sinh công nợ treo hoặc số dư dở dang giữa các phân hệ.</li>
+                  <li>Lưu trữ hồ sơ chứng từ kế toán <strong>tối thiểu 10 năm</strong> theo đúng quy định của Luật Kế toán hiện hành.</li>
                 </ul>
               </div>
 
+              <!-- Hộp 3: Đầu vào - Đầu ra - Biểu mẫu -->
               <div class="step-meta-row">
-                <span class="meta-chip in"><strong>📥 Đầu vào:</strong> Báo cáo sao kê ngân hàng · Hồ sơ hoàn tiền hoàn chỉnh</span>
-                <span class="meta-chip out"><strong>📤 Đầu ra:</strong> Đơn 551 đóng trạng thái 'Hoàn tiền - Đã hủy' · Hồ sơ lưu trữ</span>
-                <span class="meta-chip"><strong>📄 Chứng từ / Form:</strong> Báo cáo đối soát hoàn tiền · Bộ hồ sơ chứng từ lưu trữ</span>
+                <div class="meta-chip-box in">
+                  <div class="meta-title">📥 Dữ liệu đầu vào (Input)</div>
+                  <div>• Báo cáo sao kê tài khoản ngân hàng<br>• Hồ sơ hoàn tiền hoàn chỉnh</div>
+                </div>
+                <div class="meta-chip-box out">
+                  <div class="meta-title">📤 Kết quả đầu ra (Output)</div>
+                  <div>• Đơn hàng 551 đóng trạng thái 'Hoàn tiền - Đã hủy'<br>• Hồ sơ chứng từ lưu trữ hoàn chỉnh</div>
+                </div>
+                <div class="meta-chip-box form">
+                  <div class="meta-title">📄 Chứng từ & Hồ sơ</div>
+                  <div>• Báo cáo đối soát hoàn tiền<br>• Bộ chứng từ lưu trữ kế toán</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1398,220 +1431,103 @@ tr:hover td { background: #f8fbff; }
             <tr>
               <td>
                 <strong>💵 Phiếu chi hoàn tiền</strong><br>
-                <span style="font-size:11.5px; color:var(--text-muted);">Lệnh chuyển khoản ngân hàng</span>
+                <span style="font-size:11.5px; color:var(--text-muted);">Chứng từ thanh toán chuyển khoản</span>
               </td>
               <td>
-                <strong>ERP & Internet Banking</strong><br>
-                <span style="font-size:11.5px; color:var(--text-muted);">Khi Kế toán thực hiện chuyển khoản</span>
+                <strong>ERP / Hệ thống Banking</strong><br>
+                <span style="font-size:11.5px; color:var(--text-muted);">Khi Kế toán xác nhận duyệt chi</span>
               </td>
               <td>
-                <strong>Hạch toán dòng tiền chi trả:</strong>
+                <strong>Tất toán nghĩa vụ hoàn tiền:</strong>
                 <ul class="table-bullet-list">
-                  <li>Nợ TK 131 (Tất toán công nợ phải trả KH)</li>
+                  <li>Nợ TK 131 (Giảm trừ công nợ phải trả)</li>
                   <li>Có TK 112 (Tiền gửi ngân hàng)</li>
                 </ul>
               </td>
-              <td>Số tiền chi phải khớp từng đồng với Phiếu nhập 10. Bắt buộc có Biên bản hủy HĐ nếu khách xuất HĐ Công ty.</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>📑 Biên bản hủy HĐ điện tử</strong><br>
-                <span style="font-size:11.5px; color:var(--text-muted);">(Bắt buộc nếu có HĐ Công ty)</span>
-              </td>
-              <td>
-                <strong>Phân hệ Hóa đơn điện tử</strong><br>
-                <span style="font-size:11.5px; color:var(--text-muted);">Khi khách có xuất HĐ Công ty gốc</span>
-              </td>
-              <td>
-                <strong>Chứng từ pháp lý Thuế:</strong>
-                <ul class="table-bullet-list">
-                  <li>Không phát sinh hạch toán số liệu</li>
-                  <li>Giải trình Cơ quan Thuế</li>
-                </ul>
-              </td>
-              <td><strong style="color:var(--red);">BẮT BUỘC</strong> phải có đầy đủ chữ ký số hoặc chữ ký sống của đại diện pháp luật 2 bên mới được duyệt chi tiền.</td>
+              <td><strong style="color:var(--red);">BẮT BUỘC có Biên bản hủy HĐ</strong> nếu khách có HĐ Công ty. Số tiền chi khớp 100% Phiếu nhập 10.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Card 4.2: Ma trận đối soát đa hệ thống -->
+    <!-- Card 4.2: Bảng đối soát 5 điểm -->
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">
-          <span class="icon" style="background:#eff6ff; color:#1e40af;">🔄</span>
-          2. Ma Trận Đối Soát Dữ Liệu Đa Hệ Thống: NewCRM ↔ ERP ↔ Web ACC ↔ Ngân Hàng
+          <span class="icon" style="background:#fffbeb; color:#d97706;">⚖️</span>
+          2. Ma Trận Đối Soát 5 Điểm Liên Kết Giữa Các Hệ Thống (Reconciliation Matrix)
         </h3>
-        <span class="sys-tag sys-crm">Cross-System Audit Matrix</span>
+        <span class="sys-tag sys-erp">Audit Trail</span>
       </div>
 
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th style="width:20%;">Hạng Mục Đối Soát</th>
-              <th style="width:20%;">Dữ Liệu NewCRM (Gốc)</th>
-              <th style="width:20%;">Dữ Liệu ERP (Tài Chính)</th>
-              <th style="width:20%;">Dữ Liệu Web ACC DMX</th>
-              <th style="width:20%;">Quy Tắc Khớp Đúng KSNB</th>
+              <th style="width:18%;">Hệ Thống & Chứng Từ A</th>
+              <th style="width:18%;">Hệ Thống & Chứng Từ B</th>
+              <th style="width:24%;">Trường Dữ Liệu Đối Soát</th>
+              <th style="width:22%;">Điều Kiện Hợp Lệ (Khớp 100%)</th>
+              <th style="width:18%;">Hành Động Khi Lệch</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Mã CNDV & Trạng thái gói</strong></td>
-              <td>Mã CNDV trạng thái <em>"Đã hủy hoặc nhập trả"</em></td>
-              <td>Đơn hàng 551 trạng thái <em>"Hoàn tiền - Đã hủy"</em></td>
-              <td>Mã CF ghi nhận hoàn tất</td>
-              <td>Khớp đúng 100% Mã CNDV giữa các hệ thống. CNDV phải khóa hoàn toàn không thể tái sử dụng.</td>
+              <td><strong>NewCRM</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Yêu cầu hủy CNDV</span></td>
+              <td><strong>ERP Bán Hàng</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Đơn hàng loại 551</span></td>
+              <td>Mã CNDV, Số điện thoại mua hàng, Giá trị gói dịch vụ</td>
+              <td>Khớp 100% Mã CNDV, đúng chủ thể mua hàng và còn nguyên hạn mức 100%.</td>
+              <td>Từ chối tạo yêu cầu trên NewCRM; yêu cầu kiểm tra lại SĐT gốc.</td>
             </tr>
             <tr>
-              <td><strong>Số tiền hoàn trả khách</strong></td>
-              <td>Giá trị gói dịch vụ hủy hợp lệ (100%)</td>
-              <td>Số tiền ghi trên Phiếu nhập trả 10</td>
-              <td>Số tiền duyệt chi trên Phiếu thông tin CF</td>
-              <td>Khớp đúng từng đồng giữa số tiền giảm trừ trên ERP, phiếu CF và số tiền trừ tài khoản ngân hàng.</td>
+              <td><strong>NewCRM</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Yêu cầu duyệt PASS</span></td>
+              <td><strong>ERP Bán Lẻ</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Phiếu nhập trả 10</span></td>
+              <td>Mã CNDV, Mã đơn 551, Số tiền hoàn trả, Mã kho</td>
+              <td>Phiếu nhập trả 10 được tạo tự động với giá trị bằng đúng giá trị gói dịch vụ.</td>
+              <td>Báo lỗi hệ thống liên thông API sang bộ phận CNTT xử lý.</td>
             </tr>
             <tr>
-              <td><strong>Hồ sơ pháp lý thuế</strong></td>
-              <td>Thông tin người mua hàng / Mã số thuế</td>
-              <td>Hóa đơn điện tử gốc đã xuất</td>
-              <td>Phiếu thông tin hoàn tiền CF</td>
-              <td>Khách có HĐ Công ty ➔ <strong style="color:var(--red);">BẮT BUỘC</strong> có Biên bản hủy HĐ lưu kèm hồ sơ. Thiếu biên bản kiểm toán KSNB xuất toán.</td>
+              <td><strong>ERP Bán Lẻ</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Phiếu nhập trả 10</span></td>
+              <td><strong>Web ACC DMX</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Phiếu thông tin (CF)</span></td>
+              <td>Số phiếu nhập 10, Số tiền hoàn, Kho tạo user BCNB, Hình thức thu = 2</td>
+              <td>Mã CF được sinh tự động với đầy đủ thông tin STK và giá trị khớp Phiếu 10.</td>
+              <td>Kế toán tạm dừng duyệt chi; liên hệ IT kiểm tra queue đồng bộ.</td>
+            </tr>
+            <tr>
+              <td><strong>Web ACC DMX</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Phiếu chi hoàn tiền</span></td>
+              <td><strong>Sao kê Ngân hàng</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Giao dịch chuyển tiền</span></td>
+              <td>Số tài khoản nhận, Tên chủ tài khoản, Số tiền chuyển, Mã giao dịch</td>
+              <td>Tiền trừ tài khoản công ty bằng đúng số tiền trên Phiếu chi; trạng thái thành công.</td>
+              <td>Kế toán làm việc với Ngân hàng tra soát lệnh chuyển tiền dở dang.</td>
+            </tr>
+            <tr>
+              <td><strong>Web ACC DMX</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Phiếu chi hoàn tất</span></td>
+              <td><strong>SMS Gateway</strong><br><span style="font-size:11.5px; color:var(--text-muted);">Log tin nhắn SMS</span></td>
+              <td>Số điện thoại khách hàng, Thời gian gửi (≤ 5 phút), Trạng thái Delivery</td>
+              <td>SMS Brandname được gửi thành công đến SĐT của khách hàng trong ≤ 5 phút.</td>
+              <td>Kích hoạt cơ chế gửi lại SMS thủ công qua SMS Portal.</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-
-    <!-- Card 4.3: Bảng Decision Log -->
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">
-          <span class="icon" style="background:#fffbeb; color:#92400e;">📝</span>
-          3. Bảng Theo Dõi Nội Dung Đã Chốt & Nội Dung Chờ Xác Nhận (Decision Log)
-        </h3>
-        <span class="sys-tag sys-acc">Decision Tracking Log</span>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:8%;">STT</th>
-              <th style="width:22%;">Hạng Mục Nội Dung</th>
-              <th style="width:35%;">Nội Dung Quy Định Chi Tiết</th>
-              <th style="width:15%;">Trạng Thái Chốt</th>
-              <th style="width:20%;">Ghi Chú KSNB</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>01</strong></td>
-              <td>Loại đơn hàng áp dụng</td>
-              <td>Đơn hàng loại 551 (App Thợ ĐMX), hình thức xuất 8, hình thức nhập trả 10.</td>
-              <td><span class="status-pill pill-green">🟢 ĐÃ CHỐT</span></td>
-              <td>Áp dụng cho gói bán online qua App/Web</td>
-            </tr>
-            <tr>
-              <td><strong>02</strong></td>
-              <td>Đầu vào tạo yêu cầu hoàn tiền</td>
-              <td>BẮT BUỘC input là Mã CNDV khi Tổng đài viên tạo yêu cầu trên NewCRM.</td>
-              <td><span class="status-pill pill-green">🟢 ĐÃ CHỐT</span></td>
-              <td>Chặn nhập sai thông tin không định danh</td>
-            </tr>
-            <tr>
-              <td><strong>03</strong></td>
-              <td>Cơ chế kiểm tra 3 điều kiện</td>
-              <td>Tự động kiểm tra: 1. Hạn ≤ 30 ngày; 2. Chưa dùng lần nào (100%); 3. CNDV hợp lệ, không Pending.</td>
-              <td><span class="status-pill pill-green">🟢 ĐÃ CHỐT</span></td>
-              <td>Kiểm soát tự động 100% bằng hệ thống</td>
-            </tr>
-            <tr>
-              <td><strong>04</strong></td>
-              <td>Nhân sự phụ trách chi tiền</td>
-              <td>Kế toán Nghiệp vụ Tận Tâm: Nhân viên 68908 (Nguyễn Thị Hằng) phụ trách xử lý và duyệt chi tiền.</td>
-              <td><span class="status-pill pill-green">🟢 ĐÃ CHỐT</span></td>
-              <td>Nhân viên 16350 Lý Trần Kim Ngân đã nghỉ việc</td>
-            </tr>
-            <tr>
-              <td><strong>05</strong></td>
-              <td>Quy định Biên bản hủy HĐ</td>
-              <td>Có HĐ Công ty ➔ BẮT BUỘC có Biên bản hủy HĐ ký 2 bên mới chi tiền. Không có HĐ Công ty ➔ Không cần.</td>
-              <td><span class="status-pill pill-green">🟢 ĐÃ CHỐT</span></td>
-              <td>Tuân thủ quy định Cơ quan Thuế</td>
-            </tr>
-            <tr>
-              <td><strong>06</strong></td>
-              <td>Tự động sinh Phiếu hoàn tiền</td>
-              <td>Web ACC DMX tự động sinh phiếu CF với Kho tạo = Kho user trên BCNB, Hình thức thu = 2 (Thu nợ bán hàng).</td>
-              <td><span class="status-pill pill-green">🟢 ĐÃ CHỐT</span></td>
-              <td>Liên kết tự động bù trừ công nợ gốc</td>
-            </tr>
-            <tr>
-              <td><strong>07</strong></td>
-              <td>SLA giải ngân chi tiền hoàn</td>
-              <td>Thời gian Kế toán hoàn tất chi tiền hoàn cho khách trong vòng 24h - 48h làm việc kể từ khi sinh phiếu CF.</td>
-              <td><span class="status-pill pill-yellow">🟡 CHỜ XÁC NHẬN</span></td>
-              <td>Cần thống nhất cam kết với khối Vận hành</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- UNIVERSAL BOTTOM NAVIGATION CARD -->
-  <div class="bottom-nav-card">
-    <div class="bottom-nav-header">
-      <div class="bnav-badge">KSNB AUTOMATION</div>
-      <div class="bnav-title">Chuyển hướng nhanh & Cổng quy trình</div>
-      <div class="bnav-desc">Truy cập Danh mục Thợ Điện Máy XANH hoặc Trang chủ Cổng KSNB</div>
-    </div>
-    <div class="bottom-nav-grid">
-      <a href="index.html" class="bnav-action bnav-action-back">
-        <div class="bnav-icon-circle">⚡</div>
-        <div class="bnav-action-text">
-          <span class="bnav-sub">Danh mục</span>
-          <span class="bnav-main">Thợ Điện Máy XANH</span>
-        </div>
-      </a>
-      <a href="../index.html" class="bnav-action bnav-action-home">
-        <div class="bnav-icon-circle">🏠</div>
-        <div class="bnav-action-text">
-          <span class="bnav-sub">Cổng chính</span>
-          <span class="bnav-main">Trang chủ KSNB</span>
-        </div>
-      </a>
-      <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bnav-action bnav-action-top">
-        <div class="bnav-icon-circle">▲</div>
-        <div class="bnav-action-text">
-          <span class="bnav-sub">Cuộn nhanh</span>
-          <span class="bnav-main">Lên đầu trang</span>
-        </div>
-      </button>
     </div>
   </div>
 
 </main>
 
-<!-- UNIVERSAL FLOATING NAVIGATION DOCK -->
-<div class="floating-nav-dock" id="floatingNavDock" aria-label="Điều hướng nhanh">
-  <a href="index.html" class="dock-btn dock-btn-back" title="Quay lại danh mục Thợ ĐMX" aria-label="Quay lại danh mục Thợ ĐMX">
-    <span class="dock-icon">←</span>
-    <span class="dock-text">Thợ ĐMX</span>
-  </a>
-  <a href="../index.html" class="dock-btn dock-btn-home" title="Về Trang chủ" aria-label="Về Trang chủ">
-    <span class="dock-icon">🏠</span>
-    <span class="dock-text">Trang chủ</span>
-  </a>
-  <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="dock-btn dock-btn-top" title="Cuộn lên đầu trang" aria-label="Cuộn lên đầu trang">
-    <span class="dock-icon">▲</span>
-  </button>
-</div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div style="max-width:1240px; margin:auto;">
+    <strong>TÀI LIỆU QUY TRÌNH NGHIỆP VỤ NỘI BỘ — BẢN QUYỀN THUỘC THỢ ĐIỆN MÁY XANH / TẬN TÂM</strong><br>
+    <span style="font-size:12px; color:#94a3b8; display:inline-block; margin-top:6px;">
+      Phạm vi áp dụng: Toàn quốc · Khối CSKH Tổng đài · Khối Kế toán Nghiệp vụ Tận Tâm · Bộ phận CNTT / Hệ thống Lõi
+    </span>
+  </div>
+</footer>
 
 <script>
-// Switch Tabs
+// Switch between Section Tabs
 function switchStage(stageId) {
   const tabs = document.querySelectorAll('.stage-tab');
   const sections = document.querySelectorAll('.stage-section');
@@ -1619,40 +1535,41 @@ function switchStage(stageId) {
   tabs.forEach(tab => tab.classList.remove('active'));
   sections.forEach(sec => sec.classList.remove('active'));
   
-  const targetTab = Array.from(tabs).find(tab => tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(stageId));
-  if (targetTab) targetTab.classList.add('active');
-  
   const targetSec = document.getElementById(stageId);
-  if (targetSec) targetSec.classList.add('active');
+  if (targetSec) {
+    targetSec.classList.add('active');
+  }
+  
+  // Highlight active tab
+  if (stageId === 'sec1') tabs[0].classList.add('active');
+  if (stageId === 'sec2') tabs[1].classList.add('active');
+  if (stageId === 'sec3') tabs[2].classList.add('active');
+  if (stageId === 'sec4') tabs[3].classList.add('active');
+  
+  window.scrollTo({ top: targetSec.offsetTop - 80, behavior: 'smooth' });
 }
 
-// Search Filter
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', function() {
-  const q = this.value.toLowerCase().trim();
-  const allCards = document.querySelectorAll('.card, .step-item, tr');
-  
-  if (!q) {
-    allCards.forEach(el => el.style.display = '');
+// Live Search Filter
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase().trim();
+  if (!term) {
+    document.querySelectorAll('.card, .step-item, tr').forEach(el => el.style.display = '');
     return;
   }
   
-  // Show all stage sections when searching so results in hidden tabs can be seen
-  document.querySelectorAll('.stage-section').forEach(sec => sec.classList.add('active'));
+  // Make all sections visible while searching
+  document.querySelectorAll('.stage-section').forEach(sec => sec.style.display = 'block');
   
-  allCards.forEach(el => {
-    // Avoid hiding header rows
-    if (el.tagName === 'TR' && el.parentElement.tagName === 'THEAD') return;
-    
-    const text = el.innerText.toLowerCase();
-    if (text.includes(q)) {
-      el.style.display = '';
-    } else {
-      el.style.display = 'none';
-    }
+  document.querySelectorAll('.step-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(term) ? 'flex' : 'none';
+  });
+  
+  document.querySelectorAll('tbody tr').forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(term) ? '' : 'none';
   });
 });
 </script>
-
 </body>
 </html>
