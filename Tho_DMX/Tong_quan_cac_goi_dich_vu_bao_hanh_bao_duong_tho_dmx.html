@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng Quan & So Sánh Các Gói Dịch Vụ Bảo Hành - Bảo Dưỡng Thợ ĐMX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #e0f2fe;
+            --secondary: #0d9488;
+            --secondary-light: #ccfbf1;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --purple: #8b5cf6;
+            --purple-light: #ede9fe;
+            --dark: #0f172a;
+            --gray-900: #1e293b;
+            --gray-700: #334155;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-300: #cbd5e1;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gray-50: #f8fafc;
+            --white: #ffffff;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        /* Top Header */
+        .top-navbar {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand i {
+            color: #38bdf8;
+            font-size: 1.4rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-home {
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            padding: 6px 14px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-home:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #0d9488 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            max-width: 850px;
+            margin: 0 auto 1.5rem auto;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .badge-pill-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .badge-pill {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem 1.5rem;
+        }
+
+        /* Navigation Tabs */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 8px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            position: sticky;
+            top: 60px;
+            z-index: 900;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 180px;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: var(--gray-100);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Tab Content Panels */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Cards */
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 1.75rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-100);
+            padding-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--primary);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .grid-6 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Info Item & Box */
+        .info-box {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .info-box:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+            background: #ffffff;
+        }
+
+        .info-box-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .info-icon.blue { background: var(--primary-light); color: var(--primary); }
+        .info-icon.teal { background: var(--secondary-light); color: var(--secondary); }
+        .info-icon.amber { background: var(--accent-light); color: var(--accent); }
+        .info-icon.purple { background: var(--purple-light); color: var(--purple); }
+        .info-icon.green { background: var(--success-light); color: var(--success); }
+        .info-icon.red { background: var(--danger-light); color: var(--danger); }
+
+        /* Package Overview Cards */
+        .pkg-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pkg-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .pkg-card-top {
+            margin-bottom: 1rem;
+        }
+
+        .pkg-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .pkg-card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pkg-card-desc {
+            font-size: 0.88rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .pkg-features {
+            list-style: none;
+            font-size: 0.85rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .pkg-features li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .pkg-features li i {
+            color: var(--success);
+            margin-top: 3px;
+        }
+
+        .pkg-link-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        /* Comparison Table Styling */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+            background: white;
+            min-width: 1100px;
+        }
+
+        .compare-table th {
+            background: #0f172a;
+            color: white;
+            padding: 14px 16px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--gray-300);
+            position: sticky;
+            top: 0;
+        }
+
+        .compare-table th.col-feature {
+            background: #1e293b;
+            min-width: 180px;
+            width: 180px;
+        }
+
+        .compare-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        .compare-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .compare-table tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+
+        .compare-table td.feature-title {
+            font-weight: 700;
+            color: var(--gray-900);
+            background-color: var(--gray-50);
+            border-right: 1px solid var(--gray-200);
+        }
+
+        /* Alert / Callout Boxes */
+        .alert-box {
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .alert-box.info {
+            background-color: var(--primary-light);
+            border-left: 5px solid var(--primary);
+            color: #0369a1;
+        }
+
+        .alert-box.warning {
+            background-color: var(--accent-light);
+            border-left: 5px solid var(--accent);
+            color: #b45309;
+        }
+
+        .alert-box.success {
+            background-color: var(--success-light);
+            border-left: 5px solid var(--success);
+            color: #047857;
+        }
+
+        .alert-box.purple {
+            background-color: var(--purple-light);
+            border-left: 5px solid var(--purple);
+            color: #6d28d9;
+        }
+
+        .alert-icon {
+            font-size: 1.4rem;
+            margin-top: 2px;
+        }
+
+        /* Flow Process Step */
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+
+        .flow-step-item {
+            display: flex;
+            gap: 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            align-items: flex-start;
+            transition: all 0.2s;
+        }
+
+        .flow-step-item:hover {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .flow-step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .flow-step-content h4 {
+            font-size: 1rem;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .flow-step-content p {
+            font-size: 0.88rem;
+            color: var(--gray-600);
+            margin: 0;
+        }
+
+        /* Tag Labels */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .tag-blue { background: #e0f2fe; color: #0369a1; }
+        .tag-teal { background: #ccfbf1; color: #0f766e; }
+        .tag-amber { background: #fef3c7; color: #b45309; }
+        .tag-purple { background: #ede9fe; color: #6d28d9; }
+        .tag-green { background: #d1fae5; color: #047857; }
+        .tag-red { background: #fee2e2; color: #b91c1c; }
+
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .hero-title { font-size: 1.6rem; }
+            .tab-nav { flex-wrap: nowrap; overflow-x: scroll; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <a href="index.html" class="nav-brand">
+            <i class="fas fa-shield-alt"></i>
+            <span>HỆ THỐNG GÓI DỊCH VỤ THỢ ĐMX</span>
+        </a>
+        <div class="nav-actions">
+            <a href="../index.html" class="btn-home">
+                <i class="fas fa-arrow-left"></i> Cổng KSNB
+            </a>
+            <a href="index.html" class="btn-home">
+                <i class="fas fa-folder"></i> Thư mục Thợ ĐMX
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="badge-pill-group" style="margin-bottom: 12px;">
+            <span class="badge-pill"><i class="fas fa-cube"></i> Hệ sinh thái 6 Gói Dịch vụ</span>
+            <span class="badge-pill"><i class="fas fa-bolt"></i> CNDV Điện Tử Airtime</span>
+            <span class="badge-pill"><i class="fas fa-sync-alt"></i> Liên thông ĐMX - Thợ</span>
+        </div>
+        <h1 class="hero-title">TỔNG QUAN & SO SÁNH CÁC GÓI DỊCH VỤ BẢO HÀNH - BẢO DƯỠNG THỢ ĐMX</h1>
+        <p class="hero-subtitle">
+            Tài liệu quy chuẩn tổng hợp các quy tắc chung, ma trận so sánh chi tiết và phân loại chuyên sâu cho toàn bộ 6 gói dịch vụ bảo dưỡng, bảo hành mở rộng, bảo hành rơi vỡ và các quy trình vận hành liên quan.
+        </p>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="container">
+
+        <!-- Navigation Tabs -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('tab-overview')">
+                <i class="fas fa-th-large"></i> 1. Danh Mục 6 Gói Dịch Vụ
+            </button>
+            <button class="tab-btn" onclick="switchTab('tab-common')">
+                <i class="fas fa-cogs"></i> 2. Thông Tin Chung Tất Cả Gói
+            </button>
+            <button class="tab-btn" onclick="switchTab('tab-matrix')">
+                <i class="fas fa-table"></i> 3. Ma Trận So Sánh Chi Tiết
+            </button>
+            <button class="tab-btn" onclick="switchTab('tab-differences')">
+                <i class="fas fa-balance-scale"></i> 4. Điểm Khác Biệt Cốt Lõi
+            </button>
+            <button class="tab-btn" onclick="switchTab('tab-operations')">
+                <i class="fas fa-exchange-alt"></i> 5. Swap IMEI & Hoàn Tiền X-Work
+            </button>
+        </nav>
+
+        <!-- ======================================================================== -->
+        <!-- TAB 1: DANH MỤC 6 GÓI DỊCH VỤ -->
+        <!-- ======================================================================== -->
+        <section id="tab-overview" class="tab-panel active">
+            
+            <div class="alert-box info">
+                <i class="fas fa-info-circle alert-icon"></i>
+                <div>
+                    <h4 style="font-weight: 700; margin-bottom: 4px;">Phân hệ dịch vụ Thợ ĐMX tại Siêu thị Điện máy XANH</h4>
+                    <p style="font-size: 0.9rem; margin: 0;">
+                        Các gói dịch vụ được chia thành 2 nhóm chính: <strong>Nhóm Dịch Vụ Bảo Hành</strong> (Bảo vệ rủi ro, sửa chữa miễn phí khi hư hỏng) và <strong>Nhóm Dịch Vụ Bảo Dưỡng</strong> (Chăm sóc định kỳ, vệ sinh, thay thế vật tư tiêu hao).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Group A: Nhóm Bảo Hành -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-shield-virus" style="color: var(--purple);"></i>
+                        NHÓM 1: DỊCH VỤ BẢO HÀNH (SỬA CHỮA RỦI RO & MỞ RỘNG THỜI GIAN)
+                    </h2>
+                    <span class="tag tag-purple">Bảo Hành Sửa Chữa</span>
+                </div>
+
+                <div class="grid-3">
+                    <!-- Gói 1: BHMR Máy Mới -->
+                    <div class="pkg-card" style="border-top: 4px solid var(--purple);">
+                        <div class="pkg-card-top">
+                            <span class="pkg-badge" style="background: var(--purple-light); color: var(--purple);">BHMR Máy Mới (≤ 30 Ngày)</span>
+                            <h3 class="pkg-card-title"><i class="fas fa-shield-alt" style="color: var(--purple);"></i> BHMR Thợ ĐMX (Máy Mới)</h3>
+                            <p class="pkg-card-desc">Gia hạn thời gian bảo hành chính hãng thêm 12 hoặc 24 tháng cho thiết bị mua mới tại siêu thị.</p>
+                            <ul class="pkg-features">
+                                <li><i class="fas fa-check-circle"></i> <strong>Sản phẩm:</strong> Điện máy, Gia dụng, Điện tử, Tivi, Tủ lạnh, Máy giặt...</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Thời hạn:</strong> +12 tháng hoặc +24 tháng.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Hạn mức chi trả:</strong> Bằng 100% giá trị hóa đơn mua máy.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Mã Airtime:</strong> Airtime 2572 CNDV Bảo hành.</li>
+                            </ul>
+                        </div>
+                        <a href="Quy_trinh_ban_goi_bao_hanh_mo_rong_tho_dmx.html" class="pkg-link-btn" style="background: var(--purple); color: white;">
+                            Xem Quy Trình Máy Mới <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Gói 1B: BHMR Sản Phẩm Đã Sử Dụng (ĐSD) -->
+                    <div class="pkg-card" style="border-top: 4px solid #0284c7; background: #f0f9ff;">
+                        <div class="pkg-card-top">
+                            <span class="pkg-badge" style="background: #0284c7; color: white;">Mới: BHMR Sản Phẩm Đã Sử Dụng</span>
+                            <h3 class="pkg-card-title" style="color: #0369a1;"><i class="fas fa-mobile-screen" style="color: #0284c7;"></i> BHMR Thợ ĐMX_ĐSD</h3>
+                            <p class="pkg-card-desc">Gia hạn bảo hành thêm 12 tháng cho thiết bị đã sử dụng (mua từ ngày thứ 31 và còn ≥ 30 ngày BH hãng).</p>
+                            <ul class="pkg-features">
+                                <li><i class="fas fa-check-circle"></i> <strong>Sản phẩm:</strong> Smartphone, Laptop, Tablet, Apple Watch (61 gói).</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Thời hạn:</strong> +12 tháng sau khi hết BH hãng.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Hạn mức:</strong> Tổng chi phí lũy kế ≤ Giá niêm yết thiết bị.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Kênh cấp:</strong> SMS Brandname 2733 & e-Cert tgdd.vn/gcn-bhmr-dsd.</li>
+                            </ul>
+                        </div>
+                        <a href="Quy_trinh_ban_goi_bao_hanh_mo_rong_sp_da_su_dung.html" class="pkg-link-btn" style="background: #0284c7; color: white;">
+                            Xem Quy Trình Gói ĐSD <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Gói 2: BHRV -->
+                    <div class="pkg-card" style="border-top: 4px solid var(--danger);">
+                        <div class="pkg-card-top">
+                            <span class="pkg-badge" style="background: var(--danger-light); color: var(--danger);">Gói Bảo Hiểm / Rơi Vỡ (BHRV)</span>
+                            <h3 class="pkg-card-title"><i class="fas fa-mobile-alt" style="color: var(--danger);"></i> Bảo Hành Rơi Vỡ - Vào Nước</h3>
+                            <p class="pkg-card-desc">Bảo hiểm chi phí sửa chữa hoặc thay mới linh kiện khi thiết bị bị rơi vỡ màn hình, vô nước do tai nạn bất ngờ.</p>
+                            <ul class="pkg-features">
+                                <li><i class="fas fa-check-circle"></i> <strong>Sản phẩm áp dụng:</strong> Điện thoại, Laptop, Tablet, Đồng hồ thông minh...</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Thời hạn:</strong> 06 tháng hoặc 12 tháng từ ngày mua.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Hạn mức sửa chữa:</strong> Theo gói (ví dụ 100% giá trị máy hoặc theo từng lần rơi vỡ).</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Mã Airtime:</strong> Airtime Bảo hiểm rơi vỡ Thợ.</li>
+                            </ul>
+                        </div>
+                        <a href="Quy_trinh_ban_goi_thay_loi_loc_nuoc_bao_hanh_roi_vo.html" class="pkg-link-btn" style="background: var(--danger); color: white;">
+                            Xem Quy Trình Chi Tiết <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group B: Nhóm Bảo Dưỡng -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-tools" style="color: var(--primary);"></i>
+                        NHÓM 2: DỊCH VỤ BẢO DƯỠNG (CHĂM SÓC, VỆ SINH, THAY VẬT TƯ ĐỊNH KỲ)
+                    </h2>
+                    <span class="tag tag-blue">Bảo Dưỡng Tận Nhà</span>
+                </div>
+
+                <div class="grid-4">
+                    <!-- Gói 3: TLLN -->
+                    <div class="pkg-card" style="border-top: 4px solid var(--secondary);">
+                        <div class="pkg-card-top">
+                            <span class="pkg-badge" style="background: var(--secondary-light); color: var(--secondary);">Thay Lõi Lọc Nước</span>
+                            <h3 class="pkg-card-title" style="font-size: 1.05rem;"><i class="fas fa-filter" style="color: var(--secondary);"></i> Thay Lõi Lọc Nước</h3>
+                            <p class="pkg-card-desc">Gói thay thế định kỳ lõi lọc thô 1-2-3 và màng lọc theo chu kỳ 6-12-18-24 tháng.</p>
+                            <ul class="pkg-features">
+                                <li><i class="fas fa-check-circle"></i> <strong>Áp dụng:</strong> Máy lọc nước R.O, Nano...</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Số lần:</strong> 2 - 4 đợt thay lõi.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Hạn mức:</strong> Khấu trừ theo số lượng lõi thay.</li>
+                            </ul>
+                        </div>
+                        <a href="Quy_trinh_ban_goi_thay_loi_loc_nuoc_bao_hanh_roi_vo.html" class="pkg-link-btn" style="background: var(--secondary); color: white;">
+                            Xem Chi Tiết <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Gói 4: VSMNN -->
+                    <div class="pkg-card" style="border-top: 4px solid var(--accent);">
+                        <div class="pkg-card-top">
+                            <span class="pkg-badge" style="background: var(--accent-light); color: var(--accent);">Vệ Sinh Máy Nước Nóng</span>
+                            <h3 class="pkg-card-title" style="font-size: 1.05rem;"><i class="fas fa-shower" style="color: var(--accent);"></i> Vệ Sinh Máy Nước Nóng</h3>
+                            <p class="pkg-card-desc">Bảo dưỡng, xúc rửa bình chứa, kiểm tra rò điện ELCB và thay thế thanh magie chống ăn mòn.</p>
+                            <ul class="pkg-features">
+                                <li><i class="fas fa-check-circle"></i> <strong>Áp dụng:</strong> Máy nước nóng Trực tiếp / Gián tiếp.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Số lần:</strong> 1 - 2 lần định kỳ.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Đặc thù:</strong> Kèm kiểm tra an toàn điện.</li>
+                            </ul>
+                        </div>
+                        <a href="Quy_trinh_ban_goi_bao_duong_ve_sinh_may_nuoc_nong.html" class="pkg-link-btn" style="background: var(--accent); color: white;">
+                            Xem Chi Tiết <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Gói 5: VSML Định Kỳ -->
+                    <div class="pkg-card" style="border-top: 4px solid #0284c7;">
+                        <div class="pkg-card-top">
+                            <span class="pkg-badge" style="background: #e0f2fe; color: #0284c7;">VSML Định Kỳ (1-4 Năm)</span>
+                            <h3 class="pkg-card-title" style="font-size: 1.05rem;"><i class="fas fa-snowflake" style="color: #0284c7;"></i> VS Máy Lạnh Định Kỳ</h3>
+                            <p class="pkg-card-desc">Gói dài hạn 2, 4, 6, 8 lần vệ sinh dàn nóng/lạnh, sạc gas và kiểm tra toàn diện máy lạnh.</p>
+                            <ul class="pkg-features">
+                                <li><i class="fas fa-check-circle"></i> <strong>Thời hạn:</strong> 1, 2, 3, 4 Năm.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Số lần:</strong> Gói 2 / 3 / 4 / 5 (2 - 8 lần).</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Airtime:</strong> 2573 (Khấu trừ hạn mức).</li>
+                            </ul>
+                        </div>
+                        <a href="Quy_trinh_ban_goi_dinh_ky_ve_sinh_may_lanh.html" class="pkg-link-btn" style="background: #0284c7; color: white;">
+                            Xem Chi Tiết <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Gói 6: VSML Lẻ (1 Lần) -->
+                    <div class="pkg-card" style="border-top: 4px solid var(--gray-500);">
+                        <div class="pkg-card-top">
+                            <span class="pkg-badge" style="background: var(--gray-100); color: var(--gray-600);">VSML Lẻ (1 Lần)</span>
+                            <h3 class="pkg-card-title" style="font-size: 1.05rem;"><i class="fas fa-wind" style="color: var(--gray-600);"></i> VS Máy Lạnh Lẻ (1 Lần)</h3>
+                            <p class="pkg-card-desc">Bán lẻ dịch vụ 1 lần làm duy nhất, lấy tải giao ngay theo giờ hẹn (Hình thức giao 281).</p>
+                            <ul class="pkg-features">
+                                <li><i class="fas fa-check-circle"></i> <strong>Hình thức:</strong> Bán lẻ giao ngay 281.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Giá bán:</strong> 200.000đ/lần/máy.</li>
+                                <li><i class="fas fa-check-circle"></i> <strong>Đặc thù:</strong> KTV làm 1 lần là đóng đơn SO.</li>
+                            </ul>
+                        </div>
+                        <a href="Quy_trinh_ban_goi_ve_sinh_may_lanh.html" class="pkg-link-btn" style="background: var(--gray-700); color: white;">
+                            Xem Chi Tiết <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Supporting Flows -->
+            <div class="card" style="background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); border-color: #86efac;">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-cubes" style="color: var(--success);"></i>
+                        CÁC QUY TRÌNH HỖ TRỢ VẬN HÀNH DỊCH VỤ THỢ
+                    </h2>
+                    <span class="tag tag-green">Quy Trình Phụ Trợ</span>
+                </div>
+                <div class="grid-2">
+                    <div class="info-box" style="background: white;">
+                        <div class="info-box-header">
+                            <div class="info-icon green"><i class="fas fa-exchange-alt"></i></div>
+                            <div>Quy trình Nhập Đổi / Swap IMEI CNDV</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600); margin-bottom: 10px;">
+                            Áp dụng khi khách đổi sản phẩm chính (1 đổi 1 lỗi NSX / thu cũ đổi mới). Chuyển quyền sử dụng CNDV sang IMEI mới mà không làm mất hạn mức hay thời hạn còn lại.
+                        </p>
+                        <a href="Quy_trinh_nhap_doi_swap_imei_goi_dich_vu_tho.html" style="font-weight: 600; color: var(--success); text-decoration: none; font-size: 0.88rem;">
+                            Chi tiết Swap IMEI <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="info-box" style="background: white;">
+                        <div class="info-box-header">
+                            <div class="info-icon green"><i class="fas fa-gift"></i></div>
+                            <div>Quy trình Tặng Gói Dịch Vụ Khuyến Mãi</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600); margin-bottom: 10px;">
+                            Cơ chế áp dụng CTKM giảm giá 100% gói dịch vụ khi mua kèm SPC. Vẫn sinh CNDV điện tử và quản lý hạn mức, hạch toán chiết khấu khuyến mãi đại lý.
+                        </p>
+                        <a href="quy_trinh_tang_goi_dich_vu.html" style="font-weight: 600; color: var(--success); text-decoration: none; font-size: 0.88rem;">
+                            Chi tiết Tặng Gói <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ======================================================================== -->
+        <!-- TAB 2: THÔNG TIN CHUNG TẤT CẢ GÓI -->
+        <!-- ======================================================================== -->
+        <section id="tab-common" class="tab-panel">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-dna"></i>
+                        CÁC ĐẶC ĐIỂM & QUY TẮC CHUNG CỦA TẤT CẢ GÓI DỊCH VỤ
+                    </h2>
+                    <span class="tag tag-blue">Chuẩn Hóa Nghiệp Vụ</span>
+                </div>
+
+                <div class="grid-3">
+                    <!-- Rule 1 -->
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <div class="info-icon blue"><i class="fas fa-database"></i></div>
+                            <div>1. Khai Báo Master Data (MDM)</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600);">
+                            Tất cả gói dịch vụ đều được định nghĩa trên hệ thống MDM trung tâm: Quản lý <strong>mã dịch vụ, tên gói, giá niêm yết, giá vốn Thợ, tỷ lệ hoa hồng đại lý</strong> trả cho ĐMX, và cấu hình <strong>hạn mức (số lần / số tiền)</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Rule 2 -->
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <div class="info-icon teal"><i class="fas fa-laptop-code"></i></div>
+                            <div>2. Bán qua Tool Multicat</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600);">
+                            Tất cả các gói dài hạn đều được bán qua giao diện <strong>Tool Multicat</strong> tại POS ĐMX, tự động link với hóa đơn mua <strong>Sản phẩm chính (SPC) trong vòng &le; 30 ngày</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Rule 3 -->
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <div class="info-icon purple"><i class="fas fa-id-card"></i></div>
+                            <div>3. Cấp CNDV Điện Tử Airtime</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600);">
+                            Hệ thống tự động kích hoạt và cấp <strong>Chứng nhận dịch vụ (CNDV) điện tử</strong> qua cổng Airtime, định danh theo Serial/IMEI hoặc số điện thoại khách hàng, gửi tin nhắn SMS/Zalo kèm link tra cứu cho khách.
+                        </p>
+                    </div>
+
+                    <!-- Rule 4 -->
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <div class="info-icon amber"><i class="fas fa-calculator"></i></div>
+                            <div>4. Quản Lý & Khấu Trừ Hạn Mức</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600);">
+                            Mỗi CNDV được thiết lập sẵn tổng hạn mức. Khi KTV Thợ đến thực hiện dịch vụ (hoặc khi bảo hành sửa chữa), hệ thống sẽ <strong>khấu trừ điện tử theo từng đợt</strong> cho đến khi hết hạn mức hoặc hết thời hạn.
+                        </p>
+                    </div>
+
+                    <!-- Rule 5 -->
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <div class="info-icon green"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <div>5. Hạch Toán Tài Chính Chuẩn</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600);">
+                            ĐMX thu tiền của khách $
+ightarrow$ xuất phiếu thu loại <code>3030</code>, ghi nhận công nợ qua Bank ID <code>20980 (Công nợ ĐMX)</code> $
+ightarrow$ Thợ ĐMX tự động ghi nhận doanh thu và trích hoa hồng đại lý cho ĐMX.
+                        </p>
+                    </div>
+
+                    <!-- Rule 6 -->
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <div class="info-icon red"><i class="fas fa-undo-alt"></i></div>
+                            <div>6. Hoàn Tiền Duyệt X-Work (10p)</div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--gray-600);">
+                            Mọi yêu cầu hoàn trả gói đều phải thỏa mãn: <strong>Đơn hàng &le; 30 ngày VÀ CNDV chưa dùng bất kỳ lần nào</strong>. Phải tạo Ticket qua X-Work để Quản lý Siêu thị (QLST) phê duyệt trong SLA 10 phút.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Flow Quy chuẩn tổng quát -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-project-diagram"></i>
+                        LUỒNG QUY TRÌNH CHUẨN TỪ BÁN HÀNG ĐẾN THỰC THI & QUẢN TRỊ
+                    </h2>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="flow-step-item">
+                        <div class="flow-step-num">1</div>
+                        <div class="flow-step-content">
+                            <h4>Tư Vấn & Lên Đơn Trên Multicat</h4>
+                            <p>Nhân viên tư vấn gói dịch vụ kèm theo sản phẩm chính. Mở Tool Multicat &rarr; Chọn nhóm (Bảo hành / Bảo dưỡng) &rarr; Chọn mã gói &rarr; Kiểm tra ngày mua SPC &le; 30 ngày.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step-item">
+                        <div class="flow-step-num">2</div>
+                        <div class="flow-step-content">
+                            <h4>Thu Tiền & Kích Hoạt CNDV Điện Tử</h4>
+                            <p>Thu ngân thu tiền 100% (Phiếu thu 3030, Bank ID 20980). Hệ thống gọi API Airtime tương ứng để cấp mã CNDV, lưu hạn mức ban đầu và gửi SMS xác nhận cho khách hàng.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step-item">
+                        <div class="flow-step-num">3</div>
+                        <div class="flow-step-content">
+                            <h4>Khách Hàng Đặt Lịch Hoặc Yêu Cầu Sửa Chữa</h4>
+                            <p>Khách hàng liên hệ tổng đài Thợ ĐMX hoặc đặt lịch qua App khi đến hạn bảo dưỡng định kỳ hoặc khi thiết bị gặp sự cố hư hỏng/rơi vỡ.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step-item">
+                        <div class="flow-step-num">4</div>
+                        <div class="flow-step-content">
+                            <h4>Điều Phối KTV & Khấu Trừ Hạn Mức Thực Tế</h4>
+                            <p>Hệ thống tự động điều phối KTV Thợ ĐMX gần nhất đến nhà khách hàng phục vụ. KTV hoàn tất công việc trên App Thợ &rarr; Hệ thống tự động trừ 1 lần (hoặc trừ chi phí sửa chữa) trên CNDV.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step-item">
+                        <div class="flow-step-num">5</div>
+                        <div class="flow-step-content">
+                            <h4>Đối Soát Tài Chính & Hoa Hồng Đại Lý</h4>
+                            <p>Cuối kỳ, hệ thống ERP tự động đối soát giữa Công ty Thợ ĐMX và MWG/ĐMX để thanh quyết toán doanh thu, giá vốn và tiền hoa hồng đại lý giới thiệu dịch vụ.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ======================================================================== -->
+        <!-- TAB 3: MA TRẬN SO SÁNH CHI TIẾT -->
+        <!-- ======================================================================== -->
+        <section id="tab-matrix" class="tab-panel">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-th-list"></i>
+                        BẢNG MA TRẬN SO SÁNH TOÀN DIỆN 6 GÓI DỊCH VỤ THỢ ĐMX
+                    </h2>
+                    <span class="tag tag-amber">Tra Cứu Nhanh</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th class="col-feature">Tiêu chí so sánh</th>
+                                <th>1. Bảo Hành Mở Rộng (BHMR)</th>
+                                <th>2. Bảo Hành Rơi Vỡ (BHRV)</th>
+                                <th>3. Bảo Dưỡng Thay Lõi Lọc Nước</th>
+                                <th>4. Vệ Sinh Máy Nước Nóng</th>
+                                <th>5. VS Máy Lạnh Định Kỳ (1-4N)</th>
+                                <th>6. VS Máy Lạnh Lẻ (1 Lần)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-tag"></i> 1. Loại Dịch Vụ</td>
+                                <td><span class="tag tag-purple">Bảo Hành Mở Rộng</span><br>Gia hạn bảo hành NSX</td>
+                                <td><span class="tag tag-red">Bảo Hiểm Sửa Chữa</span><br>Rơi vỡ, vào nước</td>
+                                <td><span class="tag tag-teal">Bảo Dưỡng Vật Tư</span><br>Thay thế lõi lọc định kỳ</td>
+                                <td><span class="tag tag-amber">Bảo Dưỡng Vệ Sinh</span><br>Xúc rửa, thay thanh magie</td>
+                                <td><span class="tag tag-blue">Bảo Dưỡng Định Kỳ</span><br>Vệ sinh trọn gói nhiều năm</td>
+                                <td><span class="tag" style="background:#e2e8f0;color:#334155;">Dịch Vụ Lẻ Giao Ngay</span><br>Làm 1 lần theo đơn</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-tv"></i> 2. Ngành Hàng Áp Dụng</td>
+                                <td>Điện máy, Điện tử, Tivi, Tủ lạnh, Máy giặt, Gia dụng lớn</td>
+                                <td>Điện thoại, Tablet, Laptop, Đồng hồ thông minh</td>
+                                <td>Máy lọc nước R.O, Nano, Máy lọc nước ion kiềm</td>
+                                <td>Máy nước nóng Trực tiếp & Gián tiếp</td>
+                                <td>Máy lạnh treo tường, Âm trần (Đơn SPC)</td>
+                                <td>Mọi máy lạnh đang sử dụng tại nhà khách</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-clock"></i> 3. Thời Hạn Hiệu Lực</td>
+                                <td>+12 tháng hoặc +24 tháng (sau khi hết BH hãng)</td>
+                                <td>06 tháng hoặc 12 tháng từ ngày kích hoạt</td>
+                                <td>12 đến 24 tháng (theo các đợt 6, 12, 18, 24T)</td>
+                                <td>12 đến 24 tháng (1 hoặc 2 lần làm)</td>
+                                <td>1 Năm (2 lần), 2 Năm (4 lần), 3 Năm (6 lần), 4 Năm (8 lần)</td>
+                                <td>Có giá trị thực hiện trong vòng 7 - 30 ngày hẹn</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-chart-pie"></i> 4. Hạn Mức Chi Trả / Số Lần</td>
+                                <td>Tối đa 100% giá trị hóa đơn máy chính</td>
+                                <td>Tối đa bằng hạn mức gói hoặc giá trị máy lúc mua</td>
+                                <td>2 đến 4 đợt thay lõi lọc theo cấu hình gói</td>
+                                <td>1 đến 2 lần bảo dưỡng & kiểm tra điện an toàn</td>
+                                <td><strong>2 - 8 lần làm</strong> (tùy theo Gói 2, 3, 4 hoặc Gói 5)</td>
+                                <td><strong>1 lần làm duy nhất</strong> (200.000đ/máy)</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-calendar-check"></i> 5. Ràng Buộc Đơn Mua</td>
+                                <td>Bán kèm đơn SPC &le; 30 ngày</td>
+                                <td>Bán kèm đơn SPC &le; 30 ngày (cần test máy)</td>
+                                <td>Bán kèm đơn SPC &le; 30 ngày</td>
+                                <td>Bán kèm đơn SPC &le; 30 ngày</td>
+                                <td>Bán kèm đơn SPC &le; 30 ngày</td>
+                                <td><strong>Không ràng buộc</strong> (bán tự do bất kỳ lúc nào)</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-desktop"></i> 6. Màn Hình Bán Hàng</td>
+                                <td>Tool Multicat &rarr; Nhóm Bảo Hành</td>
+                                <td>Tool Multicat &rarr; Nhóm Bảo Hiểm</td>
+                                <td>Tool Multicat &rarr; Nhóm Bảo Dưỡng</td>
+                                <td>Tool Multicat &rarr; Nhóm Bảo Dưỡng</td>
+                                <td>Tool Multicat &rarr; Nhóm Bảo Dưỡng</td>
+                                <td><strong>POS Bán Lẻ Thu Ngân</strong> (Mã thu hộ <code>2037548000001</code>)</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-sim-card"></i> 7. Hệ Thống Cấp CNDV</td>
+                                <td>Cấp CNDV điện tử dài hạn (Airtime BH)</td>
+                                <td>Cấp CNDV điện tử dài hạn (Airtime BHRV)</td>
+                                <td>Cấp CNDV điện tử dài hạn (Airtime 2572)</td>
+                                <td>Cấp CNDV điện tử dài hạn (Airtime VSMNN)</td>
+                                <td>Cấp CNDV điện tử dài hạn (Airtime 2573)</td>
+                                <td><strong>Không cấp CNDV</strong> (Sinh SO giao hàng 281)</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-wrench"></i> 8. Cách Khấu Trừ Khi Làm</td>
+                                <td>Trừ chi phí sửa chữa / thay linh kiện trên tổng hạn mức</td>
+                                <td>Trừ chi phí sửa chữa theo báo giá TTBH / Thợ</td>
+                                <td>Trừ 1 đợt thay lõi & trừ tồn kho lõi tương ứng</td>
+                                <td>Trừ 1 lượt bảo dưỡng trên CNDV</td>
+                                <td>Trừ 1 lần vệ sinh (ví dụ: 1/4 &rarr; còn 3 lần)</td>
+                                <td>KTV giao lắp hoàn tất là đóng đơn SO kết thúc</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-ticket-alt"></i> 9. Quy Trình Hoàn Tiền</td>
+                                <td>Ticket X-Work (QLST duyệt 10p) &le; 30N, chưa dùng</td>
+                                <td>Ticket X-Work (QLST duyệt 10p) &le; 30N, chưa dùng</td>
+                                <td>Ticket X-Work (QLST duyệt 10p) &le; 30N, chưa dùng</td>
+                                <td>Ticket X-Work (QLST duyệt 10p) &le; 30N, chưa dùng</td>
+                                <td>Ticket X-Work (QLST duyệt 10p) &le; 30N, chưa dùng</td>
+                                <td>Hủy đơn bán lẻ thông thường trên ERP trước khi giao</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-title"><i class="fas fa-sync"></i> 10. Hỗ Trợ Swap IMEI</td>
+                                <td>Có (khi đổi máy chính 1-1)</td>
+                                <td>Có (khi đổi máy chính 1-1)</td>
+                                <td>Có (khi đổi máy chính 1-1)</td>
+                                <td>Có (khi đổi máy chính 1-1)</td>
+                                <td>Có (khi đổi máy chính 1-1)</td>
+                                <td>Không áp dụng</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ======================================================================== -->
+        <!-- TAB 4: ĐIỂM KHÁC BIỆT CỐT LÕI -->
+        <!-- ======================================================================== -->
+        <section id="tab-differences" class="tab-panel">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-not-equal"></i>
+                        PHÂN TÍCH CHUYÊN SÂU CÁC ĐIỂM KHÁC NHAU CỐT LÕI GIỮA CÁC GÓI
+                    </h2>
+                    <span class="tag tag-purple">Điểm Trọng Yếu</span>
+                </div>
+
+                <!-- Difference 1 -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.15rem; color: var(--primary-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-exchange-alt"></i> 1. Phân biệt: Gói Bảo Hành (Sửa chữa rủi ro) vs Gói Bảo Dưỡng (Chăm sóc định kỳ)
+                    </h3>
+                    <div class="grid-2">
+                        <div class="info-box" style="border-left: 4px solid var(--purple);">
+                            <h4 style="color: var(--purple); margin-bottom: 6px;"><i class="fas fa-shield-alt"></i> Gói Bảo Hành (BHMR, BHRV)</h4>
+                            <ul style="font-size: 0.88rem; padding-left: 1.2rem; color: var(--gray-700);">
+                                <li><strong>Bản chất:</strong> Là dịch vụ bảo hiểm rủi ro / bảo đảm vận hành. Khách hàng chỉ sử dụng khi máy <em>phát sinh lỗi hư hỏng hoặc tai nạn rơi vỡ</em>.</li>
+                                <li><strong>Hạn mức quản lý:</strong> Quản lý theo <strong>Số Tiền (Hạn mức tài chính)</strong>, mỗi lần sửa chữa trừ số tiền tương ứng chi phí linh kiện.</li>
+                                <li><strong>Địa điểm xử lý:</strong> Trung tâm bảo hành Thợ ĐMX hoặc gửi Hãng.</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box" style="border-left: 4px solid var(--secondary);">
+                            <h4 style="color: var(--secondary); margin-bottom: 6px;"><i class="fas fa-tools"></i> Gói Bảo Dưỡng (VSML, Thay Lõi, VSMNN)</h4>
+                            <ul style="font-size: 0.88rem; padding-left: 1.2rem; color: var(--gray-700);">
+                                <li><strong>Bản chất:</strong> Là dịch vụ chăm sóc, bảo dưỡng định kỳ chủ động. Máy không hỏng vẫn được thực hiện theo chu kỳ thời gian quy định.</li>
+                                <li><strong>Hạn mức quản lý:</strong> Quản lý theo <strong>Số Lần Làm / Số Đợt Vật Tư</strong> (2, 4, 6, 8 lần hoặc các đợt lõi lọc 1-2-3).</li>
+                                <li><strong>Địa điểm xử lý:</strong> Kỹ thuật viên đến thực hiện <strong>trực tiếp tận nhà khách hàng</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Difference 2 -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.15rem; color: var(--primary-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-exchange-alt"></i> 2. Phân biệt: Gói VSML Định Kỳ Dài Hạn (1-4 Năm) vs Gói VSML Bán Lẻ (1 Lần)
+                    </h3>
+                    <div class="grid-2">
+                        <div class="info-box" style="border-left: 4px solid #0284c7;">
+                            <h4 style="color: #0284c7; margin-bottom: 6px;"><i class="fas fa-snowflake"></i> Gói VSML Định Kỳ Dài Hạn (File Mới)</h4>
+                            <ul style="font-size: 0.88rem; padding-left: 1.2rem; color: var(--gray-700);">
+                                <li><strong>Kênh bán:</strong> Tool Multicat (Nhóm Bảo dưỡng), chỉ bán kèm đơn SPC &le; 30 ngày.</li>
+                                <li><strong>Quản lý:</strong> Cấp CNDV điện tử Airtime 2573, lưu trữ hạn mức 2 - 8 lần.</li>
+                                <li><strong>Thực thi:</strong> Mỗi lần khách gọi làm sẽ trừ dần 1 lần trên CNDV.</li>
+                                <li><strong>Tài chính:</strong> Cấu hình hoa hồng đại lý trên MDM, xuất phiếu thu 3030, Bank ID 20980.</li>
+                                <li><strong>Hoàn tiền:</strong> Ticket X-Work QLST duyệt 10 phút, nhập trả 3804/141, chi 3029.</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-box" style="border-left: 4px solid var(--gray-600);">
+                            <h4 style="color: var(--gray-700); margin-bottom: 6px;"><i class="fas fa-wind"></i> Gói VSML Bán Lẻ 1 Lần (File Cũ)</h4>
+                            <ul style="font-size: 0.88rem; padding-left: 1.2rem; color: var(--gray-700);">
+                                <li><strong>Kênh bán:</strong> Màn hình POS bán lẻ thu ngân (Mã thu hộ <code>2037548000001</code>, CTBH <code>11217</code>).</li>
+                                <li><strong>Quản lý:</strong> Không cấp CNDV, sinh trực tiếp SO giao hàng hình thức 281.</li>
+                                <li><strong>Thực thi:</strong> Lấy tải KTV đi làm ngay trong khung giờ hẹn, làm xong hoàn tất phiếu là đóng đơn.</li>
+                                <li><strong>Tài chính:</strong> Hạch toán đơn lẻ trực tiếp trên hệ thống POS/ERP.</li>
+                                <li><strong>Hoàn tiền:</strong> Hủy đơn bán lẻ thông thường trên POS trước khi KTV lấy tải đi làm.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Difference 3 -->
+                <div>
+                    <h3 style="font-size: 1.15rem; color: var(--primary-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-exchange-alt"></i> 3. Đặc thù riêng biệt của từng gói dịch vụ
+                    </h3>
+                    <div class="grid-3">
+                        <div class="info-box">
+                            <h4 style="color: var(--secondary); margin-bottom: 6px;"><i class="fas fa-filter"></i> Gói Thay Lõi Lọc Nước</h4>
+                            <p style="font-size: 0.85rem; color: var(--gray-600);">
+                                Phải quản lý xuất - nhập tồn kho linh kiện lõi lọc thực tế. Mỗi lần KTV đến thay lõi tại nhà khách sẽ xuất kho đúng chủng loại lõi tương thích với model máy lọc nước của khách.
+                            </p>
+                        </div>
+
+                        <div class="info-box">
+                            <h4 style="color: var(--accent); margin-bottom: 6px;"><i class="fas fa-shower"></i> Gói Vệ Sinh Máy Nước Nóng</h4>
+                            <p style="font-size: 0.85rem; color: var(--gray-600);">
+                                Bắt buộc kiểm tra an toàn điện (cầu dao chống giật ELCB, dây tiếp đất) và thay thanh Magie chống ăn mòn bình chứa. Nếu phát hiện rò điện phải ngắt nguồn ngay và lập biên bản.
+                            </p>
+                        </div>
+
+                        <div class="info-box">
+                            <h4 style="color: var(--danger); margin-bottom: 6px;"><i class="fas fa-mobile-alt"></i> Gói Bảo Hành Rơi Vỡ</h4>
+                            <p style="font-size: 0.85rem; color: var(--gray-600);">
+                                Bắt buộc kiểm tra ngoại quan máy tại thời điểm bán (nếu bán sau ngày mua SPC phải chụp ảnh máy chưa nứt vỡ). Khi phát sinh bồi thường phải thẩm định nguyên nhân tai nạn và định giá linh kiện thay thế.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ======================================================================== -->
+        <!-- TAB 5: QUY TRÌNH SWAP IMEI & HOÀN TIỀN X-WORK -->
+        <!-- ======================================================================== -->
+        <section id="tab-operations" class="tab-panel">
+            
+            <div class="grid-2">
+                <!-- Operation 1: Hoàn tiền Ticket X-Work -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-undo-alt" style="color: var(--danger);"></i>
+                            QUY TRÌNH HOÀN TIỀN / TRẢ GÓI (TICKET X-WORK)
+                        </h2>
+                        <span class="tag tag-red">SLA 10 Phút</span>
+                    </div>
+
+                    <div class="alert-box warning" style="margin-bottom: 1rem;">
+                        <i class="fas fa-exclamation-triangle alert-icon"></i>
+                        <div>
+                            <strong>Điều kiện hoàn tiền bắt buộc:</strong>
+                            <ul style="font-size: 0.85rem; margin-top: 4px; padding-left: 1rem;">
+                                <li>Đơn hàng mua gói còn trong vòng <strong>&le; 30 ngày</strong>.</li>
+                                <li>CNDV <strong>CHƯA SỬ DỤNG</strong> bất kỳ lượt bảo dưỡng hay sửa chữa nào.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flow-steps">
+                        <div class="flow-step-item">
+                            <div class="flow-step-num" style="background: var(--danger);">1</div>
+                            <div class="flow-step-content">
+                                <h4>Thu ngân tạo Ticket trên Tool X-Work</h4>
+                                <p>Nhập số điện thoại khách hàng, mã CNDV, lý do hoàn tiền và đính kèm hóa đơn mua hàng.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-step-item">
+                            <div class="flow-step-num" style="background: var(--danger);">2</div>
+                            <div class="flow-step-content">
+                                <h4>Quản Lý Siêu Thị (QLST) Duyệt Ticket</h4>
+                                <p>QLST kiểm tra thông tin trên hệ thống và nhấn Phê duyệt trên App X-Work (Cam kết SLA trong vòng 10 phút).</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-step-item">
+                            <div class="flow-step-num" style="background: var(--danger);">3</div>
+                            <div class="flow-step-content">
+                                <h4>Hủy CNDV & Hạch Toán Kế Toán</h4>
+                                <p>
+                                    • Hệ thống hủy mã CNDV trên cổng Airtime.<br>
+                                    • Thợ ĐMX nhập trả hóa đơn: Mã loại <code>HTN 3804 / 141</code>.<br>
+                                    • Thu ngân ĐMX chi tiền mặt/chuyển khoản trả khách: Phiếu chi <code>3029</code>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operation 2: Swap IMEI CNDV -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-sync-alt" style="color: var(--success);"></i>
+                            QUY TRÌNH NHẬP ĐỔI / SWAP IMEI CNDV THỢ
+                        </h2>
+                        <span class="tag tag-green">Bảo Lưu Quyền Lợi</span>
+                    </div>
+
+                    <div class="alert-box success" style="margin-bottom: 1rem;">
+                        <i class="fas fa-check-shield alert-icon"></i>
+                        <div>
+                            <strong>Trường hợp áp dụng Swap IMEI:</strong>
+                            <p style="font-size: 0.85rem; margin-top: 4px;">
+                                Khách hàng đổi sản phẩm chính theo chính sách 1 đổi 1 (lỗi NSX trong 30 ngày) hoặc được hãng đổi máy mới / đổi mainboard có Serial/IMEI mới.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flow-steps">
+                        <div class="flow-step-item">
+                            <div class="flow-step-num" style="background: var(--success);">1</div>
+                            <div class="flow-step-content">
+                                <h4>Thực Hiện Đổi Máy Chính Trên ERP</h4>
+                                <p>Thu ngân thực hiện nhập đổi sản phẩm chính trên hệ thống ERP ĐMX theo quy trình đổi hàng thông thường.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-step-item">
+                            <div class="flow-step-num" style="background: var(--success);">2</div>
+                            <div class="flow-step-content">
+                                <h4>Tự Động Kích Hoạt Tool Swap IMEI CNDV</h4>
+                                <p>Hệ thống tự động nhận diện gói dịch vụ đang gắn với IMEI cũ &rarr; Mở giao diện Swap CNDV sang Serial/IMEI máy mới.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-step-item">
+                            <div class="flow-step-num" style="background: var(--success);">3</div>
+                            <div class="flow-step-content">
+                                <h4>Bảo Lưu Thời Hạn & Hạn Mức Còn Lại</h4>
+                                <p>CNDV mới được kế thừa toàn bộ thời hạn hiệu lực và số lần/số tiền bảo dưỡng còn lại từ CNDV cũ mà khách hàng không phải đóng thêm phí.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Interactive Script -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab panels
+            const panels = document.querySelectorAll('.tab-panel');
+            panels.forEach(p => p.classList.remove('active'));
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            // Activate target panel
+            const targetPanel = document.getElementById(tabId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+
+            // Activate clicked button
+            const activeBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(tabId));
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Scroll tab into view if needed
+            if (activeBtn) {
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+    </script>
+<script src="/auth-bar.js" defer></script>
+</body>
+</html>

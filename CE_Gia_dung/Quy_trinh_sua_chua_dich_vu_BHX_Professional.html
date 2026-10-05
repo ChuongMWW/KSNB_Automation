@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy trình Sửa chữa Dịch vụ ngoài ĐMX (Đối tác Bách Hóa Xanh) | KSNB Automation</title>
+<style>
+:root {
+  --blue: #12358f;
+  --blue2: #0a276f;
+  --blue-light: #edf3ff;
+  --blue-border: #b8c7e8;
+  --yellow: #ffd200;
+  --yellow-bg: #fff9db;
+  --green: #087443;
+  --green-bg: #eaf8f1;
+  --green-border: #a3e0c0;
+  --orange: #c2410c;
+  --orange-bg: #fff7ed;
+  --orange-border: #fdba74;
+  --red: #d92d20;
+  --red-bg: #fff4f2;
+  --red-border: #fca5a5;
+  --purple: #6b21a8;
+  --purple-bg: #f3e8ff;
+  --purple-border: #d8b4fe;
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --line: #dce3ee;
+  --shadow: 0 8px 26px rgba(18, 53, 143, 0.08);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px 20px 60px;
+}
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+.top-nav a {
+  text-decoration: none;
+  font-weight: 700;
+}
+.top-nav .back-cat {
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.top-nav .back-home {
+  color: var(--muted);
+}
+.top-nav a:hover {
+  text-decoration: underline;
+}
+
+.header {
+  background: linear-gradient(135deg, #094074, #06274a);
+  color: #fff;
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 24px rgba(9, 64, 116, 0.2);
+}
+.header-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #dceaff;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.header h1 {
+  margin: 0 0 8px;
+  font-size: 25px;
+  letter-spacing: -0.3px;
+}
+.header p {
+  margin: 0;
+  font-size: 14.5px;
+  color: #dceaff;
+  max-width: 980px;
+  line-height: 1.5;
+}
+
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.toc a {
+  text-decoration: none;
+  color: #094074;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .15s ease;
+}
+.toc a:hover {
+  background: var(--blue-light);
+  border-color: var(--blue-border);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #f0f4f9;
+  padding-bottom: 12px;
+}
+.card-head .num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #094074;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 15px;
+  flex: none;
+}
+.card-head h2 {
+  margin: 0;
+  font-size: 19px;
+  color: #06274a;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 14px 0;
+  font-size: 13.5px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+th, td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+th:last-child, td:last-child {
+  border-right: 0;
+}
+tr:last-child td {
+  border-bottom: 0;
+}
+th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 700;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+tr:nth-child(even) td {
+  background: #fafcff;
+}
+
+.badge-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge-blue { background: #e0f2fe; color: #0284c7; }
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-orange { background: var(--orange-bg); color: var(--orange); }
+.badge-purple { background: var(--purple-bg); color: var(--purple); }
+.badge-red { background: var(--red-bg); color: var(--red); }
+.badge-gray { background: #f1f5f9; color: #475569; }
+
+.callout {
+  border-left: 4px solid #094074;
+  background: var(--blue-light);
+  padding: 14px 18px;
+  border-radius: 0 10px 10px 0;
+  margin: 14px 0;
+  font-size: 13.5px;
+}
+.callout.green {
+  border-left-color: var(--green);
+  background: var(--green-bg);
+}
+.callout.orange {
+  border-left-color: var(--orange);
+  background: var(--orange-bg);
+}
+.callout.red {
+  border-left-color: var(--red);
+  background: var(--red-bg);
+}
+.callout-title {
+  font-weight: 700;
+  color: #06274a;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.callout.green .callout-title { color: var(--green); }
+.callout.orange .callout-title { color: var(--orange); }
+.callout.red .callout-title { color: var(--red); }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+.pill-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+}
+.pill-box b {
+  display: block;
+  color: #06274a;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+/* Flowchart Visual */
+.flow-diagram {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 18px 0;
+}
+.flow-step-node {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.flow-step-node.active-blue {
+  border-left: 4px solid #094074;
+  background: #f0f6ff;
+}
+.flow-step-node.active-purple {
+  border-left: 4px solid var(--purple);
+  background: #faf5ff;
+}
+.flow-step-node.active-green {
+  border-left: 4px solid var(--green);
+  background: #f0fdf4;
+}
+.flow-step-node.active-orange {
+  border-left: 4px solid var(--orange);
+  background: #fff7ed;
+}
+.node-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #094074;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  flex: none;
+}
+.node-content {
+  flex: 1;
+  font-size: 13.5px;
+}
+.node-content strong {
+  color: #06274a;
+}
+
+/* Voucher Cards */
+.voucher-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.voucher-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  border-bottom: 2px solid var(--blue-border);
+}
+.voucher-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #06274a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+@media(max-width: 850px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .header h1 { font-size: 21px; }
+  .header { padding: 22px 20px; }
+  table { font-size: 12.5px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="top-nav">
+    <a href="index.html" class="back-cat">← Quay lại Danh mục CE & Gia dụng</a>
+    <a href="index.html" class="back-home">Về Trang chủ KSNB</a>
+  </div>
+
+  <header class="header">
+    <span class="header-badge">QUY TRÌNH DỊCH VỤ ĐỐI TÁC · BÁCH HÓA XANH</span>
+    <h1>QUY TRÌNH SỬA CHỮA DỊCH VỤ SẢN PHẨM NGOÀI ĐMX</h1>
+    <p>Quy trình chuẩn hóa cung cấp dịch vụ sửa chữa thiết bị (Tủ đông, Tủ mát, Máy lạnh...) cho chuỗi Bách Hóa Xanh (BHX): Tiếp nhận ➔ Xác định đối tác & chi nhánh đại diện theo tỉnh ➔ Tạo JC & Vận đơn (Không thu phí kiểm tra 100k) ➔ Khảo sát & Báo giá ➔ Sửa chữa / Xuất linh kiện ➔ Chứng từ kế toán & Quyết toán công nợ.</p>
+  </header>
+
+  <!-- Mục lục nhanh -->
+  <nav class="toc">
+    <a href="#muc-tieu">1. Mục tiêu quy trình</a>
+    <a href="#bo-phan">2. Bộ phận tham gia</a>
+    <a href="#khai-bao">3. Khai báo hệ thống & MST tỉnh</a>
+    <a href="#luong-tong-the">4. Luồng xử lý tổng thể</a>
+    <a href="#chi-tiet-26-buoc">5. Bảng chi tiết 26 bước thực hiện</a>
+    <a href="#chung-tu">6. Quy định Chứng từ Kế toán (SO / OV)</a>
+  </nav>
+
+  <!-- 1. Mục tiêu quy trình -->
+  <section class="card" id="muc-tieu">
+    <div class="card-head">
+      <div class="num">1</div>
+      <h2>Mục tiêu quy trình</h2>
+    </div>
+    <p style="margin-top: 0;">
+      Quy định toàn bộ luồng nghiệp vụ tiếp nhận, điều phối, sửa chữa và quyết toán chi phí đối với các sản phẩm thiết bị vận hành (như <strong>Tủ đông, Tủ mát, Máy lạnh...</strong>) của <strong>Đối tác Bách Hóa Xanh (BHX / XDBT)</strong> do Đội ngũ Thợ Điện Máy Xanh thực hiện dịch vụ kỹ thuật.
+    </p>
+
+    <div class="grid-3">
+      <div class="pill-box">
+        <b>🎯 Chuẩn hóa Tiếp nhận Đối tác</b>
+        <span style="font-size: 13px; color: var(--muted);">Tự động nhận diện Partner = BHX trên CRM và định tuyến đúng Chi nhánh đại diện theo Tỉnh/Thành của siêu thị BHX.</span>
+      </div>
+      <div class="pill-box">
+        <b>⚙️ Không thu phí kiểm tra 100k</b>
+        <span style="font-size: 13px; color: var(--muted);">Tạo loại Vận đơn chuyên biệt tương tự 1126, không phát sinh phí kiểm tra 100k ban đầu, chỉ tính phí khi có sửa chữa/thay linh kiện.</span>
+      </div>
+      <div class="pill-box">
+        <b>💰 Tự động hóa Xuất hóa đơn & Đối soát</b>
+        <span style="font-size: 13px; color: var(--muted);">Khai báo Mapping MST đích danh theo Tỉnh của BHX để sinh SO/OV xuất dịch vụ và SO xuất tiêu hao linh kiện chuẩn xác.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Các bộ phận tham gia -->
+  <section class="card" id="bo-phan">
+    <div class="card-head">
+      <div class="num">2</div>
+      <h2>Các bộ phận tham gia & Trách nhiệm</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Bộ phận</th>
+          <th>Vai trò & Trách nhiệm chính</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BHX / XDBT</strong></td>
+          <td>Đơn vị gửi yêu cầu sửa chữa thiết bị; phê duyệt thông tin báo giá từ KTV và thanh toán công nợ theo hóa đơn/chứng từ định kỳ.</td>
+        </tr>
+        <tr>
+          <td><strong>Tổng đài / Nhân viên Thợ</strong></td>
+          <td>Tiếp nhận yêu cầu từ CRM/App Thợ, chọn Partner = BHX, chọn Tỉnh/Địa điểm, tải bảo hành và tạo Jobcard + Vận đơn sửa chữa dịch vụ.</td>
+        </tr>
+        <tr>
+          <td><strong>Điều phối / Trưởng nhóm Thợ</strong></td>
+          <td>Phân công Jobcard cho Kỹ thuật viên phụ trách khu vực; theo dõi tiến độ hoàn tất và đôn đốc quyết toán công nợ BHX.</td>
+        </tr>
+        <tr>
+          <td><strong>Kỹ thuật viên (Thợ ĐMX)</strong></td>
+          <td>Đến siêu thị BHX kiểm tra thiết bị, chẩn đoán lỗi, báo giá, thực hiện sửa chữa, tạm ứng/nhận linh kiện và nghiệm thu với quản lý siêu thị BHX.</td>
+        </tr>
+        <tr>
+          <td><strong>Quản lý Kho Linh kiện</strong></td>
+          <td>Tiếp nhận yêu cầu tạm ứng, xuất kho linh kiện đích danh theo Jobcard và ghi nhận trừ tồn kho ERP/TMS.</td>
+        </tr>
+        <tr>
+          <td><strong>Kế toán</strong></td>
+          <td>Kiểm tra chứng từ hoàn tất (SO xuất bán dịch vụ + SO tiêu hao linh kiện), đối soát với BHX, ghi nhận doanh thu và clear công nợ.</td>
+        </tr>
+        <tr>
+          <td><strong>KSNB / BP Phát triển Hệ thống</strong></td>
+          <td>Kiểm soát tính tuân thủ quy trình, kiểm tra tính đầy đủ của MST theo tỉnh và tính toàn vẹn của dữ liệu doanh thu/chi phí.</td>
+        </tr>
+        <tr>
+          <td><strong>IT</strong></td>
+          <td>Phát triển cấu hình MDM, CRM, WMS, TMS và ERP hỗ trợ luồng nghiệp vụ đối tác BHX.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3. Khai báo hệ thống & MST tỉnh -->
+  <section class="card" id="khai-bao">
+    <div class="card-head">
+      <div class="num">3</div>
+      <h2>Các khai báo hệ thống & Cấu hình Hóa đơn theo Tỉnh</h2>
+    </div>
+
+    <div class="callout" style="border-left-color: var(--blue); background: var(--blue-light);">
+      <div class="callout-title" style="color: var(--blue2);">📌 2 Hạng mục Khai báo Cấu hình bắt buộc trên Hệ thống:</div>
+      <strong>1. Khai báo Danh mục Đối tác trên MDM:</strong> Thêm đối tác <code>002 - BHX</code> vào trang cấu hình MDM (<a href="https://mdm.mwgroup.vn/dmx_app_service_repair_product" target="_blank" style="color: var(--blue); font-weight: bold;">mdm.mwgroup.vn/dmx_app_service_repair_product</a>) để cho phép chọn khi tạo yêu cầu.
+      <br><strong>2. Khai báo Thông tin Xuất hóa đơn theo Tỉnh của Đối tác:</strong> Do Bách Hóa Xanh ghi nhận hóa đơn theo đích danh Tỉnh đại diện, hệ thống bắt buộc phải có bảng khai báo mapping Tỉnh ➔ Mã số thuế ➔ Chi nhánh đại diện tương ứng.
+    </div>
+
+    <h3 style="margin: 20px 0 10px; font-size: 15.5px; color: var(--blue2);">📋 Bảng Khai báo Thông tin Xuất hóa đơn theo Tỉnh Đối tác (Master Config):</h3>
+    
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 5%; text-align: center;">STT</th>
+          <th style="width: 15%;">Đối tác (Partner)</th>
+          <th style="width: 16%;">Tỉnh / Thành</th>
+          <th>Tên xuất hóa đơn</th>
+          <th style="width: 14%;">Mã số thuế</th>
+          <th style="width: 12%;">Số điện thoại</th>
+          <th>Địa chỉ xuất hóa đơn</th>
+          <th>Email nhận HĐ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;"><strong>1</strong></td>
+          <td><span class="badge-tag badge-blue">002 - BHX</span></td>
+          <td><strong>3 - Hồ Chí Minh</strong></td>
+          <td>Công ty CP Thương mại Bách Hóa Xanh - CN TP.HCM</td>
+          <td><code>0310471746-001</code></td>
+          <td>028.38125960</td>
+          <td>Tầng 3, Tòa nhà MWG, TP. Thủ Đức, TP.HCM</td>
+          <td>ketoan.hcm@bachhoaxanh.com</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>2</strong></td>
+          <td><span class="badge-tag badge-blue">002 - BHX</span></td>
+          <td><strong>4 - Cần Thơ</strong></td>
+          <td>Công ty CP Thương mại Bách Hóa Xanh - CN Cần Thơ</td>
+          <td><code>0310471746-004</code></td>
+          <td>029.23812345</td>
+          <td>Số 123, Đ. 30/4, P. Ninh Kiều, TP. Cần Thơ</td>
+          <td>ketoan.cantho@bachhoaxanh.com</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>3</strong></td>
+          <td><span class="badge-tag badge-blue">002 - BHX</span></td>
+          <td><strong>7 - Cà Mau</strong></td>
+          <td>Công ty CP Thương mại Bách Hóa Xanh - CN Cà Mau</td>
+          <td><code>0310471746-007</code></td>
+          <td>029.03856789</td>
+          <td>Số 45, Đ. Trần Hưng Đạo, P. 5, TP. Cà Mau</td>
+          <td>ketoan.camau@bachhoaxanh.com</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>4</strong></td>
+          <td><span class="badge-tag badge-blue">002 - BHX</span></td>
+          <td><strong>10 - Hà Nội</strong></td>
+          <td>Công ty CP Thương mại Bách Hóa Xanh - CN Hà Nội</td>
+          <td><code>0310471746-010</code></td>
+          <td>024.37956888</td>
+          <td>Số 88, Đ. Phạm Hùng, Q. Nam Từ Liêm, Hà Nội</td>
+          <td>ketoan.hanoi@bachhoaxanh.com</td>
+        </tr>
+        <tr style="background: #fffafa;">
+          <td style="text-align: center;"><strong>5</strong></td>
+          <td><span class="badge-tag badge-gray">004 - ĐMX</span></td>
+          <td><strong>1 - Tất cả</strong></td>
+          <td>Công ty Cổ phần Thợ Điện Máy Xanh</td>
+          <td><code>0317351688</code></td>
+          <td>1900.232.465</td>
+          <td>Số 128, Đ. Trần Quang Khải, P. Tân Định, Q.1, TP.HCM</td>
+          <td>ketoan@thodienmayxanh.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. Luồng xử lý tổng thể -->
+  <section class="card" id="luong-tong-the">
+    <div class="card-head">
+      <div class="num">4</div>
+      <h2>Luồng xử lý tổng thể (Sơ đồ nghiệp vụ)</h2>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-step-node">
+        <div class="node-num">1</div>
+        <div class="node-content">
+          <strong>Tiếp nhận yêu cầu:</strong> BHX / XDBT gửi yêu cầu sửa chữa ➔ Tổng đài Thợ ĐMX chọn <code>Partner = BHX</code> + Tỉnh/Địa điểm ➔ Hệ thống kiểm tra bảng khai báo MST và xác định Chi nhánh đại diện.
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #094074; font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+      <div class="flow-step-node active-blue">
+        <div class="node-num">2</div>
+        <div class="node-content">
+          <strong>Khởi tạo Vận đơn & Phân công:</strong> Sinh <strong>Jobcard & Vận đơn sửa chữa dịch vụ</strong> (loại vận đơn chuyên biệt, <em>không tính phí kiểm tra 100k</em>) ➔ Điều phối phân công KTV phụ trách.
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #094074; font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+      <div class="flow-step-node active-orange">
+        <div class="node-num">3</div>
+        <div class="node-content">
+          <strong>Kiểm tra & Báo giá tại chỗ:</strong> KTV đến siêu thị BHX kiểm tra thiết bị, chẩn đoán nguyên nhân lỗi ➔ Tiến hành <strong>báo giá sửa chữa</strong> cho đại diện BHX.
+          <br>• ❌ <em>BHX không đồng ý báo giá:</em> Đóng Vận đơn / Jobcard ➔ Kết thúc.
+          <br>• ✔️ <em>BHX đồng ý báo giá:</em> Tiến hành sửa chữa thiết bị.
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #094074; font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+      <div class="flow-step-node">
+        <div class="node-num">4</div>
+        <div class="node-content">
+          <strong>Thực hiện sửa chữa & Quản lý Linh kiện:</strong>
+          <br>• <em>Không thay linh kiện:</em> Xử lý kỹ thuật ➔ Hoàn tất sửa chữa.
+          <br>• <em>Có thay linh kiện:</em> KTV tạo lệnh tạm ứng trên TMS ➔ Kho xuất linh kiện ➔ Lắp ráp ➔ Ghi nhận linh kiện & dịch vụ sử dụng tương ứng.
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #094074; font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+      <div class="flow-step-node active-purple">
+        <div class="node-num">5</div>
+        <div class="node-content">
+          <strong>Nghiệm thu & Sinh Chứng từ nợ:</strong> Đại diện BHX kiểm tra/nghiệm thu ➔ KTV hoàn tất Vận đơn ➔ Hệ thống tự động sinh <strong>SO xuất bán dịch vụ + SO xuất tiêu hao LK</strong> (ở trạng thái nợ lại 161).
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #094074; font-weight: bold; font-size: 18px; margin: 4px 0 10px;">↓</div>
+
+      <div class="flow-step-node active-green">
+        <div class="node-num">6</div>
+        <div class="node-content">
+          <strong>Thanh toán & Quyết toán Công nợ:</strong> Thợ ĐMX gửi hóa đơn/chứng từ cho BHX ➔ BHX thanh toán theo hóa đơn ➔ Kế toán ĐMX cập nhật clear công nợ trên ERP ➔ Lưu trữ hồ sơ.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Chi tiết 26 bước quy trình -->
+  <section class="card" id="chi-tiet-26-buoc">
+    <div class="card-head">
+      <div class="num">5</div>
+      <h2>Bảng chi tiết 26 bước thực hiện quy trình</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 5%; text-align: center;">Bước</th>
+          <th style="width: 17%;">Ai làm (Actor)</th>
+          <th style="width: 25%;">Làm gì (Action)</th>
+          <th style="width: 12%;">Hệ thống</th>
+          <th>System Logic & Điểm kiểm soát</th>
+          <th style="width: 12%; text-align: center;">Trạng thái HT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;"><strong>1</strong></td>
+          <td>IT / Quản trị hệ thống</td>
+          <td>Khai báo đối tác BHX vào danh mục hiện hữu</td>
+          <td><span class="badge-tag badge-blue">MDM</span></td>
+          <td>Cho phép chọn Partner = BHX khi tạo yêu cầu sửa chữa dịch vụ.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-orange">Cần bổ sung</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>2</strong></td>
+          <td>IT / Quản trị hệ thống</td>
+          <td>Khai báo thông tin xuất HĐ theo tỉnh của BHX</td>
+          <td><span class="badge-tag badge-purple">WMS / MDM</span></td>
+          <td>Mapping Partner BHX với danh sách Tỉnh, Chi nhánh đại diện và MST.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-purple">Tạo mới</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>3</strong></td>
+          <td>BHX / XDBT</td>
+          <td>Gửi yêu cầu sửa chữa sản phẩm</td>
+          <td><span class="badge-tag badge-gray">QT ngoài</span></td>
+          <td>Gửi thông tin thiết bị hỏng (Tủ đông, tủ mát, máy lạnh) qua kênh phối hợp.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Hiện hữu</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>4</strong></td>
+          <td>Tổng đài / Nhân viên Thợ</td>
+          <td>Chọn đối tác BHX và nhập thông tin sản phẩm</td>
+          <td><span class="badge-tag badge-blue">CRM / App Thợ</span></td>
+          <td>CRM ghi nhận Partner = BHX, ghi nhận loại dịch vụ SP ngoài ĐMX.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-orange">Cần điều chỉnh</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>5</strong></td>
+          <td>Tổng đài / Nhân viên Thợ</td>
+          <td>Nhập tỉnh / địa điểm siêu thị BHX</td>
+          <td><span class="badge-tag badge-blue">CRM / App Thợ</span></td>
+          <td>Hệ thống tự động xác định Kho/Chi nhánh đại diện theo Tỉnh để xuất HĐ.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-orange">Cần bổ sung</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>6</strong></td>
+          <td>Tổng đài / Nhân viên Thợ</td>
+          <td>Chọn tải bảo hành sửa chữa</td>
+          <td><span class="badge-tag badge-blue">CRM / App Thợ</span></td>
+          <td>Lấy tải bảo hành sửa chữa cho Vận đơn SP ngoài ĐMX (Đối tác BHX).</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>7</strong></td>
+          <td>Tổng đài / Nhân viên Thợ</td>
+          <td>Chọn tình trạng lỗi theo Ngành/Nhóm hàng</td>
+          <td><span class="badge-tag badge-blue">CRM / App Thợ</span></td>
+          <td>Ghi nhận mô tả lỗi sơ bộ từ siêu thị BHX.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>8</strong></td>
+          <td>Tổng đài / Nhân viên Thợ</td>
+          <td>Xác nhận yêu cầu</td>
+          <td><span class="badge-tag badge-blue">CRM / App Thợ</span></td>
+          <td>Sinh <strong>Jobcard sửa chữa dịch vụ + Vận đơn dịch vụ</strong> trên hệ thống.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-blue">Mở rộng</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>9</strong></td>
+          <td>Điều phối / TN Thợ</td>
+          <td>Nhận JC và phân công Kỹ thuật viên</td>
+          <td><span class="badge-tag badge-blue">TMS / WMS</span></td>
+          <td>WMS/TMS ghi nhận KTV phụ trách theo tuyến địa bàn siêu thị BHX.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Tận dụng luồng cũ</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>10</strong></td>
+          <td>Hệ thống Thợ</td>
+          <td>Tạo Vận đơn chuyên biệt (Không phí KT 100k)</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Loại vận đơn mới tương tự 1126, thiết lập <strong>không thu phí kiểm tra 100k</strong>.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-purple">Tạo mới</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>11</strong></td>
+          <td>Kỹ thuật viên</td>
+          <td>Đến địa điểm BHX kiểm tra sản phẩm</td>
+          <td><span class="badge-tag badge-blue">App Thợ / TMS</span></td>
+          <td>Cập nhật trạng thái Vận đơn = Đang xử lý / Đã đến nơi.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-blue">Mở rộng</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>12</strong></td>
+          <td>Kỹ thuật viên</td>
+          <td>Chẩn đoán lỗi thiết bị tại chỗ</td>
+          <td><span class="badge-tag badge-blue">App Thợ</span></td>
+          <td>Xác định nguyên nhân hỏng hóc, phương án khắc phục và linh kiện cần thay.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>13</strong></td>
+          <td>Kỹ thuật viên</td>
+          <td>Tiến hành báo giá sửa chữa cho BHX</td>
+          <td><span class="badge-tag badge-gray">Trực tiếp / App</span></td>
+          <td>Báo giá công sửa chữa + giá linh kiện theo bảng giá thỏa thuận.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Quy trình chuẩn</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>14</strong></td>
+          <td>Đại diện BHX</td>
+          <td>Phản hồi thông tin báo giá</td>
+          <td><span class="badge-tag badge-gray">Trực tiếp</span></td>
+          <td>• Đồng ý ➔ Tiến hành sửa chữa.<br>• Không đồng ý ➔ KTV đóng Vận đơn kết thúc.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Quy trình chuẩn</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>15</strong></td>
+          <td>Kỹ thuật viên</td>
+          <td>Thực hiện sửa chữa thiết bị</td>
+          <td><span class="badge-tag badge-blue">App Thợ</span></td>
+          <td>Jobcard chuyển sang trạng thái Đang sửa chữa.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>16</strong></td>
+          <td>Kỹ thuật viên</td>
+          <td>Tạo yêu cầu tạm ứng linh kiện (nếu cần)</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Ghi nhận nhu cầu xuất linh kiện từ kho trung tâm / kho thợ.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>17</strong></td>
+          <td>Kho Linh kiện</td>
+          <td>Xuất kho linh kiện cho Jobcard</td>
+          <td><span class="badge-tag badge-purple">WMS / ERP</span></td>
+          <td>Tạo giao dịch xuất kho đích danh Part Number / Serial linh kiện.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>18</strong></td>
+          <td>Kỹ thuật viên</td>
+          <td>Nhận LK và cập nhật vào Vận đơn</td>
+          <td><span class="badge-tag badge-blue">TMS / ERP</span></td>
+          <td>Hệ thống ghi nhận linh kiện thực tế sử dụng gắn liền với Jobcard.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>19</strong></td>
+          <td>Kỹ thuật viên</td>
+          <td>Kiểm tra vận hành & hoàn tất sửa chữa</td>
+          <td><span class="badge-tag badge-blue">TMS</span></td>
+          <td>Đóng Vận đơn trên App Thợ sau khi máy chạy ổn định.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>20</strong></td>
+          <td>Hệ thống Thợ</td>
+          <td>Tự động sinh bộ chứng từ SO, OV để nợ lại</td>
+          <td><span class="badge-tag badge-blue">ERP</span></td>
+          <td>Tự động tạo <strong>SO Xuất bán dịch vụ + SO Tiêu hao LK</strong> (HT thanh toán 161).</td>
+          <td style="text-align: center;"><span class="badge-tag badge-purple">Tạo mới / Tự động</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>21</strong></td>
+          <td>Đại diện BHX</td>
+          <td>Kiểm tra chất lượng & Nghiệm thu</td>
+          <td><span class="badge-tag badge-gray">Biên bản giấy / App</span></td>
+          <td>Ký xác nhận biên bản hoàn tất dịch vụ sửa chữa tại siêu thị.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-orange">Cần bổ sung</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>22</strong></td>
+          <td>Trưởng nhóm Thợ</td>
+          <td>Cung cấp chứng từ liên quan cho BHX</td>
+          <td><span class="badge-tag badge-gray">Online / Email</span></td>
+          <td>Gửi bảng kê Jobcard, biên bản nghiệm thu và đề nghị thanh toán.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Hiện hữu</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>23</strong></td>
+          <td>Điều phối / TN Thợ</td>
+          <td>Theo dõi JC hoàn tất & Đôn đốc công nợ</td>
+          <td><span class="badge-tag badge-purple">WMS Reports</span></td>
+          <td>Báo cáo theo dõi công nợ riêng cho đối tác BHX theo kỳ quy định.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-orange">Cần bổ sung</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>24</strong></td>
+          <td>BHX / XDBT</td>
+          <td>Thực hiện thanh toán theo hóa đơn</td>
+          <td><span class="badge-tag badge-gray">Banking / ERP BHX</span></td>
+          <td>Chuyển khoản thanh toán theo thông tin tài khoản và số hóa đơn ĐMX.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Quy trình hiện tại</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>25</strong></td>
+          <td>Kế toán</td>
+          <td>Cập nhật clear công nợ cho đối tác BHX</td>
+          <td><span class="badge-tag badge-blue">ERP</span></td>
+          <td>Khớp giao dịch ngân hàng, cấn trừ công nợ SO/OV trên hệ thống.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-green">Đã có</span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><strong>26</strong></td>
+          <td>Hệ thống</td>
+          <td>Lưu trữ lịch sử toàn bộ Jobcard</td>
+          <td><span class="badge-tag badge-blue">Online / DB</span></td>
+          <td>Lưu trữ đầy đủ: <code>Partner ↔ Tỉnh ↔ Chi nhánh ↔ MST ↔ Jobcard ↔ Linh kiện ↔ Phí</code>.</td>
+          <td style="text-align: center;"><span class="badge-tag badge-orange">Cần kiểm tra</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. Quy định Chứng từ Kế toán (SO / OV) -->
+  <section class="card" id="chung-tu">
+    <div class="card-head">
+      <div class="num">6</div>
+      <h2>Quy định Chứng từ Kế toán (SO / OV Xuất bán & Tiêu hao)</h2>
+    </div>
+
+    <p style="margin-top: 0; font-size: 14px; color: #334155;">
+      Khi Vận đơn sửa chữa dịch vụ BHX hoàn tất, hệ thống tự động sinh <strong>2 loại chứng từ kế toán</strong> với các tham số quy định chuẩn như sau:
+    </p>
+
+    <!-- Chứng từ 1 -->
+    <div class="voucher-card">
+      <div class="voucher-header">
+        <h3>🧾 1. ĐƠN HÀNG XUẤT BÁN DỊCH VỤ (SO / OV DỊCH VỤ)</h3>
+        <span class="badge-tag badge-blue">Thu tiền dịch vụ sửa chữa</span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">Trường thông tin</th>
+            <th>Giá trị thiết lập chuẩn trên Hệ thống</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tên loại đơn hàng</strong></td>
+            <td><span class="badge-tag badge-purple">[Tạo mới]</span> <strong>Yêu cầu xuất dịch vụ sửa chữa công ty đối tác</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Hình thức thu</strong></td>
+            <td><code>20 - Thu tiền dịch vụ sửa chữa</code></td>
+          </tr>
+          <tr>
+            <td><strong>Hình thức giao</strong></td>
+            <td><code>281 - Giao hàng qua Tận Tâm</code></td>
+          </tr>
+          <tr>
+            <td><strong>Thông tin khách hàng</strong></td>
+            <td>Họ tên, Địa chỉ, SĐT theo thông tin khai báo MST chi nhánh BHX tại Tỉnh tương ứng.</td>
+          </tr>
+          <tr>
+            <td><strong>Ngày xuất / Ngày hẹn giao</strong></td>
+            <td>Ngày hoàn tất Vận đơn sửa chữa thực tế.</td>
+          </tr>
+          <tr>
+            <td><strong>Kho xuất</strong></td>
+            <td>Kho điều phối phụ trách Vận đơn.</td>
+          </tr>
+          <tr>
+            <td><strong>Hình thức thanh toán</strong></td>
+            <td><strong style="color: var(--blue);">221 - Công nợ chuyển khoản (Ghi nhận nợ để đối soát sau)</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Nhân viên bán / tạo</strong></td>
+            <td>Nhân viên KTV / Điều phối hoàn tất Vận đơn.</td>
+          </tr>
+          <tr>
+            <td><strong>Số lượng & Giá trị</strong></td>
+            <td>• Số lượng = Số lượng xuất sử dụng linh kiện.<br>• Tổng tiền = Giá bán của Code dịch vụ tương ứng với linh kiện.</td>
+          </tr>
+          <tr>
+            <td><strong>Thuế VAT</strong></td>
+            <td>Theo khai báo thuế suất sản phẩm dịch vụ xuất.</td>
+          </tr>
+          <tr>
+            <td><strong>Chứng từ liên quan (CTLQ)</strong></td>
+            <td><code>Mã Jobcard</code>, <code>Mã Vận đơn TMS</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>Hình thức xuất hóa đơn</strong></td>
+            <td><code>[Tạo mới] Xuất bán dịch vụ sửa chữa công ty đối tác </code> (CTLQ: Mã đơn hàng SO).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Chứng từ 2 -->
+    <div class="voucher-card">
+      <div class="voucher-header">
+        <h3>📦 2. ĐƠN HÀNG XUẤT TIÊU HAO LINH KIỆN (SO / OV TIÊU HAO LK)</h3>
+        <span class="badge-tag badge-orange">Xuất tiêu hao linh kiện có phí</span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">Trường thông tin</th>
+            <th>Giá trị thiết lập chuẩn trên Hệ thống</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tên loại yêu cầu xuất</strong></td>
+            <td><span class="badge-tag badge-purple">[Loại yêu cầu xuất cũ]</span> <strong>Yêu cầu xuất Vật tư phụ/linh kiện tiêu hao (có phí) </strong></td>
+          </tr>
+          <tr>
+            <td><strong>Tên khách hàng</strong></td>
+            <td><strong>Công ty Cổ phần Thợ Điện Máy Xanh</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Mã số thuế & Địa chỉ</strong></td>
+            <td>Theo Mã số thuế và Địa chỉ của Kho điều phối xuất hàng.</td>
+          </tr>
+          <tr>
+            <td><strong>Ngày xuất / Ngày hẹn giao</strong></td>
+            <td>Ngày hoàn tất Vận đơn sửa chữa.</td>
+          </tr>
+          <tr>
+            <td><strong>Kho xuất</strong></td>
+            <td>Kho điều phối phụ trách linh kiện của Vận đơn.</td>
+          </tr>
+          <tr>
+            <td><strong>Nội dung xuất</strong></td>
+            <td><code>Xuất tiêu hao linh kiện [Mã Jobcard, Mã Vận đơn]</code></td>
+          </tr>
+          <tr>
+            <td><strong>Số lượng & Đơn giá vốn</strong></td>
+            <td>• Số lượng = Số lượng linh kiện thực tế sử dụng.<br>• Tổng tiền = <strong>Đơn giá vốn</strong> của Code linh kiện đích danh.</td>
+          </tr>
+          <tr>
+            <td><strong>Thuế VAT</strong></td>
+            <td>Theo khai báo thuế suất của linh kiện xuất kho.</td>
+          </tr>
+          <tr>
+            <td><strong>Hình thức thanh toán</strong></td>
+            <td><code>161 - Công nợ phải thu</code></td>
+          </tr>
+          <tr>
+            <td><strong>Chứng từ liên quan (CTLQ)</strong></td>
+            <td><code>Mã Jobcard</code>, <code>Mã Vận đơn TMS</code>, <code>Mã SO Xuất bán dịch vụ</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>Hình thức xuất</strong></td>
+            <td><code> Hình thức xuất tương ứng với loại yêu cầu xuất </code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout green">
+      <div class="callout-title">🎯 Nguyên tắc Hạch toán & Đối soát KSNB:</div>
+      Đảm bảo khớp đúng 100% giữa <strong>Doanh thu dịch vụ (SO Xuất bán)</strong> ↔ <strong>Chi phí giá vốn linh kiện (SO Tiêu hao)</strong> ↔ <strong>Mã Jobcard & Vận đơn Thợ ĐMX</strong>, phục vụ quyết toán công nợ minh bạch và xuất hóa đơn GTGT chính xác cho từng chi nhánh tỉnh của Bách Hóa Xanh.
+    </div>
+  </section>
+
+  <footer class="footer">
+    KSNB Automation · Quy trình Sửa chữa Dịch vụ Ngoài ĐMX (Bách Hóa Xanh) · Phiên bản chuẩn hóa 2026
+  </footer>
+
+</div>
+
+<script src="/auth-bar.js" defer></script>
+</body>
+</html>

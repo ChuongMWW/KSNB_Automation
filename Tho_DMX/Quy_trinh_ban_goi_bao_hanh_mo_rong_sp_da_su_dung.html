@@ -1,0 +1,3239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUY TRÌNH BÁN GÓI BẢO HÀNH MỞ RỘNG CHO SẢN PHẨM ĐÃ SỬ DỤNG (ĐSD) | THỢ ĐIỆN MÁY XANH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #e0f2fe;
+            --navy-dark: #0f172a;
+            --navy-card: #1e293b;
+            --secondary: #0d9488;
+            --secondary-light: #ccfbf1;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --purple: #8b5cf6;
+            --purple-light: #ede9fe;
+            --gray-900: #0f172a;
+            --gray-800: #1e293b;
+            --gray-700: #334155;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-400: #94a3b8;
+            --gray-300: #cbd5e1;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gray-50: #f8fafc;
+            --white: #ffffff;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 22px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.06);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--gray-800);
+            line-height: 1.6;
+            font-size: 0.88rem;
+        }
+
+        /* Top Bar */
+        .top-meta-bar {
+            background: #090d16;
+            color: #94a3b8;
+            padding: 6px 1.5rem;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #1e293b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        /* Executive Header */
+        .top-navbar {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #0284c7;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-brand i {
+            color: #38bdf8;
+            font-size: 1.35rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            padding: 6px 14px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-color: #38bdf8;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #071c52 0%, #0f399b 50%, #0284c7 100%);
+            color: white;
+            padding: 2.25rem 1.5rem 2.75rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .hero-inner {
+            max-width: 1480px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            font-size: 0.8rem;
+            color: #93c5fd;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #ffd200;
+        }
+
+        .hero-title-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-title-wrap h1 {
+            font-size: 1.85rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .hero-title-wrap p {
+            font-size: 0.95rem;
+            color: #e0f2fe;
+            max-width: 980px;
+            line-height: 1.55;
+        }
+
+        .badge-hero-status {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 9999px;
+            padding: 6px 14px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Quick Stats Grid */
+        .stats-banner-wrap {
+            max-width: 1480px;
+            margin: -24px auto 0;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 20;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 16px 18px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: #38bdf8;
+        }
+
+        .stat-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: grid;
+            place-items: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+
+        .stat-icon-blue { background: #e0f2fe; color: #0284c7; }
+        .stat-icon-green { background: #dcfce7; color: #15803d; }
+        .stat-icon-amber { background: #fef3c7; color: #b45309; }
+        .stat-icon-purple { background: #f3e8ff; color: #7e22ce; }
+
+        .stat-val {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--gray-900);
+            line-height: 1.2;
+        }
+
+        .stat-lbl {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--gray-500);
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Container Layout */
+        .main-container {
+            max-width: 1480px;
+            margin: 28px auto 60px;
+            padding: 0 1.5rem;
+        }
+
+        /* ========================================================================= */
+        /* 2-TIER ENTERPRISE TAB NAVIGATION SYSTEM */
+        /* ========================================================================= */
+        .tab-nav-wrapper {
+            position: sticky;
+            top: 60px;
+            z-index: 950;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-tier-primary {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+            flex-wrap: wrap;
+        }
+
+        .nav-tier-primary-left {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .tab-btn-hero {
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            padding: 9px 16px;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            font-size: 0.82rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn-hero:hover {
+            background: #f0f9ff;
+            color: #0284c7;
+            border-color: #0284c7;
+            transform: translateY(-1px);
+        }
+
+        .tab-btn-hero.active {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
+            border-color: #0284c7;
+            box-shadow: 0 4px 10px -2px rgba(2, 132, 199, 0.4);
+        }
+
+        .badge-new-tag {
+            background: #ef4444;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 999px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .nav-tier-modules {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .tab-btn-mod {
+            background: #f8fafc;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            transition: all 0.15s ease;
+            text-align: left;
+        }
+
+        .tab-btn-mod .mod-badge {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #0284c7;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .tab-btn-mod .mod-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #1e293b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .tab-btn-mod:hover {
+            background: #f0f9ff;
+            border-color: #0284c7;
+            color: #0284c7;
+            transform: translateY(-1px);
+        }
+
+        .tab-btn-mod.active {
+            background: #0f172a;
+            border-color: #0f172a;
+            color: #ffffff;
+            box-shadow: 0 3px 8px rgba(15, 23, 42, 0.25);
+        }
+
+        .tab-btn-mod.active .mod-badge {
+            color: #38bdf8;
+        }
+
+        .tab-btn-mod.active .mod-title {
+            color: #ffffff;
+        }
+
+        /* Tab Panels */
+        .tab-panel {
+            display: none;
+            animation: panelFade 0.25s ease-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes panelFade {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enterprise Card */
+        .enterprise-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card-header-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .card-header-title i {
+            color: var(--primary);
+        }
+
+        /* Callouts */
+        .callout-box {
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.85rem;
+            line-height: 1.55;
+        }
+
+        .callout-info {
+            background: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            color: #0369a1;
+        }
+
+        .callout-success {
+            background: #f0fdf4;
+            border-left: 4px solid #15803d;
+            color: #14532d;
+        }
+
+        .callout-warning {
+            background: #fffbeb;
+            border-left: 4px solid #b45309;
+            color: #78350f;
+        }
+
+        .callout-danger {
+            background: #fef2f2;
+            border-left: 4px solid #b91c1c;
+            color: #7f1d1d;
+        }
+
+        /* Grids */
+        .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+        .grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .grid-4col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+        /* Feature Cards */
+        .feature-box {
+            background: #f8fafc;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .feature-box:hover {
+            background: #ffffff;
+            border-color: #0284c7;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .feature-box h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-box p {
+            font-size: 0.82rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* Step Timeline */
+        .step-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 16px;
+            background: #f8fafc;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 1.15rem;
+            transition: all 0.2s ease;
+        }
+
+        .step-item:hover {
+            background: #ffffff;
+            border-color: #0284c7;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #0284c7;
+            color: white;
+            font-weight: 900;
+            font-size: 0.9rem;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(2, 132, 199, 0.3);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .step-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .step-system-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+
+        .step-desc {
+            font-size: 0.83rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* Tables */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            margin-bottom: 1.25rem;
+            background: white;
+        }
+
+        .enterprise-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            text-align: left;
+        }
+
+        .enterprise-table th {
+            background: #0f172a;
+            color: white;
+            padding: 10px 14px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary);
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .enterprise-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--gray-200);
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .enterprise-table tr:hover td {
+            background-color: #f0f9ff;
+        }
+
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+        .font-bold { font-weight: 700; }
+
+        /* Package Badges */
+        .group-pill {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .badge-android { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+        .badge-apple { background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; }
+        .badge-laptop { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .badge-tablet { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+        .badge-watch { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+
+        .pkg-name {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 0.83rem;
+        }
+
+        .price-range-tag {
+            font-size: 0.74rem;
+            font-weight: 700;
+            background: #f8fafc;
+            color: #475569;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .margin-badge {
+            font-size: 0.72rem;
+            color: #059669;
+            font-weight: 800;
+        }
+
+        /* Filter Toolbar */
+        .filter-toolbar {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .btn-filter {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-filter:hover {
+            background: #f1f5f9;
+            border-color: #0284c7;
+            color: #0284c7;
+        }
+
+        .btn-filter.active {
+            background: #0284c7;
+            color: white;
+            border-color: #0284c7;
+        }
+
+        .search-box-wrap {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 4px 10px;
+            width: 280px;
+        }
+
+        .search-box-wrap input {
+            border: none;
+            outline: none;
+            font-size: 0.8rem;
+            width: 100%;
+            margin-left: 6px;
+        }
+
+        /* SMS & Certificate Mockup */
+        .sms-mockup {
+            max-width: 480px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .sms-mockup-header {
+            background: #0f172a;
+            color: white;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .sms-bubble {
+            margin: 16px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 0.83rem;
+            color: #1e293b;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .cert-mockup {
+            background: white;
+            border: 2px solid #0284c7;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* MDM Link Button */
+        .mdm-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #ede9fe;
+            color: #6d28d9;
+            border: 1px solid #ddd6fe;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+        .mdm-link-btn:hover {
+            background: #6d28d9;
+            color: white;
+        }
+
+        /* Universal Floating Dock */
+        .floating-nav-dock {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 99999;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 4px 6px;
+            border-radius: 999px;
+            border: 1px solid rgba(18, 53, 143, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dock-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #1e293b;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .dock-btn-parent { background: #edf3ff; color: #12358f; }
+        .dock-btn-parent:hover { background: #12358f; color: #ffffff; }
+        .dock-btn-home { background: #0f172a; color: #ffffff; }
+        .dock-btn-home:hover { background: #0284c7; color: #ffffff; }
+        .dock-btn-top { background: #f1f5f9; color: #475569; width: 28px; height: 28px; justify-content: center; padding: 0; }
+        .dock-btn-top:hover { background: #12358f; color: #ffffff; }
+
+        /* Footer */
+        .footer {
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.78rem;
+            margin-top: 40px;
+        }
+
+        .footer-inner {
+            max-width: 1480px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 1100px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-tier-modules { grid-template-columns: repeat(2, 1fr); }
+            .grid-2col, .grid-3col, .grid-4col { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 700px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .nav-tier-modules { grid-template-columns: 1fr; }
+        }
+    
+        /* Certificate Viewer & Interactive Modal Styles */
+        .cert-viewer-card {
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+        .cert-viewer-card:hover {
+            border-color: #0284c7;
+            box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12);
+        }
+        .cert-preview-box {
+            position: relative;
+            background: #f1f5f9;
+            border: 2px dashed #94a3b8;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: center;
+            padding: 8px;
+            transition: all 0.25s ease;
+        }
+        .cert-preview-box:hover {
+            border-color: #0284c7;
+            background: #e0f2fe;
+        }
+        .cert-preview-box img {
+            max-width: 100%;
+            height: auto;
+            max-height: 380px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        .cert-preview-box:hover img {
+            transform: scale(1.02);
+        }
+        .cert-overlay-badge {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.85);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+        }
+        .cert-preview-box:hover .cert-overlay-badge {
+            background: #0284c7;
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        /* Modal Lightbox */
+        .cert-modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(6px);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .cert-modal-backdrop.active {
+            display: flex;
+            opacity: 1;
+        }
+        .cert-modal-container {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 95%;
+            max-width: 1000px;
+            max-height: 94vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalPop {
+            0% { transform: scale(0.92); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .cert-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: #0f172a;
+            color: #ffffff;
+            border-bottom: 1px solid #334155;
+        }
+        .cert-modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cert-modal-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cert-ctrl-btn {
+            background: #334155;
+            color: #f8fafc;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.15s ease;
+        }
+        .cert-ctrl-btn:hover {
+            background: #0284c7;
+            color: #ffffff;
+        }
+        .cert-ctrl-btn.btn-close-modal {
+            background: #ef4444;
+        }
+        .cert-ctrl-btn.btn-close-modal:hover {
+            background: #dc2626;
+        }
+        .cert-modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            background: #e2e8f0;
+            text-align: center;
+            flex: 1;
+        }
+        .cert-modal-img-wrap {
+            display: inline-block;
+            transition: transform 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border-radius: 8px;
+            background: #ffffff;
+        }
+        .cert-modal-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Metadata Bar -->
+    <div class="top-meta-bar">
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <span class="meta-pill"><i class="fas fa-shield-alt" style="color: #38bdf8;"></i> KSNB COMPLIANCE LEVEL 4</span>
+            <span>Mã Quy Chuẩn: <strong>QC-DSD-BHMR-2026</strong></span>
+            <span>Phiên Bản: <strong>v1.2 (Đầy đủ điều kiện khai báo)</strong></span>
+        </div>
+        <div>
+            <span>Đơn Vị Quản Lý: <strong>Thợ Điện Máy XANH · Khối KSNB MWG</strong></span>
+        </div>
+    </div>
+
+    <!-- Executive Sticky Navbar -->
+    <nav class="top-navbar">
+        <a href="index.html" class="nav-brand">
+            <i class="fas fa-screwdriver-wrench"></i>
+            <div>
+                <span>THỢ ĐIỆN MÁY XANH</span>
+                <span style="font-size: 0.7rem; display: block; font-weight: 500; color: #94a3b8;">HỆ THỐNG QUY TRÌNH NGHIỆP VỤ & QUẢN TRỊ DỊCH VỤ</span>
+            </div>
+        </a>
+        <div class="nav-actions">
+            <a href="index.html" class="btn-nav"><i class="fas fa-folder"></i> Danh mục Thợ ĐMX</a>
+            <a href="Tong_quan_cac_goi_dich_vu_bao_hanh_bao_duong_tho_dmx.html" class="btn-nav"><i class="fas fa-chart-pie"></i> Hub 6 Gói Dịch Vụ</a>
+            <a href="../index.html" class="btn-nav"><i class="fas fa-home"></i> Cổng KSNB</a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <header class="hero-banner">
+        <div class="hero-inner">
+            <div class="breadcrumb">
+                <a href="../index.html">Trang chủ KSNB</a> <span>/</span>
+                <a href="index.html">Thợ Điện Máy XANH</a> <span>/</span>
+                <span>Bán gói Bảo hành mở rộng Sản phẩm đã sử dụng</span>
+            </div>
+            <div class="hero-title-wrap">
+                <div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <span class="badge-hero-status"><i class="fas fa-certificate" style="color: #ffd200;"></i> CHÍNH THỨC BAN HÀNH</span>
+                        <span class="badge-hero-status"><i class="fas fa-scale-balanced"></i> PHÁP CHẾ & KSNB DUYỆT</span>
+                        <span class="badge-hero-status" style="background: rgba(16, 185, 129, 0.25); border-color: #34d399;"><i class="fas fa-check-double"></i> MÃ GÓI ĐSD_THỢ ĐMX</span>
+                        <span class="badge-hero-status" style="background: rgba(14, 165, 233, 0.25); border-color: #38bdf8;"><i class="fas fa-database"></i> ĐẦY ĐỦ KHAI BÁO MDM & ERP</span>
+                    </div>
+                    <h1>QUY TRÌNH BÁN GÓI BẢO HÀNH MỞ RỘNG SẢN PHẨM ĐÃ SỬ DỤNG</h1>
+                    <p>
+                        Chuẩn hóa toàn diện quy chế bán gói bảo hành mở rộng thêm 12 tháng cho thiết bị đã sử dụng (Smartphone, Laptop, Tablet, Apple Watch): Thiết lập Masterdata, 9 bước cấu hình MDM, khai báo giá vốn/giá bán ERP, điều kiện tiếp nhận từ ngày thứ 31, SMS Mẫu 2733 và kiểm soát KSNB.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quick Stats Banner -->
+    <div class="stats-banner-wrap">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon-box stat-icon-blue"><i class="fas fa-clock"></i></div>
+                <div>
+                    <div class="stat-val">+12 Tháng</div>
+                    <div class="stat-lbl">Thời hạn BH mở rộng</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-box stat-icon-green"><i class="fas fa-boxes-stacked"></i></div>
+                <div>
+                    <div class="stat-val">4 Ngành · 61 Gói</div>
+                    <div class="stat-lbl">Phạm vi thiết bị áp dụng</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-box stat-icon-amber"><i class="fas fa-hand-holding-dollar"></i></div>
+                <div>
+                    <div class="stat-val">100% Giá Niêm Yết</div>
+                    <div class="stat-lbl">Hạn mức bồi thường lũy kế</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-box stat-icon-purple"><i class="fas fa-arrows-rotate"></i></div>
+                <div>
+                    <div class="stat-val">Quyền Lợi 1 Đổi 1</div>
+                    <div class="stat-lbl">Khi máy không thể sửa chữa</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+
+        <!-- ========================================================================= -->
+        <!-- 2-TIER TAB NAVIGATION SYSTEM (7 TABS CHUYÊN SÂU) -->
+        <!-- ========================================================================= -->
+        <div class="tab-nav-wrapper">
+            <!-- Tier 1: Core Framework Tabs -->
+            <div class="nav-tier-primary">
+                <div class="nav-tier-primary-left">
+                    <button class="tab-btn-hero active" onclick="switchAppTab('tab-overview')">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>01. TỔNG QUAN & KHUNG CHÍNH SÁCH</span>
+                    </button>
+                    <button class="tab-btn-hero" onclick="switchAppTab('tab-eligibility')">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>02. ĐIỀU KIỆN BÁN & KHÓA CHẶN KSNB</span>
+                    </button>
+                    <button class="tab-btn-hero" onclick="switchAppTab('tab-system-setup')">
+                        <i class="fas fa-gears" style="color: #38bdf8;"></i>
+                        <span>03. ĐIỀU KIỆN & CẤU HÌNH KHAI BÁO (MDM/ERP)</span>
+                        <span class="badge-new-tag">Quan trọng</span>
+                    </button>
+                    <button class="tab-btn-hero" onclick="switchAppTab('tab-sales-flow')">
+                        <i class="fas fa-network-wired"></i>
+                        <span>04. QUY TRÌNH BÁN HÀNG & POS ERP</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tier 2: Operational Deep-Dive Modules -->
+            <div class="nav-tier-modules">
+                <button class="tab-btn-mod" onclick="switchAppTab('tab-pricing-matrix')">
+                    <span class="mod-badge">MODULE 05</span>
+                    <span class="mod-title">🏷️ Bảng Giá 61 Gói Chi Tiết</span>
+                </button>
+                <button class="tab-btn-mod" onclick="switchAppTab('tab-activation-cert')">
+                    <span class="mod-badge">MODULE 06</span>
+                    <span class="mod-title">📱 SMS 2733 & Chứng Nhận ĐT</span>
+                </button>
+                <button class="tab-btn-mod" onclick="switchAppTab('tab-accounting-ksnb')">
+                    <span class="mod-badge">MODULE 07</span>
+                    <span class="mod-title">💼 Tài Chính & Mã ERP</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 1: TỔNG QUAN & KHUNG CHÍNH SÁCH -->
+        <!-- ========================================================================= -->
+        <section id="tab-overview" class="tab-panel active">
+            <div class="enterprise-card">
+                <div class="card-header-bar">
+                    <div class="card-header-title">
+                        <i class="fas fa-info-circle"></i>
+                        1. TỔNG QUAN DỊCH VỤ BẢO HÀNH MỞ RỘNG CHO SẢN PHẨM ĐÃ SỬ DỤNG
+                    </div>
+                    <span class="group-pill badge-android">CHÍNH SÁCH CHUẨN MWG</span>
+                </div>
+
+                <div class="callout-box callout-info">
+                    <i class="fas fa-bullseye fa-lg" style="margin-top: 2px;"></i>
+                    <div>
+                        <strong>Mục Tiêu Dịch Vụ:</strong> Mở rộng giải pháp bảo vệ toàn diện cho các thiết bị công nghệ mà khách hàng đang sử dụng (đã qua 30 ngày đầu trải nghiệm máy mới) nhưng vẫn còn trong thời hạn bảo hành chính hãng. Gói dịch vụ giúp khách hàng an tâm tiếp tục sử dụng thêm 1 năm với quyền lợi sửa chữa linh kiện chính hãng và miễn phí 100% chi phí nhân công.
+                    </div>
+                </div>
+
+                <!-- So Sánh Máy Mới vs Sản Phẩm Đã Sử Dụng -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.25rem 0 0.75rem;">
+                    ⚖️ Ma Trận So Sánh: Gói BHMR Máy Mới vs Gói BHMR Sản Phẩm Đã Sử Dụng (ĐSD)
+                </h3>
+                <div class="table-responsive">
+                    <table class="enterprise-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 20%;">Tiêu Chí Nghiệp Vụ</th>
+                                <th style="width: 40%; background: #0369a1;">Gói BHMR Máy Mới (Hiện Tại)</th>
+                                <th style="width: 40%; background: #0f766e;">Gói BHMR Sản Phẩm Đã Sử Dụng (Mới - ĐSD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold text-slate-800">Tên gói trên hệ thống</td>
+                                <td><code>Dịch vụ Bảo hành mở rộng Thợ ĐMX</code></td>
+                                <td><code style="color: #0f766e; font-weight: 800;">Dịch vụ Bảo hành mở rộng Thợ ĐMX_ĐSD</code></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Thời điểm khách hàng được mua</td>
+                                <td>Mua ngay lúc xuất bán máy mới hoặc trong vòng <strong>&le; 30 ngày</strong> đầu tiên.</td>
+                                <td>Được mua từ <strong>ngày thứ 31</strong> tính từ ngày tạo đơn hàng (> 30 ngày).</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Điều kiện thời hạn BH hãng</td>
+                                <td>Tính từ thời điểm kích hoạt máy mới.</td>
+                                <td>Phải còn thời hạn BH hãng và <strong>còn ít nhất 30 ngày</strong> trước khi hết hạn BH hãng.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Thời gian bảo hành cộng thêm</td>
+                                <td>12 Tháng hoặc 24 Tháng</td>
+                                <td><strong>12 Tháng</strong> cộng thêm</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Ngày hiệu lực gói dịch vụ</td>
+                                <td>Ngay sau khi hết hạn bảo hành hãng (Tháng thứ 13 trở đi).</td>
+                                <td>Bắt đầu ngay sau khi hết hạn bảo hành hãng (12 tháng hoặc 18 tháng).</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Hạn mức bồi thường lũy kế</td>
+                                <td>100% Giá trị hóa đơn mua máy.</td>
+                                <td><strong>Không vượt quá giá bán lẻ niêm yết</strong> của Thiết Bị (đã gồm VAT, chưa trừ KM).</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Lịch sử sửa chữa thiết bị</td>
+                                <td>Chưa từng sửa chữa (máy mới).</td>
+                                <td><strong>Được mua</strong> (hệ thống không chặn máy đã từng sửa chữa, miễn đủ điều kiện BH hãng).</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-slate-800">Kênh tra cứu chứng nhận</td>
+                                <td><code>tgdd.vn/gcn-bhmr</code></td>
+                                <td><code style="color: #0284c7; font-weight: 700;">https://tgdd.vn/gcn-bhmr-dsd</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 4 Ngành Hàng Trọng Điểm -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.5rem 0 0.75rem;">
+                    📱 4 Nhóm Thiết Bị Áp Dụng Chính Thức
+                </h3>
+                <div class="grid-4col">
+                    <div class="feature-box">
+                        <div>
+                            <h4><i class="fas fa-mobile-screen-button text-emerald-600"></i> Smartphone</h4>
+                            <p>Áp dụng cho toàn bộ Điện thoại thông minh chạy hệ điều hành Android và iPhone chính hãng do MWG phân phối.</p>
+                        </div>
+                        <span class="group-pill badge-android" style="margin-top: 10px;">19 Phân Khúc Gói</span>
+                    </div>
+                    <div class="feature-box">
+                        <div>
+                            <h4><i class="fas fa-laptop text-sky-600"></i> Laptop & MacBook</h4>
+                            <p>Áp dụng cho tất cả Laptop chạy Windows và dòng máy Apple MacBook còn trong hạn bảo hành chính hãng.</p>
+                        </div>
+                        <span class="group-pill badge-laptop" style="margin-top: 10px;">17 Phân Khúc Gói</span>
+                    </div>
+                    <div class="feature-box">
+                        <div>
+                            <h4><i class="fas fa-tablet-screen-button text-amber-600"></i> Tablet & iPad</h4>
+                            <p>Áp dụng cho toàn bộ Máy tính bảng Android (Samsung, Xiaomi, Lenovo...) và dòng máy tính bảng Apple iPad.</p>
+                        </div>
+                        <span class="group-pill badge-tablet" style="margin-top: 10px;">20 Phân Khúc Gói</span>
+                    </div>
+                    <div class="feature-box">
+                        <div>
+                            <h4><i class="fas fa-clock text-purple-600"></i> Smartwatch</h4>
+                            <p>Áp dụng chuyên biệt cho dòng đồng hồ thông minh Apple Watch chính hãng với mức giá bán lẻ chuẩn hóa.</p>
+                        </div>
+                        <span class="group-pill badge-watch" style="margin-top: 10px;">5 Phân Khúc Gói</span>
+                    </div>
+                </div>
+
+
+                <!-- Phạm Vi Áp Dụng: Phase 1 Boundary -->
+                <div class="callout-box callout-warning" style="margin-top: 1.25rem;">
+                    <i class="fas fa-filter-circle-xmark fa-lg" style="margin-top: 2px;"></i>
+                    <div>
+                        <strong>Phạm Vi Áp Dụng (Phase 1 Boundary):</strong> Gói BHMR ĐSD trong giai đoạn hiện tại <strong>chỉ áp dụng độc quyền cho các sản phẩm (IMEI/Serial) được xuất bán từ hệ thống Thế Giới Di Động / Điện Máy XANH / TopZone</strong>. Hệ thống POS và Multicat sẽ tự động đối chiếu cơ sở dữ liệu lịch sử xuất bán ERP; tuyệt đối <strong>từ chối bán</strong> đối với các thiết bị xách tay, thiết bị mua ngoài hệ thống MWG hoặc không tìm thấy dữ liệu hóa đơn gốc.
+                    </div>
+                </div>
+
+                <!-- Quyền Lợi 1 Đổi 1 Khi Thiết Bị Không Sửa Được -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.5rem 0 0.75rem;">
+                    🔄 Quyền Lợi "1 Đổi 1" Khi Thiết Bị Không Thể Sửa Chữa Được (Swap Machine Policy)
+                </h3>
+                <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                    <p style="font-size: 0.85rem; color: #334155; line-height: 1.6; margin-bottom: 12px;">
+                        Trong suốt thời hạn hiệu lực của gói BHMR ĐSD, nếu sản phẩm của khách hàng gặp sự cố lỗi kỹ thuật của Nhà sản xuất mà <strong>Thợ Điện Máy XANH xác nhận không thể sửa chữa được</strong> (do hỏng bo mạch chủ nghiêm trọng, linh kiện ngưng sản xuất hoặc chi phí thay thế vượt quá hạn mức bồi thường), khách hàng sẽ được kích hoạt quyền lợi đổi máy theo quy tắc:
+                    </p>
+                    <div class="grid-3col">
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <div style="font-weight: 800; color: #0284c7; font-size: 0.88rem; margin-bottom: 6px;">
+                                <i class="fas fa-clone"></i> 1. Đổi Cùng Model / Nhóm Hàng
+                            </div>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.5; margin: 0;">
+                                Khách hàng được đổi sang sản phẩm cùng Model. Trường hợp siêu thị/hệ thống đã hết tồn kho Model đó, cho phép đổi sang sản phẩm khác cùng nhóm ngành hàng có tính năng tương đương.
+                            </p>
+                        </div>
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <div style="font-weight: 800; color: #15803d; font-size: 0.88rem; margin-bottom: 6px;">
+                                <i class="fas fa-scale-balanced"></i> 2. Quy Tắc Chênh Lệch Giá
+                            </div>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.5; margin: 0;">
+                                - Đổi sang máy có giá trị cao hơn: Khách hàng thanh toán phần tiền chênh lệch.<br>
+                                - Đổi sang máy có giá trị thấp hơn: Không hoàn lại phần tiền chênh lệch thừa.
+                            </p>
+                        </div>
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <div style="font-weight: 800; color: #b45309; font-size: 0.88rem; margin-bottom: 6px;">
+                                <i class="fas fa-hand-fist"></i> 3. Giới Hạn Đổi Duy Nhất 01 Lần
+                            </div>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.5; margin: 0;">
+                                Quyền lợi 1 Đổi 1 chỉ áp dụng <strong>duy nhất 01 lần</strong> trong suốt chu kỳ gói. Sau khi hoàn tất đổi máy mới, gói dịch vụ <strong>tự động chấm dứt hiệu lực (Expired)</strong> ngay cả khi hạn mức chi trả còn dư.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 2: ĐIỀU KIỆN BÁN & KHÓA CHẶN KSNB -->
+        <!-- ========================================================================= -->
+        <section id="tab-eligibility" class="tab-panel">
+            <div class="enterprise-card">
+                <div class="card-header-bar">
+                    <div class="card-header-title">
+                        <i class="fas fa-shield-halved"></i>
+                        2. BỘ QUY TẮC ĐIỀU KIỆN BÁN & KHÓA CHẶN KIỂM SOÁT KSNB
+                    </div>
+                    <span class="group-pill badge-apple">RULE ENGINE CHẶN TỰ ĐỘNG</span>
+                </div>
+
+                <div class="callout-box callout-warning">
+                    <i class="fas fa-triangle-exclamation fa-lg" style="margin-top: 2px;"></i>
+                    <div>
+                        <strong>Cảnh Báo Nghiệp Vụ KSNB:</strong> Hệ thống ERP POS và Multicat tự động kiểm tra chặt chẽ điều kiện bảo hành hãng và ngày xuất bán đầu tiên của thiết bị trước khi cho phép tạo đơn. Nhân viên tư vấn không được cố tình bán cho máy đã hết hạn bảo hành hãng hoặc các thiết bị đã bị hãng từ chối bảo hành (rơi vỡ, vô nước, can thiệp trái phép).
+                    </div>
+                </div>
+
+                <div class="grid-2col" style="margin-bottom: 1.5rem;">
+                    
+                    <!-- Khung Thời Gian Bán Hợp Lệ -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+                        <h4 style="font-size: 0.98rem; font-weight: 800; color: #0f172a; margin-bottom: 10px;">
+                            <i class="fas fa-calendar-days text-sky-600"></i> 1. Khung Thời Gian Bán Hợp Lệ Theo Chu Kỳ BH Hãng
+                        </h4>
+                        <ul style="padding-left: 18px; font-size: 0.83rem; color: #334155; line-height: 1.6;">
+                            <li style="margin-bottom: 8px;">
+                                <strong>Thời điểm bắt đầu được phép mua:</strong> Từ <strong>ngày thứ 31</strong> tính từ ngày xuất bán đầu tiên trên hệ thống ERP (> 30 ngày).
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <strong>Đối với thiết bị BH hãng 12 tháng (365 ngày):</strong> Được mua từ <strong>Ngày 31 đến Ngày 335</strong>. (Quy tắc 365 - 30 ngày: Thiết bị phải còn ít nhất 30 ngày bảo hành hãng tại thời điểm xuất bán gói).
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <strong>Đối với thiết bị BH hãng 18 tháng (540 ngày):</strong> Được mua từ <strong>Ngày 31 đến Ngày 510</strong>. (Quy tắc 540 - 30 ngày: Phải còn ít nhất 30 ngày bảo hành hãng).
+                            </li>
+                            <li>
+                                <strong>Trường hợp IMEI/Serial không xác định được thời hạn BH hãng:</strong> Hệ thống <span style="color: #dc2626; font-weight: 800;">CHẶN TUYỆT ĐỐI</span>, không cho phép bán.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Quy Tắc Khóa Chặn Trùng Lặp & Lịch Sử Sửa Chữa -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+                        <h4 style="font-size: 0.98rem; font-weight: 800; color: #0f172a; margin-bottom: 10px;">
+                            <i class="fas fa-fingerprint text-emerald-600"></i> 2. Quy Tắc Định Danh IMEI & Lịch Sử Sửa Chữa
+                        </h4>
+                        <ul style="padding-left: 18px; font-size: 0.83rem; color: #334155; line-height: 1.6;">
+                            <li style="margin-bottom: 8px;">
+                                <strong>Quy tắc 1 IMEI = 1 Gói Duy Nhất:</strong> Một số IMEI/Serial chỉ được phép liên kết với 01 gói Bảo hành mở rộng duy nhất trong suốt vòng đời. Nếu IMEI đã từng mua gói BHMR máy mới hoặc gói ĐSD trước đó ➔ Hệ thống lập tức chặn không cho tạo đơn mới.
+                            </li>
+                            <li style="margin-bottom: 8px;">
+                                <strong>Lịch sử sửa chữa thiết bị:</strong> Khách hàng <span style="color: #15803d; font-weight: 800;">ĐƯỢC PHÉP MUA</span> gói ĐSD ngay cả khi thiết bị đã từng có lịch sử sửa chữa trước đây tại TTBH/Thợ ĐMX, miễn là thiết bị hiện tại vẫn còn trong thời hạn bảo hành hãng và đạt điều kiện bảo hành hãng.
+                            </li>
+                            <li>
+                                <strong>Ngoại quan và tình trạng máy:</strong> Máy phải hoạt động bình thường, không vỡ màn hình, không cong vênh thân máy, không có dấu hiệu ngấm chất lỏng.
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- 6 Chốt Chặn Kiểm Tra Hệ Thống -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.25rem 0 0.75rem;">
+                    🛡️ 6 Chốt Chặn Kiểm Tra Logic Tự Động Trên POS & Multicat
+                </h3>
+                <div class="step-timeline">
+                    <div class="step-item">
+                        <div class="step-badge">1</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Kiểm tra thông tin Serial / IMEI trên hệ thống dữ liệu gốc ERP</span>
+                                <span class="step-system-tag">ERP MASTERDATA</span>
+                            </div>
+                            <p class="step-desc">Hệ thống quét IMEI để xác định ngày xuất bán đầu tiên, Model, Nhóm ngành hàng và giá bán niêm yết tại thời điểm xuất bán.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">2</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Kiểm tra điều kiện đủ 30 ngày trải nghiệm đầu tiên (T &gt; 30 ngày)</span>
+                                <span class="step-system-tag">GATE 01</span>
+                            </div>
+                            <p class="step-desc">Nếu khoảng cách từ ngày xuất bán máy mới đến hiện tại &le; 30 ngày ➔ Hướng dẫn khách hàng mua gói BHMR máy mới thông thường. Nếu &gt; 30 ngày ➔ Cho phép chuyển tiếp sang bước kiểm tra gói ĐSD.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">3</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Kiểm tra thời hạn bảo hành hãng còn lại (&ge; 30 ngày)</span>
+                                <span class="step-system-tag">GATE 02</span>
+                            </div>
+                            <p class="step-desc">Đối chiếu thời hạn bảo hành hãng: Nếu thời gian còn lại &lt; 30 ngày (tức sau ngày 335 với máy 12T, hoặc sau ngày 510 với máy 18T) ➔ Chặn tạo đơn vì rủi ro thiết bị sắp hết bảo hành hãng.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">4</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Kiểm tra trùng lặp gói bảo hành mở rộng (1 IMEI = 1 Gói)</span>
+                                <span class="step-system-tag">GATE 03</span>
+                            </div>
+                            <p class="step-desc">Truy vấn cơ sở dữ liệu Airtime và CRM: Nếu IMEI này đã từng kích hoạt gói BHMR (máy mới hoặc ĐSD) đang còn hiệu lực ➔ Chặn xuất bán.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">5</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Tự động đối chiếu phân khúc giá và gán Mã Gói Dịch Vụ chuẩn</span>
+                                <span class="step-system-tag">MDM PRICING</span>
+                            </div>
+                            <p class="step-desc">Dựa trên nhóm thiết bị và giá bán niêm yết ban đầu của máy, hệ thống tự động lọc ra đúng 01 gói cước ĐSD tương ứng trong danh mục 61 gói, tránh thu sai giá.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">6</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Xác thực ngoại quan và tình trạng hoạt động thực tế tại Siêu thị</span>
+                                <span class="step-system-tag">STORE AUDIT</span>
+                            </div>
+                            <p class="step-desc">Nhân viên kỹ thuật/bán hàng tại siêu thị kiểm tra nhanh ngoại quan máy, xác nhận máy không rơi vỡ, nứt màn hình hay vô nước trước khi in phiếu thu tiền.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 3: ĐIỀU KIỆN & CẤU HÌNH KHAI BÁO (MDM/ERP) - MỚI BỔ SUNG TOÀN DIỆN -->
+        <!-- ========================================================================= -->
+        <section id="tab-system-setup" class="tab-panel">
+            <div class="enterprise-card">
+                <div class="card-header-bar">
+                    <div class="card-header-title">
+                        <i class="fas fa-gears" style="color: #0284c7;"></i>
+                        3. ĐIỀU KIỆN & CẤU HÌNH KHAI BÁO HỆ THỐNG TRƯỚC KHI MỞ BÁN (MDM & ERP)
+                    </div>
+                    <span class="group-pill badge-apple">MASTERDATA & MDM ARCHITECTURE</span>
+                </div>
+
+                <div class="callout-box callout-info">
+                    <i class="fas fa-sliders fa-lg" style="margin-top: 2px;"></i>
+                    <div>
+                        <strong>Yêu Cầu Tiên Quyết Trước Khi Mở Bán:</strong> Để các Siêu thị ĐMX / TGDĐ có thể tìm kiếm, chọn gói và xuất hóa đơn thu hộ dịch vụ trên POS / Tool Multicat, toàn bộ các tham số danh mục, gói dịch vụ, giá vốn, giá bán lẻ, liên kết mapping và rule điều phối phải được khai báo hoàn tất trên Hệ thống Masterdata (MDM) và ERP.
+                    </div>
+                </div>
+
+                <!-- Card 3.1: Khung Khai Báo Thực Thể Pháp Nhân & Chứng Từ ERP -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.25rem 0 0.75rem;">
+                    🏢 1. Khai Báo Thực Thể Pháp Nhân, Kho Giá & Chứng Từ ERP
+                </h3>
+                <div class="grid-3col" style="margin-bottom: 1.5rem;">
+                    
+                    <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 1.15rem;">
+                        <div style="font-size: 0.72rem; font-weight: 800; color: #0284c7; text-transform: uppercase; margin-bottom: 4px;">ĐƠN VỊ CUNG ỨNG DỊCH VỤ</div>
+                        <h4 style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin-bottom: 8px;">53796 - CÔNG TY CP THỢ ĐIỆN MÁY XANH</h4>
+                        <p style="font-size: 0.82rem; color: #475569; line-height: 1.5; margin: 0;">
+                            - Pháp nhân thụ hưởng doanh thu dịch vụ: Công ty Số 10.<br>
+                            - Siêu thị ĐMX/TGDĐ chỉ đóng vai trò thu hộ và kết nối khách hàng.<br>
+                            - Đơn vị chịu trách nhiệm pháp lý bảo hành và thực hiện sửa chữa.
+                        </p>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 1.15rem;">
+                        <div style="font-size: 0.72rem; font-weight: 800; color: #15803d; text-transform: uppercase; margin-bottom: 4px;">KHU VỰC GIÁ & KHO LẤY GIÁ</div>
+                        <h4 style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin-bottom: 8px;">KVG 680 · KHO MẶC ĐỊNH 6373</h4>
+                        <p style="font-size: 0.82rem; color: #475569; line-height: 1.5; margin: 0;">
+                            - <strong>Khu vực giá chuẩn:</strong> <code>680 - Tận Tâm Giá chuẩn</code>.<br>
+                            - <strong>Kho lấy giá mặc định:</strong> <code>6373 - Kho Trung Tâm Dịch Vụ</code>.<br>
+                            - <strong>Rule ERP:</strong> Khi hệ thống lấy khu vực giá dịch vụ thì không phụ thuộc vào kho vật lý của siêu thị.
+                        </p>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 1.15rem;">
+                        <div style="font-size: 0.72rem; font-weight: 800; color: #b45309; text-transform: uppercase; margin-bottom: 4px;">LOẠI HÌNH THỨC CHỨNG TỪ XUẤT BÁN</div>
+                        <h4 style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin-bottom: 8px;">YCX 684 · HTX 4403</h4>
+                        <p style="font-size: 0.82rem; color: #475569; line-height: 1.5; margin: 0;">
+                            - <strong>Yêu cầu xuất (YCX):</strong> <code>684 - Xuất bán thu hộ dịch vụ</code>.<br>
+                            - <strong>Hình thức xuất (HTX):</strong> <code>4403 - Bán gói dịch vụ Thợ ĐMX</code>.<br>
+                            - Tự động đồng bộ sang kế toán công nợ liên công ty giữa ĐMX và Công ty số 10.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Card 3.2: 9 Bước Cấu Hình Chuẩn Trên Hệ Thống MDM -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.25rem 0 0.75rem;">
+                    ⚙️ 2. Quy Trình Chuẩn 9 Bước Cấu Hình Danh Mục Trên Hệ Thống MDM (Master Data)
+                </h3>
+                <div class="table-responsive">
+                    <table class="enterprise-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%; text-align: center;">Bước</th>
+                                <th style="width: 25%;">Hạng Mục Cấu Hình MDM</th>
+                                <th style="width: 50%;">Nội Dung & Quy Định Cấu Hình Chi Tiết Cho Gói ĐSD</th>
+                                <th style="width: 20%;">Link Thao Tác MDM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B1</td>
+                                <td>
+                                    <strong>Khai báo Loại dịch vụ</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_service_type</div>
+                                </td>
+                                <td>
+                                    Khai báo phân loại dịch vụ là <code>Bảo hành mở rộng (BHMR)</code>. Định danh phân nhóm dịch vụ cấp 2 là <strong>Sản phẩm đã sử dụng (ĐSD)</strong> để tách biệt luồng báo cáo và hạch toán với gói máy mới.
+                                </td>
+                                <td><a href="https://mdm.mwgroup.vn/sales_service_type" target="_blank" class="mdm-link-btn">sales_service_type ↗</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B2</td>
+                                <td>
+                                    <strong>Gói dịch vụ & Hạn mức</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_service_package</div>
+                                </td>
+                                <td>
+                                    Khai báo <strong>61 mã gói dịch vụ chi tiết</strong> theo phân khúc giá (Smartphone, Laptop, Tablet, Apple Watch). Thiết lập: Thời hạn cộng thêm = <strong>12 tháng</strong>; Hạn mức chi trả tối đa = <strong>Tổng chi phí sửa chữa lũy kế &le; 100% Giá bán lẻ niêm yết của máy</strong>.
+                                </td>
+                                <td><a href="https://mdm.mwgroup.vn/sales_service_package" target="_blank" class="mdm-link-btn">sales_service_package ↗</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B3</td>
+                                <td>
+                                    <strong>Dịch vụ thành phần</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_service_component</div>
+                                </td>
+                                <td>
+                                    Khai báo danh mục chi phí được bảo hiểm chi trả: (1) Chi phí thay thế linh kiện lỗi kỹ thuật do Nhà sản xuất (Linh kiện Hãng / OEM / Bóc máy); (2) Chi phí tiền công kiểm tra, chẩn đoán, sửa chữa và thay thế của KTV Thợ ĐMX.
+                                </td>
+                                <td><a href="https://mdm.mwgroup.vn/sales_service_component" target="_blank" class="mdm-link-btn">sales_service_component ↗</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B4</td>
+                                <td>
+                                    <strong>Thiết lập Hạng mục gói</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_service_category_group</div>
+                                </td>
+                                <td>
+                                    Liên kết 61 Gói dịch vụ ĐSD với Dịch vụ thành phần sửa chữa tương ứng, đồng thời nhóm vào 4 nhóm ngành hàng thiết bị công nghệ.
+                                </td>
+                                <td><a href="https://mdm.mwgroup.vn/sales_service_category_group" target="_blank" class="mdm-link-btn">sales_service_category_group ↗</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-rose-600">B5</td>
+                                <td>
+                                    <strong>Thông tin Quản lý gói</strong>
+                                    <span class="badge-new-tag">Cốt Lõi</span>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_manage_infor_package</div>
+                                </td>
+                                <td>
+                                    <strong>Thiết lập toàn bộ luật chơi & điều kiện ràng buộc:</strong><br>
+                                    - <em>Ngày hiệu lực:</em> Tự động bắt đầu ngay sau khi hết hạn bảo hành hãng (Tháng thứ 13 hoặc tháng thứ 19).<br>
+                                    - <em>Khoảng thời gian bán:</em> Từ ngày 31 sau ngày xuất bán máy gốc và còn &ge; 30 ngày bảo hành hãng.<br>
+                                    - <em>Khóa IMEI:</em> 1 IMEI chỉ kích hoạt 1 gói BHMR duy nhất.<br>
+                                    - <em>Điều kiện nhập trả:</em> &le; 30 ngày từ ngày xuất bán gói và chưa tồn tại yêu cầu dịch vụ.
+                                </td>
+                                <td><a href="https://mdm.mwgroup.vn/sales_manage_infor_package" target="_blank" class="mdm-link-btn">sales_manage_infor_package ↗</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B6</td>
+                                <td>
+                                    <strong>Khai báo Giá vốn sản phẩm</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_cost_price_product</div>
+                                </td>
+                                <td>
+                                    Nhập biểu giá vốn chính thức cho 61 gói dịch vụ từ 36.000đ đến 1.902.000đ (đã bao gồm VAT) làm cơ sở phân bổ chi phí kế toán và tính hoa hồng/biên lợi nhuận gộp.
+                                </td>
+                                <td><a href="https://mdm.mwgroup.vn/sales_cost_price_product" target="_blank" class="mdm-link-btn">sales_cost_price_product ↗</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B7</td>
+                                <td>
+                                    <strong>Điều phối loại SP chính / Model</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_main_apply</div>
+                                </td>
+                                <td>
+                                    Khai báo cây danh mục Model sản phẩm chính được phép mua gói ĐSD: Toàn bộ Model Smartphone (Android/iPhone), Laptop (Windows/MacBook), Tablet (Android/iPad), Apple Watch đang kinh doanh hoặc đã từng xuất bán tại MWG.
+                                </td>
+                                <td><a href="https://mdm.mwgroup.vn/sales_main_apply" target="_blank" class="mdm-link-btn">sales_main_apply ↗</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B8</td>
+                                <td>
+                                    <strong>Điều phối gợi ý mua thêm (Upsell)</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_upsell / Multicat</div>
+                                </td>
+                                <td>
+                                    Cấu hình Popup gợi ý thông minh trên POS/Tool Multicat: Khi nhân viên siêu thị tra cứu IMEI của khách hàng đến bảo dưỡng/sửa chữa/mua phụ kiện, nếu máy thỏa mãn điều kiện $31 \le \text{Ngày} \le \text{Hạn BH Hãng} - 30$ ➔ Hệ thống tự động hiển thị gợi ý tư vấn gói BHMR ĐSD.
+                                </td>
+                                <td><span class="group-pill badge-laptop">Multicat Setup</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center font-bold text-slate-600">B9</td>
+                                <td>
+                                    <strong>Mapping Mã Sản Phẩm Chung</strong>
+                                    <div style="font-size: 0.74rem; color: #64748b;">sales_mapping</div>
+                                </td>
+                                <td>
+                                    Ánh xạ 1 - 1 giữa <strong>Mã sản phẩm Thu hộ ĐMX</strong> và <strong>Mã Dịch vụ Thợ ĐMX</strong> đảm bảo dữ liệu tự động đồng bộ sang Cổng Airtime phát hành chứng nhận và hệ thống ERP kế toán.
+                                </td>
+                                <td><span class="group-pill badge-android">Auto Sync 1 - 1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Card 3.3: Khai Báo Cổng Airtime & Đặc Quyền Hủy Ngoại Lệ -->
+                <div class="grid-2col" style="margin-top: 1rem;">
+                    
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+                        <h4 style="font-size: 0.98rem; font-weight: 800; color: #0f172a; margin-bottom: 10px;">
+                            <i class="fas fa-tower-broadcast text-sky-600"></i> Khai Báo Cổng Airtime & Mẫu SMS 2733
+                        </h4>
+                        <ul style="padding-left: 18px; font-size: 0.82rem; color: #334155; line-height: 1.6;">
+                            <li><strong>Cổng kích hoạt dịch vụ:</strong> <code>Airtime 2733</code> (chuyên biệt cho gói ĐSD).</li>
+                            <li><strong>Mã mẫu tin nhắn SMS:</strong> <code>2733 - Tho DienmayXanh - Kích hoạt gói BH mở rộng</code>.</li>
+                            <li><strong>Tên hiển thị Brandname:</strong> <code>Tho DienmayXanh</code> (kênh CSKH chính thức).</li>
+                            <li><strong>Link tra cứu Giấy chứng nhận điện tử:</strong> <code>https://tgdd.vn/gcn-bhmr-dsd</code> (được Ban Pháp chế Chị Uyên phê duyệt).</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+                        <h4 style="font-size: 0.98rem; font-weight: 800; color: #0f172a; margin-bottom: 10px;">
+                            <i class="fas fa-user-shield text-amber-600"></i> Khai Báo Phân Quyền Hủy Ngoại Lệ User 196673
+                        </h4>
+                        <ul style="padding-left: 18px; font-size: 0.82rem; color: #334155; line-height: 1.6;">
+                            <li><strong>Tài khoản phê duyệt ngoại lệ:</strong> <code style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 1px 6px; border-radius: 4px;">User 196673</code>.</li>
+                            <li><strong>Phạm vi thẩm quyền:</strong> Hủy bỏ yêu cầu sử dụng dịch vụ trên CRM/Airtime khi khách hàng có nhu cầu nhập trả gói trong hạn &le; 30 ngày mà chưa phát sinh chi phí bồi thường.</li>
+                            <li><strong>Quy tắc bảo mật:</strong> Không cấp quyền hủy cho siêu thị để ngăn ngừa rủi ro hoàn tiền khống sau khi đã được hỗ trợ sửa chữa.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 4: QUY TRÌNH BÁN HÀNG & POS ERP -->
+        <!-- ========================================================================= -->
+        <section id="tab-sales-flow" class="tab-panel">
+            <div class="enterprise-card">
+                <div class="card-header-bar">
+                    <div class="card-header-title">
+                        <i class="fas fa-network-wired"></i>
+                        4. LUỒNG QUY TRÌNH VẬN HÀNH BÁN HÀNG END-TO-END
+                    </div>
+                    <span class="group-pill badge-laptop">ERP · MULTICAT · AIRTIME</span>
+                </div>
+
+                <div class="grid-2col" style="margin-bottom: 1.5rem;">
+                    <div>
+                        <h4 style="font-size: 0.98rem; font-weight: 800; color: #0f172a; margin-bottom: 10px;">
+                            <i class="fas fa-desktop text-sky-600"></i> Các Hệ Thống Tham Gia Vận Hành
+                        </h4>
+                        <div class="table-responsive">
+                            <table class="enterprise-table">
+                                <thead>
+                                    <tr>
+                                        <th>Hệ Thống</th>
+                                        <th>Vai Trò & Tác Nghiệp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-bold text-sky-700">POS ERP Siêu Thị</td>
+                                        <td>Lập đơn xuất bán, in hóa đơn VAT thu hộ, ghi nhận thanh toán tiền mặt/chuyển khoản/thẻ.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold text-emerald-700">Tool Multicat</td>
+                                        <td>Tra cứu IMEI, thẩm định điều kiện thời gian, hiển thị gợi ý gói cước ĐSD phù hợp.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold text-amber-700">Cổng Airtime</td>
+                                        <td>Kích hoạt gói dịch vụ bảo hành mở rộng, khởi tạo mã chứng nhận điện tử và gửi lệnh SMS.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold text-purple-700">Hệ Thống CRM</td>
+                                        <td>Lưu trữ hồ sơ khách hàng, lịch sử bảo hành, quản lý hạn mức bồi thường lũy kế.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 0.98rem; font-weight: 800; color: #0f172a; margin-bottom: 10px;">
+                            <i class="fas fa-coins text-emerald-600"></i> Hạn Mức Bồi Thường & Quyền Lợi Bảo Hành
+                        </h4>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.15rem; font-size: 0.83rem; line-height: 1.55;">
+                            <p style="margin-bottom: 8px;">
+                                <strong>Hạn mức bồi thường tối đa:</strong> Giới hạn giá trị hỗ trợ sửa chữa bảo hành mở rộng là <strong>tổng chi phí sửa chữa lũy kế</strong> (bao gồm tiền công và giá trị linh kiện thay thế) không vượt quá giá bán lẻ niêm yết của thiết bị (đã gồm thuế GTGT, chưa trừ các khuyến mại).
+                            </p>
+                            <p style="margin-bottom: 8px;">
+                                <strong>Phạm vi lỗi được bảo hành:</strong> Hỗ trợ 100% chi phí sửa chữa nếu thiết bị phát sinh <strong>lỗi kỹ thuật do Nhà sản xuất (lỗi NSX)</strong> trong thời gian bảo hành mở rộng 12 tháng.
+                            </p>
+                            <p>
+                                <strong>Đơn vị thực hiện sửa chữa:</strong> Trung tâm bảo hành Thợ Điện Máy XANH hoặc Trung tâm bảo hành ủy quyền chính hãng của từng thương hiệu (Apple, Samsung, Asus, Dell, HP...).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Bước Tác Nghiệp Bán Hàng Tại Siêu Thị -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.25rem 0 0.75rem;">
+                    🔄 5 Bước Tác Nghiệp Chi Tiết Tại Siêu Thị Điện Máy Xanh / Thế Giới Di Động
+                </h3>
+                <div class="step-timeline">
+                    <div class="step-item">
+                        <div class="step-badge">B1</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Bước 1: Tiếp nhận yêu cầu & Nhập IMEI trên Tool Multicat / POS</span>
+                                <span class="step-system-tag">MULTICAT POS</span>
+                            </div>
+                            <p class="step-desc">Khách hàng mang thiết bị đến siêu thị yêu cầu mua gói bảo hành mở rộng. Nhân viên bán hàng mở giao diện bán dịch vụ, nhập số IMEI/Serial của máy để hệ thống kiểm tra tự động điều kiện thời gian và thời hạn bảo hành hãng còn lại.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">B2</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Bước 2: Kiểm tra ngoại quan & Tư vấn quyền lợi 12 tháng bảo hành</span>
+                                <span class="step-system-tag">TƯ VẤN & XÁC NHẬN</span>
+                            </div>
+                            <p class="step-desc">Kiểm tra nhanh chức năng máy (màn hình cảm ứng, camera, nghe gọi, sạc pin). Tư vấn rõ quyền lợi: bảo hành lỗi kỹ thuật thêm 12 tháng sau khi hết BH hãng, hạn mức sửa chữa tối đa bằng giá niêm yết máy.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">B3</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Bước 3: Lập hóa đơn xuất bán POS & Thu tiền 100%</span>
+                                <span class="step-system-tag">ERP POS BILLING</span>
+                            </div>
+                            <p class="step-desc">Hệ thống sinh đơn hàng bán dịch vụ với đúng mã gói ĐSD tương ứng. Thu ngân thu tiền 100% (tiền mặt/thẻ/chuyển khoản/VNPay) và in phiếu hóa đơn GTGT dịch vụ thu hộ cho khách hàng.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">B4</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Bước 4: Đồng bộ Cổng Airtime kích hoạt gói dịch vụ trong 3 phút</span>
+                                <span class="step-system-tag">AIRTIME API</span>
+                            </div>
+                            <p class="step-desc">Ngay khi hóa đơn được thanh toán hoàn tất, POS gửi lệnh API tự động sang Cổng Airtime để kích hoạt gói cước, ghi nhận thời gian hiệu lực bắt đầu tính từ ngày hết hạn bảo hành hãng của thiết bị.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-badge">B5</div>
+                        <div class="step-content">
+                            <div class="step-title-line">
+                                <span class="step-title">Bước 5: Tự động gửi SMS Brandname 2733 & Cấp Giấy chứng nhận điện tử</span>
+                                <span class="step-system-tag">SMS BRANDNAME</span>
+                            </div>
+                            <p class="step-desc">Hệ thống gửi tin nhắn SMS Brandname <code>Tho DienmayXanh</code> (Mẫu 2733) đến số điện thoại khách hàng thông báo kích hoạt thành công kèm đường link tra cứu Giấy chứng nhận dịch vụ điện tử tại <code>https://tgdd.vn/gcn-bhmr-dsd</code>.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 5: MA TRẬN BẢNG GIÁ 61 GÓI CHI TIẾT -->
+        <!-- ========================================================================= -->
+        <section id="tab-pricing-matrix" class="tab-panel">
+            <div class="enterprise-card">
+                <div class="card-header-bar">
+                    <div class="card-header-title">
+                        <i class="fas fa-tags"></i>
+                        5. MA TRẬN BẢNG GIÁ VỐN & GIÁ BÁN LẺ 61 GÓI DỊCH VỤ ĐSD CHI TIẾT
+                    </div>
+                    <span class="group-pill badge-watch">DỮ LIỆU CHUẨN GOOGLE SHEET</span>
+                </div>
+
+                <div class="callout-box callout-success">
+                    <i class="fas fa-coins fa-lg" style="margin-top: 2px;"></i>
+                    <div>
+                        <strong>Đặc Thù Cơ Cấu Giá:</strong> Toàn bộ 61 gói dịch vụ đã bao gồm thuế GTGT (VAT). Nhóm sản phẩm Apple (iPhone, MacBook, iPad, Apple Watch) được áp dụng mức giá vốn và giá bán cố định theo từng phân khúc giá máy nhằm tối ưu biên lợi nhuận và đơn giản hóa công tác tư vấn tại siêu thị.
+                    </div>
+                </div>
+
+                <!-- Filter Toolbar -->
+                <div class="filter-toolbar">
+                    <div class="filter-buttons">
+                        <button class="btn-filter active" onclick="filterPackageGroup('all', this)">Tất cả (61 gói)</button>
+                        <button class="btn-filter" onclick="filterPackageGroup('android_phone', this)">📱 ĐT Android (11)</button>
+                        <button class="btn-filter" onclick="filterPackageGroup('iphone', this)">🍏 iPhone (8)</button>
+                        <button class="btn-filter" onclick="filterPackageGroup('laptop', this)">💻 Laptop (11)</button>
+                        <button class="btn-filter" onclick="filterPackageGroup('macbook', this)">💻 MacBook (6)</button>
+                        <button class="btn-filter" onclick="filterPackageGroup('android_tablet', this)">📱 Tablet (11)</button>
+                        <button class="btn-filter" onclick="filterPackageGroup('ipad', this)">🍏 iPad (9)</button>
+                        <button class="btn-filter" onclick="filterPackageGroup('apple_watch', this)">⌚ Apple Watch (5)</button>
+                    </div>
+                    <div class="search-box-wrap">
+                        <i class="fas fa-search" style="color: #94a3b8; font-size: 0.8rem;"></i>
+                        <input type="text" id="pkgSearchInput" placeholder="Tìm tên gói, mức giá..." oninput="filterPackageSearch()">
+                    </div>
+                </div>
+
+                <div style="font-size: 0.78rem; color: #64748b; margin-bottom: 8px; display: flex; justify-content: space-between;">
+                    <span id="pkgCountText">Đang hiển thị <strong>61</strong> / 61 gói dịch vụ</span>
+                    <span>Đơn vị tính: Việt Nam Đồng (VNĐ - Đã gồm VAT)</span>
+                </div>
+
+                <!-- Full 61 Packages Table -->
+                <div class="table-responsive">
+                    <table class="enterprise-table" id="packagesTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%; text-align: center;">STT</th>
+                                <th style="width: 45%;">Tên Gói Dịch Vụ Chuẩn MDM</th>
+                                <th style="width: 15%; text-align: center;">Phân Khúc Giá Máy</th>
+                                <th style="width: 12%; text-align: right;">Giá Vốn Thợ (VAT)</th>
+                                <th style="width: 12%; text-align: right;">Giá Bán Lẻ (VAT)</th>
+                                <th style="width: 11%; text-align: right;">Biên Lợi Nhuận Gộp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">1</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android dưới 3 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">< 3.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">36,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">90,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+54,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">2</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 3-5 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">3.000.000đ - 5.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">116,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">290,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+174,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">3</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 5-7 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">5.000.000đ - 7.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">208,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">520,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+312,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">4</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 7-10 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">7.000.000đ - 10.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">208,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">520,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+312,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">5</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 10-15 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">10.000.000đ - 15.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">282,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">705,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+423,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">6</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 15-20 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">15.000.000đ - 20.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">396,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">990,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+594,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">7</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 20-25 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">20.000.000đ - 25.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">472,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,180,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+708,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">8</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 25-30 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">25.000.000đ - 30.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">586,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,465,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+879,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">9</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 30-40 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">30.000.000đ - 40.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">752,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,880,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+1,128,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">10</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 40-50 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">40.000.000đ - 50.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">942,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">2,355,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+1,413,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_phone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">11</td>
+            <td>
+                <span class="group-pill badge-android">Điện thoại Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Android từ 50-80 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">50.000.000đ - 80.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">1,426,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">3,565,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+2,139,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">12</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop dưới 3 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">< 3.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">112,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">280,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+168,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">13</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 3-5 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">3.000.000đ - 5.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">112,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">280,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+168,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">14</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 5-7 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">5.000.000đ - 7.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">198,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">495,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+297,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">15</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 7-10 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">7.000.000đ - 10.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">16</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 10-15 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">10.000.000đ - 15.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">416,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,040,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+624,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">17</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 15-20 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">15.000.000đ - 20.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">496,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,240,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+744,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">18</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 20-25 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">20.000.000đ - 25.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">614,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,535,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+921,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">19</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 25-30 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">25.000.000đ - 30.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">752,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,880,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+1,128,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">20</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 30-40 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">30.000.000đ - 40.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">952,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">2,380,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+1,428,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">21</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 40-50 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">40.000.000đ - 50.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">1,348,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">3,370,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+2,022,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="laptop">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">22</td>
+            <td>
+                <span class="group-pill badge-laptop">Laptop Windows</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Laptop từ 50-80 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">50.000.000đ - 80.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">1,822,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">4,555,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+2,733,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">23</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet dưới 3 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">< 3.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">36,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">90,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+54,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">24</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 3-5 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">3.000.000đ - 5.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">108,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">270,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+162,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">25</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 5-7 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">5.000.000đ - 7.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">198,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">495,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+297,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">26</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 7-10 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">7.000.000đ - 10.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">198,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">495,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+297,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">27</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 10-15 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">10.000.000đ - 15.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">268,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">670,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+402,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">28</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 15-20 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">15.000.000đ - 20.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">376,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">940,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+564,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">29</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 20-25 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">20.000.000đ - 25.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">448,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,120,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+672,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">30</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 25-30 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">25.000.000đ - 30.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">556,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,390,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+834,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">31</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 30-40 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">30.000.000đ - 40.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">712,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,780,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+1,068,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">32</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 40-50 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">40.000.000đ - 50.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">892,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">2,230,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+1,338,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="android_tablet">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">33</td>
+            <td>
+                <span class="group-pill badge-tablet">Tablet Android</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Tablet từ 50-80 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">50.000.000đ - 80.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">1,902,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">4,755,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+2,853,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">34</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 7-10 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">7.000.000đ - 10.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">35</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 10-15 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">10.000.000đ - 15.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">36</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 15-20 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">15.000.000đ - 20.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">37</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 20-25 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">20.000.000đ - 25.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">38</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 25-30 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">25.000.000đ - 30.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">39</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 30-40 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">30.000.000đ - 40.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">40</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 40-50 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">40.000.000đ - 50.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="iphone">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">41</td>
+            <td>
+                <span class="group-pill badge-apple">iPhone</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Điện thoại Iphone từ 50-80 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">50.000.000đ - 80.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">260,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">650,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+390,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="macbook">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">42</td>
+            <td>
+                <span class="group-pill badge-apple">MacBook</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho MacBook từ 15-20 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">15.000.000đ - 20.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">436,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,090,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+654,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="macbook">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">43</td>
+            <td>
+                <span class="group-pill badge-apple">MacBook</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho MacBook từ 20-25 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">20.000.000đ - 25.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">436,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,090,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+654,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="macbook">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">44</td>
+            <td>
+                <span class="group-pill badge-apple">MacBook</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho MacBook từ 25-30 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">25.000.000đ - 30.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">436,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,090,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+654,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="macbook">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">45</td>
+            <td>
+                <span class="group-pill badge-apple">MacBook</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho MacBook từ 30-40 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">30.000.000đ - 40.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">550,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,375,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+825,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="macbook">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">46</td>
+            <td>
+                <span class="group-pill badge-apple">MacBook</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho MacBook từ 40-50 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">40.000.000đ - 50.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">550,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,375,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+825,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="macbook">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">47</td>
+            <td>
+                <span class="group-pill badge-apple">MacBook</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho MacBook từ 50-80 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">50.000.000đ - 80.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">792,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">1,980,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+1,188,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">48</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 5-7 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">5.000.000đ - 7.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">49</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 7-10 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">7.000.000đ - 10.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">50</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 10-15 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">10.000.000đ - 15.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">51</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 15-20 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">15.000.000đ - 20.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">52</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 20-25 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">20.000.000đ - 25.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">53</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 25-30 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">25.000.000đ - 30.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">54</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 30-40 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">30.000.000đ - 40.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">55</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 40-50 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">40.000.000đ - 50.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="ipad">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">56</td>
+            <td>
+                <span class="group-pill badge-apple">iPad</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho iPad từ 50-80 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">50.000.000đ - 80.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">278,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">695,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+417,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="apple_watch">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">57</td>
+            <td>
+                <span class="group-pill badge-watch">Apple Watch</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Apple Watch từ 5-7 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">5.000.000đ - 7.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">178,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">445,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+267,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="apple_watch">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">58</td>
+            <td>
+                <span class="group-pill badge-watch">Apple Watch</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Apple Watch từ 7-10 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">7.000.000đ - 10.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">178,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">445,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+267,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="apple_watch">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">59</td>
+            <td>
+                <span class="group-pill badge-watch">Apple Watch</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Apple Watch từ 10-15 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">10.000.000đ - 15.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">178,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">445,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+267,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="apple_watch">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">60</td>
+            <td>
+                <span class="group-pill badge-watch">Apple Watch</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Apple Watch từ 15-20 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">15.000.000đ - 20.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">178,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">445,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+267,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+
+        <tr class="pkg-row" data-group="apple_watch">
+            <td style="text-align: center; font-weight: 700; color: #64748b;">61</td>
+            <td>
+                <span class="group-pill badge-watch">Apple Watch</span>
+                <div style="font-weight: 700; color: #0f172a; margin-top: 4px;">ĐSD_Dịch vụ Bảo hành mở rộng 1 năm Thợ ĐMX cho Apple Watch từ 20-25 triệu</div>
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600; color: #475569;">20.000.000đ - 25.000.000đ</td>
+            <td class="num-col" style="color: #64748b; font-family: monospace;">178,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #0284c7; font-family: monospace;">445,000 đ</td>
+            <td class="num-col" style="font-weight: 700; color: #15803d; font-family: monospace;">+267,000 đ</td>
+            <td class="num-col" style="font-weight: 800; color: #16a34a; font-family: monospace;">60.0%</td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 6: KÍCH HOẠT SMS 2733 & CHỨNG NHẬN ĐIỆN TỬ -->
+        <!-- ========================================================================= -->
+        <section id="tab-activation-cert" class="tab-panel">
+            <div class="enterprise-card">
+                <div class="card-header-bar">
+                    <div class="card-header-title">
+                        <i class="fas fa-mobile-screen"></i>
+                        6. QUY CHUẨN SMS BRANDNAME 2733 & GIẤY CHỨNG NHẬN DỊCH VỤ ĐIỆN TỬ
+                    </div>
+                    <span class="group-pill badge-apple">PHÁP CHẾ DUYỆT: UYÊN</span>
+                </div>
+
+                <div class="grid-2col" style="margin-bottom: 1.5rem;">
+                    
+                    <!-- SMS Brandname Specification -->
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: 10px;">
+                            <i class="fas fa-comment-sms text-sky-600"></i> Quy Chuẩn Mẫu Tin Nhắn SMS Brandname
+                        </h4>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; font-size: 0.83rem;">
+                            <p style="margin-bottom: 6px;"><strong>Mã Template Hệ Thống:</strong> <code>2733</code></p>
+                            <p style="margin-bottom: 6px;"><strong>Brandname Gửi Đi:</strong> <code>Tho DienmayXanh</code></p>
+                            <p style="margin-bottom: 6px;"><strong>Tên Mẫu:</strong> <code>Kích hoạt gói BH mở rộng</code></p>
+                            <p style="margin-bottom: 12px;"><strong>Đơn vị phê duyệt:</strong> Ban Chăm sóc Khách hàng & Pháp chế MWG</p>
+
+                            <!-- Interactive SMS Mockup -->
+                            <div class="sms-mockup">
+                                <div class="sms-mockup-header">
+                                    <span><i class="fas fa-chevron-left"></i> Messages</span>
+                                    <span>Tho DienmayXanh</span>
+                                    <span><i class="fas fa-info-circle"></i></span>
+                                </div>
+                                <div class="sms-bubble">
+                                    <strong>Kich hoat goi Bao hanh mo rong thanh cong</strong><br><br>
+                                    Thong bao Anh/Chi [Ma Khach hang: KH882910] da kich hoat thanh cong goi Bao hanh mo rong cho [iPhone 15 Pro Max 256GB] - [IMEI: 356891028371920] tai Tho Dien may XANH.<br><br>
+                                    Chi tiet quyen loi & giay chung nhan dien tu xem tai: <br>
+                                    <span style="color: #0284c7; text-decoration: underline; font-weight: 700;">https://dmx.vn/gcn2733</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Giấy Chứng Nhận Dịch Vụ Điện Tử Mẫu (Live Demo) -->
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h4 style="font-size: 1rem; font-weight: 800; color: #0f172a; margin: 0;">
+                                <i class="fas fa-award text-amber-600"></i> Giấy Chứng Nhận Điện Tử Thực Tế (Live Demo)
+                            </h4>
+                            <span class="group-pill badge-android">LINK TRỰC TUYẾN CHÍNH THỨC</span>
+                        </div>
+
+                        <div class="cert-viewer-card">
+                            <p style="font-size: 0.82rem; color: #475569; margin-bottom: 10px; line-height: 1.5;">
+                                <strong>Đường dẫn tra cứu công khai:</strong> <br>
+                                <a href="https://www.dienmayxanh.com/chung-nhan-dich-vu?certid=3198315&key=70119c2ba148382de302c35f034fd2ff1a693a09bd112c1c41e77e743812d8b1&utm" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: 700; word-break: break-all; font-size: 0.78rem;">
+                                    <i class="fas fa-arrow-up-right-from-square"></i> dienmayxanh.com/chung-nhan-dich-vu?certid=3198315...
+                                </a>
+                            </p>
+
+                            <!-- Live Certificate Preview Box with Zoom click -->
+                            <div class="cert-preview-box" onclick="openCertModal()" title="Nhấp vào đây để phóng to toàn màn hình">
+                                <img src="assets/chung_nhan_dich_vu_mau.png" alt="Chứng nhận dịch vụ mẫu Điện Máy Xanh" onerror="this.onerror=null; this.src='https://cdnv2.tgdd.vn/erppos/Logo/ServicePackage/Logo_AppThoDMX.jpg';">
+                                <div class="cert-overlay-badge">
+                                    <i class="fas fa-magnifying-glass-plus"></i>
+                                    <span>Nhấp để phóng to / Xem chi tiết</span>
+                                </div>
+                            </div>
+
+                            <!-- Certificate Summary Table -->
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-top: 12px; font-size: 0.78rem;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                                    <div><span style="color: #64748b;">Số GCN:</span> <strong style="color: #0284c7; font-family: monospace;">SCERT2609053198315</strong></div>
+                                    <div><span style="color: #64748b;">Trạng thái:</span> <span class="group-pill badge-android" style="font-size: 0.7rem; padding: 2px 8px;">Có hiệu lực</span></div>
+                                    <div><span style="color: #64748b;">Khách hàng:</span> <strong>Trần Thị Thanh Huyền</strong></div>
+                                    <div><span style="color: #64748b;">Điện thoại:</span> <strong style="font-family: monospace;">078xxxx416</strong></div>
+                                    <div style="grid-column: span 2;"><span style="color: #64748b;">Thiết bị:</span> <strong>Máy lạnh AQUA AQA-RUV13RB5 (Serial: AAD459E0022N2S3JL73J)</strong></div>
+                                    <div><span style="color: #64748b;">Phí dịch vụ:</span> <strong style="color: #0284c7;">550.000 đ (VAT)</strong></div>
+                                    <div><span style="color: #64748b;">Hạn mức tối đa:</span> <strong style="color: #15803d;">11.490.000 đ</strong></div>
+                                    <div style="grid-column: span 2;"><span style="color: #64748b;">Thời hạn bảo vệ:</span> <strong style="color: #d97706;">31/08/2028 - 31/08/2029 (+12 Tháng)</strong></div>
+                                </div>
+                                <div style="color: #64748b; font-size: 0.72rem; border-top: 1px dashed #cbd5e1; padding-top: 6px;">
+                                    <i class="fas fa-building text-sky-600"></i> <strong>Đơn vị phát hành:</strong> CÔNG TY CỔ PHẦN THỢ ĐIỆN MÁY XANH · Hotline: 1900 232 463
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
+                                <button type="button" onclick="openCertModal()" style="background: #0284c7; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                    <i class="fas fa-expand"></i> Phóng Lớn Xem
+                                </button>
+                                <a href="https://www.dienmayxanh.com/chung-nhan-dich-vu?certid=3198315&key=70119c2ba148382de302c35f034fd2ff1a693a09bd112c1c41e77e743812d8b1&utm" target="_blank" rel="noopener noreferrer" style="background: #f1f5f9; color: #0f172a; border: 1.5px solid #cbd5e1; padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                    <i class="fas fa-arrow-up-right-from-square text-sky-600"></i> Mở Web ĐMX
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+</div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ======
+        <!-- ========================================================================= -->
+        <!-- TAB 7: TÀI CHÍNH, DOANH THU CHƯA THỰC HIỆN & BẢNG TRA CỨU MÃ CHỨNG TỪ ERP -->
+        <!-- ========================================================================= -->
+        <section id="tab-accounting-ksnb" class="tab-panel">
+            <div class="enterprise-card">
+                <div class="card-header-bar">
+                    <div class="card-header-title">
+                        <i class="fas fa-scale-balanced"></i>
+                        7. CƠ CHẾ TÀI CHÍNH, DOANH THU CHƯA THỰC HIỆN & BẢNG TRA CỨU MÃ CHỨNG TỪ ERP
+                    </div>
+                    <span class="group-pill badge-android">HẠCH TOÁN PHÁP NHÂN CÔNG TY SỐ 10</span>
+                </div>
+
+                <!-- 8.1: Cơ Chế Doanh Thu Chưa Thực Hiện & Phân Bổ Ngân Sách -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.25rem 0 0.75rem;">
+                    📊 7.1 Cơ Chế Doanh Thu Chưa Thực Hiện (Deferred Revenue) & Phân Bổ Ngân Sách Hàng Tháng / Năm
+                </h3>
+                <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                    <p style="font-size: 0.85rem; color: #334155; line-height: 1.6; margin-bottom: 12px;">
+                        Theo chuẩn mực kế toán tài chính tập đoàn MWG, doanh thu từ các gói bảo hành mở rộng là <strong>Doanh thu nhận trước / Doanh thu chưa thực hiện</strong>. Toàn bộ dòng tiền và chi phí được hạch toán theo cơ chế phân bổ ngân sách:
+                    </p>
+                    <div class="grid-2col" style="margin-bottom: 1rem;">
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <div style="font-weight: 800; color: #0284c7; font-size: 0.9rem; margin-bottom: 6px;">
+                                <i class="fas fa-hourglass-half"></i> Giai Đoạn Chờ (Máy Còn Bảo Hành Hãng)
+                            </div>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.5; margin: 0;">
+                                Trong khoảng thời gian máy còn bảo hành chính hãng (từ ngày bán gói đến hết tháng thứ 12 hoặc 18): <strong>Không phân bổ ngân sách</strong> và <strong>không hạch toán doanh thu thực hiện</strong>. Toàn bộ giá trị nằm trên tài khoản Doanh thu chưa thực hiện của ĐMX và Thợ ĐMX.
+                            </p>
+                        </div>
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <div style="font-weight: 800; color: #15803d; font-size: 0.9rem; margin-bottom: 6px;">
+                                <i class="fas fa-calendar-check"></i> Giai Đoạn Có Hiệu Lực (Tháng Thứ 13 Trở Đi)
+                            </div>
+                            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.5; margin: 0;">
+                                Khi gói bắt đầu có hiệu lực (ngày sau khi hết BH hãng): Thợ ĐMX bắt đầu phân bổ ngân sách và <strong>xuất hóa đơn dịch vụ (bill doanh thu) hàng tháng sang ĐMX</strong>. ĐMX ghi nhận doanh thu thực hiện và hạch toán chi phí dịch vụ từ Thợ ĐMX tương ứng.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Công Thức Phân Bổ Ngân Sách -->
+                    <div style="background: #eff6ff; border: 1px dashed #93c5fd; border-radius: 8px; padding: 1rem; font-size: 0.82rem; color: #1e40af;">
+                        <div style="font-weight: 800; margin-bottom: 6px;">📐 Công Thức Phân Bổ Ngân Sách Hàng Năm (Thực tế áp dụng gói 12 tháng):</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: monospace; font-size: 0.85rem;">
+                            <div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #bfdbfe;">
+                                <strong>Ngân sách phân bổ năm ĐMX:</strong><br>
+                                = (Giá bán lẻ ĐMX / 1 năm) = 100% Giá Bán Lẻ
+                            </div>
+                            <div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #bfdbfe;">
+                                <strong>Ngân sách phân bổ năm Thợ ĐMX:</strong><br>
+                                = (Giá vốn Thợ ĐMX / 1 năm) = 100% Giá Vốn
+                            </div>
+                        </div>
+                        <div style="margin-top: 8px; font-size: 0.78rem; color: #1e3a8a;">
+                            <i class="fas fa-circle-exclamation"></i> <strong>Quy tắc chi phí thực tế:</strong> Thợ ĐMX <strong>không bill chi phí sửa chữa từng đợt sang ĐMX</strong>. Thợ ĐMX tự chịu trách nhiệm hạch toán chi phí linh kiện và tiền công KTV, đồng thời hệ thống tự động trừ lùi hạn mức bồi thường của CNDV khách hàng tương ứng với giá trị chi phí phát sinh.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8.2: Bảng Tra Cứu Toàn Diện Mã Chứng Từ ERP & Nghiệp Vụ -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.5rem 0 0.75rem;">
+                    📑 7.2 Bảng Tra Cứu Toàn Diện Mã Chứng Từ ERP & Hình Thức Hạch Toán
+                </h3>
+                <div class="table-responsive" style="margin-bottom: 1.5rem;">
+                    <table class="enterprise-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 14%;">Mã Chứng Từ ERP</th>
+                                <th style="width: 22%;">Tên Nghiệp Vụ Hệ Thống</th>
+                                <th style="width: 18%;">Hệ Thống Thực Hiện</th>
+                                <th style="width: 32%;">Mục Đích & Cơ Chế Hạch Toán</th>
+                                <th style="width: 14%;">Ghi Chú KSNB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code style="font-weight: 800; color: #0284c7;">YCX 100 / HTX 3</code></td>
+                                <td class="font-bold text-slate-800">Xuất bán lẻ tại siêu thị</td>
+                                <td><span class="group-pill badge-android">POS ERP</span></td>
+                                <td style="font-size: 0.8rem;">Xuất bán gói dịch vụ cho khách hàng lẻ tại quầy siêu thị, ghi nhận doanh thu chưa thực hiện.</td>
+                                <td style="font-size: 0.78rem; color: #15803d; font-weight: 700;">Hợp lệ khi T &gt; 30 ngày</td>
+                            </tr>
+                            <tr>
+                                <td><code style="font-weight: 800; color: #0f766e;">YCX 684 / HTX 4403</code></td>
+                                <td class="font-bold text-slate-800">Thu hộ dịch vụ Thợ ĐMX</td>
+                                <td><span class="group-pill badge-apple">POS ERP / TOOL</span></td>
+                                <td style="font-size: 0.8rem;">Ghi nhận khoản tiền siêu thị thu hộ từ khách hàng chuyển tiếp về tài khoản Công ty Số 10 (Thợ ĐMX).</td>
+                                <td style="font-size: 0.78rem; color: #0f766e; font-weight: 700;">Đúng KVG 680</td>
+                            </tr>
+                            <tr>
+                                <td><code style="font-weight: 800; color: #b45309;">YCX 706</code></td>
+                                <td class="font-bold text-slate-800">Cung ứng dịch vụ ngân sách</td>
+                                <td><span class="group-pill badge-tablet">ERP TÀI CHÍNH</span></td>
+                                <td style="font-size: 0.8rem;">Thợ ĐMX xuất hóa đơn dịch vụ hàng tháng sang ĐMX để kết chuyển doanh thu chưa thực hiện thành doanh thu thực tế.</td>
+                                <td style="font-size: 0.78rem; color: #b45309; font-weight: 700;">Phân bổ tháng 13+</td>
+                            </tr>
+                            <tr>
+                                <td><code style="font-weight: 800; color: #15803d;">YCX 613</code></td>
+                                <td class="font-bold text-slate-800">Xuất quyền lợi đổi hàng</td>
+                                <td><span class="group-pill badge-android">ERP / WMS</span></td>
+                                <td style="font-size: 0.8rem;">Đơn hàng xuất bồi thường đổi thiết bị mới cho khách hàng khi thiết bị cũ không sửa chữa được.</td>
+                                <td style="font-size: 0.78rem; color: #15803d; font-weight: 700;">Duy nhất 01 lần</td>
+                            </tr>
+                            <tr>
+                                <td><code style="font-weight: 800; color: #0284c7;">HTC 2926</code></td>
+                                <td class="font-bold text-slate-800">Chi từ hạn mức gói dịch vụ</td>
+                                <td><span class="group-pill badge-apple">ERP POS</span></td>
+                                <td style="font-size: 0.8rem;">Hình thức chi tiền dùng hạn mức CNDV còn lại của khách để cấn trừ tiền mua máy đổi theo đơn YCX 613.</td>
+                                <td style="font-size: 0.78rem; color: #0284c7; font-weight: 700;">Hạn mức &le; Niêm yết</td>
+                            </tr>
+                            <tr>
+                                <td><code style="font-weight: 800; color: #dc2626;">TÌNH TRẠNG 161</code></td>
+                                <td class="font-bold text-slate-800">Lỗi NSX áp dụng gói BH</td>
+                                <td><span class="group-pill badge-watch">CRM / WMS</span></td>
+                                <td style="font-size: 0.8rem;">Trạng thái phân loại lỗi kỹ thuật phần cứng do NSX đủ điều kiện kích hoạt bảo hành hoặc đổi máy theo gói ĐSD.</td>
+                                <td style="font-size: 0.78rem; color: #dc2626; font-weight: 700;">Loại trừ vô nước/vỡ</td>
+                            </tr>
+                            <tr>
+                                <td><code style="font-weight: 800; color: #64748b;">YCX 101 / 102</code></td>
+                                <td class="font-bold text-slate-800">Nhập trả hủy gói dịch vụ</td>
+                                <td><span class="group-pill badge-neutral">POS ERP</span></td>
+                                <td style="font-size: 0.8rem;">Hủy hóa đơn và hoàn tiền 100% cho khách hàng khi nhập trả trong vòng 30 ngày (chưa có claim bồi thường).</td>
+                                <td style="font-size: 0.78rem; color: #64748b; font-weight: 700;">Thời hạn &le; 30 ngày</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 8.3: 4 Khóa Kiểm Soát Nội Bộ KSNB -->
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 1.5rem 0 0.75rem;">
+                    🔒 7.3 4 Khóa Kiểm Soát Nội Bộ Phòng Chống Thất Thoát Rủi Ro (KSNB Gates)
+                </h3>
+                <div class="grid-4col">
+                    <div class="feature-box" style="border-top: 4px solid #0284c7;">
+                        <h4><i class="fas fa-lock text-sky-600"></i> Khóa Chặn 1: Ngày Bán</h4>
+                        <p><strong>Khóa Ngày Bán:</strong> Tự động chặn nếu bán trước ngày thứ 31, hoặc bán khi thời hạn BH hãng còn lại dưới 30 ngày.</p>
+                    </div>
+                    <div class="feature-box" style="border-top: 4px solid #10b981;">
+                        <h4><i class="fas fa-lock text-emerald-600"></i> Khóa Chặn 2: Trùng IMEI</h4>
+                        <p><strong>Khóa Trùng IMEI:</strong> 1 IMEI chỉ được liên kết 01 gói duy nhất. Chặn bán đè gói cũ hoặc trục lợi gói dịch vụ.</p>
+                    </div>
+                    <div class="feature-box" style="border-top: 4px solid #f59e0b;">
+                        <h4><i class="fas fa-lock text-amber-600"></i> Khóa Chặn 3: Nhập Trả</h4>
+                        <p><strong>Khóa Nhập Trả:</strong> Chặn hoàn tiền tự động nếu hệ thống đã ghi nhận chi phí bồi thường hoặc quá hạn 30 ngày.</p>
+                    </div>
+                    <div class="feature-box" style="border-top: 4px solid #ef4444;">
+                        <h4><i class="fas fa-lock text-rose-600"></i> Khóa Chặn 4: Hậu Kiểm</h4>
+                        <p><strong>Hậu Kiểm Dữ Liệu:</strong> Đối soát chéo IMEI xuất bán với lịch sử tiếp nhận bảo hành hãng để phát hiện máy lỗi trước khi mua.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Universal Floating Quick Navigation Dock -->
+    <div class="floating-nav-dock" id="floatingNavDock" aria-label="Điều hướng nhanh">
+        <a href="index.html" class="dock-btn dock-btn-parent" title="Về thư mục Thợ ĐMX">
+            <i class="fas fa-folder"></i> <span>Thợ ĐMX</span>
+        </a>
+        <a href="../index.html" class="dock-btn dock-btn-home" title="Về Cổng KSNB">
+            <i class="fas fa-home"></i> <span>Trang chủ</span>
+        </a>
+        <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="dock-btn dock-btn-top" title="Cuộn lên đầu trang">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <strong>KSNB Automation · Ban Kiểm Soát Nội Bộ & Pháp Chế MWG</strong><br>
+                <span>Quy trình Bán gói Bảo hành Mở rộng Sản phẩm đã sử dụng (Thợ ĐMX_ĐSD) · Ban hành năm 2026</span>
+            </div>
+            <div style="text-align: right;">
+                <span>Hệ thống vận hành: ERP POS · Tool Multicat · Cổng Airtime · CRM · Masterdata MDM</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Tab switching logic
+        function switchAppTab(tabId) {
+            // Hide all tab panels
+            document.querySelectorAll('.tab-panel').forEach(function(panel) {
+                panel.classList.remove('active');
+            });
+
+            // Remove active on all buttons
+            document.querySelectorAll('.tab-btn-hero, .tab-btn-mod').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+
+            // Show target panel
+            var target = document.getElementById(tabId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Highlight active buttons
+            document.querySelectorAll('.tab-btn-hero, .tab-btn-mod').forEach(function(btn) {
+                var attr = btn.getAttribute('onclick') || '';
+                if (attr.indexOf(tabId) !== -1) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Scroll to nav top smoothly
+            var nav = document.querySelector('.tab-nav-wrapper');
+            if (nav) {
+                var navTop = nav.getBoundingClientRect().top + window.pageYOffset - 10;
+                window.scrollTo({ top: navTop, behavior: 'smooth' });
+            }
+        }
+
+        // Filter package table by device group
+        function filterPackageGroup(group, btnElement) {
+            // Update active button state
+            document.querySelectorAll('.btn-filter').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            // Reset search box
+            var searchInput = document.getElementById('pkgSearchInput');
+            if (searchInput) searchInput.value = '';
+
+            var rows = document.querySelectorAll('#packagesTable tbody tr.pkg-row');
+            var visibleCount = 0;
+
+            rows.forEach(function(row) {
+                var rowGroup = row.getAttribute('data-group');
+                if (group === 'all' || rowGroup === group) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updateCountText(visibleCount);
+        }
+
+        // Filter package table by search text
+        function filterPackageSearch() {
+            var query = document.getElementById('pkgSearchInput').value.toLowerCase().trim();
+            var rows = document.querySelectorAll('#packagesTable tbody tr.pkg-row');
+            var visibleCount = 0;
+
+            // Reset active category filter to all
+            document.querySelectorAll('.btn-filter').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            var firstFilter = document.querySelector('.btn-filter');
+            if (firstFilter) firstFilter.classList.add('active');
+
+            rows.forEach(function(row) {
+                var text = row.innerText.toLowerCase();
+                if (!query || text.indexOf(query) !== -1) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updateCountText(visibleCount);
+        }
+
+        function updateCountText(count) {
+            var countEl = document.getElementById('pkgCountText');
+            if (countEl) {
+                countEl.innerHTML = 'Đang hiển thị <strong>' + count + '</strong> / 61 gói dịch vụ';
+            }
+        }
+
+        // =========================================================================
+        // Certificate Modal Lightbox Logic
+        // =========================================================================
+        var currentZoom = 1.0;
+
+        function openCertModal() {
+            var modal = document.getElementById('certModal');
+            if (modal) {
+                modal.classList.add('active');
+                currentZoom = 1.0;
+                applyZoom();
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeCertModal() {
+            var modal = document.getElementById('certModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function handleBackdropClick(e) {
+            if (e.target.id === 'certModal') {
+                closeCertModal();
+            }
+        }
+
+        function zoomCert(delta, isReset) {
+            if (isReset) {
+                currentZoom = 1.0;
+            } else if (delta < 1) {
+                currentZoom = Math.max(0.6, currentZoom - 0.2);
+            } else {
+                currentZoom = Math.min(2.5, currentZoom + 0.2);
+            }
+            applyZoom();
+        }
+
+        function applyZoom() {
+            var wrap = document.getElementById('certImgWrap');
+            var txt = document.getElementById('zoomLevelText');
+            if (wrap) {
+                wrap.style.transform = 'scale(' + currentZoom + ')';
+                wrap.style.transformOrigin = 'top center';
+            }
+            if (txt) {
+                txt.textContent = Math.round(currentZoom * 100) + '%';
+            }
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCertModal();
+            }
+        });
+    </script>
+
+    <!-- Fullscreen Certificate Lightbox Modal -->
+    <div class="cert-modal-backdrop" id="certModal" onclick="handleBackdropClick(event)">
+        <div class="cert-modal-container" onclick="event.stopPropagation()">
+            <div class="cert-modal-header">
+                <div class="cert-modal-title">
+                    <i class="fas fa-certificate text-sky-400"></i>
+                    <span>Chứng Nhận Dịch Vụ Mẫu · SCERT2609053198315</span>
+                </div>
+                <div class="cert-modal-controls">
+                    <button class="cert-ctrl-btn" onclick="zoomCert(0.2)" title="Thu nhỏ (-)">
+                        <i class="fas fa-magnifying-glass-minus"></i>
+                    </button>
+                    <button class="cert-ctrl-btn" onclick="zoomCert(1.0, true)" title="Đặt lại 100%">
+                        <span id="zoomLevelText">100%</span>
+                    </button>
+                    <button class="cert-ctrl-btn" onclick="zoomCert(1.2)" title="Phóng to (+)">
+                        <i class="fas fa-magnifying-glass-plus"></i>
+                    </button>
+                    <a href="https://www.dienmayxanh.com/chung-nhan-dich-vu?certid=3198315&key=70119c2ba148382de302c35f034fd2ff1a693a09bd112c1c41e77e743812d8b1&utm" target="_blank" rel="noopener noreferrer" class="cert-ctrl-btn" style="background: #0284c7; text-decoration: none;" title="Mở trang web gốc trên tab mới">
+                        <i class="fas fa-arrow-up-right-from-square"></i> Mở Web ĐMX
+                    </a>
+                    <button class="cert-ctrl-btn btn-close-modal" onclick="closeCertModal()" title="Đóng (ESC)">
+                        <i class="fas fa-xmark"></i> Đóng
+                    </button>
+                </div>
+            </div>
+            <div class="cert-modal-body" id="certModalBody">
+                <div class="cert-modal-img-wrap" id="certImgWrap">
+                    <img src="assets/chung_nhan_dich_vu_mau.png" alt="Chứng nhận dịch vụ mẫu Điện Máy Xanh" class="cert-modal-img" id="certModalImg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="/auth-bar.js" defer></script>
+</body>
+</html>

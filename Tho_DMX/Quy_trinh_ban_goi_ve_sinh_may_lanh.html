@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy trình Bán gói Vệ sinh Máy lạnh | Thợ Điện Máy XANH</title>
+<style>
+:root {
+  --primary: #0a276f;
+  --primary-gradient: linear-gradient(135deg, #071c52 0%, #0f399b 100%);
+  --blue: #12358f;
+  --blue-light: #edf4ff;
+  --blue-border: #bfdbfe;
+  --accent: #0284c7;
+  --yellow: #ffd200;
+  --yellow-light: #fffdf0;
+  --green: #059669;
+  --green-light: #ecfdf5;
+  --green-border: #a7f3d0;
+  --red: #dc2626;
+  --red-light: #fef2f2;
+  --red-border: #fecaca;
+  --orange: #d97706;
+  --orange-light: #fffbeb;
+  --orange-border: #fde68a;
+  --purple: #7c3aed;
+  --purple-light: #f5f3ff;
+  --purple-border: #ddd6fe;
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --line: #e2e8f0;
+  --shadow-sm: 0 2px 8px rgba(10, 39, 111, 0.04);
+  --shadow-md: 0 6px 20px rgba(10, 39, 111, 0.08);
+  --shadow-lg: 0 12px 32px rgba(10, 39, 111, 0.12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* ================= HEADER ================= */
+.header {
+  background: var(--primary-gradient);
+  color: #fff; padding: 28px 24px 42px;
+  box-shadow: var(--shadow-md);
+}
+.header-inner { max-width: 1200px; margin: auto; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; margin-bottom: 20px;
+}
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 800; font-size: 18px; text-decoration: none; color: #fff;
+}
+.logo-mark {
+  width: 40px; height: 40px; border-radius: 12px; background: var(--yellow);
+  color: var(--primary); display: grid; place-items: center; font-weight: 900;
+  box-shadow: 0 3px 10px rgba(255, 210, 0, 0.35);
+}
+.badge-header {
+  padding: 6px 14px; border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px; font-size: 12.5px; color: #f0f6ff;
+  background: rgba(255,255,255,0.1); font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.breadcrumb {
+  font-size: 13px; color: #cbd5e1; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
+.breadcrumb a:hover { text-decoration: underline; color: var(--yellow); }
+.hero h1 { font-size: 32px; line-height: 1.25; margin: 0 0 10px; font-weight: 800; letter-spacing: -0.5px; }
+.hero p { max-width: 900px; color: #e2e8f0; margin: 0; font-size: 15px; font-weight: 400; }
+
+/* ================= QUICK STATS BANNER ================= */
+.stats-banner {
+  max-width: 1200px; margin: -24px auto 0; padding: 0 24px; position: relative; z-index: 10;
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+.stat-card {
+  background: #fff; border: 1.5px solid var(--line); border-radius: 16px;
+  padding: 16px 20px; box-shadow: var(--shadow-md);
+  display: flex; align-items: center; gap: 16px;
+  transition: all 0.25s ease;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--blue-border); }
+.stat-icon {
+  width: 48px; height: 48px; border-radius: 12px; display: grid;
+  place-items: center; font-size: 22px; flex-shrink: 0;
+}
+.stat-icon.blue { background: var(--blue-light); color: var(--blue); }
+.stat-icon.green { background: var(--green-light); color: var(--green); }
+.stat-icon.orange { background: var(--orange-light); color: var(--orange); }
+.stat-icon.purple { background: var(--purple-light); color: var(--purple); }
+.stat-info .stat-val { font-size: 17px; font-weight: 800; color: var(--text); line-height: 1.2; }
+.stat-info .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
+
+/* ================= MAIN CONTAINER ================= */
+.container { max-width: 1200px; margin: 32px auto 60px; padding: 0 24px; }
+
+/* ================= SEARCH FILTER BOX ================= */
+.search-filter-box {
+  background: #fff; border: 1.5px solid var(--line); border-radius: 16px;
+  padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center;
+  gap: 14px; box-shadow: var(--shadow-sm);
+}
+.search-filter-box input {
+  flex: 1; border: none; outline: none; font-size: 14.5px; color: var(--text);
+  font-family: inherit;
+}
+.search-filter-box span { color: var(--text-muted); font-size: 18px; }
+
+/* ================= STAGE NAVIGATION TABS (GRID FULL WRAP) ================= */
+.stage-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  padding: 4px 0 20px;
+  margin-bottom: 28px;
+  border-bottom: 2px solid var(--line);
+}
+.stage-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  user-select: none;
+}
+.stage-tab:hover {
+  background: var(--blue-light);
+  border-color: var(--blue-border);
+  color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.stage-tab.active {
+  background: var(--primary-gradient);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 6px 20px rgba(10, 39, 111, 0.28);
+}
+.stage-tab .tab-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+.stage-tab.active .tab-num {
+  background: var(--yellow);
+  color: var(--primary);
+  font-weight: 900;
+}
+
+/* ================= STAGE PANELS ================= */
+.stage-panel { display: none; }
+.stage-panel.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ================= CONTENT CARDS ================= */
+.section-card {
+  background: var(--card); border: 1.5px solid var(--line);
+  border-radius: 20px; padding: 28px 32px; box-shadow: var(--shadow-md);
+  margin-bottom: 26px;
+}
+.section-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 22px; padding-bottom: 16px;
+  border-bottom: 1.5px solid #edf2f7; flex-wrap: wrap;
+}
+.section-card-title {
+  display: flex; align-items: center; gap: 12px; font-size: 21px;
+  font-weight: 800; color: var(--primary); margin: 0;
+}
+.section-card-tag {
+  display: inline-block; font-size: 11.5px; font-weight: 800;
+  padding: 5px 12px; border-radius: 999px; text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tag-blue { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-border); }
+.tag-green { background: var(--green-light); color: var(--green); border: 1px solid var(--green-border); }
+.tag-orange { background: var(--orange-light); color: var(--orange); border: 1px solid var(--orange-border); }
+.tag-red { background: var(--red-light); color: var(--red); border: 1px solid var(--red-border); }
+.tag-purple { background: var(--purple-light); color: var(--purple); border: 1px solid var(--purple-border); }
+
+/* ================= STEP TIMELINE & FLOW ================= */
+.flow-steps {
+  display: flex; flex-direction: column; gap: 22px;
+}
+.flow-step {
+  display: flex; gap: 20px; position: relative;
+}
+.flow-step::before {
+  content: ""; position: absolute; left: 21px; top: 46px; bottom: -22px;
+  width: 2px; background: #cbd5e1;
+}
+.flow-step:last-child::before { display: none; }
+.step-num {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--blue-light);
+  color: var(--primary); font-weight: 900; font-size: 16px; display: grid;
+  place-items: center; flex-shrink: 0; border: 2.5px solid var(--primary);
+  z-index: 2; box-shadow: 0 3px 10px rgba(10, 39, 111, 0.15);
+}
+.step-content {
+  flex: 1; background: #f8faff; border: 1.5px solid var(--line);
+  border-radius: 16px; padding: 20px 24px; box-shadow: var(--shadow-sm);
+}
+.step-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.step-title {
+  font-size: 16.5px; font-weight: 800; color: var(--text); margin: 0;
+}
+.step-actor-badge {
+  font-size: 11.5px; font-weight: 700; padding: 4px 10px;
+  border-radius: 8px; background: #e2e8f0; color: #334155;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.step-system-badge {
+  font-size: 11.5px; font-weight: 700; padding: 4px 10px;
+  border-radius: 8px; background: #dbeafe; color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+.step-body { font-size: 14px; color: #334155; line-height: 1.6; }
+.step-body ul { margin: 8px 0; padding-left: 20px; }
+.step-body li { margin-bottom: 5px; }
+
+/* ================= RULE BOXES ================= */
+.rule-box {
+  margin-top: 12px;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-left: 5px solid var(--blue);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #1e293b;
+}
+.rule-box strong { color: var(--primary); }
+
+/* ================= TABLES ================= */
+.table-responsive { overflow-x: auto; margin: 18px 0; border-radius: 14px; border: 1.5px solid var(--line); box-shadow: var(--shadow-sm); }
+.custom-table {
+  width: 100%; border-collapse: collapse; font-size: 13.5px; text-align: left;
+  background: #fff; min-width: 680px;
+}
+.custom-table th {
+  background: #f8fafc; color: var(--primary); font-weight: 800;
+  padding: 14px 18px; border-bottom: 2px solid var(--line);
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.4px;
+}
+.custom-table td {
+  padding: 13px 18px; border-bottom: 1px solid #edf2f7; vertical-align: middle;
+}
+.custom-table tr:last-child td { border-bottom: none; }
+.custom-table tr:hover td { background: #f8faff; }
+.code-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: #eef2ff; color: #1e40af; padding: 3px 8px;
+  border-radius: 6px; font-size: 12px; font-weight: 700;
+  border: 1px solid #c7d2fe; display: inline-block;
+}
+
+/* ================= CALLOUT BOXES ================= */
+.callout {
+  padding: 18px 22px; border-radius: 14px; margin: 18px 0;
+  display: flex; gap: 16px; font-size: 14px; line-height: 1.6;
+  box-shadow: var(--shadow-sm);
+}
+.callout-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
+.callout-info { background: var(--blue-light); border: 1.5px solid var(--blue-border); color: #1e3a8a; }
+.callout-warning { background: var(--orange-light); border: 1.5px solid var(--orange-border); color: #92400e; }
+.callout-danger { background: var(--red-light); border: 1.5px solid var(--red-border); color: #991b1b; }
+.callout-success { background: var(--green-light); border: 1.5px solid var(--green-border); color: #065f46; }
+
+/* ================= PRIORITY GRID ================= */
+.priority-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px; margin: 16px 0;
+}
+.priority-card {
+  background: #fff; border: 1.5px solid var(--line); border-radius: 14px;
+  padding: 16px 18px; border-left: 5px solid var(--blue);
+  box-shadow: var(--shadow-sm);
+}
+.priority-card.p1 { border-left-color: var(--green); background: var(--green-light); }
+.priority-card.p2 { border-left-color: var(--accent); background: #f0f9ff; }
+.priority-card.p3 { border-left-color: var(--orange); background: var(--orange-light); }
+.priority-card.p4 { border-left-color: var(--purple); background: var(--purple-light); }
+.priority-title { font-weight: 800; font-size: 14px; margin-bottom: 4px; color: var(--text); }
+.priority-desc { font-size: 12.5px; color: var(--text-muted); }
+
+/* ================= UNIVERSAL FLOATING NAVIGATION DOCK ================= */
+.floating-nav-dock {
+  position: fixed; bottom: 16px; right: 16px; left: auto !important;
+  z-index: 99999; display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); padding: 4px 6px; border-radius: 999px;
+  border: 1px solid rgba(18, 53, 143, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease; max-width: calc(100vw - 32px); width: auto;
+}
+.floating-nav-dock:hover {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 24px rgba(18, 53, 143, 0.22);
+}
+.dock-btn {
+  display: inline-flex; align-items: center; gap: 5px; text-decoration: none;
+  font-size: 12px; font-weight: 700; padding: 6px 11px; border-radius: 999px;
+  border: none; cursor: pointer; transition: all 0.15s ease;
+  font-family: inherit; white-space: nowrap; line-height: 1.2;
+}
+.dock-btn-parent {
+  background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0;
+}
+.dock-btn-parent:hover { background: #dcfce7; color: #14532d; border-color: #86efac; }
+.dock-btn-home {
+  background: linear-gradient(135deg, #12358f, #0a276f); color: #ffffff;
+  box-shadow: 0 2px 6px rgba(18, 53, 143, 0.2);
+}
+.dock-btn-home:hover {
+  background: linear-gradient(135deg, #0a276f, #061948); color: #ffd200;
+}
+.dock-btn-top {
+  width: 28px; height: 28px; min-width: 28px; padding: 0;
+  justify-content: center; background: #f1f5f9; color: #475569;
+  border: 1px solid #cbd5e1;
+}
+.dock-btn-top:hover { background: #12358f; color: #ffffff; border-color: #12358f; }
+.dock-icon { font-size: 13px; line-height: 1; }
+
+/* ================= UNIVERSAL BOTTOM NAVIGATION CARD ================= */
+.bottom-nav-card {
+  margin: 40px auto 24px; background: linear-gradient(145deg, #ffffff, #f8faff);
+  border: 1.5px solid #dce3ee; border-radius: 20px; padding: 24px 28px;
+  box-shadow: 0 8px 28px rgba(18, 53, 143, 0.06); text-align: center;
+  box-sizing: border-box;
+}
+.bottom-nav-header { margin-bottom: 20px; }
+.bnav-badge {
+  display: inline-block; background: #edf3ff; color: #12358f; font-size: 11px;
+  font-weight: 800; letter-spacing: 0.5px; padding: 3px 10px;
+  border-radius: 999px; margin-bottom: 6px; border: 1px solid #b8c7e8;
+}
+.bnav-title { font-size: 18px; font-weight: 800; color: #12358f; margin-bottom: 4px; }
+.bnav-desc { font-size: 13px; color: #667085; }
+.bottom-nav-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px; max-width: 820px; margin: 0 auto;
+}
+.bnav-action {
+  display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+  border-radius: 14px; text-decoration: none; font-family: inherit;
+  border: 1.5px solid #dce3ee; background: #ffffff; cursor: pointer;
+  transition: all 0.2s ease; text-align: left;
+}
+.bnav-action:hover {
+  transform: translateY(-2px); box-shadow: 0 8px 20px rgba(18, 53, 143, 0.1);
+}
+.bnav-icon-circle {
+  width: 40px; height: 40px; border-radius: 10px; display: grid;
+  place-items: center; font-size: 18px; flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.bnav-action:hover .bnav-icon-circle { transform: scale(1.1); }
+.bnav-action-text { display: flex; flex-direction: column; }
+.bnav-sub {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.3px; color: #667085;
+}
+.bnav-main { font-size: 14px; font-weight: 700; color: #172033; }
+.bnav-action-parent { border-color: #bbf7d0; background: #f0fdf4; }
+.bnav-action-parent .bnav-icon-circle { background: #dcfce7; color: #166534; }
+.bnav-action-parent:hover { border-color: #166534; background: #dcfce7; }
+.bnav-action-parent:hover .bnav-main { color: #166534; }
+.bnav-action-home { border-color: #ffd200; background: #fffdf0; }
+.bnav-action-home .bnav-icon-circle { background: #12358f; color: #ffd200; }
+.bnav-action-home:hover { border-color: #12358f; background: #edf3ff; }
+.bnav-action-home:hover .bnav-main { color: #12358f; }
+.bnav-action-top { border-color: #dce3ee; background: #ffffff; }
+.bnav-action-top .bnav-icon-circle { background: #f3f6fb; color: #475467; }
+.bnav-action-top:hover { border-color: #667085; background: #f8faff; }
+.bnav-action-top:hover .bnav-main { color: #12358f; }
+
+.footer {
+  border-top: 1px solid var(--line); background: #fff;
+  padding: 22px 24px; color: var(--text-muted); font-size: 12px;
+}
+.footer-inner {
+  max-width: 1200px; margin: auto; display: flex;
+  justify-content: space-between; gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .header { padding: 22px 18px 36px; }
+  .hero h1 { font-size: 25px; }
+  .section-card { padding: 20px 18px; }
+  .stage-nav { grid-template-columns: 1fr; gap: 8px; }
+  .stage-tab { padding: 12px 16px; }
+  .flow-step { gap: 14px; }
+  .step-num { width: 36px; height: 36px; font-size: 14px; }
+  .floating-nav-dock { bottom: 12px; right: 12px; gap: 4px; padding: 3px 5px; }
+  .dock-btn { padding: 5px 9px; font-size: 11.5px; }
+  .dock-btn-top { width: 26px; height: 26px; min-width: 26px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="topbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">KS</div>
+        <div>KSNB Automation</div>
+      </a>
+      <div class="badge-header">THỢ ĐIỆN MÁY XANH · QUY TRÌNH BÁN DỊCH VỤ</div>
+    </div>
+
+    <div class="breadcrumb">
+      <a href="../index.html">Trang chủ</a> <span>/</span>
+      <a href="index.html">Thợ ĐMX</a> <span>/</span>
+      <span>Quy trình bán gói Vệ sinh máy lạnh</span>
+    </div>
+
+    <div class="hero">
+      <h1>Quy trình Bán gói Vệ sinh Máy lạnh</h1>
+      <p>Hướng dẫn chi tiết toàn trình từ Khai báo ERP, Tư vấn & Lấy tải tại Siêu thị ĐMX, Thu tiền liên thông, Điều phối KTV thực thi đến Xử lý hoàn hủy trên hệ thống POS/TMS/Airtime.</p>
+    </div>
+  </div>
+</header>
+
+<!-- QUICK STATS BANNER -->
+<div class="stats-banner">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue">🏷️</div>
+      <div class="stat-info">
+        <div class="stat-val">2037548000001</div>
+        <div class="stat-lbl">Mã SP thu hộ ĐMX (ERP)</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">📜</div>
+      <div class="stat-info">
+        <div class="stat-val">11217 · 200.000đ</div>
+        <div class="stat-lbl">Chương trình BH / Niêm yết</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon orange">🚚</div>
+      <div class="stat-info">
+        <div class="stat-val">HTG: 281</div>
+        <div class="stat-lbl">Giao & Tải phục vụ tại nhà</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon purple">🏢</div>
+      <div class="stat-info">
+        <div class="stat-val">NCC: 53796</div>
+        <div class="stat-lbl">CP Thợ Điện Máy XANH</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+  <!-- SEARCH & QUICK FILTER -->
+  <div class="search-filter-box">
+    <span>⌕</span>
+    <input type="text" id="quickSearchInput" placeholder="Tìm kiếm nhanh: mã nghiệp vụ, loại phiếu, API lấy tải, điều kiện hủy đơn..." onkeyup="filterContent()">
+  </div>
+
+  <!-- STAGE TABS (GRID FULL WRAP) -->
+  <div class="stage-nav">
+    <div class="stage-tab active" onclick="switchStage('stage1', this)">
+      <span class="tab-num">1</span> 01. Khai báo hệ thống (Master Data)
+    </div>
+    <div class="stage-tab" onclick="switchStage('stage2', this)">
+      <span class="tab-num">2</span> 02. Tư vấn & Lấy tải Thợ ĐMX
+    </div>
+    <div class="stage-tab" onclick="switchStage('stage3', this)">
+      <span class="tab-num">3</span> 03. Thu tiền & Tạo đơn liên thông
+    </div>
+    <div class="stage-tab" onclick="switchStage('stage4', this)">
+      <span class="tab-num">4</span> 04. Thợ thực thi dịch vụ tại nhà
+    </div>
+    <div class="stage-tab" onclick="switchStage('stage5', this)">
+      <span class="tab-num">5</span> 05. Xử lý Hủy đơn & Hoàn tiền
+    </div>
+  </div>
+
+  <!-- ==================== GIAI ĐOẠN 01 ==================== -->
+  <div id="stage1" class="stage-panel active">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h2 class="section-card-title">
+          <span>⚙️</span> Giai đoạn 01: Chuẩn bị & Khai báo Hệ thống (Master Data)
+        </h2>
+        <span class="section-card-tag tag-blue">ERP & TMS MASTER DATA</span>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">💡</div>
+        <div>
+          <strong>Phạm vi triển khai:</strong> Áp dụng cho gói dịch vụ Vệ sinh máy lạnh treo tường. Hệ thống ERP của Điện Máy Xanh và TMS Thợ ĐMX được mapping dữ liệu đồng bộ trước khi mở bán tại Siêu thị.
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Hạng mục khai báo</th>
+              <th style="width: 20%;">Hệ thống cấu hình</th>
+              <th style="width: 30%;">Thông số cấu hình chuẩn</th>
+              <th style="width: 25%;">Ghi chú & Quy tắc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sản phẩm thu hộ ĐMX</strong></td>
+              <td><span class="code-badge">ERP ĐMX</span></td>
+              <td>Mã SP thu hộ: <span class="code-badge">2037548000001</span></td>
+              <td>Dùng để ghi nhận doanh thu thu hộ trên hệ thống POS Siêu thị.</td>
+            </tr>
+            <tr>
+              <td><strong>Chương trình bảo hiểm ĐMX</strong></td>
+              <td><span class="code-badge">ERP ĐMX</span></td>
+              <td>Mã CTBH: <span class="code-badge">11217</span><br>Giá niêm yết: <strong>200.000 VNĐ</strong></td>
+              <td>Danh sách sản phẩm chính áp dụng được lấy tự động theo CTBH.</td>
+            </tr>
+            <tr>
+              <td><strong>Chương trình Khuyến mãi Thợ</strong></td>
+              <td><span class="code-badge">ERP / TMS Thợ</span></td>
+              <td>Khai báo CTKM giảm giá % đích danh</td>
+              <td>Thợ ĐMX trực tiếp quản trị chính sách giá & khuyến mãi trên mã SP Thợ.</td>
+            </tr>
+            <tr>
+              <td><strong>Giá bán Thợ ĐMX</strong></td>
+              <td><span class="code-badge">TMS Thợ</span></td>
+              <td>Khu vực giá chuẩn Thợ ĐMX</td>
+              <td>Giá bán gói trước VAT & sau KM có VAT.</td>
+            </tr>
+            <tr>
+              <td><strong>Chính sách giao & Tải Thợ</strong></td>
+              <td><span class="code-badge">ERP / Logistics</span></td>
+              <td>Kho CN ĐMX theo SP ĐMX, Kho ĐMX<br>Hình thức giao: <span class="code-badge">281</span></td>
+              <td>Khai báo hạn mức tải phục vụ theo ngày cho từng kho chi nhánh.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== GIAI ĐOẠN 02 ==================== -->
+  <div id="stage2" class="stage-panel">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h2 class="section-card-title">
+          <span>🛒</span> Giai đoạn 02: Tư vấn Bán hàng & Lấy tải Thợ ĐMX tại Siêu thị
+        </h2>
+        <span class="section-card-tag tag-green">POS · CRM · MAP · LOGISTICS</span>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Đăng nhập & Chọn Menu Dịch vụ trên App POS</h3>
+              <div>
+                <span class="step-actor-badge">👤 Nhân viên POS</span>
+                <span class="step-system-badge">App POS Siêu thị</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <ul>
+                <li>Nhân viên đăng nhập vào Kho Login mặc định của Siêu thị ĐMX.</li>
+                <li>Truy cập menu: <strong>Dịch vụ ngành hàng Multicat ➔ Mua Bán Bảo hiểm ➔ Chọn Bảo dưỡng ➔ Chọn Vệ Sinh Máy Lạnh</strong>.</li>
+                <li>Chọn Chương trình bảo hiểm: Mã <span class="code-badge">11217</span>.</li>
+                <li>Chọn mã Sản phẩm Thu hộ: Mặc định <span class="code-badge">2037548000001</span>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">ĐMX gọi API lấy giá gói dịch vụ từ Hệ thống Thợ ĐMX</h3>
+              <div>
+                <span class="step-actor-badge">💻 Hệ thống ĐMX</span>
+                <span class="step-system-badge">API ĐMX ➔ TMS Thợ</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <p><strong>Dữ liệu truyền đi (Input ĐMX):</strong></p>
+              <ul>
+                <li>Mã SP thu hộ: <span class="code-badge">2037548000001</span></li>
+                <li>Hãng sản xuất máy lạnh (Daikin, Panasonic, Casper...)</li>
+                <li>Mã sản phẩm chính (máy lạnh khách đang mua hoặc đang dùng)</li>
+              </ul>
+
+              <p><strong>Logic tính giá của Thợ ĐMX (TMS theo 4 cấp ưu tiên):</strong></p>
+              <div class="priority-grid">
+                <div class="priority-card p1">
+                  <div class="priority-title">Ưu tiên 1: Theo Sản phẩm</div>
+                  <div class="priority-desc">Mapping chính xác 1-1 mã SP ĐMX sang mã SP Thợ.</div>
+                </div>
+                <div class="priority-card p2">
+                  <div class="priority-title">Ưu tiên 2: Nhóm + NSX + Thông số</div>
+                  <div class="priority-desc">Khớp theo nhóm hàng, thương hiệu, thông số & giá niêm yết.</div>
+                </div>
+                <div class="priority-card p3">
+                  <div class="priority-title">Ưu tiên 3: Nhóm + NSX + Giá NY</div>
+                  <div class="priority-desc">Khớp theo thương hiệu và phân khúc giá.</div>
+                </div>
+                <div class="priority-card p4">
+                  <div class="priority-title">Ưu tiên 4: Nhóm hàng + Giá NY</div>
+                  <div class="priority-desc">Khớp chung theo nhóm hàng vệ sinh máy lạnh.</div>
+                </div>
+              </div>
+
+              <div class="callout callout-success">
+                <div class="callout-icon">💰</div>
+                <div>
+                  <strong>Công thức tính số tiền thu hộ:</strong><br>
+                  <code>Số tiền phải thu hộ = Giá bán (Khu vực chuẩn Thợ) - Khuyến mãi giảm giá (% đích danh)</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Xác định Kho xuất & Lấy tải giao hàng (CRM, Map, Logistics)</h3>
+              <div>
+                <span class="step-actor-badge">💻 CRM · Map · Logistics</span>
+                <span class="step-system-badge">HTG: 281</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <ul>
+                <li>Nhân viên POS nhập <strong>Địa chỉ phục vụ của khách hàng</strong>.</li>
+                <li><strong>Hệ thống CRM:</strong> Căn cứ Kho tạo đơn (Kho ĐMX), Mã SP thu hộ, Địa chỉ giao ➔ Xác định Chính sách giao hàng <strong>Hình thức giao <span class="code-badge">281</span></strong>.</li>
+                <li><strong>Hệ thống Bản đồ (Map):</strong> Lấy tọa độ kho và tọa độ nhà khách ➔ Tính cự ly đường bộ từ danh sách kho xuất đến nhà khách.</li>
+                <li><strong>Hệ thống Logistics:</strong> Căn cứ kho xuất và khoảng ngày hẹn ➔ Kiểm tra năng lực tải phục vụ của Thợ ĐMX.</li>
+                <li><strong>Quy tắc chọn kho:</strong> Kho có tải phục vụ <strong>sớm nhất</strong> sẽ được hệ thống tự động chỉ định.</li>
+              </ul>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px;">
+                <div style="background: var(--red-light); border: 1.5px solid var(--red-border); border-radius: 14px; padding: 16px;">
+                  <strong style="color: var(--red);">❌ TH1: Hết tải hoặc Không có tải</strong>
+                  <p style="font-size: 13px; margin: 6px 0 0; color: #7f1d1d;">
+                    - POS hiển thị: <em>"Không có tải Phục vụ"</em>.<br>
+                    - Nhân viên nhắn Line liên hệ Trưởng phòng / Trưởng nhóm Thợ ĐMX để hỗ trợ mở thêm tải hoặc tư vấn khách chọn khung giờ khác.
+                  </p>
+                </div>
+                <div style="background: var(--green-light); border: 1.5px solid var(--green-border); border-radius: 14px; padding: 16px;">
+                  <strong style="color: var(--green);">✅ TH2: Có tải phục vụ</strong>
+                  <p style="font-size: 13px; margin: 6px 0 0; color: #064e3b;">
+                    - POS hiển thị danh sách các khung giờ hẹn giao khả dụng.<br>
+                    - Nhân viên tư vấn và tích chọn thời gian hẹn giao theo yêu cầu của khách hàng.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== GIAI ĐOẠN 03 ==================== -->
+  <div id="stage3" class="stage-panel">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h2 class="section-card-title">
+          <span>💳</span> Giai đoạn 03: Thu tiền & Khởi tạo Đơn hàng liên thông (ĐMX ➔ Thợ)
+        </h2>
+        <span class="section-card-tag tag-purple">POS · AIRTIME · ERP · TMS</span>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">🔒</div>
+        <div>
+          <strong>Quy tắc chốt luồng (Luồng 1):</strong>
+          <br>1. Siêu thị bắt buộc phải <strong>thu đủ 100% tiền của khách</strong> trước khi hoàn tất đơn.
+          <br>2. Sau khi đã thu đủ tiền và gọi sang Thợ tạo đơn thành công, hệ thống <strong>KHÓA quyền hủy trực tiếp SO thu hộ tại Siêu thị</strong> (mọi yêu cầu hủy phải đi qua quy trình kiểm soát tại Giai đoạn 05).
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Hệ thống / Loại chứng từ</th>
+              <th style="width: 35%;">Mã định danh & Tham số kỹ thuật</th>
+              <th style="width: 40%;">Quy tắc hạch toán & Logic liên thông</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Giao dịch Airtime ĐMX</strong></td>
+              <td>
+                - Nhà cung cấp: <span class="code-badge">53796 - CP Thợ ĐMX</span><br>
+                - Loại GD Airtime: <span class="code-badge">2573 - Bán DV VSML Thợ ĐMX</span>
+              </td>
+              <td>Ghi nhận giao dịch đối soát Airtime giữa ĐMX và Thợ. Mã giao dịch này là khóa định danh xuyên suốt đơn hàng.</td>
+            </tr>
+            <tr>
+              <td><strong>Đơn hàng thu hộ ĐMX (SO)</strong></td>
+              <td>
+                - Loại Yêu cầu xuất: <span class="code-badge">684</span><br>
+                - Hình thức xuất: <span class="code-badge">4403</span><br>
+                - Kho tạo = Kho xuất: Kho đăng nhập của User<br>
+                - User xuất: User tạo đơn | User HTGH: <span class="code-badge">Administrator</span>
+              </td>
+              <td>
+                - Giá bán code thu hộ = Giá bán Thợ (sau KM có VAT) - KM của ĐMX.<br>
+                - Giá vốn code thu hộ = Giá bán của Thợ (sau KM có VAT).<br>
+                - Đơn thu hộ <strong>không lưu thông tin hẹn giao</strong> (thông tin hẹn giao do Thợ quản lý).
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Phiếu thu hộ ĐMX</strong></td>
+              <td>
+                - Hình thức thu: <span class="code-badge">3027 - Thu hộ DV BHBD Thợ ĐMX</span><br>
+                - Thu điều chỉnh: <span class="code-badge">3046</span> | Chi điều chỉnh: <span class="code-badge">3047</span><br>
+                - Loại Phiếu biên nhận: <span class="code-badge">37</span>
+              </td>
+              <td>Nội dung phiếu: <code>Thu hộ tiền bán dịch vụ VSML MPX: [Mã PX của SO thu hộ]</code>. Gắn chứng từ liên quan là Mã SO thu hộ.</td>
+            </tr>
+            <tr>
+              <td><strong>Đơn hàng xuất bán Thợ (SO Thợ)</strong></td>
+              <td>
+                - Loại YCX: <span class="code-badge">685 - YCX bán DV BHBD Thợ ĐMX</span><br>
+                - Hình thức xuất: <span class="code-badge">4404 - Xuất bán DV BHBD Thợ ĐMX</span><br>
+                - Kho tạo: <span class="code-badge">6373</span><br>
+                - Kho xuất: Mapping theo Kho điều phối (<span class="code-badge">Loại VĐ 1011</span>)
+              </td>
+              <td>Tạo tự động ngay khi ĐMX gọi sang. Sản phẩm là mã dịch vụ Thợ. User tạo/bán/xuất: <span class="code-badge">Administrator</span>.</td>
+            </tr>
+            <tr>
+              <td><strong>Vận đơn Thợ ĐMX</strong></td>
+              <td>
+                - Loại vận đơn: <span class="code-badge">1011</span><br>
+                - Không phát hành Chứng nhận Dịch vụ<br>
+                - <strong>100% KHÔNG THU TIỀN TẠI NHÀ</strong>
+              </td>
+              <td>Thợ chỉ việc đến nhà phục vụ kỹ thuật theo đúng ngày giờ hẹn, không thu thêm bất kỳ khoản tiền nào của khách cho gói này.</td>
+            </tr>
+            <tr>
+              <td><strong>Phiếu thu tiền Thợ (Để nợ lại)</strong></td>
+              <td>
+                - Loại phiếu: <span class="code-badge">3030 - Thu tiền bán DV BHBD Thợ ĐMX</span><br>
+                - HTTT: <strong>Công nợ chuyển khoản</strong><br>
+                - Bank ID: <span class="code-badge">20980 - Tiền công nợ ĐMX</span>
+              </td>
+              <td>Ghi chú phiếu thu Thợ = <strong>Mã giao dịch Airtime</strong>. Kho thu = Kho của đơn hàng xuất bán dịch vụ.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== GIAI ĐOẠN 04 ==================== -->
+  <div id="stage4" class="stage-panel">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h2 class="section-card-title">
+          <span>🧰</span> Giai đoạn 04: Thợ Thực thi Dịch vụ tại Nhà khách hàng
+        </h2>
+        <span class="section-card-tag tag-green">TMS THỢ · APP THỢ · ERP</span>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Điều phối Thợ ĐMX phân công đơn hàng</h3>
+              <div>
+                <span class="step-actor-badge">👔 Điều phối viên</span>
+                <span class="step-system-badge">TMS Thợ ĐMX</span>
+              </div>
+            </div>
+            <div class="step-body">
+              Hệ thống Điều phối hoặc Trưởng nhóm Thợ thực hiện <strong>Gán Người (Kỹ thuật viên) & Gán Xe</strong> theo khu vực và ca làm việc.
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Kỹ thuật viên tiếp nhận & Di chuyển</h3>
+              <div>
+                <span class="step-actor-badge">👨‍🔧 KTV Thợ ĐMX</span>
+                <span class="step-system-badge">App Thợ ĐMX</span>
+              </div>
+            </div>
+            <div class="step-body">
+              KTV nhận thông báo đơn hàng trên App Thợ ĐMX, liên hệ xác nhận với khách hàng và bấm trạng thái <strong>"Đang di chuyển đến nhà khách"</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Thực hiện vệ sinh máy lạnh & Chụp ảnh đối soát</h3>
+              <div>
+                <span class="step-actor-badge">👨‍🔧 KTV Thợ ĐMX</span>
+                <span class="step-system-badge">Tại nhà khách</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <ul>
+                <li>Kiểm tra vận hành máy lạnh trước khi vệ sinh.</li>
+                <li>Tiến hành tháo lắp, vệ sinh dàn lạnh, dàn nóng, xịt rửa lưới lọc, kiểm tra gas và đường thoát nước.</li>
+                <li><strong>Bắt buộc chụp hình thực tế</strong> trên App: Hình ảnh hiện trạng trước - sau khi làm sạch.</li>
+                <li>Cho khách hàng nghiệm thu và bấm <strong>"Hoàn tất đơn hàng"</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Tự động cập nhật ERP & Hoàn tất giao hàng</h3>
+              <div>
+                <span class="step-actor-badge">💻 Hệ thống TMS</span>
+                <span class="step-system-badge">TMS ➔ ERP</span>
+              </div>
+            </div>
+            <div class="step-body">
+              Hệ thống Thợ gọi API sang ERP:
+              <ul>
+                <li>Cập nhật <strong>Phiếu xuất hàng</strong>: HTX <span class="code-badge">4404</span>, YCX <span class="code-badge">685</span>, Kho tạo = Kho xuất = Kho CN chính Thợ cùng tỉnh.</li>
+                <li>Cập nhật trạng thái <strong>Hoàn tất giao hàng</strong> thành công.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== GIAI ĐOẠN 05 ==================== -->
+  <div id="stage5" class="stage-panel">
+    <div class="section-card">
+      <div class="section-card-header">
+        <h2 class="section-card-title">
+          <span>↩️</span> Giai đoạn 05: Xử lý Yêu cầu Hủy đơn & Hoàn tiền Dịch vụ
+        </h2>
+        <span class="section-card-tag tag-red">TICKET QLST · X-WORK · CHECK ĐIỀU KIỆN THỢ</span>
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Tiếp nhận & Tạo yêu cầu hoàn tiền tại Siêu thị</h3>
+              <div>
+                <span class="step-actor-badge">👤 Thu ngân / POS</span>
+                <span class="step-system-badge">POS Siêu thị</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <ul>
+                <li>Khách hàng liên hệ tổng đài hoặc đến trực tiếp Siêu thị ĐMX yêu cầu hủy dịch vụ.</li>
+                <li>Nhân viên Siêu thị tạo yêu cầu hoàn tiền thu hộ dịch vụ trên App POS.</li>
+                <li><em>Cảnh báo hóa đơn:</em> Nếu đơn thu hộ có xuất hóa đơn GTGT, hệ thống yêu cầu xác nhận KH có biên bản hủy & thu hồi hóa đơn hay không.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Quản lý Siêu thị duyệt Ticket qua App X-Work</h3>
+              <div>
+                <span class="step-actor-badge">👔 Quản lý Siêu thị</span>
+                <span class="step-system-badge">App X-Work</span>
+              </div>
+            </div>
+            <div class="step-body">
+              Hệ thống tự động bắn Ticket xác nhận đến App X-Work của Quản lý Siêu thị. Thời hạn hiệu lực phê duyệt thông thường là <strong>10 phút</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-header">
+              <h3 class="step-title">Kiểm tra điều kiện hủy từ Hệ thống Thợ ĐMX (TMS)</h3>
+              <div>
+                <span class="step-actor-badge">💻 API Check TMS</span>
+                <span class="step-system-badge">3 Kịch bản chặn</span>
+              </div>
+            </div>
+            <div class="step-body">
+              <p>Nhân viên POS bấm <em>"Chuyển thông tin Thợ kiểm tra đủ điều kiện hoàn tiền"</em> (Truyền mã Airtime). Hệ thống TMS Thợ kiểm tra trạng thái Vận đơn thực tế:</p>
+
+              <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 10px;">
+                <div style="background: var(--red-light); border: 2px solid var(--red-border); border-radius: 14px; padding: 16px 20px;">
+                  <div style="font-weight: 800; color: var(--red); font-size: 15px; margin-bottom: 4px;">
+                    🚫 KỊCH BẢN 1: Vận đơn Thợ đã HOÀN TẤT thực thi ➔ TUYỆT ĐỐI KHÔNG CHO HOÀN TIỀN
+                  </div>
+                  <div style="font-size: 13.5px; color: #7f1d1d;">
+                    - POS hiển thị cảnh báo: <strong>"Đơn hàng đã hoàn tất, không được phép hủy"</strong>.<br>
+                    - Hệ thống <strong>khóa hoàn toàn</strong>, không cho phép gửi yêu cầu hủy sang Thợ nữa. Siêu thị thông báo khách hàng dịch vụ đã được thực hiện.
+                  </div>
+                </div>
+
+                <div style="background: var(--orange-light); border: 2px solid var(--orange-border); border-radius: 14px; padding: 16px 20px;">
+                  <div style="font-weight: 800; color: var(--orange); font-size: 15px; margin-bottom: 4px;">
+                    ⚠️ KỊCH BẢN 2: Thợ ĐÃ ĐẾN NHÀ KHÁCH nhưng chưa hoàn tất ➔ TẠM CHẶN HOÀN TIỀN
+                  </div>
+                  <div style="font-size: 13.5px; color: #92400e;">
+                    - POS hiển thị thông báo: <strong>"Đơn hàng đã đến nhà khách, vui lòng liên hệ Quản lý Dịch vụ Thợ ĐMX để xử lý"</strong>.<br>
+                    - Nhân viên Siêu thị liên hệ Quản lý Dịch vụ Thợ để xác minh. Sau khi QLDV Thợ hủy vận đơn trên TMS, Siêu thị mới được bấm gọi lại kiểm tra để hoàn tiền.
+                  </div>
+                </div>
+
+                <div style="background: var(--green-light); border: 2px solid var(--green-border); border-radius: 14px; padding: 16px 20px;">
+                  <div style="font-weight: 800; color: var(--green); font-size: 15px; margin-bottom: 4px;">
+                    ✅ KỊCH BẢN 3: Vận đơn TRƯỚC KHI ĐẾN NHÀ hoặc Vận đơn ĐÃ HỦY ➔ ĐỦ ĐIỀU KIỆN HOÀN TIỀN
+                  </div>
+                  <div style="font-size: 13.5px; color: #064e3b;">
+                    - POS hiển thị: <strong>"Đủ điều kiện hoàn tiền"</strong>.<br>
+                    - Thu ngân Siêu thị thực hiện thao tác chi tiền trả lại cho khách hàng.<br>
+                    - Hình thức chi hoàn tiền: <span class="code-badge">3026 - Chi hoàn tiền cho thu ngân GD lỗi (BHBD Thợ ĐMX)</span> (gắn với thu ĐC <span class="code-badge">3049</span> & chi ĐC <span class="code-badge">3048</span>).<br>
+                    - ĐMX gọi API cập nhật hủy sang Thợ ĐMX ➔ TMS Thợ <strong>tự động hủy SO, hủy Vận đơn và hủy Phiếu thu 3030</strong> liên quan.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== BẢNG TRA CỨU MÃ NGHIỆP VỤ TỔNG HỢP ==================== -->
+  <div class="section-card">
+    <div class="section-card-header">
+      <h2 class="section-card-title">
+        <span>📑</span> Bảng Tra cứu Mã Nghiệp vụ & Chứng từ Toàn trình
+      </h2>
+      <span class="section-card-tag tag-blue">QUICK CHEAT SHEET</span>
+    </div>
+
+    <div class="table-responsive">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Mã / Loại nghiệp vụ</th>
+            <th>Tên gọi chi tiết</th>
+            <th>Hệ thống áp dụng</th>
+            <th>Mục đích sử dụng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="code-badge">2037548000001</span></td>
+            <td>Sản phẩm thu hộ VSML</td>
+            <td>ERP ĐMX / POS</td>
+            <td>Mã sản phẩm thu hộ ghi nhận đơn hàng tại Siêu thị</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">11217</span></td>
+            <td>Chương trình bảo hiểm VSML (200k)</td>
+            <td>ERP ĐMX / POS</td>
+            <td>Chương trình bảo hiểm áp dụng cho bán dịch vụ máy lạnh</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">281</span></td>
+            <td>Hình thức giao phục vụ tại nhà</td>
+            <td>CRM / Logistics</td>
+            <td>Chính sách giao hàng và xác định hạn mức tải KTV Thợ ĐMX</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">2573</span></td>
+            <td>Bán Dịch vụ VSML Thợ ĐMX</td>
+            <td>Airtime / ERP</td>
+            <td>Loại giao dịch Airtime hạch toán trung gian</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">53796</span></td>
+            <td>CP Thợ Điện Máy Xanh</td>
+            <td>Airtime / ERP</td>
+            <td>Mã nhà cung cấp dịch vụ liên kết</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">684</span></td>
+            <td>YCX DV thu hộ BHBD Thợ ĐMX</td>
+            <td>ERP ĐMX</td>
+            <td>Loại Yêu cầu xuất của đơn hàng thu hộ Siêu thị</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">4403</span></td>
+            <td>Xuất DV thu hộ BHBD Thợ ĐMX</td>
+            <td>ERP ĐMX</td>
+            <td>Hình thức xuất của đơn hàng thu hộ Siêu thị</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">685</span></td>
+            <td>YCX bán DV BHBD Thợ ĐMX</td>
+            <td>TMS / ERP Thợ</td>
+            <td>Loại Yêu cầu xuất của đơn hàng xuất bán Thợ ĐMX</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">4404</span></td>
+            <td>Xuất bán DV BHBD Thợ ĐMX</td>
+            <td>TMS / ERP Thợ</td>
+            <td>Hình thức xuất của đơn hàng xuất bán Thợ ĐMX</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">1011</span></td>
+            <td>Vận đơn thực thi dịch vụ Thợ</td>
+            <td>TMS Thợ</td>
+            <td>Loại vận đơn điều phối KTV đi làm tại nhà khách (không thu tiền)</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">3027</span></td>
+            <td>Thu hộ DV BHBD Thợ ĐMX</td>
+            <td>ERP ĐMX</td>
+            <td>Phiếu thu tiền từ khách tại POS (gắn thu ĐC 3046, chi ĐC 3047)</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">3030</span></td>
+            <td>Thu tiền bán DV BHBD Thợ ĐMX</td>
+            <td>ERP Thợ</td>
+            <td>Phiếu thu công nợ chuyển khoản (Bank ID 20980)</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">3026</span></td>
+            <td>Chi hoàn tiền cho thu ngân GD lỗi</td>
+            <td>ERP ĐMX</td>
+            <td>Hình thức chi trả lại tiền cho khách khi hủy đơn thành công</td>
+          </tr>
+          <tr>
+            <td><span class="code-badge">37</span></td>
+            <td>Phiếu biên nhận dịch vụ BHBD</td>
+            <td>ERP ĐMX</td>
+            <td>Loại phiếu biên nhận in cho khách hàng tại Siêu thị</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- UNIVERSAL BOTTOM NAVIGATION CARD -->
+  <div class="bottom-nav-card">
+    <div class="bottom-nav-header">
+      <div class="bnav-badge">HỆ THỐNG ĐIỀU HƯỚNG QUY TRÌNH</div>
+      <div class="bnav-title">Chuyển hướng nhanh & Tài liệu liên quan</div>
+      <div class="bnav-desc">Dễ dàng quay lại danh mục Thợ ĐMX hoặc chuyển đến các quy trình khác</div>
+    </div>
+    <div class="bottom-nav-grid">
+      <a href="index.html" class="bnav-action bnav-action-parent">
+        <div class="bnav-icon-circle">📂</div>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Danh mục cha</span>
+          <span class="bnav-main">Thư mục Thợ ĐMX</span>
+        </div>
+      </a>
+      <a href="../index.html" class="bnav-action bnav-action-home">
+        <div class="bnav-icon-circle">🏠</div>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Cổng quy trình</span>
+          <span class="bnav-main">Trang chủ KSNB</span>
+        </div>
+      </a>
+      <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bnav-action bnav-action-top">
+        <div class="bnav-icon-circle">▲</div>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Cuộn nhanh</span>
+          <span class="bnav-main">Lên đầu trang</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<!-- FLOATING QUICK NAVIGATION DOCK -->
+<div class="floating-nav-dock" id="floatingNavDock" aria-label="Điều hướng nhanh">
+  <a href="index.html" class="dock-btn dock-btn-parent" title="Về danh mục Thợ ĐMX" aria-label="Về danh mục Thợ ĐMX">
+    <span class="dock-icon">📂</span>
+    <span class="dock-text">Thợ ĐMX</span>
+  </a>
+  <a href="../index.html" class="dock-btn dock-btn-home" title="Về Trang chủ" aria-label="Về Trang chủ">
+    <span class="dock-icon">🏠</span>
+    <span class="dock-text">Trang chủ</span>
+  </a>
+  <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="dock-btn dock-btn-top" title="Cuộn lên đầu trang" aria-label="Cuộn lên đầu trang">
+    <span class="dock-icon">▲</span>
+  </button>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>KSNB Automation · Quy trình nghiệp vụ Thợ Điện Máy Xanh</span>
+    <span>Cập nhật theo tài liệu đặc tả hệ thống mới nhất</span>
+  </div>
+</footer>
+
+<script>
+function switchStage(stageId, tabElement) {
+  document.querySelectorAll('.stage-panel').forEach(panel => {
+    panel.classList.remove('active');
+  });
+  document.querySelectorAll('.stage-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  const target = document.getElementById(stageId);
+  if (target) {
+    target.classList.add('active');
+  }
+  if (tabElement) {
+    tabElement.classList.add('active');
+  }
+}
+
+function filterContent() {
+  const q = document.getElementById('quickSearchInput').value.toLowerCase().trim();
+  const tables = document.querySelectorAll('.custom-table');
+  
+  tables.forEach(table => {
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      if (!q || text.includes(q)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+}
+</script>
+
+<script src="/auth-bar.js" defer></script>
+</body>
+</html>

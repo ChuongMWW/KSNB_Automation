@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy trình Rã xác Linh kiện | Thợ Điện Máy XANH</title>
+<style>
+:root {
+  --primary: #0a276f;
+  --primary-gradient: linear-gradient(135deg, #071c52 0%, #0f399b 100%);
+  --blue: #12358f;
+  --blue-light: #edf4ff;
+  --blue-border: #bfdbfe;
+  --accent: #0284c7;
+  --yellow: #ffd200;
+  --yellow-light: #fffdf0;
+  --green: #059669;
+  --green-light: #ecfdf5;
+  --green-border: #a7f3d0;
+  --red: #dc2626;
+  --red-light: #fef2f2;
+  --red-border: #fecaca;
+  --orange: #d97706;
+  --orange-light: #fffbeb;
+  --orange-border: #fde68a;
+  --purple: #7c3aed;
+  --purple-light: #f5f3ff;
+  --purple-border: #ddd6fe;
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --line: #e2e8f0;
+  --shadow-sm: 0 2px 8px rgba(10, 39, 111, 0.04);
+  --shadow-md: 0 6px 20px rgba(10, 39, 111, 0.08);
+  --shadow-lg: 0 12px 32px rgba(10, 39, 111, 0.12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* ================= HEADER ================= */
+.header {
+  background: var(--primary-gradient);
+  color: #fff; padding: 28px 24px 42px;
+  box-shadow: var(--shadow-md);
+}
+.header-inner { max-width: 1200px; margin: auto; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; margin-bottom: 20px;
+}
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 800; font-size: 18px; text-decoration: none; color: #fff;
+}
+.logo-mark {
+  width: 40px; height: 40px; border-radius: 12px; background: var(--yellow);
+  color: var(--primary); display: grid; place-items: center; font-weight: 900;
+  box-shadow: 0 3px 10px rgba(255, 210, 0, 0.35);
+}
+.badge-header {
+  padding: 6px 14px; border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px; font-size: 12.5px; color: #f0f6ff;
+  background: rgba(255,255,255,0.1); font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.breadcrumb {
+  font-size: 13px; color: #cbd5e1; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
+.breadcrumb a:hover { text-decoration: underline; color: var(--yellow); }
+.hero h1 { font-size: 32px; line-height: 1.25; margin: 0 0 10px; font-weight: 800; letter-spacing: -0.5px; }
+.hero p { max-width: 900px; color: #e2e8f0; margin: 0; font-size: 15px; font-weight: 400; }
+
+/* ================= QUICK STATS BANNER ================= */
+.stats-banner {
+  max-width: 1200px; margin: -24px auto 0; padding: 0 24px; position: relative; z-index: 10;
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+.stat-card {
+  background: #fff; border: 1.5px solid var(--line); border-radius: 16px;
+  padding: 16px 20px; box-shadow: var(--shadow-md);
+  display: flex; align-items: center; gap: 16px;
+  transition: all 0.25s ease;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--blue-border); }
+.stat-icon {
+  width: 48px; height: 48px; border-radius: 12px; display: grid;
+  place-items: center; font-size: 22px; flex-shrink: 0;
+}
+.stat-icon.blue { background: var(--blue-light); color: var(--blue); }
+.stat-icon.green { background: var(--green-light); color: var(--green); }
+.stat-icon.orange { background: var(--orange-light); color: var(--orange); }
+.stat-icon.purple { background: var(--purple-light); color: var(--purple); }
+.stat-info .stat-val { font-size: 17px; font-weight: 800; color: var(--text); line-height: 1.2; }
+.stat-info .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
+
+/* ================= MAIN CONTAINER ================= */
+.container { max-width: 1200px; margin: 32px auto 60px; padding: 0 24px; }
+
+/* ================= SEARCH FILTER BOX ================= */
+.search-filter-box {
+  background: #fff; border: 1.5px solid var(--line); border-radius: 16px;
+  padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center;
+  gap: 14px; box-shadow: var(--shadow-sm);
+}
+.search-filter-box input {
+  flex: 1; border: none; outline: none; font-size: 14.5px; color: var(--text);
+  font-family: inherit;
+}
+.search-filter-box span { color: var(--text-muted); font-size: 18px; }
+
+/* ================= STAGE NAVIGATION TABS (FULL WRAP GRID) ================= */
+.stage-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  padding: 4px 0 20px;
+  margin-bottom: 28px;
+  border-bottom: 2px solid var(--line);
+}
+.stage-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  user-select: none;
+}
+.stage-tab:hover {
+  background: var(--blue-light);
+  border-color: var(--blue-border);
+  color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.stage-tab.active {
+  background: var(--primary-gradient);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 6px 20px rgba(10, 39, 111, 0.28);
+}
+.stage-tab .tab-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+.stage-tab.active .tab-num {
+  background: var(--yellow);
+  color: var(--primary);
+  font-weight: 900;
+}
+
+/* ================= STAGE PANELS ================= */
+.stage-panel { display: none; }
+.stage-panel.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ================= CONTENT CARDS ================= */
+.section-card {
+  background: var(--card); border: 1.5px solid var(--line);
+  border-radius: 20px; padding: 28px 32px; box-shadow: var(--shadow-md);
+  margin-bottom: 26px;
+}
+.section-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 22px; padding-bottom: 16px;
+  border-bottom: 1.5px solid #edf2f7; flex-wrap: wrap;
+}
+.section-card-title {
+  display: flex; align-items: center; gap: 12px; font-size: 21px;
+  font-weight: 800; color: var(--primary); margin: 0;
+}
+.section-card-tag {
+  display: inline-block; font-size: 11.5px; font-weight: 800;
+  padding: 5px 12px; border-radius: 999px; text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tag-blue { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-border); }
+.tag-green { background: var(--green-light); color: var(--green); border: 1px solid var(--green-border); }
+.tag-orange { background: var(--orange-light); color: var(--orange); border: 1px solid var(--orange-border); }
+.tag-red { background: var(--red-light); color: var(--red); border: 1px solid var(--red-border); }
+.tag-purple { background: var(--purple-light); color: var(--purple); border: 1px solid var(--purple-border); }
+
+/* ================= STEP TIMELINE & FLOW ================= */
+.flow-steps {
+  display: flex; flex-direction: column; gap: 22px;
+}
+.flow-step {
+  display: flex; gap: 20px; position: relative;
+}
+.flow-step::before {
+  content: ""; position: absolute; left: 21px; top: 46px; bottom: -22px;
+  width: 2px; background: #cbd5e1;
+}
+.flow-step:last-child::before { display: none; }
+.step-num {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--blue-light);
+  color: var(--primary); font-weight: 900; font-size: 16px; display: grid;
+  place-items: center; flex-shrink: 0; border: 2.5px solid var(--primary);
+  z-index: 2; box-shadow: 0 3px 10px rgba(10, 39, 111, 0.15);
+}
+.step-content {
+  flex: 1; background: #f8faff; border: 1.5px solid var(--line);
+  border-radius: 16px; padding: 20px 24px; box-shadow: var(--shadow-sm);
+}
+.step-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.step-title {
+  font-size: 16.5px; font-weight: 800; color: var(--text); margin: 0;
+}
+.step-actor-badge {
+  font-size: 11.5px; font-weight: 700; padding: 4px 10px;
+  border-radius: 8px; background: #e2e8f0; color: #334155;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.step-system-badge {
+  font-size: 11.5px; font-weight: 700; padding: 4px 10px;
+  border-radius: 8px; background: #dbeafe; color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+.step-body { font-size: 14px; color: #334155; line-height: 1.6; }
+.step-body ul { margin: 8px 0; padding-left: 20px; }
+.step-body li { margin-bottom: 5px; }
+
+/* ================= RULE CALLOUT INSIDE STEPS ================= */
+.rule-box {
+  margin-top: 12px;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-left: 5px solid var(--blue);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #1e293b;
+}
+.rule-box strong { color: var(--primary); }
+
+/* ================= TABLES ================= */
+.table-responsive { overflow-x: auto; margin: 18px 0; border-radius: 14px; border: 1.5px solid var(--line); box-shadow: var(--shadow-sm); }
+.custom-table {
+  width: 100%; border-collapse: collapse; font-size: 13.5px; text-align: left;
+  background: #fff; min-width: 680px;
+}
+.custom-table th {
+  background: #f8fafc; color: var(--primary); font-weight: 800;
+  padding: 14px 18px; border-bottom: 2px solid var(--line);
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.4px;
+}
+.custom-table td {
+  padding: 13px 18px; border-bottom: 1px solid #edf2f7; vertical-align: middle;
+}
+.custom-table tr:last-child td { border-bottom: none; }
+.custom-table tr:hover td { background: #f8faff; }
+.code-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: #eef2ff; color: #1e40af; padding: 3px 8px;
+  border-radius: 6px; font-size: 12px; font-weight: 700;
+  border: 1px solid #c7d2fe; display: inline-block;
+}
+
+/* ================= CALLOUT BOXES ================= */
+.callout {
+  padding: 18px 22px; border-radius: 14px; margin: 18px 0;
+  display: flex; gap: 16px; font-size: 14px; line-height: 1.6;
+  box-shadow: var(--shadow-sm);
+}
+.callout-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
+.callout-info { background: var(--blue-light); border: 1.5px solid var(--blue-border); color: #1e3a8a; }
+.callout-warning { background: var(--orange-light); border: 1.5px solid var(--orange-border); color: #92400e; }
+.callout-danger { background: var(--red-light); border: 1.5px solid var(--red-border); color: #991b1b; }
+.callout-success { background: var(--green-light); border: 1.5px solid var(--green-border); color: #065f46; }
+
+/* ================= THRESHOLD CARDS ================= */
+.threshold-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px; margin: 18px 0;
+}
+.threshold-card {
+  border-radius: 16px; padding: 20px 22px; border: 2px solid var(--line);
+  background: #fff; box-shadow: var(--shadow-sm); transition: transform 0.2s ease;
+}
+.threshold-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.threshold-card.green { border-color: var(--green-border); background: var(--green-light); }
+.threshold-card.orange { border-color: var(--orange-border); background: var(--orange-light); }
+.threshold-card.red { border-color: var(--red-border); background: var(--red-light); }
+.threshold-title { font-weight: 800; font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.threshold-card.green .threshold-title { color: #065f46; }
+.threshold-card.orange .threshold-title { color: #92400e; }
+.threshold-card.red .threshold-title { color: #991b1b; }
+.threshold-desc { font-size: 13.5px; color: #334155; line-height: 1.55; }
+
+/* ================= FORMULA DISPLAY BOX ================= */
+.formula-box {
+  background: #0f172a; color: #f8fafc; border-radius: 14px;
+  padding: 16px 20px; margin: 14px 0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13.5px; line-height: 1.6; border: 1px solid #334155;
+}
+.formula-box .highlight { color: #38bdf8; font-weight: 700; }
+.formula-box .param { color: #fde047; }
+
+/* ================= UNIVERSAL FLOATING NAVIGATION DOCK ================= */
+.floating-nav-dock {
+  position: fixed; bottom: 16px; right: 16px; left: auto !important;
+  z-index: 99999; display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); padding: 4px 6px; border-radius: 999px;
+  border: 1px solid rgba(18, 53, 143, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease; max-width: calc(100vw - 32px); width: auto;
+}
+.floating-nav-dock:hover {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 24px rgba(18, 53, 143, 0.22);
+}
+.dock-btn {
+  display: inline-flex; align-items: center; gap: 5px; text-decoration: none;
+  font-size: 12px; font-weight: 700; padding: 6px 11px; border-radius: 999px;
+  border: none; cursor: pointer; transition: all 0.15s ease;
+  font-family: inherit; white-space: nowrap; line-height: 1.2;
+}
+.dock-btn-parent {
+  background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0;
+}
+.dock-btn-parent:hover { background: #dcfce7; color: #14532d; border-color: #86efac; }
+.dock-btn-home {
+  background: linear-gradient(135deg, #12358f, #0a276f); color: #ffffff;
+  box-shadow: 0 2px 6px rgba(18, 53, 143, 0.2);
+}
+.dock-btn-home:hover {
+  background: linear-gradient(135deg, #0a276f, #061948); color: #ffd200;
+}
+.dock-btn-top {
+  width: 28px; height: 28px; min-width: 28px; padding: 0;
+  justify-content: center; background: #f1f5f9; color: #475569;
+  border: 1px solid #cbd5e1;
+}
+.dock-btn-top:hover { background: #12358f; color: #ffffff; border-color: #12358f; }
+.dock-icon { font-size: 13px; line-height: 1; }
+
+/* ================= UNIVERSAL BOTTOM NAVIGATION CARD ================= */
+.bottom-nav-card {
+  margin: 40px auto 24px; background: linear-gradient(145deg, #ffffff, #f8faff);
+  border: 1.5px solid #dce3ee; border-radius: 20px; padding: 24px 28px;
+  box-shadow: 0 8px 28px rgba(18, 53, 143, 0.06); text-align: center;
+  box-sizing: border-box;
+}
+.bottom-nav-header { margin-bottom: 20px; }
+.bnav-badge {
+  display: inline-block; background: #edf3ff; color: #12358f; font-size: 11px;
+  font-weight: 800; letter-spacing: 0.5px; padding: 3px 10px;
+  border-radius: 999px; margin-bottom: 6px; border: 1px solid #b8c7e8;
+}
+.bnav-title { font-size: 18px; font-weight: 800; color: #12358f; margin-bottom: 4px; }
+.bnav-desc { font-size: 13px; color: #667085; }
+.bottom-nav-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px; max-width: 820px; margin: 0 auto;
+}
+.bnav-action {
+  display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+  border-radius: 14px; text-decoration: none; font-family: inherit;
+  border: 1.5px solid #dce3ee; background: #ffffff; cursor: pointer;
+  transition: all 0.2s ease; text-align: left;
+}
+.bnav-action:hover {
+  transform: translateY(-2px); box-shadow: 0 8px 20px rgba(18, 53, 143, 0.1);
+}
+.bnav-icon-circle {
+  width: 40px; height: 40px; border-radius: 10px; display: grid;
+  place-items: center; font-size: 18px; flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.bnav-action:hover .bnav-icon-circle { transform: scale(1.1); }
+.bnav-action-text { display: flex; flex-direction: column; }
+.bnav-sub {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.3px; color: #667085;
+}
+.bnav-main { font-size: 14px; font-weight: 700; color: #172033; }
+.bnav-action-parent { border-color: #bbf7d0; background: #f0fdf4; }
+.bnav-action-parent .bnav-icon-circle { background: #dcfce7; color: #166534; }
+.bnav-action-parent:hover { border-color: #166534; background: #dcfce7; }
+.bnav-action-parent:hover .bnav-main { color: #166534; }
+.bnav-action-home { border-color: #ffd200; background: #fffdf0; }
+.bnav-action-home .bnav-icon-circle { background: #12358f; color: #ffd200; }
+.bnav-action-home:hover { border-color: #12358f; background: #edf3ff; }
+.bnav-action-home:hover .bnav-main { color: #12358f; }
+.bnav-action-top { border-color: #dce3ee; background: #ffffff; }
+.bnav-action-top .bnav-icon-circle { background: #f3f6fb; color: #475467; }
+.bnav-action-top:hover { border-color: #667085; background: #f8faff; }
+.bnav-action-top:hover .bnav-main { color: #12358f; }
+
+.footer {
+  border-top: 1px solid var(--line); background: #fff;
+  padding: 22px 24px; color: var(--text-muted); font-size: 12px;
+}
+.footer-inner {
+  max-width: 1200px; margin: auto; display: flex;
+  justify-content: space-between; gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .header { padding: 22px 18px 36px; }
+  .hero h1 { font-size: 25px; }
+  .section-card { padding: 20px 18px; }
+  .stage-nav { grid-template-columns: 1fr; gap: 8px; }
+  .stage-tab { padding: 12px 16px; }
+  .flow-step { gap: 14px; }
+  .step-num { width: 36px; height: 36px; font-size: 14px; }
+  .floating-nav-dock { bottom: 12px; right: 12px; gap: 4px; padding: 3px 5px; }
+  .dock-btn { padding: 5px 9px; font-size: 11.5px; }
+  .dock-btn-top { width: 26px; height: 26px; min-width: 26px; }
+}
+
+        /* ========================================================================= */
+        /* TAB SYSTEM & IT DOCUMENTATION STYLING */
+        /* ========================================================================= */
+        .ra-xac-tab-nav {
+            display: flex;
+            gap: 8px;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            position: sticky;
+            top: 15px;
+            z-index: 1000;
+        }
+
+        .rx-tab-btn {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid transparent;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.88rem;
+            color: #475569;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .rx-tab-btn:hover {
+            background: #f1f5f9;
+            color: #0284c7;
+        }
+
+        .rx-tab-btn.active {
+            background: #0284c7;
+            color: #ffffff;
+            box-shadow: 0 4px 8px -2px rgba(2, 132, 199, 0.4);
+            border-color: #0284c7;
+        }
+
+        .badge-new-pill {
+            background: #ef4444;
+            color: white;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .rx-tab-panel {
+            display: none;
+            animation: rxFadeIn 0.25s ease-in-out;
+        }
+
+        .rx-tab-panel.active {
+            display: block;
+        }
+
+        @keyframes rxFadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* IT Documentation Styling */
+        .it-header-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+            border: 2px solid #38bdf8;
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .it-section-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .it-section-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #f1f5f9;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Case Cards */
+        .case-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .case-green { border-top: 5px solid #10b981; }
+        .case-amber { border-top: 5px solid #f59e0b; }
+        .case-red { border-top: 5px solid #ef4444; }
+
+        .case-header {
+            padding: 12px 14px 8px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .case-badge {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .case-condition {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .case-desc {
+            padding: 0 14px 8px 14px;
+            font-size: 0.82rem;
+            color: #334155;
+        }
+
+        .case-steps {
+            list-style: none;
+            padding: 0 14px 12px 14px;
+            font-size: 0.78rem;
+            margin: 0;
+        }
+
+        .case-steps li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .case-steps li i {
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Step Walkthrough Block */
+        .it-step-block {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .it-step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .it-step-number {
+            background: #0284c7;
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .it-step-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .it-step-desc {
+            font-size: 0.84rem;
+            color: #475569;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .it-img-container {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .it-ui-img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            cursor: zoom-in;
+            transition: all 0.2s ease;
+            display: block;
+        }
+
+        .it-ui-img:hover {
+            opacity: 0.95;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .it-img-caption {
+            font-size: 0.74rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-top: 6px;
+            padding: 2px 4px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-3px);
+            border-color: #0284c7;
+            box-shadow: 0 6px 12px -2px rgba(2, 132, 199, 0.2);
+        }
+
+        .gallery-thumb {
+            width: 100%;
+            height: 125px;
+            object-fit: cover;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .gallery-info {
+            padding: 8px 10px;
+        }
+
+        .gallery-page-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .gallery-page-title {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        /* Modal Fullscreen Viewer */
+        .rx-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .rx-modal.active {
+            display: flex;
+        }
+
+        .rx-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .rx-modal-close:hover {
+            color: #38bdf8;
+            transform: scale(1.1);
+        }
+
+        .rx-modal-content {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 1100px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        .rx-modal-content img {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            background: #0f172a;
+        }
+
+        .rx-modal-caption {
+            padding: 12px 18px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #0f172a;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .grid-3col { grid-template-columns: 1fr; }
+            .grid-2col { grid-template-columns: 1fr; }
+            .ra-xac-tab-nav { flex-direction: column; }
+        }
+
+    </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="topbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">KS</div>
+        <div>KSNB Automation</div>
+      </a>
+      <div class="badge-header">THỢ ĐIỆN MÁY XANH · QUY TRÌNH NGHIỆP VỤ & TÁC NGHIỆP</div>
+    </div>
+
+    <div class="breadcrumb">
+      <a href="../index.html">Trang chủ</a> <span>/</span>
+      <a href="index.html">Thợ ĐMX</a> <span>/</span>
+      <span>Quy trình Rã xác linh kiện</span>
+    </div>
+
+    <div class="hero">
+      <h1>Quy trình Rã xác Linh kiện Sản phẩm lỗi</h1>
+      <p>Quản lý toàn diện vòng đời chuyển đổi sản phẩm lỗi thành linh kiện thu hồi: Khai báo Master BOM, Lập vận đơn rã xác, Thao tác KTV, Phân bổ giá vốn, Tính tỷ lệ thu hồi, Phê duyệt X-Work và Bàn giao nhập xuất kho.</p>
+    </div>
+  </div>
+</header>
+
+<!-- QUICK STATS BANNER -->
+<div class="stats-banner">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue">📦</div>
+      <div class="stat-info">
+        <div class="stat-val">Công ty Số 10</div>
+        <div class="stat-lbl">Pháp nhân Kho Thợ ĐMX</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">📊</div>
+      <div class="stat-info">
+        <div class="stat-val">≥ 130% : Tự động</div>
+        <div class="stat-lbl">Ngưỡng Phê duyệt thu hồi</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon orange">⏱️</div>
+      <div class="stat-info">
+        <div class="stat-val">Khóa sau 24h</div>
+        <div class="stat-lbl">Hạn mức bàn giao kho KTV</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon purple">🔄</div>
+      <div class="stat-info">
+        <div class="stat-val">HTN: 441 · ERP</div>
+        <div class="stat-lbl">Nhập mua nội bộ / Xuất rã</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <main class="container">
+        
+        <!-- Top Tab Navigation System -->
+        <div class="ra-xac-tab-nav">
+            <button class="rx-tab-btn active" onclick="switchRxTab('tab-business-doc')">
+                <i class="fas fa-file-lines"></i>
+                <span>1. QUY TRÌNH NGHIỆP VỤ (MÔ TẢ VỚI IT)</span>
+            </button>
+            <button class="rx-tab-btn" onclick="switchRxTab('tab-it-doc')">
+                <i class="fas fa-laptop-code"></i>
+                <span>2. TÀI LIỆU TRIỂN KHAI & HƯỚNG DẪN THAO TÁC IT (PDF)</span>
+                <span class="badge-new-pill">Mới cập nhật</span>
+            </button>
+        </div>
+
+
+        <!-- TAB 1: QUY TRÌNH NGHIỆP VỤ (MÔ TẢ VỚI IT) -->
+        <section id="tab-business-doc" class="rx-tab-panel active">
+            
+ SEARCH & QUICK FILTER 
+<div class="search-filter-box">
+<span>⌕</span>
+<input id="quickSearchInput" onkeyup="filterContent()" placeholder="Tìm kiếm nhanh: công thức tính giá vốn, tỷ lệ thu hồi, người duyệt X-Work, phiếu nhập xuất..." type="text"/>
+</div>
+<div class="callout callout-info" style="margin-top: 0;">
+<div class="callout-icon">📌</div>
+<div>
+<strong>Tài liệu nghiệp vụ &amp; Thiết kế hệ thống:</strong> Đây là tài liệu mô tả quy trình nghiệp vụ gửi IT để xây dựng tính năng. <em>(Phần tài liệu triển khai chi tiết của IT sẽ tiếp tục được cập nhật bổ sung sau khi nghiệm thu tính năng).</em>
+</div>
+</div>
+ STAGE TABS (GRID FULL WRAP) 
+<div class="stage-nav">
+<div class="stage-tab active" onclick="switchStage('tabOverview', this)">
+<span class="tab-num">1</span> 01. Tổng quan luồng Thu hồi &amp; Rã xác
+    </div>
+<div class="stage-tab" onclick="switchStage('tabCreateOrder', this)">
+<span class="tab-num">2</span> 02. Tạo Vận đơn Rã xác (ERP/WMS)
+    </div>
+<div class="stage-tab" onclick="switchStage('tabDisassemble', this)">
+<span class="tab-num">3</span> 03. Thao tác Rã xác &amp; Đánh giá (TMS)
+    </div>
+<div class="stage-tab" onclick="switchStage('tabPricingLogic', this)">
+<span class="tab-num">4</span> 04. Logic Giá vốn &amp; Tỷ lệ Thu hồi
+    </div>
+<div class="stage-tab" onclick="switchStage('tabHandoverStock', this)">
+<span class="tab-num">5</span> 05. Bàn giao Linh kiện &amp; Nhập Xuất kho
+    </div>
+<div class="stage-tab" onclick="switchStage('tabMasterData', this)">
+<span class="tab-num">6</span> 06. Master BOM &amp; Đơn giá Thưởng KTV
+    </div>
+</div>
+ ==================== TAB 1: TỔNG QUAN LUỒNG THU HỒI ==================== 
+<div class="stage-panel active" id="tabOverview">
+<div class="section-card">
+<div class="section-card-header">
+<h2 class="section-card-title">
+<span>🔄</span> 1. Tổng quan Quy trình Thu hồi &amp; Rã xác Sản phẩm lỗi
+        </h2>
+<span class="section-card-tag tag-blue">SIÊU THỊ ➔ KHO TCC ➔ THỢ ĐMX</span>
+</div>
+<div class="callout callout-info">
+<div class="callout-icon">🎯</div>
+<div>
+<strong>Mục đích cốt lõi của quy trình:</strong> Quản lý việc chuyển đổi một sản phẩm lỗi thành nhiều linh kiện nhằm: (1) Thu hồi linh kiện còn sử dụng được; (2) Quản lý đầy đủ tồn kho linh kiện; (3) Phân bổ chính xác giá vốn; (4) Theo dõi hiệu quả thu hồi theo từng Model, Hãng và Kỹ thuật viên.
+        </div>
+</div>
+<div class="table-responsive">
+<table class="custom-table">
+<thead>
+<tr>
+<th style="width: 8%;">Bước</th>
+<th style="width: 18%;">Đơn vị thực hiện</th>
+<th style="width: 44%;">Nội dung công việc</th>
+<th style="width: 15%;">Hệ thống</th>
+<th style="width: 15%;">Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><span class="step-actor-badge">🏪 Siêu thị ĐMX</span></td>
+<td>Tiếp nhận thu cũ đổi mới từ khách hàng.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><span class="step-actor-badge">🏪 Siêu thị ĐMX</span></td>
+<td>Phân loại sản phẩm thu hồi.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><span class="step-actor-badge">🏪 Siêu thị ĐMX</span></td>
+<td>Nếu đủ điều kiện bán Đã sử dụng (ĐSD) ➔ Giữ lại siêu thị để bán.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><span class="step-actor-badge">🏪 Siêu thị ĐMX</span></td>
+<td>Nếu không đủ điều kiện bán ➔ Chuyển về <strong>Kho TCC</strong>.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><span class="step-actor-badge">🏬 Kho TCC</span></td>
+<td>Kiểm tra và phân loại sản phẩm.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><span class="step-actor-badge">🏬 Kho TCC</span></td>
+<td>Có thể tự sửa thì sửa; nếu không thì chuyển Hãng sửa chữa.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td><span class="step-actor-badge">🏬 Kho TCC</span></td>
+<td>Tổng hợp chi phí sửa chữa gửi Ngành hàng đánh giá.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td><span class="step-actor-badge">👔 Ngành hàng</span></td>
+<td>Ra quyết định phê duyệt sửa hoặc không sửa.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td><span class="step-actor-badge">👔 Ngành hàng</span></td>
+<td>Nếu không sửa ➔ Thống nhất bán xác máy cho <strong>Thợ ĐMX</strong>.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td><span class="step-actor-badge">⚡ Thợ ĐMX</span></td>
+<td>Nhập mua sản phẩm về kho và chuẩn bị thực hiện rã xác.</td>
+<td><span class="code-badge">ERP</span></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5; border-color:#a7f3d0;">Đã có</span></td>
+</tr>
+<tr style="background:#fefce8;">
+<td><strong>11</strong></td>
+<td><span class="step-actor-badge">⚡ Thợ ĐMX</span></td>
+<td>Chuyển thông tin kho hiện tại của Jobcard từ kho ĐMX sang <strong>kho Thợ ĐMX</strong>.</td>
+<td><span class="code-badge">WMS</span></td>
+<td><span class="code-badge" style="color:#dc2626; background:#fef2f2; border-color:#fecaca;">Cần xây mới</span></td>
+</tr>
+<tr style="background:#fefce8;">
+<td><strong>12</strong></td>
+<td><span class="step-actor-badge">⚡ Thợ ĐMX</span></td>
+<td>Tiến hành rã xác sản phẩm lỗi, đánh giá &amp; nhập kho linh kiện thành phẩm.</td>
+<td><span class="code-badge">TMS / WMS / Logistics</span></td>
+<td><span class="code-badge" style="color:#dc2626; background:#fef2f2; border-color:#fecaca;">Cần xây mới</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+ ==================== TAB 2: TẠO VẬN ĐƠN RÃ XÁC ==================== 
+<div class="stage-panel" id="tabCreateOrder">
+<div class="section-card">
+<div class="section-card-header">
+<h2 class="section-card-title">
+<span>📋</span> 2. Quy trình Hình thành Vận đơn Rã xác
+        </h2>
+<span class="section-card-tag tag-purple">ERP · WMS KIỂM SOÁT</span>
+</div>
+<div class="flow-steps">
+<div class="flow-step">
+<div class="step-num">1</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Nhân viên quét/nhập Jobcard cần rã xác</h3>
+<div>
+<span class="step-actor-badge">👤 Nhân viên rã xác</span>
+<span class="step-system-badge">ERP / WMS</span>
+</div>
+</div>
+<div class="step-body">
+              Nhân viên chọn chức năng <strong>"Tạo vận đơn rã xác"</strong> trên hệ thống và quét mã Jobcard. Hệ thống tiếp nhận thông tin Jobcard để kiểm tra các điều kiện tiên quyết.
+            </div>
+</div>
+</div>
+<div class="flow-step">
+<div class="step-num">2</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Hệ thống kiểm tra 4 điều kiện ràng buộc chặt chẽ (Rules)</h3>
+<div>
+<span class="step-actor-badge">💻 Hệ thống</span>
+<span class="step-system-badge">System Validation</span>
+</div>
+</div>
+<div class="step-body">
+<div class="rule-box" style="margin-bottom: 8px;">
+<strong>Rule 1 (Pháp nhân công ty):</strong> Kho lưu giữ Jobcard bắt buộc phải thuộc kho pháp nhân <strong>Công ty Số 10</strong> (Thợ ĐMX).
+              </div>
+<div class="rule-box" style="margin-bottom: 8px;">
+<strong>Rule 2 (Tồn kho &amp; Phiếu nhập):</strong> Sản phẩm bắt buộc phải còn tồn kho trên ERP. Hệ thống xét đích danh <strong>IMEI</strong> để lấy Phiếu Nhập gần nhất với <strong>Hình thức nhập = 441 (Nhập mua công ty nội bộ)</strong>.
+              </div>
+<div class="rule-box" style="margin-bottom: 8px;">
+<strong>Rule 3 (Phân quyền Kho):</strong> User đăng nhập thao tác phải thuộc đúng kho đang quản lý Jobcard trên WMS.
+              </div>
+<div class="rule-box">
+<strong>Rule 4 (Chống trùng Vận đơn):</strong> Một Jobcard chỉ được phép tồn tại duy nhất <strong>01 vận đơn rã xác</strong> (ở trạng thái chưa hủy &amp; Chờ duyệt / Duyệt đồng ý). Tuyệt đối không cho phép tạo khi Jobcard đã hoàn tất hoặc đang rã xác.
+              </div>
+</div>
+</div>
+</div>
+<div class="flow-step">
+<div class="step-num">3</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Sinh Vận đơn Rã xác &amp; Cập nhật trạng thái Jobcard</h3>
+<div>
+<span class="step-actor-badge">💻 Hệ thống</span>
+<span class="step-system-badge">ERP Kết quả</span>
+</div>
+</div>
+<div class="step-body">
+              Khi thỏa mãn toàn bộ 4 điều kiện:
+              <ul>
+<li>Hệ thống tự động sinh <strong>Vận đơn rã xác</strong> mới.</li>
+<li>Cập nhật trạng thái Jobcard sang <strong>"Chờ rã xác"</strong>. Jobcard sẵn sàng cho KTV tiếp nhận thực hiện.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+ ==================== TAB 3: THAO TÁC RÃ XÁC & ĐÁNH GIÁ ==================== 
+<div class="stage-panel" id="tabDisassemble">
+<div class="section-card">
+<div class="section-card-header">
+<h2 class="section-card-title">
+<span>🛠️</span> 3. Quy trình Thực hiện Rã xác &amp; Đánh giá Linh kiện
+        </h2>
+<span class="section-card-tag tag-green">APP TMS · KỸ THUẬT VIÊN</span>
+</div>
+<div class="flow-steps">
+<div class="flow-step">
+<div class="step-num">1</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Tiếp nhận sản phẩm tại Kho TCC</h3>
+<div>
+<span class="step-actor-badge">📦 Kho TCC</span>
+<span class="step-system-badge">Offline Check</span>
+</div>
+</div>
+<div class="step-body">
+              Siêu thị/Kho chuyển sản phẩm lỗi kèm Jobcard về Kho TCC. Nhân viên kho tiếp nhận, kiểm tra đối soát IMEI, Model, Jobcard và điều kiện được phép rã xác.
+            </div>
+</div>
+</div>
+<div class="flow-step">
+<div class="step-num">2</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">KTV quét Jobcard bắt đầu rã xác &amp; Chạy chẩn đoán</h3>
+<div>
+<span class="step-actor-badge">👤 Kỹ thuật viên</span>
+<span class="step-system-badge">App TMS</span>
+</div>
+</div>
+<div class="step-body">
+<ul>
+<li>KTV quét Jobcard trên App TMS để bắt đầu. Hệ thống load danh sách linh kiện tiêu chuẩn theo Model từ <strong>Master Rã xác</strong>.</li>
+<li><em>Lưu ý nghiệp vụ:</em> Đối với các sản phẩm Apple, KTV thực hiện <strong>Chạy chẩn đoán</strong> trước khi tháo rời máy.</li>
+<li>Bấm "Bắt đầu rã xác" ➔ Hệ thống ghi nhận thời gian bắt đầu và User KTV thực hiện.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="flow-step">
+<div class="step-num">3</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Đánh giá tình trạng linh kiện &amp; Nhập IMEI xác</h3>
+<div>
+<span class="step-actor-badge">👤 Kỹ thuật viên</span>
+<span class="step-system-badge">Checklist TMS</span>
+</div>
+</div>
+<div class="step-body">
+<ul>
+<li>KTV tháo rời sản phẩm theo chuẩn kỹ thuật và tích chọn tình trạng cho từng linh kiện:
+                  <br/>• <span class="code-badge" style="color:#059669; background:#ecfdf5;">Đã sử dụng (ĐSD)</span>: Còn sử dụng tốt ➔ Tham gia phân bổ giá vốn.
+                  <br/>• <span class="code-badge" style="color:#dc2626; background:#fef2f2;">Lỗi (ĐSD)</span>: Không sử dụng được ➔ Giá vốn = 0 hoặc 1đ.
+                </li>
+<li><strong>Chặn hoàn tất checklist:</strong> Hệ thống bắt buộc KTV phải đánh giá đủ 100% linh kiện mới cho phép bấm tiếp tục.</li>
+<li><strong>Quản lý IMEI linh kiện:</strong> Đối với linh kiện được khai báo có quản lý IMEI trong Master (Mainboard, Màn hình...), bắt buộc phải quét/nhập IMEI linh kiện xác.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="flow-step">
+<div class="step-num">4</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Hệ thống tính Tỷ lệ thu hồi &amp; Phân nhánh kiểm soát</h3>
+<div>
+<span class="step-actor-badge">💻 Hệ thống / X-Work</span>
+<span class="step-system-badge">Approval Trigger</span>
+</div>
+</div>
+<div class="step-body">
+<p>Hệ thống tính toán tức thời <strong>Tỷ lệ thu hồi (%)</strong> = (Tổng giá trị thu hồi / Giá vốn SP rã xác) × 100% và phân nhánh kiểm soát:</p>
+<div class="threshold-grid">
+<div class="threshold-card green">
+<div class="threshold-title">🟢 Tỷ lệ thu hồi ≥ 130%</div>
+<div class="threshold-desc">
+                    • <strong>Tự động hoàn tất</strong>, không cần duyệt.<br/>
+                    • Vận đơn chuyển ngay sang bước <em>Bàn giao linh kiện</em>.
+                  </div>
+</div>
+<div class="threshold-card orange">
+<div class="threshold-title">🟠 50% ≤ Tỷ lệ thu hồi &lt; 130%</div>
+<div class="threshold-desc">
+                    • Hệ thống tạo yêu cầu duyệt gửi đến <strong>Quản lý TTBH qua App X-Work</strong>.<br/>
+                    • <em>Nếu Duyệt:</em> Bắn thông báo TMS cho KTV để bàn giao kho.<br/>
+                    • <em>Nếu Từ chối:</em> Hủy vận đơn rã xác kèm lý do, cho phép KTV tạo lại vận đơn mới.
+                  </div>
+</div>
+<div class="threshold-card red">
+<div class="threshold-title">🔴 Tỷ lệ thu hồi &lt; 50%</div>
+<div class="threshold-desc">
+                    • <strong>Tự động hoàn tất &amp; Đóng vận đơn</strong>.<br/>
+                    • Hệ thống tự động hoàn tất Jobcard với nội dung <strong>"Thanh lý"</strong>.
+                  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+ ==================== TAB 4: LOGIC TÍNH GIÁ VỐN & THU HỒI ==================== 
+<div class="stage-panel" id="tabPricingLogic">
+<div class="section-card">
+<div class="section-card-header">
+<h2 class="section-card-title">
+<span>📐</span> 4. Logic Tính Giá vốn Phân bổ &amp; Giá trị Thu hồi Dự kiến
+        </h2>
+<span class="section-card-tag tag-blue">ALGORITHM &amp; FORMULAS</span>
+</div>
+<div class="callout callout-info">
+<div class="callout-icon">💡</div>
+<div>
+<strong>Nguyên tắc tổng thể:</strong>
+<br/>1. <strong>Giá vốn linh kiện ĐSD:</strong> Phân bổ từ Giá vốn thực tế của sản phẩm rã xác trên ERP (Không cộng chi phí thưởng KTV vào giá vốn).
+          <br/>2. <strong>Giá trị thu hồi:</strong> Căn cứ Giá bán ĐSD của linh kiện theo [Model + Khu vực giá + Trạng thái].
+        </div>
+</div>
+<div class="table-responsive">
+<table class="custom-table">
+<thead>
+<tr>
+<th style="width: 20%;">Nội dung</th>
+<th style="width: 40%;">Logic 1: Phân bổ Giá vốn</th>
+<th style="width: 40%;">Logic 2: Giá trị Thu hồi Dự kiến</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Xác định giá vốn nhập kho từng linh kiện</td>
+<td>Đánh giá hiệu quả kinh tế &amp; điều kiện phê duyệt</td>
+</tr>
+<tr>
+<td><strong>Giá trị cơ sở</strong></td>
+<td>Giá vốn sản phẩm rã xác trên ERP</td>
+<td>Giá bán ĐSD của linh kiện theo khu vực chuẩn</td>
+</tr>
+<tr>
+<td><strong>Linh kiện ĐSD (Tốt)</strong></td>
+<td>Được phân bổ giá vốn theo tỷ lệ chuẩn hóa</td>
+<td>= <strong>100% Giá bán ĐSD</strong> của linh kiện</td>
+</tr>
+<tr>
+<td><strong>Linh kiện Lỗi (Hỏng)</strong></td>
+<td>Giá vốn = 0 (hoặc 1 đồng khi nhập kho)</td>
+<td>= <strong>2% × Giá bán ĐSD</strong> của linh kiện</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="formula-box">
+<div><span class="param">// 1. Công thức chuẩn hóa tỷ lệ giá vốn linh kiện ĐSD:</span></div>
+<div><span class="highlight">Tỷ lệ giá vốn thực tế</span> = (Tỷ lệ khai báo của LK / Tổng tỷ lệ khai báo của các LK sử dụng được) × 100%</div>
+<div><span class="highlight">Giá vốn nhập kho LK</span> = Giá vốn sản phẩm rã xác × Tỷ lệ giá vốn thực tế</div>
+<br/>
+<div><span class="param">// 2. Công thức tính tỷ lệ thu hồi tổng thể:</span></div>
+<div><span class="highlight">Tổng giá trị thu hồi</span> = ∑(Giá trị thu hồi các LK tốt) + ∑(2% × Giá bán ĐSD các LK hỏng)</div>
+<div><span class="highlight">Tỷ lệ thu hồi (%)</span> = (Tổng giá trị thu hồi / Giá vốn sản phẩm rã xác) × 100%</div>
+</div>
+<h3 style="font-size: 17px; font-weight: 800; color: var(--primary); margin: 26px 0 12px;">📊 Bảng Ví dụ Thực tế Phân bổ Giá vốn &amp; Thu hồi:</h3>
+<p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 12px;">
+        Giả sử sản phẩm rã xác có <strong>Giá vốn = 10.000.000 đ</strong>, <strong>Tổng giá bán ĐSD = 13.500.000 đ</strong>. Thực tế tháo máy được Linh kiện A và B còn tốt (ĐSD), Linh kiện C và D bị hỏng (Lỗi ĐSD):
+      </p>
+<div class="table-responsive">
+<table class="custom-table">
+<thead>
+<tr>
+<th>Linh kiện</th>
+<th>Tỷ lệ BOM</th>
+<th>Trạng thái thực tế</th>
+<th>Tỷ lệ phân bổ thực tế</th>
+<th>Giá vốn nhập kho (VNĐ)</th>
+<th>Giá bán ĐSD (VNĐ)</th>
+<th>Giá trị thu hồi (VNĐ)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Linh kiện A</strong></td>
+<td>50% (0.5)</td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5;">ĐSD (Tốt)</span></td>
+<td>0.5 / (0.5 + 0.2) = <strong>71.43%</strong></td>
+<td><strong>7.143.000 đ</strong></td>
+<td>7.500.000 đ</td>
+<td>7.500.000 đ (100%)</td>
+</tr>
+<tr>
+<td><strong>Linh kiện B</strong></td>
+<td>20% (0.2)</td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5;">ĐSD (Tốt)</span></td>
+<td>0.2 / (0.5 + 0.2) = <strong>28.57%</strong></td>
+<td><strong>2.857.000 đ</strong></td>
+<td>3.000.000 đ</td>
+<td>3.000.000 đ (100%)</td>
+</tr>
+<tr>
+<td><strong>Linh kiện C</strong></td>
+<td>10% (0.1)</td>
+<td><span class="code-badge" style="color:#dc2626; background:#fef2f2;">Lỗi (ĐSD)</span></td>
+<td>0%</td>
+<td>0 đ (nhập 1đ)</td>
+<td>2.000.000 đ</td>
+<td>40.000 đ (2%)</td>
+</tr>
+<tr>
+<td><strong>Linh kiện D</strong></td>
+<td>20% (0.2)</td>
+<td><span class="code-badge" style="color:#dc2626; background:#fef2f2;">Lỗi (ĐSD)</span></td>
+<td>0%</td>
+<td>0 đ (nhập 1đ)</td>
+<td>1.000.000 đ</td>
+<td>20.000 đ (2%)</td>
+</tr>
+<tr style="font-weight: 800; background: var(--blue-light);">
+<td>TỔNG CỘNG</td>
+<td>100%</td>
+<td>-</td>
+<td>100%</td>
+<td>10.000.000 đ</td>
+<td>13.500.000 đ</td>
+<td>10.560.000 đ</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-success">
+<div class="callout-icon">📈</div>
+<div>
+<strong>Kết quả phân tích:</strong>
+<br/>• Tổng giá trị thu hồi = <strong>10.560.000 đ</strong>
+<br/>• Tỷ lệ thu hồi = 10.560.000 / 10.000.000 = <strong>105.6%</strong> (Rơi vào khoảng 50% - 130% ➔ <strong>Hệ thống kích hoạt gửi duyệt qua App X-Work</strong>).
+        </div>
+</div>
+</div>
+</div>
+ ==================== TAB 5: BÀN GIAO & NHẬP XUẤT KHO ==================== 
+<div class="stage-panel" id="tabHandoverStock">
+<div class="section-card">
+<div class="section-card-header">
+<h2 class="section-card-title">
+<span>📦</span> 5. Quy trình Bàn giao Linh kiện &amp; Nhập Xuất kho Tự động
+        </h2>
+<span class="section-card-tag tag-purple">QR CODE · LOGISTICS · ERP</span>
+</div>
+<div class="callout callout-danger">
+<div class="callout-icon">⏱️</div>
+<div>
+<strong>Quy tắc khóa User KTV sau 24h:</strong>
+<br/>Nếu quá <strong>24 giờ</strong> kể từ thời điểm yêu cầu rã xác được hoàn tất (áp dụng cho cả đơn duyệt tự động hoặc duyệt qua X-Work) mà KTV chưa hoàn tất bàn giao linh kiện cho Thủ kho ➔ <strong>Hệ thống tự động KHÓA tài khoản KTV trên TMS</strong>.
+        </div>
+</div>
+<div class="flow-steps">
+<div class="flow-step">
+<div class="step-num">1</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">KTV tạo đợt bàn giao trên App TMS</h3>
+<div>
+<span class="step-actor-badge">👤 Kỹ thuật viên</span>
+<span class="step-system-badge">App TMS</span>
+</div>
+</div>
+<div class="step-body">
+<ul>
+<li>KTV chọn chức năng <strong>"Bàn giao linh kiện"</strong> trên App TMS.</li>
+<li>Cho phép tích chọn <strong>nhiều vận đơn rã xác</strong> cùng một lúc để gom đợt bàn giao.</li>
+<li>Hệ thống tổng hợp và hiển thị chi tiết số lượng từng mã linh kiện của toàn bộ các vận đơn đã chọn.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="flow-step">
+<div class="step-num">2</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Quét QR xác thực &amp; Thủ kho nhận bàn giao</h3>
+<div>
+<span class="step-actor-badge">📦 Thủ kho linh kiện</span>
+<span class="step-system-badge">QR Code Đối soát</span>
+</div>
+</div>
+<div class="step-body">
+<ul>
+<li>KTV quét mã <strong>QR Code nhân viên quản lý kho linh kiện</strong> để xác định người nhận.</li>
+<li>Thủ kho kiểm tra đối chiếu số lượng linh kiện thực tế với danh sách trên App.</li>
+<li>Thủ kho bấm <strong>"Xác nhận nhận bàn giao"</strong> trên App TMS. Vận đơn rã xác chính thức được khóa hoàn tất.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="flow-step">
+<div class="step-num">3</div>
+<div class="step-content">
+<div class="step-header">
+<h3 class="step-title">Tự động sinh Chứng từ Nhập - Xuất trên ERP &amp; Đóng Jobcard</h3>
+<div>
+<span class="step-actor-badge">💻 Hệ thống ERP/Logistics</span>
+<span class="step-system-badge">Auto Settlement</span>
+</div>
+</div>
+<div class="step-body">
+              Ngay khi Thủ kho xác nhận bàn giao thành công, hệ thống tự động sinh 2 chứng từ liên thông:
+
+              <div class="table-responsive" style="margin-top: 10px;">
+<table class="custom-table">
+<thead>
+<tr>
+<th style="width: 25%;">Chỉ tiêu</th>
+<th style="width: 37%;">1. Phiếu Xuất (SP Rã xác)</th>
+<th style="width: 38%;">2. Phiếu Nhập (Linh kiện thành phẩm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hình thức / Yêu cầu</strong></td>
+<td>
+                        - Hình thức xuất: <span class="code-badge">Xuất rã linh kiện</span><br/>
+                        - Loại YCX: <span class="code-badge">YCX linh kiện rã xác</span>
+</td>
+<td>
+                        - Hình thức nhập: <span class="code-badge">Nhập linh kiện thành phẩm</span>
+</td>
+</tr>
+<tr>
+<td><strong>Mã sản phẩm</strong></td>
+<td>Mã sản phẩm lỗi rã xác</td>
+<td>Mã linh kiện tương ứng (theo trạng thái ĐSD hoặc Lỗi ĐSD)</td>
+</tr>
+<tr>
+<td><strong>Giá trị hạch toán</strong></td>
+<td>Giá vốn = Giá bán = Giá nhập sản phẩm</td>
+<td>
+                        - LK ĐSD: Giá vốn phân bổ thực tế<br/>
+                        - LK Lỗi (ĐSD): Giá vốn = 1 đồng
+                      </td>
+</tr>
+<tr>
+<td><strong>Kho &amp; User</strong></td>
+<td>Kho Jobcard | User: KTV rã xác</td>
+<td>Kho = Kho xuất | User: Thủ kho nhận bàn giao</td>
+</tr>
+<tr>
+<td><strong>Chứng từ liên quan</strong></td>
+<td>Mã Jobcard</td>
+<td>Mã Phiếu xuất rã linh kiện</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-success" style="margin-top: 14px;">
+<div class="callout-icon">🏁</div>
+<div>
+<strong>Đóng Jobcard tự động:</strong> Hệ thống WMS thực hiện <strong>Trả khách Jobcard tự động</strong> và đóng hoàn tất toàn bộ quy trình, ghi nhận User trả khách là User thao tác cuối cùng.
+                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+ ==================== TAB 6: MASTER BOM & THƯỞNG KTV ==================== 
+<div class="stage-panel" id="tabMasterData">
+<div class="section-card">
+<div class="section-card-header">
+<h2 class="section-card-title">
+<span>📋</span> 6. Khai báo Master BOM &amp; Đơn giá Thưởng KTV
+        </h2>
+<span class="section-card-tag tag-orange">MASTER DATA CONFIGURATION</span>
+</div>
+<h3 style="font-size: 16.5px; font-weight: 800; color: var(--primary); margin-top: 0;">1. Cấu hình Master Rã xác theo Model (BOM phân bổ):</h3>
+<p style="font-size: 13.5px; color: var(--text-muted);">Ví dụ khai báo Master phân rã linh kiện cho sản phẩm <strong>iPhone 15 Pro Max 256GB</strong>:</p>
+<div class="table-responsive">
+<table class="custom-table">
+<thead>
+<tr>
+<th>Mã linh kiện</th>
+<th>Tên linh kiện</th>
+<th>Tỷ lệ phân bổ giá vốn (%)</th>
+<th>Quy tắc &amp; Kiểm soát</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="code-badge">LK001</span></td>
+<td>Mainboard</td>
+<td><strong>35%</strong> (0.35)</td>
+<td>Quản lý IMEI xác bắt buộc</td>
+</tr>
+<tr>
+<td><span class="code-badge">LK002</span></td>
+<td>Màn hình</td>
+<td><strong>25%</strong> (0.25)</td>
+<td>Quản lý IMEI xác bắt buộc</td>
+</tr>
+<tr>
+<td><span class="code-badge">LK003</span></td>
+<td>Camera sau</td>
+<td><strong>10%</strong> (0.10)</td>
+<td>Không bắt buộc IMEI</td>
+</tr>
+<tr>
+<td><span class="code-badge">LK004</span></td>
+<td>Camera trước</td>
+<td><strong>5%</strong> (0.05)</td>
+<td>Không bắt buộc IMEI</td>
+</tr>
+<tr>
+<td><span class="code-badge">LK005</span></td>
+<td>Pin</td>
+<td><strong>10%</strong> (0.10)</td>
+<td>Không bắt buộc IMEI</td>
+</tr>
+<tr>
+<td><span class="code-badge">LK006</span></td>
+<td>Vỏ máy</td>
+<td><strong>10%</strong> (0.10)</td>
+<td>Không bắt buộc IMEI</td>
+</tr>
+<tr>
+<td><span class="code-badge">LK007</span></td>
+<td>Face ID</td>
+<td><strong>5%</strong> (0.05)</td>
+<td>Không bắt buộc IMEI</td>
+</tr>
+<tr style="font-weight: 800; background: var(--blue-light);">
+<td colspan="2">TỔNG TỶ LỆ PHÂN BỔ</td>
+<td>100% (1.0)</td>
+<td><strong>Hệ thống chặn lưu nếu tổng tỷ lệ ≠ 100%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 style="font-size: 16.5px; font-weight: 800; color: var(--primary); margin: 26px 0 10px;">2. Khai báo Đơn giá Thưởng KTV Rã xác:</h3>
+<p style="font-size: 13.5px; color: var(--text-muted);">Hệ thống cho phép Import Excel để khai báo đơn giá thưởng theo 3 cấp ưu tiên:</p>
+<div class="table-responsive">
+<table class="custom-table">
+<thead>
+<tr>
+<th>Ngành hàng</th>
+<th>Nhóm hàng</th>
+<th>Mã sản phẩm</th>
+<th>Tên sản phẩm</th>
+<th>Đơn giá thưởng (VNĐ)</th>
+<th>Thứ tự ưu tiên áp dụng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Điện thoại</td>
+<td>iPhone</td>
+<td><span class="code-badge">IP15PM256</span></td>
+<td>iPhone 15 Pro Max 256GB</td>
+<td><strong>120.000 đ</strong></td>
+<td><span class="code-badge" style="color:#1e40af; background:#eef2ff;">Ưu tiên 1 (Theo Mã SP)</span></td>
+</tr>
+<tr>
+<td>Điện thoại</td>
+<td>Samsung</td>
+<td>Tất cả</td>
+<td>Tất cả điện thoại Samsung</td>
+<td><strong>80.000 đ</strong></td>
+<td><span class="code-badge" style="color:#059669; background:#ecfdf5;">Ưu tiên 2 (Theo Nhóm hàng)</span></td>
+</tr>
+<tr>
+<td>Laptop</td>
+<td>Tất cả</td>
+<td>Tất cả</td>
+<td>Tất cả dòng Laptop</td>
+<td><strong>150.000 đ</strong></td>
+<td><span class="code-badge" style="color:#d97706; background:#fffbeb;">Ưu tiên 3 (Theo Ngành hàng)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+ UNIVERSAL BOTTOM NAVIGATION CARD 
+<div class="bottom-nav-card">
+<div class="bottom-nav-header">
+<div class="bnav-badge">HỆ THỐNG ĐIỀU HƯỚNG QUY TRÌNH</div>
+<div class="bnav-title">Chuyển hướng nhanh &amp; Tài liệu liên quan</div>
+<div class="bnav-desc">Dễ dàng quay lại danh mục Thợ ĐMX hoặc chuyển đến các quy trình khác</div>
+</div>
+<div class="bottom-nav-grid">
+<a class="bnav-action bnav-action-parent" href="index.html">
+<div class="bnav-icon-circle">📂</div>
+<div class="bnav-action-text">
+<span class="bnav-sub">Danh mục cha</span>
+<span class="bnav-main">Thư mục Thợ ĐMX</span>
+</div>
+</a>
+<a class="bnav-action bnav-action-home" href="../index.html">
+<div class="bnav-icon-circle">🏠</div>
+<div class="bnav-action-text">
+<span class="bnav-sub">Cổng quy trình</span>
+<span class="bnav-main">Trang chủ KSNB</span>
+</div>
+</a>
+<button class="bnav-action bnav-action-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" type="button">
+<div class="bnav-icon-circle">▲</div>
+<div class="bnav-action-text">
+<span class="bnav-sub">Cuộn nhanh</span>
+<span class="bnav-main">Lên đầu trang</span>
+</div>
+</button>
+</div>
+</div>
+
+        </section>
+
+        
+        <!-- ========================================================================= -->
+        <!-- TAB 2: TÀI LIỆU TRIỂN KHAI & HƯỚNG DẪN THAO TÁC IT (KHỐI CNTT MWG) -->
+        <!-- ========================================================================= -->
+        <section id="tab-it-doc" class="rx-tab-panel">
+            
+            <!-- IT Header Banner -->
+            <div class="it-header-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                            <span class="badge-tag" style="background: #e0f2fe; color: #0284c7; font-weight: 700;">TÀI LIỆU TRIỂN KHAI IT</span>
+                            <span class="badge-tag" style="background: #f0fdf4; color: #15803d; font-weight: 700;">KHỐI CÔNG NGHỆ THÔNG TIN MWG</span>
+                            <span class="badge-tag" style="background: #fef3c7; color: #b45309; font-weight: 700;">PHÒNG TRIỂN KHAI IT</span>
+                        </div>
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; margin-bottom: 6px;">
+                            HƯỚNG DẪN THAO TÁC HỆ THỐNG RÃ XÁC LINH KIỆN TRÊN PHẦN MỀM THỢ ĐMX
+                        </h2>
+                        <p style="font-size: 0.9rem; color: #475569; max-width: 950px;">
+                            Tài liệu đào tạo và hướng dẫn thao tác thực tế cho Kỹ thuật viên & Điều phối viên kho: Quy trình quét mã QR Jobcard, phân loại 3 trường hợp tỷ lệ thu hồi %, tạo yêu cầu duyệt và bàn giao linh kiện sau rã xác.
+                        </p>
+                    </div>
+                    <div style="background: white; padding: 12px 18px; border-radius: 10px; border: 1px solid #cbd5e1; text-align: right; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                        <div style="font-size: 0.72rem; color: #64748b; text-transform: uppercase; font-weight: 700;">Nguồn Tài Liệu Gốc</div>
+                        <div style="font-size: 1.05rem; font-weight: 800; color: #0284c7;">RÃ XÁC LINH KIỆN.pdf</div>
+                        <div style="font-size: 0.75rem; color: #10b981; font-weight: 600;"><i class="fas fa-check-circle"></i> Bản chuẩn ban hành IT (22 Trang)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Decision Cases Matrix -->
+            <div class="it-section-card">
+                <div class="it-section-title">
+                    <i class="fas fa-scale-balanced" style="color: #0284c7;"></i>
+                    1. KHUNG PHÂN LOẠI 3 TRƯỜNG HỢP RÃ XÁC THEO TỶ LỆ THU HỒI (%)
+                </div>
+                <div class="grid-3col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1rem;">
+                    
+                    <!-- Case 1 -->
+                    <div class="case-card case-green">
+                        <div class="case-header">
+                            <span class="case-badge" style="background: #dcfce7; color: #15803d;">TRƯỜNG HỢP 1</span>
+                            <div class="case-condition">Tỷ lệ % &ge; 130%</div>
+                        </div>
+                        <div class="case-desc">
+                            <strong>Tỷ lệ % giá bán sau khi rã xác với giá vốn nhập &ge; 130%:</strong>
+                        </div>
+                        <ul class="case-steps">
+                            <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Hiệu quả kinh tế cao, tự động thông qua.</li>
+                            <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Thực hiện rã xác & tách linh kiện ngay.</li>
+                            <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Bàn giao linh kiện nhập kho trực tiếp.</li>
+                        </ul>
+                        <div class="case-action" style="background: #f0fdf4; border-top: 1px solid #bbf7d0; padding: 8px 12px; font-weight: 700; color: #15803d; font-size: 0.8rem; text-align: center;">
+                            Thực hiện rã xác & Bàn giao ngay
+                        </div>
+                    </div>
+
+                    <!-- Case 2 -->
+                    <div class="case-card case-amber">
+                        <div class="case-header">
+                            <span class="case-badge" style="background: #fef3c7; color: #b45309;">TRƯỜNG HỢP 2</span>
+                            <div class="case-condition">50% &le; Tỷ lệ % &lt; 130%</div>
+                        </div>
+                        <div class="case-desc">
+                            <strong>Tỷ lệ % giá bán sau khi rã xác với giá vốn nhập từ 50% đến &lt; 130%:</strong>
+                        </div>
+                        <ul class="case-steps">
+                            <li><i class="fas fa-triangle-exclamation" style="color: #f59e0b;"></i> Cần phê duyệt kiểm soát từ Quản lý.</li>
+                            <li><i class="fas fa-triangle-exclamation" style="color: #f59e0b;"></i> Hệ thống tạo Yêu Cầu Duyệt rã xác.</li>
+                            <li><i class="fas fa-triangle-exclamation" style="color: #f59e0b;"></i> Sau khi được Duyệt mới hoàn tất bàn giao.</li>
+                        </ul>
+                        <div class="case-action" style="background: #fffbeb; border-top: 1px solid #fde68a; padding: 8px 12px; font-weight: 700; color: #b45309; font-size: 0.8rem; text-align: center;">
+                            Tạo yêu cầu duyệt &rarr; Duyệt xong mới bàn giao
+                        </div>
+                    </div>
+
+                    <!-- Case 3 -->
+                    <div class="case-card case-red">
+                        <div class="case-header">
+                            <span class="case-badge" style="background: #fee2e2; color: #b91c1c;">TRƯỜNG HỢP 3</span>
+                            <div class="case-condition">Tỷ lệ % &lt; 50%</div>
+                        </div>
+                        <div class="case-desc">
+                            <strong>Tỷ lệ % giá bán sau khi rã xác với giá vốn nhập &lt; 50%:</strong>
+                        </div>
+                        <ul class="case-steps">
+                            <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Rã xác không hiệu quả kinh tế (lỗ vốn).</li>
+                            <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Hệ thống chặn không cho rã xác.</li>
+                            <li><i class="fas fa-times-circle" style="color: #ef4444;"></i> Chuyển sang luồng <strong>Thanh lý sản phẩm</strong>.</li>
+                        </ul>
+                        <div class="case-action" style="background: #fef2f2; border-top: 1px solid #fecaca; padding: 8px 12px; font-weight: 700; color: #b91c1c; font-size: 0.8rem; text-align: center;">
+                            Không rã xác &rarr; Chuyển sang Thanh lý SP
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Detailed Step-by-Step Walkthrough with UI Screenshots -->
+            <div class="it-section-card">
+                <div class="it-section-title">
+                    <i class="fas fa-list-check" style="color: #0284c7;"></i>
+                    2. CHI TIẾT 6 BƯỚC THAO TÁC THỰC TẾ TRÊN PHẦN MỀM (KÈM GIAO DIỆN UI)
+                </div>
+
+                <!-- Step 1 -->
+                <div class="it-step-block">
+                    <div class="it-step-header">
+                        <span class="it-step-number">BƯỚC 1</span>
+                        <h3 class="it-step-title">Điều Phối Vận Đơn Rã Xác Trên Hệ Thống</h3>
+                    </div>
+                    <p class="it-step-desc">
+                        Điều phối viên mở giao diện vận đơn rã xác trên hệ thống quản lý để tiếp nhận danh sách các sản phẩm lỗi cần thực hiện rã xác linh kiện.
+                    </p>
+                    <div class="it-img-container">
+                        <img src="assets/img_ra_xac_pdf/page_02.png" alt="Điều phối vận đơn" class="it-ui-img" onclick="openModal(this.src, 'Bước 1: Điều phối vận đơn rã xác')">
+                        <div class="it-img-caption"><i class="fas fa-image"></i> Giao diện màn hình Điều phối vận đơn rã xác linh kiện</div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="it-step-block">
+                    <div class="it-step-header">
+                        <span class="it-step-number">BƯỚC 2</span>
+                        <h3 class="it-step-title">Quét Mã QR Jobcard Để Tạo Đơn Rã Xác Linh Kiện</h3>
+                    </div>
+                    <p class="it-step-desc">
+                        KTV sử dụng máy quét hoặc camera trên ứng dụng để quét mã QR dán trên Jobcard của sản phẩm cần rã xác. 
+                        <strong>Lưu ý:</strong> Hệ thống kiểm tra điều kiện kho; trường hợp KTV chọn không đúng kho sẽ có thông báo cảnh báo lỗi ngay lập tức.
+                    </p>
+                    <div class="grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 10px;">
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_04.png" alt="Quét QR tạo đơn" class="it-ui-img" onclick="openModal(this.src, 'Bước 2: Quét mã QR Jobcard để tạo đơn')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Màn hình quét mã QR Jobcard</div>
+                        </div>
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_10.png" alt="Cảnh báo chọn sai kho" class="it-ui-img" onclick="openModal(this.src, 'Bước 2: Cảnh báo khi chọn không đúng kho')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Cảnh báo hệ thống khi chọn sai kho</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="it-step-block">
+                    <div class="it-step-header">
+                        <span class="it-step-number">BƯỚC 3</span>
+                        <h3 class="it-step-title">Thao Tác Vận Đơn - Tách Linh Kiện & Tính Tỷ Lệ % Thu Hồi</h3>
+                    </div>
+                    <p class="it-step-desc">
+                        KTV kiểm tra danh sách linh kiện cấu thành sản phẩm trên màn hình, đánh dấu các linh kiện còn hoạt động tốt để tiến hành rã xác. Hệ thống tự động tính toán tổng giá bán sau khi rã xác so với giá vốn nhập:
+                    </p>
+                    <div class="grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 10px;">
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_06.png" alt="Tách linh kiện tỷ lệ > 130%" class="it-ui-img" onclick="openModal(this.src, 'Bước 3: Tách linh kiện khi tỷ lệ > 130%')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Màn hình tách linh kiện (Tỷ lệ &gt; 130% &rarr; Cho phép bàn giao ngay)</div>
+                        </div>
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_13.png" alt="Tách linh kiện tỷ lệ 50-130%" class="it-ui-img" onclick="openModal(this.src, 'Bước 3: Tách linh kiện khi tỷ lệ 50% - 130%')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Màn hình tách linh kiện (Tỷ lệ 50% - 130% &rarr; Cần tạo yêu cầu duyệt)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="it-step-block">
+                    <div class="it-step-header">
+                        <span class="it-step-number" style="background: #f59e0b;">BƯỚC 4</span>
+                        <h3 class="it-step-title">Luồng Tạo & Phê Duyệt Yêu Cầu (Đối Với Tỷ Lệ 50% - 130%)</h3>
+                    </div>
+                    <p class="it-step-desc">
+                        Khi tỷ lệ thu hồi nằm trong ngưỡng 50% &le; Tỷ lệ &lt; 130%, KTV nhấn nút <strong>"Tạo yêu cầu duyệt"</strong> trên phần mềm. Quản lý có thẩm quyền sẽ đăng nhập để xem xét lý do, danh sách linh kiện thu hồi và nhấn <strong>"Phê duyệt"</strong> hoặc <strong>"Từ chối"</strong>.
+                    </p>
+                    <div class="grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 10px;">
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_14.png" alt="Tạo yêu cầu duyệt" class="it-ui-img" onclick="openModal(this.src, 'Bước 4: Màn hình tạo yêu cầu duyệt')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Màn hình tạo yêu cầu duyệt rã xác</div>
+                        </div>
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_15.png" alt="Duyệt yêu cầu rã xác" class="it-ui-img" onclick="openModal(this.src, 'Bước 4: Màn hình Quản lý phê duyệt yêu cầu')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Giao diện Quản lý phê duyệt yêu cầu rã xác</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="it-step-block">
+                    <div class="it-step-header">
+                        <span class="it-step-number" style="background: #10b981;">BƯỚC 5</span>
+                        <h3 class="it-step-title">Bàn Giao Thiết Bị & Nhập Kho Linh Kiện Sau Rã Xác</h3>
+                    </div>
+                    <p class="it-step-desc">
+                        Sau khi rã xác hoàn tất (hoặc sau khi được duyệt yêu cầu), KTV chọn chức năng <strong>"Bàn giao thiết bị"</strong>, kiểm tra danh sách chi tiết các linh kiện rã xác (Mã linh kiện, Tên linh kiện, Số lượng, Giá trị) và ký xác nhận bàn giao vào kho linh kiện.
+                    </p>
+                    <div class="grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 10px;">
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_07.png" alt="Chọn bàn giao thiết bị" class="it-ui-img" onclick="openModal(this.src, 'Bước 5: Chọn bàn giao thiết bị')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Màn hình chọn bàn giao thiết bị</div>
+                        </div>
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_18.png" alt="Chi tiết bàn giao linh kiện" class="it-ui-img" onclick="openModal(this.src, 'Bước 5: Chi tiết bàn giao linh kiện vào kho')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Màn hình chi tiết bàn giao linh kiện vào kho</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="it-step-block">
+                    <div class="it-step-header">
+                        <span class="it-step-number" style="background: #ef4444;">BƯỚC 6</span>
+                        <h3 class="it-step-title">Thao Tác Chuyển Sang Thanh Lý Sản Phẩm (Đối Với Tỷ Lệ &lt; 50%)</h3>
+                    </div>
+                    <p class="it-step-desc">
+                        Trường hợp tỷ lệ % thu hồi sau rã xác dưới 50% (ví dụ thực tế trong hệ thống là 29%), hệ thống sẽ chặn rã xác và hiển thị nút chức năng <strong>"Thao tác thanh lý"</strong> để KTV chuyển toàn bộ thiết bị sang kho thanh lý theo quy trình thanh lý tài sản.
+                    </p>
+                    <div class="grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 10px;">
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_20.png" alt="Thao tác thanh lý SP" class="it-ui-img" onclick="openModal(this.src, 'Bước 6: Màn hình nhận diện tỷ lệ < 50%')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Cảnh báo tỷ lệ thấp (&lt; 50%) không cho phép rã xác</div>
+                        </div>
+                        <div class="it-img-container">
+                            <img src="assets/img_ra_xac_pdf/page_21.png" alt="Xác nhận thanh lý (Tỷ lệ 29%)" class="it-ui-img" onclick="openModal(this.src, 'Bước 6: Thao tác thanh lý thiết bị (Tỷ lệ 29%)')">
+                            <div class="it-img-caption"><i class="fas fa-image"></i> Thao tác xác nhận chuyển thanh lý (Tỷ lệ 29%)</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Full 22-Page PDF Slideshow Gallery -->
+            <div class="it-section-card">
+                <div class="it-section-title">
+                    <i class="fas fa-images" style="color: #0284c7;"></i>
+                    3. BỘ TRÌNH CHIẾU TÀI LIỆU GỐC IT (FULL 22 TRANG PDF)
+                </div>
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">
+                    Dưới đây là toàn bộ 22 trang tài liệu đào tạo chính thức từ Phòng Triển Khai IT. Bấm vào từng trang để phóng to và xem chi tiết:
+                </p>
+
+                <div class="gallery-grid">
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_01.png', 'Trang 01: Trang bìa - Rã Xác Linh Kiện')">
+                        <img src="assets/img_ra_xac_pdf/page_01.png" alt="Trang 01: Trang bìa - Rã Xác Linh Kiện" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 01</span>
+                            <div class="gallery-page-title">Trang bìa - Rã Xác Linh Kiện</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_02.png', 'Trang 02: Điều phối vận đơn')">
+                        <img src="assets/img_ra_xac_pdf/page_02.png" alt="Trang 02: Điều phối vận đơn" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 02</span>
+                            <div class="gallery-page-title">Điều phối vận đơn</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_03.png', 'Trang 03: Trường hợp 1 (Tỷ lệ >= 130%)')">
+                        <img src="assets/img_ra_xac_pdf/page_03.png" alt="Trang 03: Trường hợp 1 (Tỷ lệ >= 130%)" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 03</span>
+                            <div class="gallery-page-title">Trường hợp 1 (Tỷ lệ >= 130%)</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_04.png', 'Trang 04: Quét QR Jobcard tạo đơn')">
+                        <img src="assets/img_ra_xac_pdf/page_04.png" alt="Trang 04: Quét QR Jobcard tạo đơn" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 04</span>
+                            <div class="gallery-page-title">Quét QR Jobcard tạo đơn</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_05.png', 'Trang 05: Giao diện quét mã QR')">
+                        <img src="assets/img_ra_xac_pdf/page_05.png" alt="Trang 05: Giao diện quét mã QR" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 05</span>
+                            <div class="gallery-page-title">Giao diện quét mã QR</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_06.png', 'Trang 06: Thao tác vận đơn - Tách LK (>130%)')">
+                        <img src="assets/img_ra_xac_pdf/page_06.png" alt="Trang 06: Thao tác vận đơn - Tách LK (>130%)" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 06</span>
+                            <div class="gallery-page-title">Thao tác vận đơn - Tách LK (>130%)</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_07.png', 'Trang 07: Chọn bàn giao thiết bị')">
+                        <img src="assets/img_ra_xac_pdf/page_07.png" alt="Trang 07: Chọn bàn giao thiết bị" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 07</span>
+                            <div class="gallery-page-title">Chọn bàn giao thiết bị</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_08.png', 'Trang 08: Bàn giao thiết bị hoàn tất')">
+                        <img src="assets/img_ra_xac_pdf/page_08.png" alt="Trang 08: Bàn giao thiết bị hoàn tất" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 08</span>
+                            <div class="gallery-page-title">Bàn giao thiết bị hoàn tất</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_09.png', 'Trang 09: Trường hợp 2 (50% <= Tỷ lệ < 130%)')">
+                        <img src="assets/img_ra_xac_pdf/page_09.png" alt="Trang 09: Trường hợp 2 (50% <= Tỷ lệ < 130%)" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 09</span>
+                            <div class="gallery-page-title">Trường hợp 2 (50% <= Tỷ lệ < 130%)</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_10.png', 'Trang 10: Quét QR & Cảnh báo sai kho')">
+                        <img src="assets/img_ra_xac_pdf/page_10.png" alt="Trang 10: Quét QR & Cảnh báo sai kho" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 10</span>
+                            <div class="gallery-page-title">Quét QR & Cảnh báo sai kho</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_11.png', 'Trang 11: Giao diện tạo đơn trường hợp 2')">
+                        <img src="assets/img_ra_xac_pdf/page_11.png" alt="Trang 11: Giao diện tạo đơn trường hợp 2" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 11</span>
+                            <div class="gallery-page-title">Giao diện tạo đơn trường hợp 2</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_12.png', 'Trang 12: Thao tác vận đơn - Tách LK TH2')">
+                        <img src="assets/img_ra_xac_pdf/page_12.png" alt="Trang 12: Thao tác vận đơn - Tách LK TH2" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 12</span>
+                            <div class="gallery-page-title">Thao tác vận đơn - Tách LK TH2</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_13.png', 'Trang 13: Tính toán tỷ lệ thu hồi TH2')">
+                        <img src="assets/img_ra_xac_pdf/page_13.png" alt="Trang 13: Tính toán tỷ lệ thu hồi TH2" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 13</span>
+                            <div class="gallery-page-title">Tính toán tỷ lệ thu hồi TH2</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_14.png', 'Trang 14: Tạo yêu cầu duyệt')">
+                        <img src="assets/img_ra_xac_pdf/page_14.png" alt="Trang 14: Tạo yêu cầu duyệt" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 14</span>
+                            <div class="gallery-page-title">Tạo yêu cầu duyệt</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_15.png', 'Trang 15: Quản lý phê duyệt yêu cầu')">
+                        <img src="assets/img_ra_xac_pdf/page_15.png" alt="Trang 15: Quản lý phê duyệt yêu cầu" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 15</span>
+                            <div class="gallery-page-title">Quản lý phê duyệt yêu cầu</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_16.png', 'Trang 16: Thao tác vận đơn sau khi duyệt')">
+                        <img src="assets/img_ra_xac_pdf/page_16.png" alt="Trang 16: Thao tác vận đơn sau khi duyệt" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 16</span>
+                            <div class="gallery-page-title">Thao tác vận đơn sau khi duyệt</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_17.png', 'Trang 17: Chọn bàn giao thiết bị TH2')">
+                        <img src="assets/img_ra_xac_pdf/page_17.png" alt="Trang 17: Chọn bàn giao thiết bị TH2" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 17</span>
+                            <div class="gallery-page-title">Chọn bàn giao thiết bị TH2</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_18.png', 'Trang 18: Chi tiết bàn giao linh kiện TH2')">
+                        <img src="assets/img_ra_xac_pdf/page_18.png" alt="Trang 18: Chi tiết bàn giao linh kiện TH2" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 18</span>
+                            <div class="gallery-page-title">Chi tiết bàn giao linh kiện TH2</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_19.png', 'Trang 19: Trường hợp 3 (Tỷ lệ < 50%)')">
+                        <img src="assets/img_ra_xac_pdf/page_19.png" alt="Trang 19: Trường hợp 3 (Tỷ lệ < 50%)" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 19</span>
+                            <div class="gallery-page-title">Trường hợp 3 (Tỷ lệ < 50%)</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_20.png', 'Trang 20: Nhận diện tỷ lệ thấp < 50%')">
+                        <img src="assets/img_ra_xac_pdf/page_20.png" alt="Trang 20: Nhận diện tỷ lệ thấp < 50%" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 20</span>
+                            <div class="gallery-page-title">Nhận diện tỷ lệ thấp < 50%</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_21.png', 'Trang 21: Thao tác thanh lý sản phẩm (29%)')">
+                        <img src="assets/img_ra_xac_pdf/page_21.png" alt="Trang 21: Thao tác thanh lý sản phẩm (29%)" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 21</span>
+                            <div class="gallery-page-title">Thao tác thanh lý sản phẩm (29%)</div>
+                        </div>
+                    </div>
+                    <div class="gallery-card" onclick="openModal('assets/img_ra_xac_pdf/page_22.png', 'Trang 22: Lời kết - Xin cảm ơn')">
+                        <img src="assets/img_ra_xac_pdf/page_22.png" alt="Trang 22: Lời kết - Xin cảm ơn" class="gallery-thumb" loading="lazy">
+                        <div class="gallery-info">
+                            <span class="gallery-page-badge">Trang 22</span>
+                            <div class="gallery-page-title">Lời kết - Xin cảm ơn</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Image Modal for Fullscreen View -->
+        <div id="imageModal" class="rx-modal" onclick="closeModal()">
+            <span class="rx-modal-close">&times;</span>
+            <div class="rx-modal-content" onclick="event.stopPropagation()">
+                <img id="modalImage" src="" alt="Fullscreen image">
+                <div id="modalCaption" class="rx-modal-caption"></div>
+            </div>
+        </div>
+    </main>
+
+
+<!-- FLOATING QUICK NAVIGATION DOCK -->
+<div class="floating-nav-dock" id="floatingNavDock" aria-label="Điều hướng nhanh">
+  <a href="index.html" class="dock-btn dock-btn-parent" title="Về danh mục Thợ ĐMX" aria-label="Về danh mục Thợ ĐMX">
+    <span class="dock-icon">📂</span>
+    <span class="dock-text">Thợ ĐMX</span>
+  </a>
+  <a href="../index.html" class="dock-btn dock-btn-home" title="Về Trang chủ" aria-label="Về Trang chủ">
+    <span class="dock-icon">🏠</span>
+    <span class="dock-text">Trang chủ</span>
+  </a>
+  <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="dock-btn dock-btn-top" title="Cuộn lên đầu trang" aria-label="Cuộn lên đầu trang">
+    <span class="dock-icon">▲</span>
+  </button>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>KSNB Automation · Quy trình Rã xác Linh kiện Thợ Điện Máy Xanh</span>
+    <span>Cập nhật theo đặc tả hệ thống phục vụ triển khai IT</span>
+  </div>
+</footer>
+
+<script>
+function switchStage(stageId, tabElement) {
+  document.querySelectorAll('.stage-panel').forEach(panel => {
+    panel.classList.remove('active');
+  });
+  document.querySelectorAll('.stage-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  const target = document.getElementById(stageId);
+  if (target) {
+    target.classList.add('active');
+  }
+  if (tabElement) {
+    tabElement.classList.add('active');
+  }
+}
+
+function filterContent() {
+  const q = document.getElementById('quickSearchInput').value.toLowerCase().trim();
+  const tables = document.querySelectorAll('.custom-table');
+  
+  tables.forEach(table => {
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      if (!q || text.includes(q)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+}
+
+// ==================== RX TAB SWITCHING LOGIC ====================
+function switchRxTab(tabId) {
+  // 1. Hide all tab panels
+  var panels = document.querySelectorAll('.rx-tab-panel');
+  panels.forEach(function(p) {
+    p.classList.remove('active');
+  });
+
+  // 2. Remove active state on buttons
+  var btns = document.querySelectorAll('.rx-tab-btn');
+  btns.forEach(function(b) {
+    b.classList.remove('active');
+  });
+
+  // 3. Show targeted panel
+  var target = document.getElementById(tabId);
+  if (target) {
+    target.classList.add('active');
+  }
+
+  // 4. Set active on clicked button
+  btns.forEach(function(b) {
+    var attr = b.getAttribute('onclick') || '';
+    if (attr.indexOf(tabId) !== -1) {
+      b.classList.add('active');
+    }
+  });
+
+  // 5. If switching to business doc, ensure first stage is active if none
+  if (tabId === 'tab-business-doc') {
+    var activeStage = document.querySelector('#tab-business-doc .stage-panel.active');
+    if (!activeStage) {
+      var firstTab = document.querySelector('#tab-business-doc .stage-tab');
+      var firstPanel = document.querySelector('#tab-business-doc .stage-panel');
+      if (firstTab && firstPanel) {
+        firstTab.classList.add('active');
+        firstPanel.classList.add('active');
+      }
+    }
+  }
+
+  // 6. Scroll smoothly to tabs
+  var tabNav = document.querySelector('.ra-xac-tab-nav');
+  if (tabNav) {
+    var navTop = tabNav.getBoundingClientRect().top + window.pageYOffset - 10;
+    window.scrollTo({ top: navTop, behavior: 'smooth' });
+  }
+}
+
+// ==================== FULLSCREEN IMAGE MODAL LOGIC ====================
+function openModal(imgSrc, captionText) {
+  var modal = document.getElementById('imageModal');
+  var modalImg = document.getElementById('modalImage');
+  var modalCaption = document.getElementById('modalCaption');
+  if (modal && modalImg && modalCaption) {
+    modalImg.src = imgSrc;
+    modalCaption.textContent = captionText || '';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeModal() {
+  var modal = document.getElementById('imageModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+});
+
+</script>
+
+<script src="/auth-bar.js" defer></script>
+</body>
+</html>
