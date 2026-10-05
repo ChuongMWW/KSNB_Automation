@@ -71,6 +71,275 @@ h3{margin:2px 0 0;font-size:19px;color:var(--blue2)}
 .footer{max-width:1440px;margin:auto;padding:0 28px 28px;color:var(--muted);font-size:12px}
 @media(max-width:950px){.grid-3,.systems,.warehouse-list,.status{grid-template-columns:1fr}.header-inner{align-items:flex-start}.header h1{font-size:24px}}
 @media(max-width:600px){.header-inner,.container,.footer{padding-left:15px;padding-right:15px}.logo{width:80px;height:80px}}
+
+
+
+
+
+/* ==================== UNIVERSAL FLOATING NAVIGATION DOCK ==================== */
+.floating-nav-dock {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  left: auto !important;
+  z-index: 99999;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 4px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(18, 53, 143, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  max-width: calc(100vw - 32px);
+  width: auto;
+}
+.floating-nav-dock:hover {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 6px 24px rgba(18, 53, 143, 0.22);
+}
+.dock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.dock-btn-back {
+  background: #edf3ff;
+  color: #12358f;
+  border: 1px solid #b8c7e8;
+}
+.dock-btn-back:hover {
+  background: #dbe7ff;
+  color: #0a276f;
+  border-color: #12358f;
+}
+.dock-btn-home {
+  background: linear-gradient(135deg, #12358f, #0a276f);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(18, 53, 143, 0.2);
+}
+.dock-btn-home:hover {
+  background: linear-gradient(135deg, #0a276f, #061948);
+  color: #ffd200;
+}
+.dock-btn-top {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+  justify-content: center;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+.dock-btn-top:hover {
+  background: #12358f;
+  color: #ffffff;
+  border-color: #12358f;
+}
+.dock-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .floating-nav-dock {
+    bottom: 12px;
+    right: 12px;
+    left: auto !important;
+    gap: 4px;
+    padding: 3px 5px;
+  }
+  .dock-btn {
+    padding: 5px 9px;
+    font-size: 11.5px;
+    gap: 4px;
+  }
+  .dock-btn-top {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
+}
+@media (max-width: 480px) {
+  .floating-nav-dock {
+    bottom: 10px;
+    right: 10px;
+    left: auto !important;
+    gap: 3px;
+    padding: 3px 4px;
+  }
+  .dock-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
+
+/* ==================== UNIVERSAL BOTTOM NAVIGATION CARD ==================== */
+.bottom-nav-card {
+  margin: 40px auto 24px;
+  background: linear-gradient(145deg, #ffffff, #f8faff);
+  border: 1.5px solid #dce3ee;
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 28px rgba(18, 53, 143, 0.06);
+  text-align: center;
+  box-sizing: border-box;
+}
+.bottom-nav-header {
+  margin-bottom: 20px;
+}
+.bnav-badge {
+  display: inline-block;
+  background: #edf3ff;
+  color: #12358f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+  border: 1px solid #b8c7e8;
+}
+.bnav-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #12358f;
+  margin-bottom: 4px;
+}
+.bnav-desc {
+  font-size: 13px;
+  color: #667085;
+}
+.bottom-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.bnav-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-family: inherit;
+  border: 1.5px solid #dce3ee;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.bnav-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(18, 53, 143, 0.1);
+}
+.bnav-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.bnav-action:hover .bnav-icon-circle {
+  transform: scale(1.1);
+}
+.bnav-action-text {
+  display: flex;
+  flex-direction: column;
+}
+.bnav-sub {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #667085;
+}
+.bnav-main {
+  font-size: 14px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.bnav-action-back {
+  border-color: #b8c7e8;
+  background: #fafcff;
+}
+.bnav-action-back .bnav-icon-circle {
+  background: #edf3ff;
+  color: #12358f;
+}
+.bnav-action-back:hover {
+  border-color: #12358f;
+  background: #edf3ff;
+}
+.bnav-action-back:hover .bnav-main {
+  color: #12358f;
+}
+
+.bnav-action-home {
+  border-color: #ffd200;
+  background: #fffdf0;
+}
+.bnav-action-home .bnav-icon-circle {
+  background: #12358f;
+  color: #ffd200;
+}
+.bnav-action-home:hover {
+  border-color: #12358f;
+  background: #edf3ff;
+}
+.bnav-action-home:hover .bnav-main {
+  color: #12358f;
+}
+
+.bnav-action-top {
+  border-color: #dce3ee;
+  background: #ffffff;
+}
+.bnav-action-top .bnav-icon-circle {
+  background: #f3f6fb;
+  color: #475467;
+}
+.bnav-action-top:hover {
+  border-color: #667085;
+  background: #f8faff;
+}
+.bnav-action-top:hover .bnav-main {
+  color: #12358f;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  
+  .dock-btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .bottom-nav-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -87,8 +356,8 @@ h3{margin:2px 0 0;font-size:19px;color:var(--blue2)}
 
 <main class="container">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13px;">
-    <a href="CE_Gia_dung.html" style="color:var(--blue);text-decoration:none;font-weight:700;">← Quay lại Danh mục CE & Gia dụng</a>
-    <a href="index.html" style="color:var(--muted);text-decoration:none;">Về Trang chủ KSNB</a>
+    <a href="../index.html" style="color:var(--blue);text-decoration:none;font-weight:700;">← Quay lại Danh mục & Gia dụng</a>
+    <a href="../index.html" style="color:var(--muted);text-decoration:none;">Về Trang chủ</a>
   </div>
 
   <nav class="toc">
@@ -398,6 +667,63 @@ h3{margin:2px 0 0;font-size:19px;color:var(--blue2)}
   </section>
 </main>
 
-<footer class="footer">Thợ ĐMX • Tài liệu triển khai nội bộ • Nguồn danh mục: Quy trinh tao kho Tho DMX.xlsx</footer>
+
+  
+  
+  
+  
+  <!-- BOTTOM NAVIGATION CARD -->
+  <div class="bottom-nav-card">
+    <div class="bottom-nav-header">
+      <div class="bnav-badge">KSNB AUTOMATION</div>
+      <div class="bnav-title">Điều Hướng & Thao Tác Nhanh</div>
+      <div class="bnav-desc">Bạn đã xem xong nội dung quy trình. Nhấn để quay lại danh mục hoặc về trang chủ hệ thống.</div>
+    </div>
+    <div class="bottom-nav-grid">
+      <a href="index.html" class="bnav-action bnav-action-back">
+        <span class="bnav-icon-circle">←</span>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Quay lại danh mục</span>
+          <span class="bnav-main">Thợ Điện Máy XANH</span>
+        </div>
+      </a>
+      <a href="../index.html" class="bnav-action bnav-action-home">
+        <span class="bnav-icon-circle">🏠</span>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Hệ thống nghiệp vụ</span>
+          <span class="bnav-main">Trang chủ</span>
+        </div>
+      </a>
+      <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bnav-action bnav-action-top">
+        <span class="bnav-icon-circle">▲</span>
+        <div class="bnav-action-text">
+          <span class="bnav-sub">Trở lên</span>
+          <span class="bnav-main">Đầu trang</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <footer class="footer">Thợ ĐMX • Tài liệu triển khai nội bộ • Nguồn danh mục: Quy trinh tao kho Tho DMX.xlsx</footer>
+
+
+
+
+
+<!-- FLOATING QUICK NAVIGATION DOCK -->
+<div class="floating-nav-dock" id="floatingNavDock" aria-label="Điều hướng nhanh">
+  <a href="index.html" class="dock-btn dock-btn-back" title="Quay lại danh mục Thợ ĐMX">
+    <span class="dock-icon">←</span>
+    <span class="dock-text">Quay lại danh mục</span>
+  </a>
+  <a href="../index.html" class="dock-btn dock-btn-home" title="Trở về Trang chủ">
+    <span class="dock-icon">🏠</span>
+    <span class="dock-text">Trang chủ</span>
+  </a>
+  <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="dock-btn dock-btn-top" title="Cuộn lên đầu trang" aria-label="Cuộn lên đầu trang">
+    <span class="dock-icon">▲</span>
+  </button>
+</div>
+
 </body>
 </html>
