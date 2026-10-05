@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quản lý user | KSNB Automation</title>
+<title>Quản trị | KSNB Automation</title>
 <meta name="robots" content="noindex">
 <style>
 :root{--blue:#12358f;--blue2:#0a276f;--yellow:#ffd200;--bg:#f3f6fb;--text:#172033;--muted:#667085;--line:#dce3ee;--red:#c62828;--green:#15803d}
@@ -39,6 +39,11 @@ td.act button{margin:2px}
 .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600}
 .on{background:#e7f6ec;color:var(--green)} .off{background:#fdecec;color:var(--red)} .adm{background:#fff6cc;color:#8a6d00}
 #msg{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#172033;color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;display:none;max-width:90vw;z-index:9}
+select{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;background:#fff}
+.tabs{display:flex;gap:8px;margin-top:14px}.tab{color:#fff;background:rgba(255,255,255,.12);padding:6px 14px;border-radius:999px;text-decoration:none;font-size:14px}.tab:hover{background:rgba(255,255,255,.22)}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--muted);font-size:14px}
+.drop.over{border-color:var(--blue);background:#edf3ff}
+.sec-title{font-size:18px;margin:26px 0 12px;color:var(--blue)}
 .hint{font-size:12px;color:var(--muted);margin-top:6px}
 </style>
 </head>
@@ -48,9 +53,43 @@ td.act button{margin:2px}
     <a class="logo" href="/index.html"><div class="logo-mark">KS</div><div>KSNB Automation</div></a>
     <div><a class="lnk" href="/index.html">← Trang chủ</a><a class="lnk" href="/api/logout">Đăng xuất</a></div>
   </div>
-  <h1>Quản lý user</h1>
+  <h1>Quản trị: Quy trình & User</h1>
+  <nav class="tabs"><a href="#docs" class="tab">📄 Thêm quy trình</a><a href="#users" class="tab">👥 Quản lý user</a></nav>
 </div></header>
 <main class="wrap">
+  <h2 class="sec-title" id="docs">📄 Thêm quy trình mới vào mục có sẵn</h2>
+  <div class="card">
+    <form id="upForm">
+      <div class="row">
+        <div><label>Mục *</label><select id="uCat" required></select></div>
+        <div><label>Nhóm trong mục</label><select id="uGrp"></select></div>
+        <div id="uGrpNewBox" style="display:none"><label>Tên nhóm mới</label><input id="uGrpNew" placeholder="vd: 🧾 5. Quy trình thanh toán"></div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div><label>Tiêu đề hiển thị (để trống = lấy &lt;title&gt; của file)</label><input id="uTitle"></div>
+        <div><label>Mô tả ngắn</label><input id="uDesc"></div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div><label>File quy trình (.html) *</label><input type="file" id="uFile" accept=".html,.htm" required></div>
+        <div><label>Ảnh / PDF đi kèm (nếu trang dùng ảnh riêng)</label><input type="file" id="uImgs" accept=".png,.jpg,.jpeg,.gif,.webp,.svg,.pdf" multiple></div>
+      </div>
+      <div class="hint">Tên file tự bỏ dấu, khoảng trắng → "_". Mỗi file tối đa 3 MB. Ảnh đi kèm được đặt cùng thư mục với trang, nên trong HTML dùng <code>&lt;img src="ten_anh.png"&gt;</code>.</div>
+      <div style="margin-top:12px"><button type="submit" id="upBtn">⬆ Tải lên & hiển thị trong mục</button> <span id="upStatus" class="hint"></span></div>
+    </form>
+  </div>
+  <div class="card">
+    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:8px">
+      <h2 style="margin:0">Quy trình & file đã tải lên (<span id="fCnt">0</span>)</h2>
+      <div style="flex:0 1 220px"><select id="fFilter"><option value="">Tất cả mục</option></select></div>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Mục</th><th>File / Tiêu đề</th><th>Nhóm</th><th>Dung lượng</th><th>Cập nhật</th><th>Thao tác</th></tr></thead>
+      <tbody id="ftb"><tr><td colspan="6">Đang tải...</td></tr></tbody>
+    </table></div>
+    <input type="file" id="replaceFile" style="display:none">
+  </div>
+
+  <h2 class="sec-title" id="users">👥 Quản lý user</h2>
   <div class="card">
     <h2>Thêm user</h2>
     <form class="row" id="addForm">
@@ -145,6 +184,141 @@ $('tb').addEventListener('click', async e => {
   } catch (x) { if (x) toast(x.message); }
 });
 load().catch(x => x && toast(x.message));
+// ===== Thêm quy trình mới vào mục có sẵn =====
+let files = [], cats = {};
+const GRP_NEW = '__new__';
+const kb = n => n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.ceil(n / 1024)) + ' KB';
+const cleanName = n => String(n || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D')
+  .replace(/\s+/g, '_').replace(/[^A-Za-z0-9_.-]/g, '').replace(/_+/g, '_').replace(/^[._-]+/, '');
+const readB64 = f => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1] || ''); r.onerror = no; r.readAsDataURL(f); });
+
+async function fapi(method, body, qs = '') {
+  const r = await fetch('/api/admin/files' + qs, { method, headers: { 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
+  const d = await r.json().catch(() => ({ error: r.status === 413 ? 'File quá lớn' : 'Lỗi máy chủ (' + r.status + ')' }));
+  if (r.status === 401) { location.href = '/login.html?next=/admin.html'; throw 0; }
+  if (!r.ok) { const e = new Error(d.error || 'Lỗi'); e.status = r.status; e.exists = d.exists; throw e; }
+  return d;
+}
+
+// Lấy danh sách nhóm (tiêu đề nhóm) của trang danh mục để chọn đúng chỗ hiển thị
+async function loadGroups() {
+  const cat = $('uCat').value, sel = $('uGrp');
+  sel.innerHTML = '<option value="">🆕 Quy trình bổ sung (nhóm mặc định)</option>';
+  try {
+    const html = await (await fetch('/' + cat + '/index.html')).text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const names = new Set([...doc.querySelectorAll('.category-header')].map(h => h.textContent.replace(/\s+/g, ' ').trim()));
+    files.filter(f => f.cat === cat && f.grp).forEach(f => names.add(f.grp));
+    names.forEach(n => sel.insertAdjacentHTML('beforeend', `<option value="${esc(n)}">${esc(n)}</option>`));
+  } catch {}
+  sel.insertAdjacentHTML('beforeend', `<option value="${GRP_NEW}">➕ Tạo nhóm mới...</option>`);
+  $('uGrpNewBox').style.display = 'none';
+}
+$('uGrp').addEventListener('change', () => { $('uGrpNewBox').style.display = $('uGrp').value === GRP_NEW ? '' : 'none'; });
+$('uCat').addEventListener('change', loadGroups);
+
+function renderFiles() {
+  const fc = $('fFilter').value;
+  const list = files.filter(f => !fc || f.cat === fc);
+  $('fCnt').textContent = files.length;
+  $('ftb').innerHTML = list.map(f => {
+    const html = f.content_type.startsWith('text/html');
+    return `<tr><td>${esc(cats[f.cat] || f.cat)}</td>
+      <td><a href="/${esc(f.cat)}/${esc(f.filename)}" target="_blank"><b>${esc(f.filename)}</b></a>${html && f.title ? `<br><span class="hint">${esc(f.title)}</span>` : ''}</td>
+      <td>${html ? esc(f.grp || 'Quy trình bổ sung') : '<span class="hint">(file đi kèm)</span>'}</td>
+      <td>${kb(f.size_bytes)}</td><td>${fmt(f.updated_at)}<br><span class="hint">${esc(f.uploaded_by)}</span></td>
+      <td class="act">
+        ${html ? `<button class="sec" data-f="edit" data-id="${f.id}">Sửa thông tin</button>` : ''}
+        <button class="sec" data-f="replace" data-id="${f.id}">Thay file</button>
+        <button class="danger" data-f="del" data-id="${f.id}">Xoá</button>
+      </td></tr>`;
+  }).join('') || '<tr><td colspan="6">Chưa có file nào được tải lên</td></tr>';
+}
+async function loadFiles() {
+  const d = await fapi('GET'); files = d.files; 
+  if (!Object.keys(cats).length) {
+    cats = d.cats;
+    $('uCat').innerHTML = Object.entries(cats).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
+    $('fFilter').insertAdjacentHTML('beforeend', Object.entries(cats).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join(''));
+    await loadGroups();
+  }
+  renderFiles();
+}
+$('fFilter').addEventListener('change', renderFiles);
+
+// Kiểm tra trùng tên với file có sẵn trên website (file tĩnh trong repo)
+async function staticExists(cat, name) {
+  if (files.some(f => f.cat === cat && f.filename === name)) return false;
+  try { const r = await fetch(`/${cat}/${name}`, { method: 'HEAD', cache: 'no-store' }); return r.ok; } catch { return false; }
+}
+
+async function uploadOne(cat, file, meta = {}, forceOverwrite = false) {
+  const name = cleanName(file.name);
+  if (file.size > 3 * 1024 * 1024) throw new Error(`${name}: quá 3 MB`);
+  if (await staticExists(cat, name)) throw new Error(`${name}: trùng tên với tài liệu có sẵn trong mục – hãy đổi tên file`);
+  const data_b64 = await readB64(file);
+  try { return await fapi('POST', { cat, filename: name, data_b64, ...meta, overwrite: forceOverwrite }); }
+  catch (e) {
+    if (e.exists && confirm(`${name} đã có trong mục. Ghi đè bằng file mới?`)) return fapi('POST', { cat, filename: name, data_b64, ...meta, overwrite: true });
+    throw e;
+  }
+}
+
+$('upForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const cat = $('uCat').value, f = $('uFile').files[0];
+  if (!f) return toast('Chọn file .html');
+  let grp = $('uGrp').value;
+  if (grp === GRP_NEW) { grp = $('uGrpNew').value.trim(); if (!grp) return toast('Nhập tên nhóm mới'); }
+  $('upBtn').disabled = true; $('upStatus').textContent = 'Đang tải lên...';
+  const done = [], errs = [];
+  try {
+    for (const img of $('uImgs').files) {
+      try { await uploadOne(cat, img); done.push(img.name); } catch (x) { if (x) errs.push(x.message); }
+    }
+    const r = await uploadOne(cat, f, { title: $('uTitle').value, description: $('uDesc').value, grp });
+    $('upStatus').innerHTML = `✅ Đã đăng: <a href="${esc(r.url)}" target="_blank">${esc(r.url)}</a>` + (errs.length ? ` · ⚠ ${esc(errs.join('; '))}` : '');
+    toast('Đã thêm quy trình vào mục ' + cats[cat]);
+    $('upForm').reset(); await loadFiles(); await loadGroups();
+  } catch (x) {
+    if (x) { $('upStatus').textContent = '❌ ' + x.message + (errs.length ? ' · ' + errs.join('; ') : ''); toast(x.message); }
+  }
+  $('upBtn').disabled = false;
+});
+
+let replacing = null;
+$('replaceFile').addEventListener('change', async () => {
+  const f = $('replaceFile').files[0]; const t = replacing; $('replaceFile').value = '';
+  if (!f || !t) return;
+  try {
+    const data_b64 = await readB64(f);
+    await fapi('POST', { cat: t.cat, filename: t.filename, data_b64, title: t.title, description: t.description, grp: t.grp, overwrite: true });
+    toast('Đã thay nội dung ' + t.filename); loadFiles();
+  } catch (x) { if (x) toast(x.message); }
+});
+
+$('ftb').addEventListener('click', async e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const f = files.find(x => x.id == b.dataset.id);
+  try {
+    if (b.dataset.f === 'edit') {
+      const title = prompt('Tiêu đề hiển thị:', f.title); if (title === null) return;
+      const description = prompt('Mô tả ngắn:', f.description); if (description === null) return;
+      const grp = prompt('Nhóm (để trống = "Quy trình bổ sung"; phải trùng tên nhóm trên trang mục):', f.grp); if (grp === null) return;
+      await fapi('PATCH', { id: f.id, title, description, grp }); toast('Đã cập nhật'); loadFiles();
+    }
+    if (b.dataset.f === 'replace') {
+      replacing = f; $('replaceFile').accept = '.' + f.filename.split('.').pop(); $('replaceFile').click();
+    }
+    if (b.dataset.f === 'del') {
+      if (!confirm(`Xoá ${f.filename} khỏi mục ${cats[f.cat]}?`)) return;
+      await fapi('DELETE', null, '?id=' + f.id); toast('Đã xoá ' + f.filename); loadFiles();
+    }
+  } catch (x) { if (x) toast(x.message); }
+});
+loadFiles().catch(x => x && toast(x.message));
+if (location.hash) setTimeout(() => document.querySelector(location.hash)?.scrollIntoView(), 300);
+
 </script>
 </body>
 </html>

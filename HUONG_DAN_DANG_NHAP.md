@@ -54,3 +54,14 @@ Tài liệu mới: thêm vào đúng thư mục và chèn dòng sau ngay trướ
 ## Lưu ý URL
 `vercel.json` đã tắt `cleanUrls` (cấu hình cũ làm hỏng link tương đối trong các trang danh mục).
 Link giữ dạng `.../Tho_DMX/Quy_trinh_xxx.html`.
+
+## Thêm quy trình mới vào mục có sẵn (không cần push GitHub)
+Menu tài khoản → **Quản trị** → phần **Thêm quy trình mới vào mục có sẵn**:
+1. Chọn **Mục** (CE & Gia dụng, Thợ ĐMX, ICT Android / iOS / Windows) và **Nhóm** trong mục (lấy đúng các nhóm đang có trên trang mục, hoặc tạo nhóm mới).
+2. Chọn file `.html` (và ảnh/PDF đi kèm nếu trang dùng ảnh riêng) → **Tải lên**.
+3. Quy trình hiện ngay trên trang mục và trang chủ, tại địa chỉ `/<mục>/<tên_file>.html`.
+
+- File lưu trong Neon (bảng `ksnb_files`), tối đa 3 MB/file. Neon Free có 0,5 GB.
+- Link trong file mới dùng như các trang có sẵn: `index.html` = về danh mục, `../index.html` (hoặc `../../index.html` với ICT) = về trang chủ, ảnh `ten_anh.png` = ảnh tải kèm.
+- Không được trùng tên với file đã có trong repo (web tự chặn). Tải lại cùng tên = ghi đè.
+- Muốn đưa hẳn vào repo sau này: tải file về, chép vào đúng thư mục, push GitHub, rồi xoá bản trong trang Quản trị.

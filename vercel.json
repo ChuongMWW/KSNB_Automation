@@ -2,5 +2,9 @@
   "cleanUrls": false,
   "headers": [
     { "source": "/(login|setup|admin).html", "headers": [{ "key": "Cache-Control", "value": "no-store" }] }
+  ],
+  "rewrites": [
+    { "source": "/:cat(CE_Gia_dung|Tho_DMX)/:file", "destination": "/api/file?cat=:cat&file=:file" },
+    { "source": "/ICT/:sub(Android|IOS|Windows)/:file", "destination": "/api/file?cat=ICT/:sub&file=:file" }
   ]
 }

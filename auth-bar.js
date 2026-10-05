@@ -19,7 +19,7 @@
     el.innerHTML = `<div class="b"><span class="av">${(nm[0] || '?').toUpperCase()}</span><span>${me.code.replace(/[<>&"]/g, '')}</span></div>
       <div class="m"><div>${nm}</div>
       <a href="#" data-k="pw">🔑 Đổi mật khẩu</a>
-      ${me.is_admin ? '<a href="/admin.html">👥 Quản lý user</a>' : ''}
+      ${me.is_admin ? '<a href="/admin.html">⚙️ Quản trị (quy trình &amp; user)</a>' : ''}
       <a href="/api/logout">🚪 Đăng xuất</a></div>`;
     document.body.appendChild(el);
     el.querySelector('.b').onclick = e => { e.stopPropagation(); el.classList.toggle('open'); };
