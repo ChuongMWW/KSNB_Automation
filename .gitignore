@@ -1,0 +1,21 @@
+# Local Python cache
+__pycache__/
+*.py[cod]
+
+# Local auto-sync backups
+_backups/
+
+# Local/editor files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+*.temp
