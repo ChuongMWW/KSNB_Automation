@@ -10,7 +10,7 @@ PORT = 8765
 HOST = "127.0.0.1"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_HTML_PATH = os.path.join(BASE_DIR, "Quy_trinh_bao_hanh_uy_quyen_kho_ttbh.html")
+REPO_HTML_PATH = os.path.join(BASE_DIR, "Tho_DMX", "Quy_trinh_bao_hanh_uy_quyen_kho_ttbh.html")
 USER_PROFILE = os.environ.get("USERPROFILE", r"C:\Users\PC")
 DOWNLOADS_PATH = os.path.join(USER_PROFILE, "Downloads", "quy_trinh_bao_hanh_uy_quyen_kho_ttbh_format_moi.html")
 BACKUP_DIR = os.path.join(BASE_DIR, "_backups")

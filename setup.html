@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khởi tạo quản trị | KSNB Automation</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--blue:#12358f;--blue2:#0a276f;--yellow:#ffd200;--bg:#f3f6fb;--text:#172033;--muted:#667085;--line:#dce3ee;--red:#c62828;--green:#15803d}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:linear-gradient(135deg,#102f84,#0b2568);color:var(--text);font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,sans-serif;display:flex;align-items:center;justify-content:center;padding:16px}
+.box{background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.25);width:100%;max-width:400px;padding:32px 28px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;color:var(--blue);margin-bottom:6px}
+.logo-mark{width:40px;height:40px;border-radius:10px;background:var(--yellow);color:var(--blue);display:grid;place-items:center;font-weight:900}
+h1{font-size:20px;margin:18px 0 4px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 20px}
+label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;outline:none}
+input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(18,53,143,.12)}
+button{width:100%;margin-top:22px;padding:13px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+button:hover{background:var(--blue2)}
+button:disabled{opacity:.6;cursor:wait}
+.msg{margin-top:14px;font-size:14px;min-height:20px}
+.msg.err{color:var(--red)} .msg.ok{color:var(--green)}
+.foot{margin-top:18px;font-size:12px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<form class="box" id="f">
+  <div class="logo"><div class="logo-mark">KS</div><div>KSNB Automation</div></div>
+  <h1>Tạo tài khoản quản trị đầu tiên</h1>
+  <p class="sub">Chỉ dùng một lần. Mã khởi tạo chính là giá trị <b>AUTH_SECRET</b> bạn đặt trên Vercel.</p>
+  <label for="secret">Mã khởi tạo (AUTH_SECRET)</label>
+  <input id="secret" type="password" required>
+  <label for="code">Mã user quản trị</label>
+  <input id="code" required>
+  <label for="name">Họ tên</label>
+  <input id="name">
+  <label for="pw">Mật khẩu (tối thiểu 6 ký tự)</label>
+  <input id="pw" type="password" minlength="6" required autocomplete="new-password">
+  <button id="btn" type="submit">Tạo quản trị</button>
+  <div class="msg" id="msg"></div>
+</form>
+<script>
+const f = document.getElementById('f'), msg = document.getElementById('msg'), btn = document.getElementById('btn');
+fetch('/api/setup').then(r => r.json()).then(d => {
+  if (!d.needs_setup) { msg.className = 'msg ok'; msg.innerHTML = 'Đã khởi tạo rồi. <a href="/login.html">Đến trang đăng nhập</a>'; btn.disabled = true; }
+}).catch(() => { msg.className = 'msg err'; msg.textContent = 'Không kết nối được database – kiểm tra DATABASE_URL trên Vercel.'; });
+f.addEventListener('submit', async e => {
+  e.preventDefault(); btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Đang tạo...';
+  const v = id => document.getElementById(id).value;
+  const r = await fetch('/api/setup', { method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ secret: v('secret'), code: v('code'), full_name: v('name'), password: v('pw') }) });
+  const d = await r.json().catch(() => ({}));
+  if (r.ok) { msg.className = 'msg ok'; msg.innerHTML = 'Đã tạo xong. <a href="/login.html">Đăng nhập ngay</a>'; return; }
+  msg.className = 'msg err'; msg.textContent = d.error || 'Lỗi'; btn.disabled = false;
+});
+</script>
+</body>
+</html>
