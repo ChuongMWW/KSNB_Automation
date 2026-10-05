@@ -207,6 +207,8 @@ async function loadGroups() {
   try {
     const html = await (await fetch('/' + cat + '/index.html')).text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
+    const def = doc.getElementById('docContainer')?.dataset.defaultGroup;
+    if (def) sel.options[0].textContent = def + ' (nhóm mặc định)';
     const names = new Set([...doc.querySelectorAll('.category-header')].map(h => h.textContent.replace(/\s+/g, ' ').trim()));
     files.filter(f => f.cat === cat && f.grp).forEach(f => names.add(f.grp));
     names.forEach(n => sel.insertAdjacentHTML('beforeend', `<option value="${esc(n)}">${esc(n)}</option>`));

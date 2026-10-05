@@ -3,7 +3,7 @@
   if (location.protocol === 'file:') return;
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const norm = s => String(s || '').replace(/\s+/g, ' ').trim().toLowerCase();
-  const CATS = ['CE_Gia_dung', 'Tho_DMX', 'ICT/Android', 'ICT/IOS', 'ICT/Windows'];
+  const CATS = ['CE_Gia_dung', 'Tho_DMX', 'ICT/Android', 'ICT/IOS', 'ICT/Windows', 'Giao_hang_lap_dat', 'Bao_duong_dinh_ky', 'Xay_dung_bao_tri'];
   const path = location.pathname.replace(/\/index\.html$/, '/');
   const cat = CATS.find(c => path === '/' + c + '/');
   const isHome = path === '/' ;
@@ -17,6 +17,8 @@
 
   function renderCategory(docs) {
     const box = document.getElementById('docContainer'); if (!box) return;
+    box.querySelectorAll('.ksnb-empty').forEach(e => e.remove());
+    const defName = box.dataset.defaultGroup || '🆕 Quy trình bổ sung';
     let extra = null;
     for (const doc of docs) {
       const groups = [...box.querySelectorAll('.category-group')];
@@ -29,7 +31,7 @@
       if (!g) {
         if (!extra) {
           extra = document.createElement('div'); extra.className = 'category-group'; extra.dataset.ksnbExtra = '1';
-          extra.innerHTML = '<div class="category-header">🆕 Quy trình bổ sung</div><div class="doc-list"></div>';
+          extra.innerHTML = `<div class="category-header">${esc(defName)}</div><div class="doc-list"></div>`;
           box.appendChild(extra);
         }
         g = extra;

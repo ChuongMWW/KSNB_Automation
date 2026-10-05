@@ -4,7 +4,7 @@
     { "source": "/(login|setup|admin).html", "headers": [{ "key": "Cache-Control", "value": "no-store" }] }
   ],
   "rewrites": [
-    { "source": "/:cat(CE_Gia_dung|Tho_DMX)/:file", "destination": "/api/file?cat=:cat&file=:file" },
+    { "source": "/:cat(CE_Gia_dung|Tho_DMX|Giao_hang_lap_dat|Bao_duong_dinh_ky|Xay_dung_bao_tri)/:file", "destination": "/api/file?cat=:cat&file=:file" },
     { "source": "/ICT/:sub(Android|IOS|Windows)/:file", "destination": "/api/file?cat=ICT/:sub&file=:file" }
   ]
 }
