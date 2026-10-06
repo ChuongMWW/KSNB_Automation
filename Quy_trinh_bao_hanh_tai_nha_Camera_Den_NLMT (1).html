@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUY TRÌNH BẢO HÀNH TẠI NHÀ CAMERA &amp; ĐÈN NĂNG LƯỢNG MẶT TRỜI | THỢ ĐIỆN MÁY XANH</title>
+<style>
+:root{--navy:#0F2C59;--steel:#24496E;--gold:#D97706;--sky:#0284c7;--sky-l:#e0f2fe;--ok:#10b981;--ok-l:#d1fae5;--warn:#f59e0b;--warn-l:#fef3c7;--bad:#ef4444;--bad-l:#fee2e2;--g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;--g300:#cbd5e1;--g500:#64748b;--g700:#334155;--g900:#0f172a;--r:12px;--sh:0 4px 14px rgba(15,44,89,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#eef2f7;color:var(--g700);line-height:1.6;font-size:15px}
+.top{background:#090d16;color:#94a3b8;font-size:12px;padding:6px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+header{background:linear-gradient(120deg,var(--navy),var(--steel) 60%,#1e5a8a);color:#fff;padding:34px 24px 0}
+.wrap{max-width:1180px;margin:0 auto}
+header .badge{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:3px 12px;border-radius:99px;font-size:12px;letter-spacing:.5px}
+header h1{font-size:30px;line-height:1.25;margin:12px 0 8px}
+header p.sub{opacity:.85;max-width:820px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 22px}
+.meta span{background:rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;font-size:13px}
+nav.tabs{display:flex;gap:4px;overflow-x:auto}
+nav.tabs button{background:transparent;border:0;color:#cbd5e1;padding:12px 18px;font-size:14px;font-weight:600;cursor:pointer;border-radius:10px 10px 0 0;white-space:nowrap}
+nav.tabs button.on{background:#eef2f7;color:var(--navy)}
+main{padding:26px 24px 50px}
+section.tab{display:none}section.tab.on{display:block}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:22px 24px;margin-bottom:18px}
+h2{color:var(--navy);font-size:21px;margin-bottom:14px;padding-left:12px;border-left:5px solid var(--gold)}
+h3{color:var(--steel);font-size:17px;margin:4px 0 10px}
+ul.b{padding-left:20px}ul.b li{margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:860px){.grid2,.grid3{grid-template-columns:1fr}header h1{font-size:23px}}
+.kpi{border-radius:12px;padding:16px;border-top:4px solid var(--sky);background:var(--g50)}
+.kpi b{display:block;font-size:24px;color:var(--navy)}
+.pill{display:inline-block;border-radius:99px;padding:2px 10px;font-size:12px;font-weight:700}
+.p-ok{background:var(--ok-l);color:#047857}.p-warn{background:var(--warn-l);color:#b45309}.p-bad{background:var(--bad-l);color:#b91c1c}.p-sky{background:var(--sky-l);color:#0369a1}
+.note{border-left:5px solid var(--sky);background:var(--sky-l);padding:12px 16px;border-radius:8px;margin:12px 0}
+.note.warn{border-color:var(--warn);background:var(--warn-l)}.note.bad{border-color:var(--bad);background:var(--bad-l)}.note.ok{border-color:var(--ok);background:var(--ok-l)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-weight:600}
+td{padding:10px 12px;border-bottom:1px solid var(--g200);vertical-align:top}
+tr:nth-child(even) td{background:var(--g50)}
+.tw{overflow-x:auto;border-radius:10px;border:1px solid var(--g200)}
+.code{font-family:Consolas,monospace;background:var(--g900);color:#fbbf24;padding:2px 8px;border-radius:6px;font-weight:700}
+/* steps */
+.step{display:grid;grid-template-columns:64px 1fr;gap:16px;background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:20px;margin-bottom:16px;border-left:6px solid var(--sky)}
+.step .no{width:56px;height:56px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:18px}
+.step h3{margin-top:4px}
+.step .who{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.step .who span{background:var(--g100);border:1px solid var(--g200);border-radius:8px;padding:2px 10px;font-size:13px}
+.step .io{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:700px){.step{grid-template-columns:1fr}.step .io{grid-template-columns:1fr}}
+.step .io div{background:var(--g50);border-radius:8px;padding:10px 12px;font-size:14px}
+.step .io b{color:var(--navy);display:block;margin-bottom:4px}
+.ctrl{margin-top:10px;background:#fff7ed;border:1px dashed var(--gold);border-radius:8px;padding:10px 12px;font-size:14px}
+.ctrl b{color:var(--gold)}
+.step.cam{border-left-color:var(--sky)}.step.sun{border-left-color:var(--gold)}.step.sys{border-left-color:var(--ok)}.step.red{border-left-color:var(--bad)}
+figure{margin:14px 0 4px;text-align:center}
+figure svg{max-width:100%;height:auto}
+figcaption{font-size:13px;color:var(--g500);margin-top:6px;font-style:italic}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips span{background:var(--sky-l);color:#0369a1;border-radius:8px;padding:4px 10px;font-size:13px;font-weight:600}
+footer{text-align:center;font-size:12px;color:var(--g500);padding:20px}
+.tips{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:860px){.tips{grid-template-columns:1fr}}
+.tip{border-radius:12px;padding:16px;background:var(--g50);border:1px solid var(--g200)}
+.tip h4{color:var(--navy);margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="top"><span>THỢ ĐIỆN MÁY XANH • TÀI LIỆU QUY TRÌNH NỘI BỘ</span><span>Phiên bản 2.1 • Cập nhật 06/10/2026</span></div>
+<header><div class="wrap">
+ <span class="badge">BẢO HÀNH TẠI NHÀ • GIAI ĐOẠN 1</span>
+ <h1>📷☀️ Quy trình bảo hành tại nhà<br>Camera &amp; Đèn năng lượng mặt trời</h1>
+ <p class="sub">Kiểm soát điều kiện bảo hành tại nhà bằng <b>Code lắp đặt</b> và <b>giới hạn 12 tháng</b> kể từ ngày hoàn tất giao hàng. Áp dụng cho Tổng đài CE, Điều phối, Kỹ thuật viên Thợ ĐMX và Siêu thị.</p>
+ <div class="meta"><span>🏷️ Ngành hàng: Camera • Đèn NLMT</span><span>💻 Hệ thống: CRM • ERP • WMS • TMS • App Thợ ĐMX</span><span>🔑 Code lắp đặt: 7042011000224</span><span>🚚 Vận đơn 1025 (chung quy trình Đổi trả tại nhà)</span></div>
+ <nav class="tabs" id="tabs">
+  <button data-t="t1" class="on">📊 Tổng quan</button>
+  <button data-t="t2">❓ Điều kiện tại nhà</button>
+  <button data-t="t3">⚙️ Quy trình chi tiết</button>
+  <button data-t="t4">🛡️ Kiểm soát &amp; Chứng từ</button>
+  <button data-t="t5">💡 Hướng dẫn xử lý lỗi</button>
+  <button data-t="t6">📝 Nội dung chốt</button>
+ </nav>
+</div></header>
+
+<main><div class="wrap">
+
+<!-- ================= TAB 1 ================= -->
+<section class="tab on" id="t1">
+ <div class="card">
+  <h2>🎯 Mục tiêu</h2>
+  <div class="grid3">
+   <div class="kpi"><b>2 ngành hàng</b>Chỉ áp dụng cho Camera và Đèn năng lượng mặt trời.</div>
+   <div class="kpi" style="border-top-color:var(--gold)"><b>12 tháng</b>Bảo hành tại nhà tính từ <u>ngày hoàn tất giao hàng</u>.</div>
+   <div class="kpi" style="border-top-color:var(--ok)"><b>Code lắp đặt</b>Đơn mới phải có dòng <span class="code">7042011000224</span> trên đơn bán.</div>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>🔄 Luồng 5 giai đoạn</h2>
+  <figure>
+  <svg viewBox="0 0 1100 230" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial">
+   <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker>
+   <filter id="sd"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity=".15"/></filter></defs>
+   <g filter="url(#sd)">
+    <rect x="10" y="40" width="190" height="150" rx="16" fill="#0F2C59"/>
+    <rect x="232" y="40" width="190" height="150" rx="16" fill="#24496E"/>
+    <rect x="454" y="40" width="190" height="150" rx="16" fill="#0284c7"/>
+    <rect x="676" y="40" width="190" height="150" rx="16" fill="#D97706"/>
+    <rect x="898" y="40" width="190" height="150" rx="16" fill="#10b981"/>
+   </g>
+   <g fill="#fff" text-anchor="middle">
+    <text x="105" y="88" font-size="34">📞</text><text x="105" y="128" font-size="15" font-weight="700">1. TIẾP NHẬN</text><text x="105" y="150" font-size="12">Tổng đài CE tra đơn</text><text x="105" y="168" font-size="12">tư vấn Cấp 1 từ xa</text>
+    <text x="327" y="88" font-size="34">🔍</text><text x="327" y="128" font-size="15" font-weight="700">2. THẨM ĐỊNH</text><text x="327" y="150" font-size="12">CRM tự kiểm tra</text><text x="327" y="168" font-size="12">Code + 12 tháng</text>
+    <text x="549" y="88" font-size="34">🚚</text><text x="549" y="128" font-size="15" font-weight="700">3. ĐIỀU PHỐI</text><text x="549" y="150" font-size="12">Vận đơn 1025 trên TMS</text><text x="549" y="168" font-size="12">gán KTV trên TMS</text>
+    <text x="771" y="88" font-size="34">🛠️</text><text x="771" y="128" font-size="15" font-weight="700">4. XỬ LÝ TẠI NHÀ</text><text x="771" y="150" font-size="12">KTV kiểm tra, xác định lỗi</text><text x="771" y="168" font-size="12">lỗi NSX ➔ xác nhận đổi</text>
+    <text x="993" y="88" font-size="34">✅</text><text x="993" y="128" font-size="15" font-weight="700">5. HOÀN TẤT</text><text x="993" y="150" font-size="12">Hoàn tất trên TMS</text><text x="993" y="168" font-size="12">đồng bộ về WMS</text>
+   </g>
+   <g stroke="#94a3b8" stroke-width="3" marker-end="url(#ar)"><line x1="202" y1="115" x2="228" y2="115"/><line x1="424" y1="115" x2="450" y2="115"/><line x1="646" y1="115" x2="672" y2="115"/><line x1="868" y1="115" x2="894" y2="115"/></g>
+   <text x="550" y="222" text-anchor="middle" font-size="13" fill="#64748b">Không đủ điều kiện tại nhà ➔ Tổng đài hướng dẫn khách mang sản phẩm ra Siêu thị</text>
+  </svg>
+  <figcaption>Hình 1. Luồng xử lý bảo hành tại nhà Camera &amp; Đèn NLMT</figcaption>
+  </figure>
+ </div>
+
+ <div class="card">
+  <h2>👥 Bộ phận tham gia</h2>
+  <div class="tw"><table>
+   <tr><th style="width:22%">Bộ phận</th><th>Vai trò</th><th style="width:22%">Hệ thống</th></tr>
+   <tr><td>🤝 Khách hàng</td><td>Gọi tổng đài báo lỗi; cung cấp SĐT mua hàng / mã đơn, mô tả sự cố; hẹn lịch và ký nghiệm thu.</td><td>Tổng đài CSKH</td></tr>
+   <tr><td>📞 Tổng đài viên CE</td><td>Tra cứu đơn gốc, tư vấn Cấp 1 từ xa; hệ thống thẩm định điều kiện; tạo yêu cầu bảo hành tại nhà hoặc hướng dẫn ra Siêu thị.</td><td>NewCRM / CRM</td></tr>
+   <tr><td>📋 Điều phối</td><td><b>Phân bổ kỹ thuật = gán nhân viên (KTV) trên vận đơn TMS</b>, theo kỹ năng Camera / Đèn NLMT và khu vực.</td><td>TMS (WMS Bước 5)</td></tr>
+   <tr><td>👨‍🔧 Kỹ thuật viên Thợ ĐMX</td><td>Hẹn khách, đến nhà kiểm tra, xác định lỗi; <b>lỗi nhà sản xuất ➔ xác nhận đổi sản phẩm cho khách</b>; chụp ảnh bằng chứng; khách ký nghiệm thu; <b>hoàn tất trên TMS</b>. <i>Không thay linh kiện.</i></td><td>App Thợ ĐMX / TMS</td></tr>
+   <tr><td>🏬 Siêu thị ĐMX</td><td>Tiếp nhận sản phẩm khách mang đến khi không đủ điều kiện tại nhà; tạo Jobcard gửi TTBH / Hãng theo quy trình chuẩn.</td><td>App MWGWork (WMS)</td></tr>
+   <tr><td>💰 Kế toán / 🔍 KSNB</td><td>Đối soát ca hoàn tất, chi phí công Thợ; kiểm tra tuân thủ điều kiện tạo ca tại nhà.</td><td>ERP • WMS • TMS</td></tr>
+  </table></div>
+ </div>
+</section>
+
+<!-- ================= TAB 2 ================= -->
+<section class="tab" id="t2">
+ <div class="card">
+  <h2>❓ Cây quyết định: có được bảo hành tại nhà không?</h2>
+  <figure>
+  <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial">
+   <defs><marker id="a2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker></defs>
+   <rect x="330" y="10" width="340" height="56" rx="28" fill="#0F2C59"/><text x="500" y="44" fill="#fff" text-anchor="middle" font-size="16" font-weight="700">📞 Khách báo lỗi Camera / Đèn NLMT</text>
+   <line x1="500" y1="66" x2="500" y2="100" stroke="#64748b" stroke-width="2.5" marker-end="url(#a2)"/>
+   <polygon points="500,104 690,160 500,216 310,160" fill="#fef3c7" stroke="#D97706" stroke-width="2.5"/>
+   <text x="500" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">Còn trong 12 tháng</text><text x="500" y="174" text-anchor="middle" font-size="13" fill="#92400e">từ ngày hoàn tất giao hàng?</text>
+   <line x1="690" y1="160" x2="790" y2="160" stroke="#ef4444" stroke-width="2.5" marker-end="url(#a2)"/><text x="740" y="150" text-anchor="middle" font-size="13" fill="#ef4444" font-weight="700">KHÔNG</text>
+   <rect x="794" y="118" width="196" height="84" rx="12" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/><text x="892" y="148" text-anchor="middle" font-size="14" font-weight="700" fill="#b91c1c">⛔ Từ tháng 13</text><text x="892" y="170" text-anchor="middle" font-size="12" fill="#b91c1c">CRM cảnh báo</text><text x="892" y="188" text-anchor="middle" font-size="12" fill="#b91c1c">➔ Hướng dẫn ra Siêu thị</text>
+   <line x1="500" y1="216" x2="500" y2="256" stroke="#10b981" stroke-width="2.5" marker-end="url(#a2)"/><text x="520" y="242" font-size="13" fill="#10b981" font-weight="700">CÓ</text>
+   <polygon points="500,260 690,316 500,372 310,316" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+   <text x="500" y="310" text-anchor="middle" font-size="15" font-weight="700" fill="#075985">Đơn bán trước</text><text x="500" y="332" text-anchor="middle" font-size="13" fill="#075985">hay sau ngày Go-live?</text>
+   <line x1="310" y1="316" x2="200" y2="316" stroke="#10b981" stroke-width="2.5" marker-end="url(#a2)"/><text x="255" y="306" text-anchor="middle" font-size="13" fill="#10b981" font-weight="700">TRƯỚC</text>
+   <rect x="10" y="274" width="186" height="84" rx="12" fill="#d1fae5" stroke="#10b981" stroke-width="2"/><text x="103" y="304" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">✅ ĐƠN CŨ</text><text x="103" y="326" text-anchor="middle" font-size="12" fill="#047857">Không xét Code</text><text x="103" y="344" text-anchor="middle" font-size="12" fill="#047857">➔ Cho tạo tại nhà</text>
+   <line x1="500" y1="372" x2="500" y2="412" stroke="#0284c7" stroke-width="2.5" marker-end="url(#a2)"/><text x="520" y="398" font-size="13" fill="#0284c7" font-weight="700">SAU</text>
+   <polygon points="500,416 690,472 500,528 310,472" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2.5"/>
+   <text x="500" y="466" text-anchor="middle" font-size="15" font-weight="700" fill="#5b21b6">Đơn gốc có Code lắp đặt</text><text x="500" y="488" text-anchor="middle" font-size="13" fill="#5b21b6">7042011000224?</text>
+   <line x1="310" y1="472" x2="200" y2="472" stroke="#10b981" stroke-width="2.5" marker-end="url(#a2)"/><text x="255" y="462" text-anchor="middle" font-size="13" fill="#10b981" font-weight="700">CÓ</text>
+   <rect x="10" y="430" width="186" height="84" rx="12" fill="#d1fae5" stroke="#10b981" stroke-width="2"/><text x="103" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">✅ ĐỦ ĐIỀU KIỆN</text><text x="103" y="482" text-anchor="middle" font-size="12" fill="#047857">Tạo bảo hành</text><text x="103" y="500" text-anchor="middle" font-size="12" fill="#047857">tại nhà</text>
+   <line x1="690" y1="472" x2="790" y2="472" stroke="#ef4444" stroke-width="2.5" marker-end="url(#a2)"/><text x="740" y="462" text-anchor="middle" font-size="13" fill="#ef4444" font-weight="700">KHÔNG</text>
+   <rect x="794" y="430" width="196" height="84" rx="12" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/><text x="892" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#b91c1c">⛔ Khách tự lắp</text><text x="892" y="482" text-anchor="middle" font-size="12" fill="#b91c1c">Khóa "Tại nhà"</text><text x="892" y="500" text-anchor="middle" font-size="12" fill="#b91c1c">➔ Hướng dẫn ra Siêu thị</text>
+  </svg>
+  <figcaption>Hình 2. CRM tự động phân luồng; nhân viên không chọn tay hình thức bảo hành</figcaption>
+  </figure>
+ </div>
+
+ <div class="grid2">
+  <div class="card">
+   <h2>🔑 Code lắp đặt là gì?</h2>
+   <ul class="b">
+    <li>Mã <span class="code">7042011000224</span> — <b>Code miễn phí công lắp đặt</b>.</li>
+    <li>Là một dòng sản phẩm phụ nằm <b>chung đơn bán</b> với sản phẩm chính trên ERP (ví dụ đơn loại <i>"MWG - Xuất bán GH tại nhà"</i>).</li>
+    <li>Dùng <b>chung cho tất cả quy trình có giao và lắp</b>, không riêng Camera / Đèn NLMT.</li>
+    <li>Đơn có Code nghĩa là ĐMX đã lắp đặt cho khách ➔ đủ điều kiện quay lại nhà bảo hành.</li>
+   </ul>
+  </div>
+  <div class="card">
+   <h2>🗓️ Cách tính 12 tháng</h2>
+   <figure>
+   <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial">
+    <rect x="20" y="60" width="330" height="26" rx="13" fill="#10b981"/><rect x="350" y="60" width="130" height="26" rx="13" fill="#ef4444"/>
+    <circle cx="20" cy="73" r="11" fill="#0F2C59"/><circle cx="350" cy="73" r="11" fill="#D97706"/>
+    <text x="20" y="40" font-size="13" fill="#0F2C59" font-weight="700">Ngày hoàn tất giao hàng</text>
+    <text x="350" y="40" font-size="13" fill="#D97706" font-weight="700" text-anchor="middle">Ngày 365</text>
+    <text x="185" y="78" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">THÁNG 1 ➔ 12: TẠI NHÀ</text>
+    <text x="415" y="78" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">TỪ THÁNG 13</text>
+    <text x="185" y="118" font-size="12" fill="#047857" text-anchor="middle">Đủ điều kiện (nếu đạt điều kiện Code)</text>
+    <text x="415" y="118" font-size="12" fill="#b91c1c" text-anchor="middle">Mang ra Siêu thị</text>
+   </svg>
+   <figcaption>Hình 3. Mốc tính là ngày hoàn tất giao hàng, không phải ngày xuất hóa đơn</figcaption>
+   </figure>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>🖥️ Màn hình CRM khi không đủ điều kiện (minh họa)</h2>
+  <figure>
+  <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial">
+   <rect x="0" y="0" width="900" height="300" rx="14" fill="#f1f5f9"/>
+   <rect x="0" y="0" width="900" height="38" rx="14" fill="#0F2C59"/><rect x="0" y="24" width="900" height="14" fill="#0F2C59"/>
+   <text x="20" y="25" fill="#fff" font-size="14" font-weight="700">CRM • Tạo yêu cầu bảo hành</text>
+   <circle cx="850" cy="19" r="6" fill="#ef4444"/><circle cx="830" cy="19" r="6" fill="#f59e0b"/><circle cx="810" cy="19" r="6" fill="#10b981"/>
+   <text x="30" y="72" font-size="13" fill="#334155">Hình thức bảo hành:</text>
+   <rect x="170" y="56" width="150" height="26" rx="6" fill="#e2e8f0" stroke="#cbd5e1"/><text x="245" y="74" text-anchor="middle" font-size="13" fill="#94a3b8">🔒 Tại nhà</text>
+   <rect x="330" y="56" width="150" height="26" rx="6" fill="#0284c7"/><text x="405" y="74" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">● Tại Siêu thị</text>
+   <rect x="120" y="104" width="660" height="168" rx="12" fill="#fff" stroke="#f97316" stroke-width="3"/>
+   <rect x="120" y="104" width="660" height="40" rx="12" fill="#ffedd5"/><rect x="120" y="130" width="660" height="14" fill="#ffedd5"/>
+   <text x="450" y="130" text-anchor="middle" font-size="16" font-weight="800" fill="#c2410c">⚠️ CẢNH BÁO: KHÔNG ÁP DỤNG BẢO HÀNH TẠI NHÀ</text>
+   <text x="450" y="176" text-anchor="middle" font-size="14" fill="#334155">Thiết bị đã quá 12 tháng kể từ ngày hoàn tất giao hàng</text>
+   <text x="450" y="198" text-anchor="middle" font-size="14" fill="#334155">hoặc đơn hàng không có Code lắp đặt 7042011000224.</text>
+   <text x="450" y="222" text-anchor="middle" font-size="14" fill="#0F2C59" font-weight="700">➔ Hướng dẫn khách hàng mang sản phẩm ra Siêu thị gần nhất.</text>
+   <rect x="400" y="236" width="100" height="26" rx="6" fill="#0F2C59"/><text x="450" y="254" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">Đã hiểu</text>
+  </svg>
+  <figcaption>Hình 4. Minh họa thông báo — giao diện thực tế do IT thiết kế</figcaption>
+  </figure>
+ </div>
+</section>
+
+<!-- ================= TAB 3 ================= -->
+<section class="tab" id="t3">
+ <div class="note">📌 Quy trình gồm <b>10 bước</b>. Bước 4A / 4B là nhánh không đủ điều kiện tại nhà.</div>
+
+ <div class="step"><div class="no">1</div><div>
+  <h3>Tiếp nhận cuộc gọi &amp; tra cứu đơn hàng gốc</h3>
+  <div class="who"><span>📞 Tổng đài viên CE</span><span>🤝 Khách hàng</span><span>💻 NewCRM / CRM</span></div>
+  <ul class="b"><li>Khách gọi tổng đài CSKH phản ánh Camera / Đèn NLMT bị lỗi.</li><li>Tổng đài viên yêu cầu SĐT mua hàng hoặc mã đơn, tra cứu đơn gốc trên CRM.</li><li>Xác định đúng sản phẩm thuộc ngành hàng Camera hoặc Đèn NLMT, mua tại MWG.</li></ul>
+  <div class="io"><div><b>📥 Đầu vào</b>SĐT khách • Mô tả sự cố</div><div><b>📤 Đầu ra</b>Đơn hàng gốc được xác định • Yêu cầu tiếp nhận trên CRM</div></div>
+ </div></div>
+
+ <div class="step"><div class="no">2</div><div>
+  <h3>Tư vấn Cấp 1 từ xa</h3>
+  <div class="who"><span>📞 Tổng đài viên CE</span><span>💻 CRM</span></div>
+  <div class="grid2">
+   <div class="tip"><h4>📷 Camera</h4><ul class="b"><li>Kiểm tra nguồn, adapter, đèn tín hiệu.</li><li>Kiểm tra WiFi, app quản lý.</li><li>Hướng dẫn khởi động lại / reset.</li></ul></div>
+   <div class="tip"><h4>☀️ Đèn NLMT</h4><ul class="b"><li>Tấm pin có bị che bóng, bám bụi?</li><li>Công tắc / remote, chế độ hẹn giờ.</li><li>Sạc đủ nắng 1–2 ngày rồi thử lại.</li></ul></div>
+  </div>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Ghi chú rõ hiện tượng lỗi và kết quả tư vấn vào yêu cầu trên CRM. Xử lý được từ xa thì đóng yêu cầu, không tạo ca.</div>
+ </div></div>
+
+ <div class="step sys"><div class="no">3</div><div>
+  <h3>CRM tự động thẩm định điều kiện tại nhà</h3>
+  <div class="who"><span>⚙️ Hệ thống CRM (tự động)</span><span>📊 ERP</span><span>🚚 TMS</span></div>
+  <ul class="b"><li>Lấy <b>ngày hoàn tất giao hàng</b> của đơn gốc ➔ tính số ngày đến hôm nay.</li><li>Đơn bán <b>sau Go-live</b>: kiểm tra đơn gốc có dòng <span class="code">7042011000224</span>.</li><li>Đơn bán <b>trước Go-live</b>: chỉ xét điều kiện 12 tháng.</li></ul>
+  <div class="io"><div><b>📥 Đầu vào</b>Mã đơn gốc • Dòng hàng trên đơn (ERP) • Ngày hoàn tất giao hàng</div><div><b>📤 Đầu ra</b>✅ ĐẠT ➔ Bước 5<br>⛔ Quá 12 tháng ➔ Bước 4A<br>⛔ Không có Code ➔ Bước 4B</div></div>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Hoàn toàn tự động; nhân viên <b>không được chọn tay</b> hình thức "Tại nhà" khi hệ thống đã khóa.</div>
+ </div></div>
+
+ <div class="step red"><div class="no">4A</div><div>
+  <h3>Từ tháng 13: cảnh báo &amp; hướng dẫn ra Siêu thị</h3>
+  <div class="who"><span>📞 Tổng đài viên CE</span><span>💻 CRM (cảnh báo)</span></div>
+  <ul class="b"><li>CRM khóa hình thức "Tại nhà" và hiện cảnh báo.</li><li>Tổng đài viên giải thích chính sách nhẹ nhàng, hướng dẫn khách mang sản phẩm ra Siêu thị gần nhất.</li></ul>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Không hứa hẹn cử thợ đến nhà; ghi nhận phản hồi khách lên CRM.</div>
+ </div></div>
+
+ <div class="step red"><div class="no">4B</div><div>
+  <h3>Đơn mới không có Code lắp đặt: hướng dẫn ra Siêu thị</h3>
+  <div class="who"><span>📞 Tổng đài viên CE</span><span>💻 CRM</span></div>
+  <ul class="b"><li>Trường hợp khách tự lắp đặt (đơn không có Code 7042011000224).</li><li>Giải thích: sản phẩm <b>vẫn được bảo hành</b>, chỉ là bảo hành tại Siêu thị, không phải từ chối bảo hành.</li></ul>
+ </div></div>
+
+ <div class="step"><div class="no">5</div><div>
+  <h3>Tạo yêu cầu bảo hành tại nhà ➔ Vận đơn 1025 trên TMS</h3>
+  <div class="who"><span>📞 Tổng đài viên CE</span><span>💻 CRM ➔ 🛠️ WMS ➔ 🚚 TMS</span></div>
+  <ul class="b"><li>Xác nhận địa chỉ, SĐT liên hệ, khung giờ khách mong muốn.</li><li>CRM tạo yêu cầu ➔ sinh Jobcard bảo hành tại nhà trên WMS ➔ tạo <b>Vận đơn 1025</b> trên TMS.</li><li>Vận đơn 1025 <b>chạy chung với quy trình Đổi trả tại nhà</b>.</li></ul>
+  <div class="io"><div><b>📥 Đầu vào</b>Kết quả thẩm định ĐẠT • Địa chỉ &amp; lịch hẹn</div><div><b>📤 Đầu ra</b>Mã Jobcard WMS • Vận đơn 1025 (TMS)</div></div>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> 1 Jobcard ↔ 1 Vận đơn 1025. Ghi đúng địa chỉ và SĐT để KTV liên hệ.</div>
+ </div></div>
+
+ <div class="step"><div class="no">6</div><div>
+  <h3>Phân bổ kỹ thuật = Gán KTV trên Vận đơn 1025</h3>
+  <div class="who"><span>📋 Điều phối</span><span>🚚 TMS</span><span>🛠️ WMS Bước 5</span></div>
+  <ul class="b"><li>Bước "Phân bổ kỹ thuật" của WMS được thực hiện bằng thao tác <b>gán nhân viên trên Vận đơn 1025 (TMS)</b>.</li><li>Chọn KTV có kỹ năng Camera / Đèn NLMT, đúng khu vực.</li><li>Vận đơn được đẩy về App Thợ ĐMX của KTV.</li></ul>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Không gán cho KTV chưa được đào tạo kỹ năng Camera / Đèn NLMT.</div>
+ </div></div>
+
+ <div class="step cam"><div class="no">7</div><div>
+  <h3>KTV nhận việc, hẹn giờ &amp; đến nhà khách</h3>
+  <div class="who"><span>👨‍🔧 KTV Thợ ĐMX</span><span>📱 App Thợ ĐMX</span></div>
+  <figure>
+  <svg viewBox="0 0 860 250" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial">
+   <g>
+    <rect x="20" y="10" width="170" height="230" rx="22" fill="#0f172a"/><rect x="30" y="30" width="150" height="190" rx="8" fill="#fff"/>
+    <rect x="30" y="30" width="150" height="30" rx="8" fill="#0284c7"/><text x="105" y="50" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">App Thợ ĐMX</text>
+    <text x="40" y="82" font-size="11" fill="#0F2C59" font-weight="700">📦 Vận đơn mới</text><text x="40" y="100" font-size="10" fill="#475569">Vận đơn 1025 • BH tại nhà</text><text x="40" y="116" font-size="10" fill="#475569">Đèn NLMT • Q. Bình Chánh</text>
+    <rect x="40" y="180" width="130" height="28" rx="6" fill="#10b981"/><text x="105" y="199" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Tiếp nhận</text>
+    <text x="105" y="252" text-anchor="middle" font-size="0">.</text>
+   </g>
+   <text x="235" y="130" font-size="34" fill="#94a3b8">➔</text>
+   <g>
+    <rect x="290" y="10" width="170" height="230" rx="22" fill="#0f172a"/><rect x="300" y="30" width="150" height="190" rx="8" fill="#fff"/>
+    <rect x="300" y="30" width="150" height="30" rx="8" fill="#0284c7"/><text x="375" y="50" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Liên hệ khách</text>
+    <circle cx="375" cy="112" r="30" fill="#d1fae5"/><text x="375" y="124" text-anchor="middle" font-size="30">📞</text>
+    <text x="375" y="166" text-anchor="middle" font-size="11" fill="#475569">Xác nhận lỗi &amp;</text><text x="375" y="182" text-anchor="middle" font-size="11" fill="#475569">chốt giờ đến nhà</text>
+   </g>
+   <text x="505" y="130" font-size="34" fill="#94a3b8">➔</text>
+   <g>
+    <rect x="560" y="10" width="170" height="230" rx="22" fill="#0f172a"/><rect x="570" y="30" width="150" height="190" rx="8" fill="#e0f2fe"/>
+    <rect x="570" y="30" width="150" height="30" rx="8" fill="#0284c7"/><text x="645" y="50" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Đến nhà khách</text>
+    <path d="M645 85 c-18 0 -30 13 -30 29 c0 22 30 50 30 50 s30 -28 30 -50 c0 -16 -12 -29 -30 -29z" fill="#ef4444"/><circle cx="645" cy="114" r="10" fill="#fff"/>
+    <text x="645" y="196" text-anchor="middle" font-size="11" fill="#0F2C59" font-weight="700">Check-in vị trí</text>
+   </g>
+   <text x="800" y="128" text-anchor="middle" font-size="40">🏠</text>
+  </svg>
+  <figcaption>Hình 5. Minh họa thao tác trên App Thợ ĐMX</figcaption>
+  </figure>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Bắt buộc gọi hẹn trước; check-in vị trí tại nhà khách để chống đi khống.</div>
+ </div></div>
+
+ <div class="step sun"><div class="no">8</div><div>
+  <h3>Kiểm tra, xác định lỗi &amp; xác nhận đổi sản phẩm</h3>
+  <div class="who"><span>👨‍🔧 KTV</span><span>📱 App Thợ ĐMX</span><span>🚚 Vận đơn 1025</span></div>
+  <div class="grid2">
+   <div class="tip"><h4>📷 Camera</h4><ul class="b"><li>Kiểm tra nguồn adapter, dây tín hiệu.</li><li>Kiểm tra hồng ngoại, thẻ nhớ.</li><li>Cài đặt lại kết nối mạng.</li></ul></div>
+   <div class="tip"><h4>☀️ Đèn NLMT</h4><ul class="b"><li>Kiểm tra tấm pin, pin lưu trữ.</li><li>Kiểm tra cảm biến ánh sáng, LED.</li><li>Chỉnh góc tấm pin đón nắng.</li></ul></div>
+  </div>
+  <figure>
+  <svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI,Arial">
+   <defs><marker id="a8" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker></defs>
+   <rect x="10" y="66" width="180" height="68" rx="12" fill="#0F2C59"/><text x="100" y="96" fill="#fff" text-anchor="middle" font-size="14" font-weight="700">🔍 KTV kiểm tra</text><text x="100" y="116" fill="#cbd5e1" text-anchor="middle" font-size="12">tại nhà khách</text>
+   <line x1="192" y1="100" x2="268" y2="100" stroke="#64748b" stroke-width="2.5" marker-end="url(#a8)"/>
+   <polygon points="370,40 470,100 370,160 270,100" fill="#fef3c7" stroke="#D97706" stroke-width="2.5"/>
+   <text x="370" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">Lỗi nhà</text><text x="370" y="114" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">sản xuất?</text>
+   <line x1="470" y1="100" x2="560" y2="60" stroke="#10b981" stroke-width="2.5" marker-end="url(#a8)"/><text x="505" y="66" font-size="12" fill="#10b981" font-weight="700">CÓ</text>
+   <rect x="564" y="20" width="326" height="72" rx="12" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+   <text x="727" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#047857">🔄 XÁC NHẬN ĐỔI SẢN PHẨM</text><text x="727" y="72" text-anchor="middle" font-size="12" fill="#047857">theo quy trình Đổi trả tại nhà (Vận đơn 1025)</text>
+   <line x1="470" y1="100" x2="560" y2="142" stroke="#0284c7" stroke-width="2.5" marker-end="url(#a8)"/><text x="490" y="150" font-size="12" fill="#0284c7" font-weight="700">KHÔNG</text>
+   <rect x="564" y="110" width="326" height="72" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+   <text x="727" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#075985">🛠️ Xử lý tại chỗ</text><text x="727" y="162" text-anchor="middle" font-size="12" fill="#075985">cài đặt, cân chỉnh, hướng dẫn sử dụng</text>
+  </svg>
+  <figcaption>Hình 6. Không thay linh kiện — lỗi nhà sản xuất thì đổi sản phẩm</figcaption>
+  </figure>
+  <div class="note bad">🚫 <b>Quy trình này KHÔNG thay linh kiện</b> và <b>không có bước tạm ứng linh kiện</b>.</div>
+  <div class="note ok">🔄 <b>Lỗi nhà sản xuất:</b> KTV xác nhận đổi sản phẩm cho khách hàng, thực hiện trên <b>Vận đơn 1025</b> (chạy chung với quy trình Đổi trả tại nhà).</div>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Chụp ảnh rõ Serial thiết bị và hiện tượng lỗi làm căn cứ xác nhận đổi. Tuân thủ an toàn lao động khi làm việc trên cao.</div>
+ </div></div>
+
+ <div class="step"><div class="no">9</div><div>
+  <h3>Khách nghiệm thu &amp; KTV hoàn tất trên TMS</h3>
+  <div class="who"><span>👨‍🔧 KTV</span><span>🤝 Khách hàng</span><span>🚚 TMS ➔ 🛠️ WMS</span></div>
+  <ul class="b"><li>Xử lý tại chỗ: KTV và khách cùng chạy thử (Camera xem được trên điện thoại; Đèn NLMT sáng khi che tối tấm pin).</li><li>Đổi sản phẩm: bàn giao sản phẩm đổi cho khách theo quy trình Đổi trả tại nhà.</li><li>Khách ký nghiệm thu điện tử trên App Thợ.</li><li>KTV <b>hoàn tất trên Vận đơn 1025 (TMS)</b> ➔ hệ thống <b>tự đồng bộ trạng thái Hoàn tất về Jobcard WMS</b>.</li></ul>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Phải có chữ ký khách mới được đóng ca. <b>Không thu bất kỳ khoản tiền nào</b> với ca bảo hành miễn phí. Không hoàn tất trực tiếp trên WMS.</div>
+ </div></div>
+
+ <div class="step sys"><div class="no">10</div><div>
+  <h3>Đóng ca, khảo sát khách hàng &amp; đối soát</h3>
+  <div class="who"><span>⚙️ WMS • TMS • CRM</span><span>💰 Kế toán</span><span>🔍 KSNB</span></div>
+  <ul class="b"><li>Jobcard WMS và Vận đơn 1025 cùng trạng thái hoàn tất.</li><li>CRM khảo sát mức độ hài lòng của khách.</li><li>Định kỳ đối soát ca hoàn tất và chi phí công Thợ ĐMX.</li></ul>
+  <div class="ctrl"><b>🛡️ Kiểm soát:</b> Chỉ quyết toán ca có đủ: check-in vị trí, ảnh hiện trường, chữ ký khách, và thỏa điều kiện Code / 12 tháng.</div>
+ </div></div>
+</section>
+
+<!-- ================= TAB 4 ================= -->
+<section class="tab" id="t4">
+ <div class="card">
+  <h2>🛡️ Quy tắc cốt lõi</h2>
+  <div class="tw"><table>
+   <tr><th style="width:8%">Mã</th><th style="width:24%">Quy tắc</th><th>Nội dung</th></tr>
+   <tr><td><b>BR-01</b></td><td>Phạm vi</td><td>Chỉ áp dụng cho <b>Camera</b> và <b>Đèn năng lượng mặt trời</b>.</td></tr>
+   <tr><td><b>BR-02</b></td><td>Đơn mới (sau Go-live)</td><td>Phải thỏa <b>đồng thời</b>: đơn gốc có Code <span class="code">7042011000224</span> <b>và</b> ≤ 12 tháng từ ngày hoàn tất giao hàng.</td></tr>
+   <tr><td><b>BR-03</b></td><td>Đơn cũ (trước Go-live)</td><td>Không xét Code; đã bán và ≤ 12 tháng là được tạo bảo hành tại nhà.</td></tr>
+   <tr><td><b>BR-04</b></td><td>Mốc 12 tháng</td><td>Tính từ <b>ngày hoàn tất giao hàng</b>, không theo ngày xuất hóa đơn.</td></tr>
+   <tr><td><b>BR-05</b></td><td>Từ tháng 13</td><td>CRM cảnh báo; Tổng đài hướng dẫn khách mang sản phẩm ra Siêu thị.</td></tr>
+   <tr><td><b>BR-06</b></td><td>Vận đơn &amp; gán KTV</td><td>Dùng <b>Vận đơn 1025</b>, chạy chung với quy trình Đổi trả tại nhà. Phân bổ kỹ thuật (WMS Bước 5) = gán nhân viên trên vận đơn này.</td></tr>
+   <tr><td><b>BR-07</b></td><td>Hoàn tất</td><td>Hoàn tất thực hiện trên TMS, sau đó đồng bộ về WMS.</td></tr>
+   <tr><td><b>BR-08</b></td><td>Không thay linh kiện</td><td>Quy trình không thay linh kiện, không có bước tạm ứng linh kiện. <b>Lỗi nhà sản xuất ➔ xác nhận đổi sản phẩm cho khách.</b></td></tr>
+  </table></div>
+ </div>
+
+ <div class="card">
+  <h2>📑 Chứng từ &amp; dữ liệu trong quy trình</h2>
+  <div class="tw"><table>
+   <tr><th>Chứng từ</th><th>Hệ thống</th><th>Khi nào phát sinh</th><th>Dùng để</th></tr>
+   <tr><td>📑 Đơn bán gốc (có dòng Code lắp đặt 7042011000224)</td><td>ERP</td><td>Khi khách mua hàng</td><td>Căn cứ CRM thẩm định điều kiện tại nhà</td></tr>
+   <tr><td>🎫 Yêu cầu bảo hành</td><td>CRM</td><td>Tổng đài tiếp nhận</td><td>Lưu vết tư vấn, kết quả thẩm định</td></tr>
+   <tr><td>🛠️ Jobcard bảo hành tại nhà</td><td>WMS</td><td>Khi thẩm định ĐẠT</td><td>Quản lý vòng đời sửa chữa</td></tr>
+   <tr><td>🚚 Vận đơn 1025 (chung quy trình Đổi trả tại nhà)</td><td>TMS</td><td>Sinh từ Jobcard</td><td>Gán KTV, xác nhận đổi, hoàn tất ca</td></tr>
+   
+   <tr><td>✍️ Biên bản nghiệm thu điện tử</td><td>App Thợ ĐMX</td><td>Khi khách ký</td><td>Căn cứ đóng ca, quyết toán công</td></tr>
+  </table></div>
+ </div>
+
+ <div class="card">
+  <h2>🔄 Đối soát đa hệ thống</h2>
+  <div class="tw"><table>
+   <tr><th>Hạng mục</th><th>CRM</th><th>ERP</th><th>TMS</th><th>WMS</th><th>Quy tắc khớp</th></tr>
+   <tr><td>Serial thiết bị</td><td>Serial báo lỗi</td><td>Serial trên đơn</td><td>Serial kiểm tra tại nhà</td><td>Serial trên Jobcard</td><td>Khớp 100%</td></tr>
+   <tr><td>Code lắp đặt</td><td>Kết quả thẩm định</td><td>Dòng 7042011000224</td><td>Vận đơn 1025</td><td>Loại Jobcard tại nhà</td><td>Đơn mới không có Code ➔ không được có ca tại nhà</td></tr>
+   <tr><td>Mốc 12 tháng</td><td>Ngày tạo yêu cầu</td><td>—</td><td>Ngày hoàn tất giao hàng</td><td>—</td><td>Ca tạo khi &gt; 365 ngày ➔ KSNB kiểm tra</td></tr>
+   <tr><td>Trạng thái hoàn tất</td><td>Đóng yêu cầu</td><td>—</td><td>Hoàn tất Vận đơn 1025</td><td>Đồng bộ Hoàn tất</td><td>TMS và WMS phải cùng trạng thái</td></tr>
+  </table></div>
+ </div>
+</section>
+
+<!-- ================= TAB 5 ================= -->
+<section class="tab" id="t5">
+ <div class="card">
+  <h2>💡 Câu hỏi thường gặp</h2>
+  <div class="tips">
+   <div class="tip"><h4>❓ Khách mua &gt; 12 tháng nhưng vẫn muốn thợ đến nhà?</h4><p>Hệ thống đã khóa. Giải thích chính sách và hướng dẫn khách mang sản phẩm ra Siêu thị. Không tự tạo ngoại lệ.</p></div>
+   <div class="tip"><h4>❓ Khách tự lắp, không có Code lắp đặt?</h4><p>Sản phẩm vẫn được bảo hành theo chính sách hãng, nhưng tiếp nhận tại Siêu thị.</p></div>
+   <div class="tip"><h4>❓ Đơn mua trước khi áp dụng quy định?</h4><p>Không xét Code lắp đặt. Còn trong 12 tháng kể từ ngày giao hàng là được bảo hành tại nhà.</p></div>
+   <div class="tip"><h4>❓ Sản phẩm bị lỗi nhà sản xuất?</h4><p>Không thay linh kiện. KTV xác nhận đổi sản phẩm cho khách trên Vận đơn 1025, theo quy trình Đổi trả tại nhà.</p></div>
+   <div class="tip"><h4>❓ KTV có được thu tiền khách?</h4><p>Không, với ca thuộc phạm vi bảo hành miễn phí.</p></div>
+   <div class="tip"><h4>❓ Hoàn tất ca ở đâu?</h4><p>Hoàn tất trên Vận đơn 1025 (TMS). Trạng thái tự đồng bộ về Jobcard WMS.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= TAB 6 ================= -->
+<section class="tab" id="t6">
+ <div class="card">
+  <h2>📝 Nội dung đã chốt &amp; chờ xác nhận</h2>
+  <div class="tw"><table>
+   <tr><th style="width:6%">#</th><th style="width:26%">Nội dung</th><th>Chi tiết</th><th style="width:16%">Trạng thái</th></tr>
+   <tr><td>01</td><td>Phạm vi ngành hàng</td><td>Camera và Đèn năng lượng mặt trời.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>02</td><td>Bản chất Code lắp đặt</td><td>Sản phẩm phụ nằm chung đơn bán với sản phẩm chính.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>03</td><td>Mốc 12 tháng</td><td>Tính từ ngày hoàn tất giao hàng.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>04</td><td>Đơn cũ trước Go-live</td><td>Không xét Code; ≤ 12 tháng là được tạo tại nhà.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>05</td><td>Cảnh báo từ tháng 13</td><td>CRM cảnh báo; hướng dẫn khách ra Siêu thị.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>06</td><td>Mã Code lắp đặt</td><td><span class="code">7042011000224</span> — Code miễn phí công lắp đặt; dùng chung mọi quy trình có giao và lắp.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>07</td><td>Vận đơn / Gán KTV / Hoàn tất</td><td>Dùng Vận đơn 1025 (chung quy trình Đổi trả tại nhà); gán KTV trên vận đơn; hoàn tất trên TMS đồng bộ về WMS.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>08</td><td>Giải pháp bổ sung từ tháng 13</td><td>Phương án ngoài việc mang ra Siêu thị.</td><td><span class="pill p-warn">🟡 CHỜ XÁC NHẬN</span></td></tr>
+   <tr><td>09</td><td>Giai đoạn 2</td><td>Tách 3 gói dịch vụ sau 3–6 tháng triển khai Giai đoạn 1.</td><td><span class="pill p-warn">🟡 CHỜ XÁC NHẬN</span></td></tr>
+   <tr><td>10</td><td>Không thay linh kiện</td><td>Không có bước tạm ứng linh kiện. Lỗi nhà sản xuất ➔ xác nhận đổi sản phẩm cho khách.</td><td><span class="pill p-ok">🟢 ĐÃ CHỐT</span></td></tr>
+   <tr><td>11</td><td>Chi tiết đổi sản phẩm</td><td>Ai duyệt đổi; đổi cùng model hay tương đương; sản phẩm lỗi thu hồi về đâu.</td><td><span class="pill p-warn">🟡 CHỜ XÁC NHẬN</span></td></tr>
+  </table></div>
+ </div>
+</section>
+
+</div></main>
+<footer>© Thợ Điện Máy Xanh • Quy trình bảo hành tại nhà Camera &amp; Đèn NLMT • v2.1 • 06/10/2026</footer>
+<script>
+document.querySelectorAll('#tabs button').forEach(function(b){b.onclick=function(){
+ document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('on')});
+ document.querySelectorAll('section.tab').forEach(function(x){x.classList.remove('on')});
+ b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});
+}});
+</script>
+</body>
+</html>
